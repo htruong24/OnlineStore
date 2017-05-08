@@ -1,0 +1,70 @@
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll.config
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\de\DevExpress.Data.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\es\DevExpress.Data.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\ja\DevExpress.Data.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\ru\DevExpress.Data.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\de\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\es\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\ja\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\ru\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll.config
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.pdb
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Common.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.xml
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.xml
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.xml
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\de\DevExpress.Data.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\es\DevExpress.Data.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\ja\DevExpress.Data.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\ru\DevExpress.Data.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\de\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\es\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\ja\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\bin\Debug\ru\DevExpress.Xpo.v15.1.resources.dll
+D:\Projects\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
+D:\Projects\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
+D:\Projects\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll.config
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Data.pdb
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Common.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\OnlineStore.Common.pdb
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.xml
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.xml
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.xml
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\de\DevExpress.Data.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\es\DevExpress.Data.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\ja\DevExpress.Data.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\ru\DevExpress.Data.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\de\DevExpress.Xpo.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\es\DevExpress.Xpo.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\ja\DevExpress.Xpo.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\bin\Debug\ru\DevExpress.Xpo.v15.1.resources.dll
+D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
+D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
+D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb

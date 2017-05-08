@@ -1,0 +1,24 @@
+﻿@using OnlineStore.Data.Entities;
+@using OnlineStore.Common;
+@if (Session[CommonConstants.USER_SESSION] != null)
+{
+    var user = Session[CommonConstants.USER_SESSION] as User;
+
+    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" title="Manage">Xin chào @user.FullName !</a>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

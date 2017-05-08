@@ -1,0 +1,42 @@
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Services.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Services.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.csprojResolveAssemblyReference.cache
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Data.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\EntityFramework.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Data.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\EntityFramework.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Debug\System.Linq.Dynamic.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.pdb
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Common.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Data.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\System.Linq.Dynamic.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Data.pdb
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.xml
+D:\Projects\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.csprojResolveAssemblyReference.cache
+D:\Projects\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.dll
+D:\Projects\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.pdb
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.dll.config
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.SqlServer.xml
+D:\TA\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.csprojResolveAssemblyReference.cache
+D:\TA\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.dll
+D:\TA\Online Store\OnlineStore.Services\obj\Debug\OnlineStore.Services.pdb
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.dll.config
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Services.pdb
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Common.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Data.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\System.Linq.Dynamic.dll
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Common.pdb
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\OnlineStore.Data.pdb
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.xml
+D:\TA\Online Store\OnlineStore.Services\bin\Debug\EntityFramework.SqlServer.xml

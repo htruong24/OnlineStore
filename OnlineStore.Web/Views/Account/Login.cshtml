@@ -1,0 +1,20 @@
+﻿@model OnlineStore.Services.Models.LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="logo">HỆ THỐNG QUẢN LÍ DOANH NGHIỆP</div>
+<div class="login-block">
+    <h1><b>@ViewBag.Title</b></h1>
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off", role = "form", @id = "frmLogin" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="error-message text-danger" style="margin-bottom: 10px;">@ViewBag.Error</div>
+
+        <input type="text" value="" placeholder="Tên đăng nhập" id="username" name="UserName" autocomplete = "off"/>
+        <input type="password" value="" placeholder="Mật khẩu" id="password" name="Password" autocomplete = "off"/>
+        <button type="submit">Đăng nhập</button>
+    }
+</div>
+
+<link href="~/Content/app/login/style.css" rel="stylesheet" />

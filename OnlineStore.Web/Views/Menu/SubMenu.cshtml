@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OnlineStore.Data.Entities.Function>
+
+<ul class="sub-menu">
+    @{
+        foreach (var function in Model)
+        {
+            <li id="@function.Id">
+                <a data-toggle="tooltip" title="@function.Description" href="javascript:fnChangeMenu('@function.Id', '@function.Name')">
+                    <i class=""></i> @function.Name
+                </a>
+            </li>
+        }
+    }
+</ul>
+
+<script type="text/javascript">
+    $(function () {
+        var funcId = fnGetHashParameter("funcId");
+        if (funcId !== "") {
+            $("#bodyContent").find(".active").removeClass("active");
+            $("#" + funcId).addClass("active");
+        }
+    })
+</script>
+

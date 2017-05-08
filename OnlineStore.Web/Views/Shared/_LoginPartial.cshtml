@@ -1,0 +1,32 @@
+﻿@using OnlineStore.Data.Entities;
+@using OnlineStore.Common;
+@if (Session[CommonConstants.USER_SESSION] != null)
+{
+    var user = Session[CommonConstants.USER_SESSION] as User;
+
+    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    @user.Name <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Thông tin cá nhân", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Đổi mật khẩu", "Contact", "Home")</li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+                </ul>
+            </li>
+          
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

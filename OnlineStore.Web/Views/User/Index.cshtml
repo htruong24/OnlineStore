@@ -1,0 +1,20 @@
+﻿@model IEnumerable<OnlineStore.Data.Entities.User>
+@{
+    ViewBag.Title = "Quản lí người dùng";
+}
+
+<div class="search-area">
+    <div class="col-md-4">
+        @Html.Partial("_Search")
+    </div>
+    <div class="col-md-8">
+        @{Html.RenderAction("ButtonCreate", "Common", new { });}
+    </div>
+    <input type="hidden" id="hdControllerName" value="User"/>
+</div>
+
+<div class="search-result col-md-12" id="searchContainer">
+    @Html.Action("UserList", "User")
+</div>
+
+

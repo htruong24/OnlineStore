@@ -1,0 +1,35 @@
+﻿@using OnlineStore.Common
+@model IEnumerable<OnlineStore.Data.Entities.Module>
+
+@if (Session[CommonConstants.USER_SESSION] != null)
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Quản lí quán ăn", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{
+                        foreach (var menuItem in Model.OrderBy(x => x.OrderNumber))
+                        {
+                            <li class="dropdown" data-toggle="tooltip">
+                                <a class="dropdown-toggle" href="javascript:@(menuItem.Name)('@menuItem.Id')">
+                                    <i></i> @menuItem.Name
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+}
+

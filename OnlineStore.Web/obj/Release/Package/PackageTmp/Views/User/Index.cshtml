@@ -1,0 +1,27 @@
+﻿@using OnlineStore.Web.Framework.Extensions
+@model IEnumerable<OnlineStore.Services.Models.UserModel>
+
+@{
+    ViewBag.Title = "Quản lí người dùng";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<button type="button" id="btnAddNewUser" class="btn btn-warning">Thêm mới người dùng</button>
+
+<div class="gridContainer">
+    <table id="gridUser" class="gridList"></table>
+    <div id="gridUserPager"></div>
+</div>
+
+<script type="text/javascript" src="@Url.Script("apps/user.js?version=" + DateTime.Now.Ticks)"></script>
+<script type="text/javascript">
+    var user;
+    $(function () {
+        user = new User();
+        user.setGridData();
+        user.getGrid();
+        user.bindEvents();
+    });
+</script>

@@ -1,0 +1,110 @@
+﻿<div class="btn-toolbar pull-right" style="margin-left:auto; margin-right:auto">
+    <div class="btn-group">
+        
+        <div class="btn btn-sm btn-default" style="padding: 2px;" title="">
+            <input id="txtCurrentPage" value="@(ViewBag.CurrentPage)" style="width: 22px; text-align:center" />
+        </div>
+        <div class="btn-group page-size-container">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" title="">
+                @(ViewBag.PageSize == "0" ? "Tất cả" : ViewBag.PageSize)
+                <div class="caret"></div>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="pageSize"><a>10</a></li>
+                <li class="pageSize"><a>20</a></li>
+                <li class="pageSize"><a>50</a></li>
+                <li class="pageSize"><a>Tất cả</a></li>
+            </ul>
+        </div>
+
+        <a class="btn btn-sm btn-info pg-backward paging-backward" title=""><i class="fa fa-step-backward" aria-hidden="true"></i></a>
+        <a class="btn btn-sm btn-default pg-previous" title="Previous"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
+        <div class="btn btn-sm btn-default" title="Of"> <div class="badge">@ViewBag.TotalRows</div></div>
+        <a class="btn btn-sm btn-default pg-next" title="Next"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+        <a class="btn btn-sm btn-info pg-forward paging-forward" title="LastPage"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+    </div>
+    <input type="hidden" id="totalPage" value="@ViewBag.TotalPage" />
+    <input type="hidden" id="pgSize" value="@ViewBag.PageSize" />
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $(".page-size-container li a").each(function () {
+            $(this).click(function() {
+                var size = $(this).text();
+                if (size == "Tất cả")
+                    size = 0;
+                $("#pgSize").val(size);
+                $("#hdPageSize").val(size);
+                fnLoadSearchData();
+            });
+        });
+
+        // Backward
+        $("a.pg-backward").click(function() {
+            $('#PageSize').val($("#pgSize").val());
+            $("#hdCurrentPage").val($("#txtCurrentPage").val());
+            var cpg = $("#txtCurrentPage").val();
+            if (cpg > 1)
+                $("#hdCurrentPage").val("1");
+            else {
+               // toastr.info("You are at the first page!");
+                return;
+            }
+            // Paging
+            fnLoadSearchData();
+        });
+        // Forward
+        $("a.pg-forward").click(function () {
+            var cpg = parseInt($("#txtCurrentPage").val());
+            var totalPage = $("#totalPage").val();
+            if (cpg < totalPage) {
+                $("#hdCurrentPage").val(totalPage);
+            }
+            else {
+              //  toastr.info("You are at the last page!");
+                return;
+            }
+            // Paging
+            fnLoadSearchData();
+        });
+        // Previous
+        $("a.pg-previous").click(function () {
+            var cpg = $('#txtCurrentPage').val();
+            if (cpg > 1)
+                $("#hdCurrentPage").val(cpg - 1);
+            else {
+              //  toastr.info("You have come to the first page!");
+                return;
+            }
+            // Paging
+            fnLoadSearchData();
+        });
+        // Next
+        $("a.pg-next").click(function () {
+            var cpg = parseInt($('#txtCurrentPage').val());
+            var totalPage = $("#totalPage").val();
+            if (cpg < totalPage) {
+                cpg = cpg + 1;
+                $("#hdCurrentPage").val(cpg);
+            }
+            else {
+             //   toastr.info('You have come to the last page!');
+                return;
+            }
+            // Paging
+            fnLoadSearchData();
+        });
+
+        $('#txtCurrentPage').change(function () {
+            $("#hdCurrentPage").val($("#txtCurrentPage").val());
+            fnLoadSearchData();
+        });
+    });
+
+    function fnGotoPage(page)
+    {
+        $("#txtCurrentPage").val(page);
+    }
+</script>

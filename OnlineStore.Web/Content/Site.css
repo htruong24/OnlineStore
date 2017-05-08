@@ -1,0 +1,228 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: Arial !important;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.ImagePreviewBox
+{
+    width:100px;
+    height:auto;
+}
+
+/*COMMON*/ 
+
+.no-padding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+#mainContainer {
+    padding-top: 20px;
+}
+
+.search-result {
+    padding-top: 20px;
+}
+
+.top-button {
+    margin-bottom: 20px;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-left {
+    text-align: left !important;
+}
+
+.align-center {
+    text-align: center !important;
+}
+
+.error {
+    color: red;
+    font-weight: normal;
+}
+
+table thead th a, table thead th a:hover, table thead th a:focus {
+    display: block;
+    text-decoration: none;
+    color: crimson;
+}
+
+table thead th {
+    color: crimson;
+}
+
+table thead .sorting {
+    background-image: url('images/sorting/sort_both.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+table thead .sorting_desc {
+    background-image: url('images/sorting/sort_desc.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+table thead .sorting_asc {
+    background-image: url('images/sorting/sort_asc.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+.hover-color {
+    /*color: #e74c3c;*/
+}
+
+/*AVATAR*/ 
+.avatar {
+    display: table;
+    margin-bottom: 30px;
+}
+
+.avatar-image {
+    width: 150px;
+}
+
+.avatar-image img {
+    border-radius: 10px;
+}
+
+.avatar-title {
+    padding: 0px 20px 0px 20px;
+    font-weight: bold;
+    font-size: 25px;
+    color: chocolate;
+}
+
+.avatar-image, .avatar-title {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/*MENU*/ 
+.navbar-inverse {
+    background-color: #c0392b !important;
+    border-color: white !important;    
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white !important;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white !important;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: white !important;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #e74c3c;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    background-color: #e74c3c;
+}
+
+/*SUB MENU*/ 
+ul.sub-menu {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.sub-menu > li {
+    display: inline-block;
+}
+
+ul.sub-menu > li > a {
+    display: block;
+    padding: 15px;
+    color: darkslategray;
+    font-weight: 600;
+}
+
+ul.sub-menu > li > a:hover {
+    text-decoration: none;
+    background: silver;
+    background: gainsboro;
+}
+
+ul.sub-menu > li > a:visited, ul.sub-menu > li > a:focus {
+    text-decoration: none;
+}
+
+#subMenu {
+    background: bisque;
+}
+
+/*HOME PAGE*/ 
+.home-box {
+    height: 100px;
+    padding: 5px 5px !important;
+    margin-top: 10px;
+}
+
+.home-box-content {
+    height: 100px;
+    background: #e74c3c;
+}
+
+.home-box a, .home-box a:focus, .home-box a:visited, .home-box a:hover {
+    color: white;
+    text-decoration: none !important;
+}
+
+.home-box a {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.home-title  {
+    font-weight: bold;
+    color: burlywood;
+}
+
+/* Paging */
+.paging-backward, .paging-forward
+{
+    color: #fff;
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+.paging-backward:hover, .paging-backward:focus, .paging-backward:active, .paging-forward:hover, .paging-forward:focus, .paging-forward:active {
+    background: #e74c3c;
+    border-color: #e74c3c;
+}
+
+a:hover {
+    cursor: pointer !important;
+}

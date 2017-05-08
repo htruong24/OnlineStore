@@ -1,0 +1,14 @@
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll
+D:\Projects\Online Store\OnlineStore.Common\bin\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
+D:\Projects\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb
+D:\Projects\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.csprojResolveAssemblyReference.cache
+D:\TA\Online Store\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll
+D:\TA\Online Store\OnlineStore.Common\bin\Debug\OnlineStore.Common.pdb
+D:\TA\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.csprojResolveAssemblyReference.cache
+D:\TA\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
+D:\TA\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb

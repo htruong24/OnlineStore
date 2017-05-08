@@ -1,0 +1,65 @@
+﻿<div class="input-group input-group-sm col-md-4 col-sm-4" style="float: left; margin-right: 10px">
+    <input type="text" id="txtInputKeyword" class="form-control" style="max-width:100%" placeholder="Nhập từ khóa cần tìm">
+    <div class="input-group-btn">
+        <button type="button" id="btnSearchPanel" class="btn btn-sm btn-info dropdown-toggle" title="Nâng cao" aria-expanded="false">
+            Nâng cao <div class="caret"></div>
+        </button>
+        <div id="searchDropdown" class="dropdown-menu dropdown-menu-right" role="menu" style="padding: 8px; min-width: 318px; max-width: 436px; z-index: 1;">
+            <label>Nâng cao</label>
+            <div class="nmDivider"></div>
+            <form id="formSearch">
+
+                <input type="hidden" name="keyword" id="txtKeyword"/>
+                <input type="hidden" name="GroupId" id="txtSearchGroupId" value="@ViewData["Group"]"/>
+                @*<input type="hidden" name="TypeId" id="txtSearchTypeId" value="@ViewData["Type"]" />*@
+                <input type="hidden" name="pageNum" id="txtPageNum"/>
+                <input type="hidden" name="pageSize" id="txtPageSize"/>
+                <input type="hidden" name="ViewName" id="txtViewName"/>
+
+                <div class="form-group form-group-sm col-md-6">
+                    <label>Từ ngày</label>
+                    <div>
+                        <input type="text" id="txtFromDate" name="fromDate" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group form-group-sm col-md-6">
+                    <label>Đến ngày</label>
+                    <div>
+                        <input type="text" id="txtToDate" name="toDate" class="form-control">
+                    </div>
+                </div>
+            </form>
+
+            <div class="nmDivider"></div>
+            <button type="button" id="btnSearchSubmit" class="btn btn-sm btn-info pull-right">
+                <i class="fa fa-search"></i> Tìm kiếm
+            </button>
+        </div>
+        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var t;
+        $("#txtInputKeyword").on("keyup", function (event) {
+            clearTimeout(t);
+            t = setTimeout(function () {
+                fnLoadSearchData();
+            }, 1000);
+        });
+        $("#txtInputKeyword").change(function (event) {
+            $("#txtKeyword").val($("#txtInputKeyword").val());
+        });
+        $(function () {
+            $("#txtFromDate, #txtToDate").datepicker({ changeMonth: true, changeYear: true, showButtonPanel: true, dateFormat: "yy-mm-dd" });
+            $("#btnSearchSubmit").click(function () {
+                fnLoadSearchData();
+                $('#searchDropdown').toggle();
+            });
+        });
+        $('#btnSearchPanel').click(function () {
+            $('#searchDropdown').toggle();
+        });
+    });
+</script>

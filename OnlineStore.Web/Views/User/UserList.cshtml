@@ -1,0 +1,88 @@
+﻿@using OnlineStore.Common
+@model IEnumerable<OnlineStore.Data.Entities.User>
+
+@{
+    var count = 0;
+    var info = (SortingPagingInfo)TempData["SortingPagingInfo"];
+}
+
+<div class="">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" id="dataTables">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="Id"
+                       class="header">ID</a>
+                </th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="Code"
+                       class="header">Tên đăng nhập
+                    </a>
+                </th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="Name"
+                       class="header">
+                        Họ tên
+                    </a>
+                </th>
+                <th>Hình ảnh</th>
+                <th>Ngày sinh</th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="Gender"
+                       class="header">
+                        Giới tính
+                    </a>
+                </th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="Address"
+                       class="header">
+                        Địa chỉ
+                    </a>
+                </th>
+                <th class="sorting">
+                    <a href="#" data-sortfield="EmailAddress"
+                       class="header">
+                        Email
+                    </a>
+                </th>
+                 <th class="sorting">
+                    <a href="#" data-sortfield="Telephone"
+                       class="header">
+                        Số điện thoại
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="" id="">
+                    <th>@(++count)</th>
+                    <td>@item.Id</td>
+                    <td>@item.Username</td>
+                    <td>@item.FullName</td>
+                    <td><img src="" alt="Ảnh đại diện"/></td>
+                    <td>@(item.DateOfBirth?.ToString(DatetimeFormat.DDMMYY) ?? "")</td>
+                    <td>@(item.Gender == 1 ? "Nam" : "Nữ")</td>
+                    <td>@item.Address</td>
+                    <td>@item.Email</td>
+                    <td>@item.Telephone</td>
+                    <td>
+                        <a class="hover-color" href="javascript:fnDetails('@item.Id')" title="Click để xem chi tiết!"><i class="fa fa fa-eye"></i></a>
+                        <a class="hover-color" href="javascript:fnEdit('@item.Id')" title="Click để sửa chi tiết!"><i class="fa fa-pencil-square-o"></i></a>
+                        <a class="hover-color" href="javascript:fnDelete('@item.Id')" title="Click để xóa chi tiết!"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Action("Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/User/UserList" })
+
+
+<script src="~/Scripts/app/user/user.js"></script>

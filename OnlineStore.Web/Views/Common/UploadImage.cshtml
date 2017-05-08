@@ -1,0 +1,35 @@
+﻿@using OnlineStore.Common
+<input type="hidden" id="fileName" value="@ViewBag.Avatar" name="Avatar" />
+<input type="hidden" id="tempField" value="" name="Temp" />
+
+@{
+    var avatarLink = string.IsNullOrEmpty(ViewBag.Avatar) ? Url.Content(CommonImages.Avatar) : (Url.Content("~/Content/uploads/_thumbs/") + ViewBag.Avatar);
+}
+
+<div class="form-group form-group-sm col-md-4">
+    <label>Ảnh đại diện</label>
+    <div style="padding-top: 5px;">
+        <img id="avatar" alt="@ViewBag.Avatar" src="@avatarLink" width="150" height="150"/>
+        <input type="file" id="uploadFileImage" class="btn btn-sm btn-success" name="uploadFileImage" style="display: none;" />
+        @Html.Action("ButtonCommon", "Common", new {title = "Chọn ảnh", script = "$('#uploadFileImage').click();" })
+    </div>
+</div>
+
+<script>
+    $("#uploadFileImage").change(function () {
+        loadImage(document.getElementById("uploadFileImage"));
+    });
+
+    function imageHandler(evt2) {
+        $("#avatar").attr('src', evt2.target.result);
+        var fileName = $("#uploadFileImage").val().split("\\").pop();
+        $("#fileName").val(fileName + "*" + $("#avatar").attr("src"));
+    }
+
+    function loadImage(evt1) {
+        var fileName = evt1.files[0];
+        var reader = new FileReader();
+        reader.onload = imageHandler;
+        reader.readAsDataURL(fileName);
+    }
+</script>

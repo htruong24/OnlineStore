@@ -1,0 +1,12 @@
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Services.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Services.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Data.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\System.Linq.Dynamic.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\EntityFramework.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Common.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\OnlineStore.Data.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\bin\Release\EntityFramework.xml
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Release\OnlineStore.Services.csprojResolveAssemblyReference.cache
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Release\OnlineStore.Services.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Services\obj\Release\OnlineStore.Services.pdb

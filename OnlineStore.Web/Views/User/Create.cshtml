@@ -1,0 +1,103 @@
+﻿@Scripts.Render("~/Scripts/app/user.js")
+
+@model OnlineStore.Data.Entities.User
+
+<div class="top-button col-md-12">
+    @Html.Action("ButtonSave", "Common", new { function = "User", elementId = "User" })
+    @Html.Action("ButtonCancel", "Common", new { function = "User" })
+    @Html.Action("ButtonClear", "Common", new { function = "User" })
+</div>
+
+<div class="">
+    <div class="col-md-12" style="padding-top: 20px;">
+        <form id="formUser" action="/User/Create" method="post">
+
+            <div class="form-horizontal">
+
+                <input type="hidden" name="Id" id="hdId" value="@Model.Id" />
+
+                @Html.Action("UploadImage", "Common", new { avatar = @Model.Image })
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label>Tên đăng nhập:</label>
+                        <div>
+                            <input type="text" id="txtCode" name="Code" class="form-control required" value="@Model.Username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Họ tên:</label>
+                        <div>
+                            <input type="text" id="txtName" name="Name" class="form-control required" value="@Model.FullName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Ngày sinh:</label>
+                        <div>
+                            <input type="text" id="txtDateOfBirth" class="form-control  date-time" value="@(Model.DateOfBirth?.ToString("dd-MM-yyyy"))"/>
+                            <input type="hidden" name="DateOfBirth" id="hdDateOfBirth" value="@(Model.DateOfBirth?.ToString("dd-MM-yyyy"))"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Giới tính:</label>
+                        <div>
+                            @{
+                                string male = "", female = "";
+                                if (Model.Gender == 1)
+                                {
+                                    male = "checked";
+                                }
+                                else
+                                {
+                                    female = "checked";
+                                }
+                            }
+                            <input type="radio" name="Gender" value="1" @male /> Nam
+                            <input type="radio" name="Gender" value="0" @female /> Nữ
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label>Địa chỉ:</label>
+                        <div>
+                            <input type="text" id="txtAddress" name="Address" class="form-control" value="@Model.Address" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Email:</label>
+                        <div>
+                            <input type="text" id="txtEmailAddress" name="EmailAddress" class="form-control email" value="@Model.Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Số điện thoại:</label>
+                        <div>
+                            <input type="text" name="Telephone" id="txtTelephone" class="form-control" value="@Model.Telephone" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label>Kích hoạt:</label>
+                        <div>
+                            @{
+                                var isActive = "";
+                                if (Model.Active == true)
+                                {
+                                    isActive = "checked";
+                                }
+                            }
+                            <input type="checkbox" id="chkIsActive" class="form-control input-sm" style="box-shadow: none;" name="Active" value="true" @isActive />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

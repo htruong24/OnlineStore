@@ -1,0 +1,57 @@
+﻿@using OnlineStore.Web.Framework.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/script")
+    <script type="text/javascript">
+        var appPath = '@Url.Content("~")';
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Quản lí quán ăn", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Đồ ăn", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Chi phí", "About", "Home")</li>
+                    <li>@Html.ActionLink("Thu nhập", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Nhà cung cấp", "About", "Home")</li>
+                    <li>@Html.ActionLink("Người dùng", "Index", "User")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Cấu hình <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Loại chi phí", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Loại thu nhập", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Chủng loại", "Contact", "Home")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" id="mainContent">
+        @RenderBody()
+    </div>
+    <div id="pageLoading" style="display:none;">
+        <img src="@Url.Image("ajax-loader.gif")" alt="loading" />
+    </div>
+    @Scripts.Render("~/bundles/main")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

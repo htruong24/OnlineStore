@@ -1,0 +1,4 @@
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\bin\Release\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\bin\Release\OnlineStore.Common.pdb
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\obj\Release\OnlineStore.Common.dll
+D:\Projects\MocThaoWeb\OnlineStore\OnlineStore.Common\obj\Release\OnlineStore.Common.pdb

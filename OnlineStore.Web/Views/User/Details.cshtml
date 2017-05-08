@@ -1,0 +1,67 @@
+﻿@using OnlineStore.Common
+@model OnlineStore.Data.Entities.User
+
+<div class="top-button col-md-12">
+    @Html.Action("ButtonEdit", "Common", new { function = "Imports", elementId = "Imports" })
+    @Html.Action("ButtonDelete", "Common", new { function = "Imports" })
+    @Html.Action("ButtonCommon", "Common", new { title = "Gửi mail", script = "fnSendEmail();" })
+</div>
+
+<div class="row col-md-12">
+
+    <input type="hidden" value="@Model.Id" id="hdId">
+
+    <div class="col-md-12 avatar">
+        <div class="avatar-image">
+            <a href="">
+                @{
+                    var avatarLink = string.IsNullOrEmpty(Model.Image) ? Url.Content(CommonImages.Avatar) : (Url.Content("~/Content/uploads/_thumbs/") + Model.Image);
+                }
+                <img src="@avatarLink" alt="@Model.FullName" width="150" height="150">
+            </a>
+        </div>
+        <div class="avatar-title">@Model.FullName</div>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Tên đăng nhập:</label>
+        <span class="col-sm-6">
+            @Model.Username
+        </span>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Ngày sinh:</label>
+        <span class="col-sm-6">
+            @(Model.DateOfBirth?.ToString("dd-MM-yyyy"))
+        </span>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Giới tính:</label>
+        <span class="col-sm-6">
+            @(Model.Gender == 1 ? "Nam" : "Nữ")
+        </span>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Địa chỉ:</label>
+        <span class="col-sm-6">
+            @Model.Address
+        </span>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Email:</label>
+        <span class="col-sm-6">
+            @Model.Email
+        </span>
+    </div>
+
+    <div class="col-md-4">
+        <label class="col-sm-6">Số điện thoại:</label>
+        <span class="col-sm-6">
+            @Model.Telephone
+        </span>
+    </div>
+</div>

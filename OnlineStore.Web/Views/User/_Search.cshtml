@@ -1,0 +1,81 @@
+﻿@using OnlineStore.Common
+@{
+    var info = (SortingPagingInfo)TempData["SortingPagingInfo"];
+
+    if (info == null)
+    {
+        info = new SortingPagingInfo();
+    }
+}
+
+<div class="input-group input-group-sm col-md-12">
+    
+    <input type="text" id="txtInputKeyword" class="form-control" style="max-width: 100%" placeholder="Nhập từ khóa cần tìm">
+
+    <div class="input-group-btn">
+
+        <button type="button" id="btnSearchSubmit" class="btn btn-sm btn-info">
+            <i class="fa fa-search"></i>
+        </button>
+
+        <button type="button" id="btnSearchPanel" class="btn btn-sm btn-info dropdown-toggle" title="Lọc">
+            <i class="fa fa-filter"></i>
+        </button>
+
+        <div id="searchDropdown" class="dropdown-menu dropdown-menu-right row" role="menu" style="padding: 10px; width: 100%; min-width: 320px;">
+            <label>Lọc theo</label>
+
+            <hr style="margin-top: 5px; margin-bottom: 10px;"/>
+
+            <form id="frmSearch">
+                <input type="hidden" name="SortField" id="hdSortField" value="@info.SortField"/>
+                <input type="hidden" name="SortDirection" id="hdSortDirection" value="@info.SortDirection"/>
+                <input type="hidden" name="TotalPages" id="hdTotalPages" value="@info.PageCount"/>
+                <input type="hidden" name="PageSize" id="hdPageSize" value="@info.PageSize"/>
+                <input type="hidden" name="CurrentPage" id="hdCurrentPage" value="@info.CurrentPage" />
+                <input type="hidden" name="Keyword" id="txtKeyword" value="Hello"/>
+
+                <div class="form-group form-group-sm col-md-12">
+                    <label>Từ ngày</label>
+                    <div>
+                        <input type="text" id="txtFromDate" name="FromDate" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group form-group-sm col-md-12">
+                    <label>Đến ngày</label>
+                    <div>
+                        <input type="text" id="txtToDate" name="ToDate" class="form-control">
+                    </div>
+                </div>
+            </form>
+
+            <button type="button" id="btnSearchSubmit" class="btn btn-sm btn-info pull-right">
+                <i class="fa fa-search"></i>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var t;
+    $("#txtInputKeyword").on("keyup", function (event) {
+        clearTimeout(t);
+        t = setTimeout(function () {
+            fnLoadSearchData();
+        }, 1000);
+    });
+    $("#txtInputKeyword").change(function (event) {
+        $("#txtKeyword").val($("#txtInputKeyword").val());
+    });
+    $(function () {
+        $("#txtFromDate, #txtToDate").datepicker({ changeMonth: true, changeYear: true, showButtonPanel: true, dateFormat: "yy-mm-dd" });
+        $("#btnSearchSubmit").click(function () {
+            fnLoadSearchData();
+            $('#searchDropdown').toggle();
+        });
+    });
+    $('#btnSearchPanel').click(function () {
+        $('#searchDropdown').toggle();
+    });
+</script>

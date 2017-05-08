@@ -1,0 +1,40 @@
+﻿@using OnlineStore.Common
+
+@if (Session[CommonConstants.USER_SESSION] != null)
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Quản lí quán ăn", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Nhà cung cấp", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Khách hàng", "About", "Home")</li>
+                    <li>@Html.ActionLink("Quản lí bán hàng", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Quản lí mua hàng", "About", "Home")</li>
+                    <li>@Html.ActionLink("Quản lí kho", "Index", "User")</li>
+                    <li>@Html.ActionLink("Quản lí người dùng", "Index", "User")</li>
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Cấu hình <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Loại chi phí", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Loại thu nhập", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Chủng loại", "Contact", "Home")</li>
+                        </ul>
+                    </li>*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+}
+

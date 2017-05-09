@@ -12,11 +12,11 @@ namespace OnlineStore.Web.Controllers
     {
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
-            base.OnAuthorization(filterContext);
-            if (Session[CommonConstants.USER_SESSION] == null)
-            {
-                Response.Redirect("~/Account/Login");
-            }
+            //base.OnAuthorization(filterContext);
+            //if (Session[CommonConstants.USER_SESSION] == null)
+            //{
+            //    Response.Redirect("~/Account/Login");
+            //}
         }
 
         public string GetUserId()

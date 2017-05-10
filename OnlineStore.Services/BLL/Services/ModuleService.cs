@@ -10,6 +10,7 @@ namespace OnlineStore.Services.BLL.Services
 {
     public class ModuleService: IModuleService
     {
+        public SortingPagingInfo Pagination;
         private readonly UnitOfWork _unitOfWork;
 
         public ModuleService(UnitOfWork unitOfWork)

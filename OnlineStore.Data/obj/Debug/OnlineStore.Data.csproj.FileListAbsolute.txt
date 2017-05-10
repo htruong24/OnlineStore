@@ -80,3 +80,15 @@ C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
 C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
 C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll.config
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.xml
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
+D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb

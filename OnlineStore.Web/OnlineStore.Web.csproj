@@ -203,6 +203,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -247,6 +248,7 @@
     <Content Include="assets\admin\css\colorbox.min.css" />
     <Content Include="assets\admin\css\colorpicker.css" />
     <Content Include="assets\admin\css\colorpicker.min.css" />
+    <Content Include="assets\admin\css\custom.css" />
     <Content Include="assets\admin\css\datepicker.min.css" />
     <Content Include="assets\admin\css\daterangepicker.min.css" />
     <Content Include="assets\admin\css\dropzone.min.css" />
@@ -514,6 +516,8 @@
     <Content Include="Areas\Admin\Views\Modules\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\_LeftNavigation.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Search.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\_Paging.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

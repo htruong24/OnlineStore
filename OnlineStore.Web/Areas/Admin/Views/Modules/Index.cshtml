@@ -1,15 +1,21 @@
-﻿@model IEnumerable<OnlineStore.Data.Entities.Module>
+﻿@using OnlineStore.Common
+@model IEnumerable<OnlineStore.Data.Entities.Module>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý chức năng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var info = (SortingPagingInfo)TempData["SortingPagingInfo"];
 }
 
-<h2>Quản lí chức năng</h2>
+<div class="action-buttons">
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @Html.ActionLink("Tạo mới", "Create")
+    </button>
+    @Html.Partial("_Search")
+</div>
 
-<p>
-    @Html.ActionLink("Tạo mới chức năng", "Create")
-</p>
+<br/>
 
 <div class="row">
     <div class="col-xs-12">
@@ -90,22 +96,18 @@
                         @Html.DisplayFor(modelItem => item.ModifiedBy)
                     </td>
                     <td>
-                        <div class="hidden-sm hidden-xs btn-group">
-                            <button class="btn btn-xs btn-success">
-                                <i class="ace-icon fa fa-check bigger-120"></i>
-                            </button>
+                        <div class="hidden-sm hidden-xs action-buttons">
+                            <a class="blue" href="~/Admin/Modules/Edit/@item.Id">
+                                <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                            </a>
 
-                            <button class="btn btn-xs btn-info">
-                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                            </button>
+                            <a class="green" href="~/Admin/Modules/Details/@item.Id">
+                                <i class="ace-icon fa fa-pencil bigger-130"></i>
+                            </a>
 
-                            <button class="btn btn-xs btn-danger">
-                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                            </button>
-
-                            <button class="btn btn-xs btn-warning">
-                                <i class="ace-icon fa fa-flag bigger-120"></i>
-                            </button>
+                            <a class="red" href="~/Admin/Modules/Delete/@item.Id">
+                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                            </a>
                         </div>
 
                         <div class="hidden-md hidden-lg">
@@ -116,7 +118,7 @@
 
                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                     <li>
-                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                        <a href="~/Admin/Modules/Details/@item.Id" class="tooltip-info" data-rel="tooltip" title="View">
                                             <span class="blue">
                                                 <i class="ace-icon fa fa-search-plus bigger-120"></i>
                                             </span>
@@ -124,7 +126,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                        <a href="~/Admin/Modules/Edit/@item.Id" class="tooltip-success" data-rel="tooltip" title="Edit">
                                             <span class="green">
                                                 <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                             </span>
@@ -132,7 +134,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                        <a href="~/Admin/Modules/Delete/@item.Id" class="tooltip-error" data-rel="tooltip" title="Delete">
                                             <span class="red">
                                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                             </span>
@@ -146,5 +148,7 @@
             }
             </tbody>
         </table>
+
+        @Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Modules/Index" })
     </div><!-- /.span -->
 </div><!-- /.row -->

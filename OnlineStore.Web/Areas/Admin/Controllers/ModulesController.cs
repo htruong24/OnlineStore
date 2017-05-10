@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
 using OnlineStore.Data.Interfaces;
@@ -25,9 +26,22 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Admin/Modules
-        public ActionResult Index()
+        public ActionResult Index(SortingPagingInfo info, DefaultFilter filter)
         {
-            return View(db.Modules.ToList());
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Id",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+            _moduleService.Pagination = info;
+            var modules = _moduleService.GetModules();
+            TempData["SortingPagingInfo"] = _moduleService.Pagination;
+            return View(modules);
         }
 
         // GET: Admin/Modules/Details/5

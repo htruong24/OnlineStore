@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>Quản lý cửa hàng thông minh</title>
 
+    <!-- custom css -->
+    <link rel="stylesheet" href="~/assets/admin/css/custom.css" />
+
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="~/assets/admin/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/assets/admin/font-awesome/4.2.0/css/font-awesome.min.css"/>
@@ -430,11 +433,10 @@
 <div class="breadcrumbs" id="breadcrumbs">
     <script type="text/javascript">
         try {
-            ace.settings.check('breadcrumbs', 'fixed')
+            ace.settings.check('breadcrumbs', 'fixed');
         } catch (e) {
         }
     </script>
-
     <ul class="breadcrumb">
         <li>
             <i class="ace-icon fa fa-home home-icon"></i>
@@ -442,15 +444,6 @@
         </li>
         <li class="active">Dashboard</li>
     </ul><!-- /.breadcrumb -->
-
-    <div class="nav-search" id="nav-search">
-        <form class="form-search">
-            <span class="input-icon">
-                                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                                <i class="ace-icon fa fa-search nav-search-icon"></i>
-                            </span>
-        </form>
-    </div><!-- /.nav-search -->
 </div>
 
 <div class="page-content">
@@ -526,7 +519,8 @@
         Dashboard
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            overview &amp; stats
+            @*overview &amp; stats*@
+            @ViewBag.Title
         </small>
     </h1>
 </div><!-- /.page-header -->

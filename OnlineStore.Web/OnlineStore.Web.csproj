@@ -681,6 +681,8 @@
     <Content Include="Views\Menu\SubMenuList.cshtml" />
     <Content Include="Views\Common\ButtonCommon.cshtml" />
     <Content Include="Views\Common\Paging.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

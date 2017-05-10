@@ -17,6 +17,8 @@ namespace OnlineStore.Data.Infrastructure
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
 
     }
 }

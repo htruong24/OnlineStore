@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnlineStore.Data.Entities.Module>
+
+<ul class="nav nav-list">
+    @{
+        foreach (var module in Model.OrderBy(x => x.OrderNumber))
+        {
+            <li title="@module.Description">
+                <a href="~/@module.Link">
+                    <i class="menu-icon fa fa-tachometer"></i>
+                    <span class="menu-text"> @module.Name </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+        }
+    }
+</ul>
+
+@*<ul class="nav nav-list">
+    <li class="active">
+        <a href="index.html">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> Dashboard </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="gallery.html">
+            <i class="menu-icon fa fa-picture-o"></i>
+            <span class="menu-text"> Gallery </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+</ul>*@

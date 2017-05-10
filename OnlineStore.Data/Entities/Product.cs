@@ -6,9 +6,10 @@ namespace OnlineStore.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Module")]
-    public partial class Module
+    [Table("Product")]
+    public partial class Product
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]
@@ -16,10 +17,9 @@ namespace OnlineStore.Data.Entities
 
         public string Description { get; set; }
 
-        [StringLength(50)]
-        public string Link { get; set; }
+        public int? BrandId { get; set; }
 
-        public int? OrderNumber { get; set; }
+        public int? CategoryId { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 

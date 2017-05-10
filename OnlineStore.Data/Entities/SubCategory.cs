@@ -6,8 +6,8 @@ namespace OnlineStore.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Module")]
-    public partial class Module
+    [Table("SubCategory")]
+    public partial class SubCategory
     {
         public int Id { get; set; }
 
@@ -15,11 +15,6 @@ namespace OnlineStore.Data.Entities
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        [StringLength(50)]
-        public string Link { get; set; }
-
-        public int? OrderNumber { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 

@@ -68,3 +68,25 @@ D:\TA\Online Store\OnlineStore.Data\bin\Debug\ru\DevExpress.Xpo.v15.1.resources.
 D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
 D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
 D:\TA\Online Store\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll.config
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Data.pdb
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\OnlineStore.Common.pdb
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Data.v15.1.xml
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\DevExpress.Xpo.v15.1.xml
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.xml
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\de\DevExpress.Data.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\es\DevExpress.Data.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\ja\DevExpress.Data.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\ru\DevExpress.Data.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\de\DevExpress.Xpo.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\es\DevExpress.Xpo.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\ja\DevExpress.Xpo.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\ru\DevExpress.Xpo.v15.1.resources.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
+C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
+C:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb

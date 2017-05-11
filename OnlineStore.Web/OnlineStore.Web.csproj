@@ -206,6 +206,7 @@
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -299,6 +300,7 @@
     <Content Include="assets\admin\js\bootstrap-wysiwyg.min.js" />
     <Content Include="assets\admin\js\bootstrap.min.js" />
     <Content Include="assets\admin\js\chosen.jquery.min.js" />
+    <Content Include="assets\admin\js\common.js" />
     <Content Include="assets\admin\js\dataTables.colVis.min.js" />
     <Content Include="assets\admin\js\dataTables.tableTools.min.js" />
     <Content Include="assets\admin\js\daterangepicker.min.js" />
@@ -347,6 +349,12 @@
     <Content Include="assets\admin\js\select2.min.js" />
     <Content Include="assets\admin\js\spin.min.js" />
     <Content Include="assets\admin\js\typeahead.jquery.min.js" />
+    <Content Include="assets\common\images\ajax-loader.gif" />
+    <Content Include="assets\common\images\placeholder\avatar.png" />
+    <Content Include="assets\common\images\sorting\sort_asc.png" />
+    <Content Include="assets\common\images\sorting\sort_both.png" />
+    <Content Include="assets\common\images\sorting\sort_desc.png" />
+    <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\web\css\animate.css" />
     <Content Include="assets\web\css\bootstrap.min.css" />
     <Content Include="assets\web\css\cloud-zoom.css" />
@@ -518,6 +526,11 @@
     <Content Include="Areas\Admin\Views\Modules\_LeftNavigation.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Search.cshtml" />
     <Content Include="Areas\Admin\Views\Common\_Paging.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
@@ -705,7 +718,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="assets\common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -23,22 +23,22 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             if (pageSizeFilter == 0)
             {
-                ViewBag.TotalPage = 1;
+                ViewBag.TotalPages = 1;
             }
             else
             {
                 if (int.Parse(totalRows) % pageSizeFilter == 0)
                 {
-                    ViewBag.TotalPage = int.Parse(totalRows) / pageSizeFilter;
+                    ViewBag.TotalPages = int.Parse(totalRows) / pageSizeFilter;
                 }
                 else
                 {
-                    ViewBag.TotalPage = (int.Parse(totalRows) / pageSizeFilter) + 1;
+                    ViewBag.TotalPages = (int.Parse(totalRows) / pageSizeFilter) + 1;
                 }
-                if (ViewBag.TotalPage < (pageSizeFilter + 1))
+                if (ViewBag.TotalPages < (pageSizeFilter + 1))
                 {
                     ViewBag.StartNumber = 1;
-                    ViewBag.EndNumber = ViewBag.TotalPage;
+                    ViewBag.EndNumber = ViewBag.TotalPages;
                 }
                 else
                 {
@@ -54,17 +54,17 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                         subtract = 1;
                         plus = 3;
                     }
-                    else if (currentPageFilter <= ViewBag.TotalPage - 2)
+                    else if (currentPageFilter <= ViewBag.TotalPages - 2)
                     {
                         subtract = 2;
                         plus = 2;
                     }
-                    else if (currentPageFilter == ViewBag.TotalPage - 1)
+                    else if (currentPageFilter == ViewBag.TotalPages - 1)
                     {
                         subtract = 3;
                         plus = 1;
                     }
-                    else if (currentPageFilter == ViewBag.TotalPage)
+                    else if (currentPageFilter == ViewBag.TotalPages)
                     {
                         subtract = 4;
                         plus = 0;
@@ -77,6 +77,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             ViewBag.CurrentPage = currentPageFilter;
             ViewBag.TotalRows = totalRows;
             ViewBag.PageSize = pageSize;
+            ViewBag.FromRecord = currentPageFilter * pageSizeFilter - pageSizeFilter + 1;
+            ViewBag.ToRecord = currentPageFilter * pageSizeFilter;
 
             return PartialView();
         }

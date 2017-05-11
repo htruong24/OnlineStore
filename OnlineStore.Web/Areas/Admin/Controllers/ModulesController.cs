@@ -26,13 +26,13 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Admin/Modules
-        public ActionResult Index(SortingPagingInfo info, DefaultFilter filter)
+        public ActionResult Index(SortingPagingInfo info)
         {
             if (info.SortField == null)
             {
                 info = new SortingPagingInfo
                 {
-                    SortField = "Id",
+                    SortField = "Name",
                     SortDirection = "ascending",
                     PageSize = CommonConstants.PAGE_SIZE,
                     CurrentPage = 1
@@ -141,6 +141,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
         public ActionResult _LeftNavigation()
         {
+            var info = new SortingPagingInfo
+            {
+                SortField = "OrderNumber",
+                SortDirection = "ascending",
+                PageSize = 0,
+                CurrentPage = 1
+            };
+            _moduleService.Pagination = info;
             var modules = _moduleService.GetModules();
             return PartialView(modules);
         }

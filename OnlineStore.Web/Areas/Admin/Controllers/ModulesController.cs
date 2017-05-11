@@ -26,7 +26,13 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Admin/Modules
-        public ActionResult Index(SortingPagingInfo info)
+        public ActionResult Index()
+        {
+            return PartialView();
+        }
+
+        // GET: Modules partial
+        public ActionResult _List(SortingPagingInfo info)
         {
             if (info.SortField == null)
             {
@@ -41,7 +47,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             _moduleService.Pagination = info;
             var modules = _moduleService.GetModules();
             TempData["SortingPagingInfo"] = _moduleService.Pagination;
-            return View(modules);
+
+            return PartialView(modules);
         }
 
         // GET: Admin/Modules/Details/5

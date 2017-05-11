@@ -288,6 +288,7 @@
     <Content Include="assets\admin\js\ace-extra.min.js" />
     <Content Include="assets\admin\js\ace.min.js" />
     <Content Include="assets\admin\js\additional-methods.min.js" />
+    <Content Include="assets\admin\js\app\module.js" />
     <Content Include="assets\admin\js\bootbox.min.js" />
     <Content Include="assets\admin\js\bootstrap-colorpicker.min.js" />
     <Content Include="assets\admin\js\bootstrap-datepicker.min.js" />
@@ -531,6 +532,7 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Modules\_List.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
@@ -648,8 +650,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\toastr\toastr.min.css" />
-    <Content Include="Scripts\toastr\toastr.min.js" />
+    <Content Include="assets\common\js\toastr\toastr.min.css" />
+    <Content Include="assets\common\js\toastr\toastr.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -692,7 +694,7 @@
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Scripts\toastr\toastr.js.map" />
+    <Content Include="assets\common\js\toastr\toastr.js.map" />
     <Content Include="Views\Common\ButtonCreate.cshtml" />
     <Content Include="Views\Common\ButtonDelete.cshtml" />
     <Content Include="Views\Common\ButtonEdit.cshtml" />

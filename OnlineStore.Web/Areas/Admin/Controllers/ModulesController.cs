@@ -28,11 +28,11 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Modules
         public ActionResult Index()
         {
-            return PartialView();
+            return View();
         }
 
         // GET: Modules partial
-        public ActionResult _List(SortingPagingInfo info)
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)
             {
@@ -45,6 +45,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 };
             }
             _moduleService.Pagination = info;
+            _moduleService.Filter = filter;
             var modules = _moduleService.GetModules();
             TempData["SortingPagingInfo"] = _moduleService.Pagination;
 

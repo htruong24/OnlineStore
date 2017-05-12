@@ -10,18 +10,24 @@ function fnLoad(action) {
 }
 
 function fnLoadContent(container, action, parameters) {
-  //  $('#' + container).empty().append(loadingContent);
+    //$('#' + container).empty().load(rootPath + action, parameters, function (response, status, XMLHttpRequest) {
+    //    if (status === "Error") {
+    //        toastr.error("Oops! Something went wrong.");
+    //        $("#loadingContent").remove();
+    //    }
+    //});
+    $('#' + container).empty().append(loadingContent);
     $.ajax({
         type: "GET",
         url: rootPath + action,
         data: parameters,
         success: function (data) {
             $("#" + container).html(data);
-       //     $("#loadingContent").remove();
+           $("#loadingContent").remove();
         },
         error: function (xhr, textStatus, error) {
             toastr.error(error);
-          //  $("#loadingContent").remove();
+            $("#loadingContent").remove();
         }
     });
 }

@@ -21,6 +21,11 @@ namespace OnlineStore.Data.Entities
 
         public int? OrderNumber { get; set; }
 
+        [StringLength(50)]
+        public string Icon { get; set; }
+
+        public int? StatusId { get; set; }
+
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]

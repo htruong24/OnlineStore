@@ -11,10 +11,5 @@ namespace OnlineStore.Common
         public string Keyword { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
-
-        public int PageSize { get; set; }
-        public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
-        public int TotalRows { get; set; }
     }
 }

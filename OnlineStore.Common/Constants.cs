@@ -28,4 +28,9 @@ namespace OnlineStore.Common
     {
         public const string Avatar = "~/Content/images/placeholder/avatar.png";
     }
+
+    public class StatusGroups
+    {
+        public static int STATUS = 1;
+    }
 }

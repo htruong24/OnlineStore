@@ -6,16 +6,16 @@ namespace OnlineStore.Data.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Group")]
-    public partial class Group
+    public partial class Status
     {
-        [StringLength(30)]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public int? StatusGroupId { get; set; }
 
         public DateTime? CreatedOn { get; set; }
 

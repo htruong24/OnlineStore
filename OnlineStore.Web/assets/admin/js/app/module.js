@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
+
     LoadSorting();
+
     $("th.sortable").click(function (evt) {
         var sortfield = $(evt.target).data("sortfield");
         if ($("#hdSortField").val() === sortfield) {

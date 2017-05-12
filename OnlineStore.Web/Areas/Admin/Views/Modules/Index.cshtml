@@ -6,7 +6,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="action-buttons">
+<div class="action-buttons" style="padding-bottom: 10px;">
     <button class="btn btn-white btn-info btn-bold">
         <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
         @Html.ActionLink("Tạo mới", "Create")
@@ -18,3 +18,4 @@
 <div id="search-container">
     @Html.Action("_List", "Modules")
 </div>
+

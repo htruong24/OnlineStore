@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
@@ -11,6 +12,8 @@ namespace OnlineStore.Services.BLL.Services
     public class ModuleService: IModuleService
     {
         public SortingPagingInfo Pagination;
+
+        public DefaultFilter Filter;
 
         private readonly UnitOfWork _unitOfWork;
 
@@ -60,7 +63,8 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var query = _unitOfWork.GetRepository<Module>().All();
-
+                
+                // Sorting
                 switch (Pagination.SortField)
                 {
                     case "Id":
@@ -88,6 +92,11 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.OrderNumber) :
                                  query.OrderByDescending(c => c.OrderNumber));
                         break;
+                    case "StatusId":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.StatusId) :
+                                 query.OrderByDescending(c => c.StatusId));
+                        break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.CreatedOn) :
@@ -110,11 +119,21 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                 }
 
+                // Fitler
+                if (!string.IsNullOrEmpty(Filter?.Keyword))
+                {
+                    query = query.Where(x => x.Name.Contains(Filter.Keyword)
+                                             || x.Description.Contains(Filter.Keyword)
+                                             || x.Link.Contains(Filter.Keyword));
+                }
+
+                // Paging
                 Pagination.TotalRows = query.Count();
                 Pagination.PageCount =
                     (int)Math.Ceiling((double)query.Count() / Pagination.PageSize);
 
                 var pageIndex = Pagination.CurrentPage - 1;
+
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
                 return query.ToList();

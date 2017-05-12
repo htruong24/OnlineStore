@@ -19,6 +19,8 @@ namespace OnlineStore.Data.Infrastructure
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<StatusGroup> StatusGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

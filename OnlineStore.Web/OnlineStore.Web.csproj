@@ -356,6 +356,7 @@
     <Content Include="assets\common\images\sorting\sort_both.png" />
     <Content Include="assets\common\images\sorting\sort_desc.png" />
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
+    <Content Include="assets\common\js\paging\paging.js" />
     <Content Include="assets\web\css\animate.css" />
     <Content Include="assets\web\css\bootstrap.min.css" />
     <Content Include="assets\web\css\cloud-zoom.css" />

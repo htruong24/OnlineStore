@@ -1,87 +1,15 @@
-﻿<div id="grid-pager" class="ui-state-default ui-jqgrid-pager ui-corner-bottom" dir="ltr" style="width: 1034px;">
+﻿<div id="grid-pager" class="ui-state-default ui-jqgrid-pager ui-corner-bottom" dir="ltr" style="width: 1034px; padding-top: 10px;">
     <div id="pg_grid-pager" class="ui-pager-control" role="group"><table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table" style="width: 100%; table-layout: fixed; height: 100%;" role="row"><tbody><tr><td id="grid-pager_left" align="left"><table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table navtable" style="float: left; table-layout: auto;"><tbody><tr><td class="ui-pg-button ui-corner-all" title="" id="add_grid-table" data-original-title="Add new row">
             <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-plus-circle purple"></span></div></td><td class="ui-pg-button ui-corner-all" title="" id="edit_grid-table" data-original-title="Edit selected row">
             <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-pencil blue"></span></div></td><td class="ui-pg-button ui-corner-all" title="" id="view_grid-table" data-original-title="View selected row">
             <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-search-plus grey"></span></div></td><td class="ui-pg-button ui-corner-all" title="" id="del_grid-table" data-original-title="Delete selected row">
             <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-trash-o red"></span></div></td><td class="ui-pg-button" style="width: 4px;" data-original-title="" title=""><span class="ui-separator"></span></td><td class="ui-pg-button ui-corner-all" title="" id="search_grid-table" data-original-title="Find records">
             <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-search orange"></span></div></td><td class="ui-pg-button ui-corner-all" title="" id="refresh_grid-table" data-original-title="Reload Grid">
-            <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-refresh green"></span></div></td></tr></tbody></table></td><td id="grid-pager_center" align="center" style="white-space: pre; width: 343px;"><table cellspacing="0" cellpadding="0" border="0" style="table-layout: auto;" class="ui-pg-table"><tbody><tr><td id="first_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-left bigger-140"></span></td><td id="prev_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-left bigger-140"></span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td dir="ltr">Trang <input class="ui-pg-input" type="text" size="2" maxlength="7" value="@ViewBag.CurrentPage" role="textbox"> trong <span id="sp_1_grid-pager">@(ViewBag.TotalPages)</span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td id="next_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-right bigger-140"></span></td><td id="last_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-right bigger-140"></span></td><td dir="ltr"><select class="ui-pg-selbox" role="listbox"><option role="option" value="10" selected="selected">10</option><option role="option" value="20">20</option><option role="option" value="50">50</option><option role="option" value="100">100</option></select></td></tr></tbody></table></td><td id="grid-pager_right" align="right">
+            <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-refresh green"></span></div></td></tr></tbody></table></td><td id="grid-pager_center" align="center" style="white-space: pre; width: 343px;"><table cellspacing="0" cellpadding="0" border="0" style="table-layout: auto;" class="ui-pg-table"><tbody><tr><td id="first_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-left bigger-140"></span></td><td id="prev_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-left bigger-140"></span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td dir="ltr">Trang <input id="txtCurrentPage" class="ui-pg-input" type="text" size="2" maxlength="7" value="@ViewBag.CurrentPage" role="textbox"> trong <span id="sp_1_grid-pager">@(ViewBag.TotalPages)</span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td id="next_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-right bigger-140"></span></td><td id="last_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-right bigger-140"></span></td><td dir="ltr"><select class="ui-pg-selbox" role="listbox"><option role="option" value="10" selected="selected">10</option><option role="option" value="20">20</option><option role="option" value="50">50</option><option role="option" value="100">100</option></select></td></tr></tbody></table></td><td id="grid-pager_right" align="right">
             <div dir="ltr" style="text-align: right" class="ui-paging-info">Hiển thị @ViewBag.FromRecord - @ViewBag.ToRecord trong số @ViewBag.TotalRows</div></td></tr></tbody></table>
     </div>
     <input type="hidden" id="totalPages" value="@ViewBag.TotalPages" />
     <input type="hidden" id="pgSize" value="@ViewBag.PageSize" />
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        alert("vo day");
-        // Change page size
-        $(".ui-pg-selbox").val($("#pgSize").val());
-        $(".ui-pg-selbox").change(function () {
-            $("#hdPageSize").val($(this).val());
-            fnSearch();
-        });
-
-        //// Backward
-        //$("#first_grid-pager").click(function () {
-        //    $('#PageSize').val($("#pgSize").val());
-        //    $("#hdCurrentPage").val($("#txtCurrentPage").val());
-        //    var currentPage = $("#txtCurrentPage").val();
-        //    if (currentPage > 1)
-        //        $("#hdCurrentPage").val("1");
-        //    else {
-        //        return;
-        //    }
-        //    fnSearch();
-        //});
-
-        //// Forward
-        //$("#last_grid-pager").click(function () {
-        //    var currentPage = parseInt($("#txtCurrentPage").val());
-        //    var totalPages = $("#totalPages").val();
-        //    if (currentPage < totalPages) {
-        //        $("#hdCurrentPage").val(totalPages);
-        //    }
-        //    else {
-        //        return;
-        //    }
-        //    fnSearch();
-        //});
-
-        //// Previous
-        //$("#prev_grid-pager").click(function () {
-        //    var currentPage = $('#txtCurrentPage').val();
-        //    if (currentPage > 1)
-        //        $("#hdCurrentPage").val(currentPage - 1);
-        //    else {
-        //        return;
-        //    }
-        //    fnSearch();
-        //});
-
-        //// Next
-        //$("#next_grid-pager").click(function () {
-        //    var currentPage = parseInt($('#txtCurrentPage').val());
-        //    var totalPages = $("#totalPages").val();
-        //    if (currentPage < totalPages) {
-        //        currentPage = currentPage + 1;
-        //        $("#hdCurrentPage").val(currentPage);
-        //    }
-        //    else {
-        //        return;
-        //    }
-        //    fnSearch();
-        //});
-
-        //// Change page number
-        //$('.ui-pg-input').change(function () {
-        //    var currentPage = $(".ui-pg-input").val();
-        //    if (currentPage < 1) {
-        //        $("#hdCurrentPage").val(1);
-        //    } else {
-        //        $("#hdCurrentPage").val(currentPage);
-        //    }
-        //    fnSearch();
-        //});
-    });
-</script>
+<script src="~/assets/common/js/paging/paging.js"></script>

@@ -1,36 +1,33 @@
 ﻿@using OnlineStore.Common
 @{
     var info = (SortingPagingInfo)TempData["SortingPagingInfo"] ?? new SortingPagingInfo();
-
-    var demo = "";
 }
 
 <div class="nav-search" id="nav-search">
-    <form id="frmSearch" class="form-search" action="~/@ViewBag.SearchUrl" method="post">
-        @*Parameters for searching*@
-        <input type="hidden" name="SortField" id="hdSortField" value="@info.SortField" />
-        <input type="hidden" name="SortDirection" id="hdSortDirection" value="@info.SortDirection" />
-        <input type="hidden" name="TotalPages" id="hdTotalPages" value="@info.PageCount" />
-        <input type="hidden" name="PageSize" id="hdPageSize" value="@info.PageSize" />
-        <input type="hidden" name="CurrentPage" id="hdCurrentPage" value="@info.CurrentPage" />
-        <input type="hidden" name="Keyword" id="hdKeyword" value="" />
+    
+    <span class="input-icon">
+        <input type="text" id="txtSearchKey" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+    </span>
 
-        <span class="input-icon">
-            <input type="text" id="txtKeyword" placeholder="Tìm kiếm ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-            <i class="ace-icon fa fa-search nav-search-icon"></i>
-        </span>
+    <form id="frmSearch" class="form-search">
+        @*Parameters for searching*@
+        <input type="hidden" name="SortField" id="hdSortField" value="@info.SortField"/>
+        <input type="hidden" name="SortDirection" id="hdSortDirection" value="@info.SortDirection"/>
+        <input type="hidden" name="TotalPages" id="hdTotalPages" value="@info.PageCount"/>
+        <input type="hidden" name="PageSize" id="hdPageSize" value="@info.PageSize"/>
+        <input type="hidden" name="CurrentPage" id="hdCurrentPage" value="@info.CurrentPage"/>
+        <input type="hidden" name="Keyword" id="hdKeyword" value=""/>
     </form>
 </div><!-- /.nav-search -->
 
 <script type="text/javascript">
-    var t;
-    $("#txtKeyword").on("keyup", function (event) {
-        clearTimeout(t);
-        t = setTimeout(function () {
-            fnSearch();
-        }, 1000);
-    });
-    $("#txtKeyword").change(function (event) {
-        $("#hdKeyword").val($("#txtKeyword").val());
+    $(document).ready(function() {
+        $("#txtSearchKey").on("keyup", function (event) {
+            if (event.keyCode === 13) {
+                $("#hdKeyword").val($("#txtSearchKey").val());
+                fnSearch();
+            }
+        });
     });
 </script>

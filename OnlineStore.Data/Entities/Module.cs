@@ -26,11 +26,13 @@ namespace OnlineStore.Data.Entities
 
         public int? StatusId { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
         public string CreatedBy { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]

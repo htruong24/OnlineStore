@@ -1,5 +1,5 @@
 ﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
-<script src="~/assets/admin/js/app/module.js"></script>
+<script src="~/assets/admin/js/app/module/list.js"></script>
 
 @using OnlineStore.Common
 @model IEnumerable<OnlineStore.Data.Entities.Module>
@@ -89,10 +89,10 @@
                         </td>
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
-                                <a class="blue" href="~/Admin/Modules/Edit/@item.Id">
+                                <a class="blue" href="~/Admin/Modules/Details/@item.Id">
                                     <i class="ace-icon fa fa-search-plus bigger-130"></i>
                                 </a>
-                                <a class="green" href="~/Admin/Modules/Details/@item.Id">
+                                <a class="green" href="~/Admin/Modules/Edit/@item.Id">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
                                 <a class="red" href="~/Admin/Modules/Delete/@item.Id">

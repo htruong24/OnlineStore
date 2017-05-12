@@ -1,3 +1,7 @@
 ﻿.nav-search {
     top: 10px;
 }
+
+.ui-datepicker {
+    width: 18em !important;
+}

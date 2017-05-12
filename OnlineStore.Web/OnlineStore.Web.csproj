@@ -288,7 +288,8 @@
     <Content Include="assets\admin\js\ace-extra.min.js" />
     <Content Include="assets\admin\js\ace.min.js" />
     <Content Include="assets\admin\js\additional-methods.min.js" />
-    <Content Include="assets\admin\js\app\module.js" />
+    <Content Include="assets\admin\js\app\module\edit.js" />
+    <Content Include="assets\admin\js\app\module\list.js" />
     <Content Include="assets\admin\js\bootbox.min.js" />
     <Content Include="assets\admin\js\bootstrap-colorpicker.min.js" />
     <Content Include="assets\admin\js\bootstrap-datepicker.min.js" />
@@ -355,6 +356,7 @@
     <Content Include="assets\common\images\sorting\sort_asc.png" />
     <Content Include="assets\common\images\sorting\sort_both.png" />
     <Content Include="assets\common\images\sorting\sort_desc.png" />
+    <Content Include="assets\common\js\common.js" />
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\common\js\paging\paging.js" />
     <Content Include="assets\web\css\animate.css" />
@@ -721,6 +723,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="assets\common\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

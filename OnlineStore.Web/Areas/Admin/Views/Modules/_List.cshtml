@@ -36,10 +36,10 @@
                     <th class="sorting sortable" data-sortfield="CreatedOn">
                         <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>@Html.DisplayNameFor(model => model.CreatedOn)
                     </th>
-                    <th class="sorting " data-sortfield="CreatedBy">
+                    <th class="sorting sortable" data-sortfield="CreatedBy">
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </th>
-                    <th class="sorting sortable">
+                    <th class="sorting sortable" data-sortfield="ModifiedOn">
                         <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>@Html.DisplayNameFor(model => model.ModifiedOn)
                     </th>
                     <th class="sorting sortable" data-sortfield="ModifiedBy">
@@ -59,7 +59,7 @@
                             </label>
                         </td>
                         <td>
-                            <a href="#">
+                            <a href="~/Admin/Modules/Details/@item.Id">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </a>
                         </td>

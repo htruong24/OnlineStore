@@ -67,4 +67,9 @@
         }
         fnSearch();
     });
+
+    // Reload grid
+    $("#refresh_grid-table").click(function () {
+        fnSearch();
+    });
 });

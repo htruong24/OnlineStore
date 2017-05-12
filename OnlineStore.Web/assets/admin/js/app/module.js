@@ -17,7 +17,7 @@
             $("#hdSortField").val(sortfield);
             $("#hdSortDirection").val("ascending");
         }
-        fnSearch(LoadSorting);
+        fnSearch();
     });
 });
 

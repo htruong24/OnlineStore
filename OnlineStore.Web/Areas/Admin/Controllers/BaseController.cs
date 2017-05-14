@@ -24,7 +24,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             if (Session[CommonConstants.USER_SESSION] != null)
             {
                 var user = Session[CommonConstants.USER_SESSION] as User;
-                return user.Id;
+                if (user != null) return user.Id;
             }
             return string.Empty;
         }

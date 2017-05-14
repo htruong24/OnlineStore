@@ -22,7 +22,7 @@ namespace OnlineStore.Services.BLL.Services
             this._unitOfWork = unitOfWork;
         }
 
-        public Module GetModule(string moduleId)
+        public Module GetModule(int? moduleId)
         {
             using (_unitOfWork)
             {
@@ -49,7 +49,7 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
-        public void DeleteModule(string moduleId)
+        public void DeleteModule(int? moduleId)
         {
             using (_unitOfWork)
             {

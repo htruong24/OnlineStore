@@ -59,7 +59,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
+            Module module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -78,12 +78,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Link,OrderNumber,CreatedOn,CreatedBy,ModifiedOn,ModifiedBy")] Module module)
+        public ActionResult Create(Module module)
         {
             if (ModelState.IsValid)
             {
-                db.Modules.Add(module);
-                db.SaveChanges();
+                UpdateDefaultProperties(module);
+                _moduleService.CreateModule(module);
+                //db.Modules.Add(module);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -97,7 +99,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
+            Module module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -110,12 +112,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Link,OrderNumber,CreatedOn,CreatedBy,ModifiedOn,ModifiedBy")] Module module)
+        public ActionResult Edit(Module module)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(module).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(module);
+                _moduleService.UpdateModule(module);
+                //db.Entry(module).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(module);
@@ -128,7 +132,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = db.Modules.Find(id);
+            Module module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -141,9 +145,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Module module = db.Modules.Find(id);
-            db.Modules.Remove(module);
-            db.SaveChanges();
+            _moduleService.DeleteModule(id);
+            //Module module = db.Modules.Find(id);
+            //db.Modules.Remove(module);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -168,6 +173,29 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Module module)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (module.Id == 0)
+                {
+                    module.CreatedBy = user.Id;
+                    module.CreatedOn = DateTime.Now;
+                    module.ModifiedBy = user.Id;
+                    module.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    module.ModifiedBy = user.Id;
+                    module.ModifiedOn = DateTime.Now;
+                }
+            }
         }
     }
 }

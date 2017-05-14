@@ -6,10 +6,10 @@ namespace OnlineStore.Services.BLL.Contracts
 {
     public interface IModuleService
     {
-        Module GetModule(string moduleId);
+        Module GetModule(int? moduleId);
         void UpdateModule(Module module);
         void CreateModule(Module module);
-        void DeleteModule(string moduleId);
+        void DeleteModule(int? moduleId);
         List<Module> GetModules();
     }
 }

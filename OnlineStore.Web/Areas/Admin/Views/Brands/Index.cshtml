@@ -1,0 +1,16 @@
+﻿@model IEnumerable<OnlineStore.Data.Entities.Brand>
+@{
+    ViewBag.Title = "Quản lý thương hiệu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="action-buttons" style="padding-bottom: 10px;">
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @Html.ActionLink("Tạo mới", "Create")
+    </button>
+    @Html.Partial("_Search")
+    <input type="hidden" id="hdControllerName" value="Brands" />
+</div>
+<div id="search-container">
+    @Html.Action("_List", "Brands")
+</div>

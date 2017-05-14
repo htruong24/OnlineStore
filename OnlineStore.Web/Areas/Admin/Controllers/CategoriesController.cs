@@ -6,19 +6,49 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        private readonly CategoryService _categoryService;
+
+        public CategoriesController()
+        {
+            this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View();
+        }
+
+        // GET: List of modules
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _categoryService.Pagination = info;
+            _categoryService.Filter = filter;
+            var categories = _categoryService.GetCategories();
+            TempData["SortingPagingInfo"] = _categoryService.Pagination;
+
+            return PartialView(categories);
         }
 
         // GET: Admin/Categories/Details/5
@@ -28,7 +58,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            var category = _categoryService.GetCategory(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -47,12 +77,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,CreatedOn,CreatedBy,ModifiedOn,ModifiedBy")] Category category)
+        public ActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                UpdateDefaultProperties(category);
+                _categoryService.CreateCategory(category);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +96,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            var category = _categoryService.GetCategory(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -79,12 +109,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,CreatedOn,CreatedBy,ModifiedOn,ModifiedBy")] Category category)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(category);
+                _categoryService.UpdateCategory(category);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -97,7 +127,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            var category = _categoryService.GetCategory(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -110,19 +140,31 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            _categoryService.DeleteCategory(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Category category)
         {
-            if (disposing)
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
             {
-                db.Dispose();
+                if (category.Id == 0)
+                {
+                    category.CreatedBy = user.Id;
+                    category.CreatedOn = DateTime.Now;
+                    category.ModifiedBy = user.Id;
+                    category.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    category.ModifiedBy = user.Id;
+                    category.ModifiedOn = DateTime.Now;
+                }
             }
-            base.Dispose(disposing);
         }
     }
 }

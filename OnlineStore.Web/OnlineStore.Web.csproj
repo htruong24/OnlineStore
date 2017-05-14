@@ -202,6 +202,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -288,8 +289,14 @@
     <Content Include="assets\admin\js\ace-extra.min.js" />
     <Content Include="assets\admin\js\ace.min.js" />
     <Content Include="assets\admin\js\additional-methods.min.js" />
+    <Content Include="assets\admin\js\app\category\edit.js" />
+    <Content Include="assets\admin\js\app\category\list.js" />
     <Content Include="assets\admin\js\app\module\edit.js" />
     <Content Include="assets\admin\js\app\module\list.js" />
+    <Content Include="assets\admin\js\app\brand\edit.js" />
+    <Content Include="assets\admin\js\app\brand\list.js" />
+    <Content Include="assets\admin\js\app\user\edit.js" />
+    <Content Include="assets\admin\js\app\user\list.js" />
     <Content Include="assets\admin\js\bootbox.min.js" />
     <Content Include="assets\admin\js\bootstrap-colorpicker.min.js" />
     <Content Include="assets\admin\js\bootstrap-datepicker.min.js" />
@@ -537,6 +544,13 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Modules\_List.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_List.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\_List.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\_List.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

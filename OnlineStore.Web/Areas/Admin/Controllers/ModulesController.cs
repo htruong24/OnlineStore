@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Common;
 using OnlineStore.Data.Entities;
@@ -23,15 +18,13 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             this._moduleService = new ModuleService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
-
         // GET: Admin/Modules
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Modules partial
+        // GET: List of modules
         public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)
@@ -44,6 +37,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     CurrentPage = 1
                 };
             }
+
             _moduleService.Pagination = info;
             _moduleService.Filter = filter;
             var modules = _moduleService.GetModules();
@@ -59,7 +53,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = _moduleService.GetModule(id);
+            var module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -84,11 +78,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 UpdateDefaultProperties(module);
                 _moduleService.CreateModule(module);
-                //db.Modules.Add(module);
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(module);
         }
 
@@ -99,7 +90,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = _moduleService.GetModule(id);
+            var module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -118,8 +109,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 UpdateDefaultProperties(module);
                 _moduleService.UpdateModule(module);
-                //db.Entry(module).State = EntityState.Modified;
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(module);
@@ -132,7 +121,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Module module = _moduleService.GetModule(id);
+            var module = _moduleService.GetModule(id);
             if (module == null)
             {
                 return HttpNotFound();
@@ -146,9 +135,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             _moduleService.DeleteModule(id);
-            //Module module = db.Modules.Find(id);
-            //db.Modules.Remove(module);
-            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -161,18 +147,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 PageSize = 0,
                 CurrentPage = 1
             };
+
             _moduleService.Pagination = info;
             var modules = _moduleService.GetModules();
             return PartialView(modules);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy

@@ -59,5 +59,15 @@ namespace OnlineStore.Data.Entities
         public bool? Active { get; set; }
 
         public string Image { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        [StringLength(30)]
+        public string CreatedBy { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        [StringLength(30)]
+        public string ModifiedBy { get; set; }
     }
 }

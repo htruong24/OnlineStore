@@ -12,6 +12,8 @@ namespace OnlineStore.Services.BLL.Services
     {
         public SortingPagingInfo Pagination;
 
+        public DefaultFilter Filter;
+
         public string ErrorMessage;
 
         private readonly UnitOfWork _unitOfWork;
@@ -46,13 +48,20 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var automaticValueService = new AutomaticValueService(_unitOfWork);
-                // Get New Id and Password
+
+                // Generate default id and password
+
                 user.Id = automaticValueService.GetNextId(AutomaticTable.USER);
                 user.Password = Encryptor.MD5Hash(CommonConstants.DEFAULT_PASSWORD);
+                user.EmailPassword = Encryptor.MD5Hash(CommonConstants.DEFAULT_EMAIL_PASSWORD);
+
                 // Create new User
+
                 _unitOfWork.GetRepository<User>().Create(user);
                 _unitOfWork.Save();
-                //Update Automatic Value
+
+                //Update automatic value for id
+
                 var currentAutomaticValue = automaticValueService.GetAutomaticValue(AutomaticTable.USER);
                 currentAutomaticValue.LastValue = user.Id;
                 automaticValueService.UpdateAutomaticValue(currentAutomaticValue);
@@ -106,23 +115,64 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Gender) :
                                  query.OrderByDescending(c => c.Gender));
                         break;
+                    case "DateOfBirth":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.DateOfBirth) :
+                                 query.OrderByDescending(c => c.DateOfBirth));
+                        break;
                     case "Address":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.Address) :
                                  query.OrderByDescending(c => c.Address));
-                        break;
-                    case "Email":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.Email) :
-                                 query.OrderByDescending(c => c.Email));
                         break;
                     case "Telephone":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.Telephone) :
                                  query.OrderByDescending(c => c.Telephone));
                         break;
+                    case "CellPhone":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.CellPhone) :
+                                 query.OrderByDescending(c => c.CellPhone));
+                        break;
+                    case "Fax":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Fax) :
+                                 query.OrderByDescending(c => c.Fax));
+                        break;
+                    case "Email":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Email) :
+                                 query.OrderByDescending(c => c.Email));
+                        break;
+                    case "TaxCode":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.TaxCode) :
+                                 query.OrderByDescending(c => c.TaxCode));
+                        break;
+                    case "Active":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Active) :
+                                 query.OrderByDescending(c => c.Active));
+                        break;
                 }
 
+                // Fitler
+                if (!string.IsNullOrEmpty(Filter?.Keyword))
+                {
+                    query = query.Where(x => x.Username.Contains(Filter.Keyword)
+                                             || x.FirstName.Contains(Filter.Keyword)
+                                             || x.LastName.Contains(Filter.Keyword)
+                                             || x.FullName.Contains(Filter.Keyword)
+                                             || x.Address.Contains(Filter.Keyword)
+                                             || x.Telephone.Contains(Filter.Keyword)
+                                             || x.CellPhone.Contains(Filter.Keyword)
+                                             || x.Fax.Contains(Filter.Keyword)
+                                             || x.Email.Contains(Filter.Keyword)
+                                             || x.TaxCode.Contains(Filter.Keyword));
+                }
+
+                // Paging
                 Pagination.TotalRows = query.Count();
                 Pagination.PageCount =
                     (int)Math.Ceiling((double)query.Count() / Pagination.PageSize);

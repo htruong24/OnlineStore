@@ -1,24 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        private readonly UserService _userService;
+
+        public UsersController()
+        {
+            this._userService = new UserService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View();
+        }
+
+        // GET: List of users
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _userService.Pagination = info;
+            _userService.Filter = filter;
+            var users = _userService.GetUsers();
+            TempData["SortingPagingInfo"] = _userService.Pagination;
+
+            return PartialView(users);
         }
 
         // GET: Admin/Users/Details/5
@@ -28,7 +54,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = _userService.GetUser(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -47,15 +73,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Password,FirstName,LastName,FullName,Gender,DateOfBirth,Address,Telephone,CellPhone,Fax,Email,EmailPassword,GroupId,TypeId,TaxCode,Active,Image")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
+                UpdateDefaultProperties(user);
+                _userService.CreateUser(user);
                 return RedirectToAction("Index");
             }
-
             return View(user);
         }
 
@@ -66,7 +91,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = _userService.GetUser(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -79,12 +104,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Password,FirstName,LastName,FullName,Gender,DateOfBirth,Address,Telephone,CellPhone,Fax,Email,EmailPassword,GroupId,TypeId,TaxCode,Active,Image")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(user);
+                _userService.UpdateUser(user);
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -97,7 +122,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            var user = _userService.GetUser(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -110,19 +135,31 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
+            _userService.DeleteUser(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(User userModel)
         {
-            if (disposing)
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
             {
-                db.Dispose();
+                if (string.IsNullOrEmpty(userModel.Id))
+                {
+                    userModel.CreatedBy = user.Id;
+                    userModel.CreatedOn = DateTime.Now;
+                    userModel.ModifiedBy = user.Id;
+                    userModel.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    userModel.ModifiedBy = user.Id;
+                    userModel.ModifiedOn = DateTime.Now;
+                }
             }
-            base.Dispose(disposing);
         }
     }
 }

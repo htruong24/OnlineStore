@@ -1,67 +1,72 @@
 ﻿@model OnlineStore.Data.Entities.Category
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<h2>@Model.Name</h2>
 <div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-
-    </dl>
+    @*Details information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chi tiết</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    @*Common information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chung</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <i class="ace-icon fa fa-wrench bigger-110 icon-only"></i> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </p>

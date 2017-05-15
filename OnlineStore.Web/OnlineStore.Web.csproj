@@ -207,6 +207,8 @@
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubCategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnitsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -295,6 +298,10 @@
     <Content Include="assets\admin\js\app\module\list.js" />
     <Content Include="assets\admin\js\app\brand\edit.js" />
     <Content Include="assets\admin\js\app\brand\list.js" />
+    <Content Include="assets\admin\js\app\subcategory\edit.js" />
+    <Content Include="assets\admin\js\app\subcategory\list.js" />
+    <Content Include="assets\admin\js\app\unit\edit.js" />
+    <Content Include="assets\admin\js\app\unit\list.js" />
     <Content Include="assets\admin\js\app\user\edit.js" />
     <Content Include="assets\admin\js\app\user\list.js" />
     <Content Include="assets\admin\js\bootbox.min.js" />
@@ -551,6 +558,18 @@
     <Content Include="Areas\Admin\Views\Brands\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Brands\_List.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\_List.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Units\_List.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategories\_List.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
@@ -733,6 +752,11 @@
     <Content Include="Views\Common\Paging.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Units\Create.cshtml" />
+    <Content Include="Views\Units\Delete.cshtml" />
+    <Content Include="Views\Units\Details.cshtml" />
+    <Content Include="Views\Units\Edit.cshtml" />
+    <Content Include="Views\Units\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

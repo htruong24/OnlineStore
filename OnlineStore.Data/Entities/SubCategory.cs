@@ -16,6 +16,8 @@ namespace OnlineStore.Data.Entities
 
         public string Description { get; set; }
 
+        public int? CategoryId { get; set; }
+
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]

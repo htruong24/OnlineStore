@@ -17,12 +17,12 @@ namespace OnlineStore.Data.Entities
 
         public string Description { get; set; }
 
-        public DateTime? CreatedOn { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [StringLength(30)]
         public string CreatedBy { get; set; }
 
-        public DateTime? ModifiedOn { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [StringLength(30)]
         public string ModifiedBy { get; set; }

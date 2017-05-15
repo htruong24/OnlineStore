@@ -58,11 +58,15 @@
     <Compile Include="BLL\Contracts\ICategoryService.cs" />
     <Compile Include="BLL\Contracts\IFunctionService.cs" />
     <Compile Include="BLL\Contracts\IBrandService.cs" />
+    <Compile Include="BLL\Contracts\ISubCategoryService.cs" />
+    <Compile Include="BLL\Contracts\IUnitService.cs" />
     <Compile Include="BLL\Contracts\IModuleService.cs" />
     <Compile Include="BLL\Contracts\IAutomaticValueService.cs" />
     <Compile Include="BLL\Contracts\IUserService.cs" />
     <Compile Include="BLL\Services\AccountService.cs" />
     <Compile Include="BLL\Contracts\IAccountService.cs" />
+    <Compile Include="BLL\Services\SubCategoryService.cs" />
+    <Compile Include="BLL\Services\UnitService.cs" />
     <Compile Include="BLL\Services\CategoryService.cs" />
     <Compile Include="BLL\Services\FunctionService.cs" />
     <Compile Include="BLL\Services\BrandService.cs" />

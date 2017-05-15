@@ -11,6 +11,13 @@ namespace OnlineStore.Data.Entities
     {
         public int Id { get; set; }
 
+        [StringLength(30)]
+        public string CustomerId { get; set; }
+
+        public int? StatusId { get; set; }
+
+        public string Note { get; set; }
+
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]

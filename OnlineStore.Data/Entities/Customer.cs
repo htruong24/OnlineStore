@@ -14,6 +14,20 @@ namespace OnlineStore.Data.Entities
         [StringLength(50)]
         public string Name { get; set; }
 
+        public string Address { get; set; }
+
+        [StringLength(20)]
+        public string Telephone { get; set; }
+
+        [StringLength(20)]
+        public string CellPhone { get; set; }
+
+        [StringLength(50)]
+        public string Email { get; set; }
+
+        [StringLength(50)]
+        public string Fax { get; set; }
+
         public string Description { get; set; }
 
         public DateTime? CreatedOn { get; set; }

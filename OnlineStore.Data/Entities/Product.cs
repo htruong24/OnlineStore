@@ -15,24 +15,24 @@ namespace OnlineStore.Data.Entities
         [StringLength(50)]
         public string Name { get; set; }
 
+        public string ShortDescrition { get; set; }
+
         public string Description { get; set; }
 
-        public int? BrandId { get; set; }
-
-        public int? SubCategoryId { get; set; }
-
         public decimal? Price { get; set; }
-
-        public int? StatusId { get; set; }
 
         public bool? Active { get; set; }
 
         [StringLength(50)]
         public string Color { get; set; }
 
-        public int? UnitId { get; set; }
+        public int? StatusId { get; set; }
 
-        public string ShortDescrition { get; set; }
+        public int? SubCategoryId { get; set; }
+
+        public int? BrandId { get; set; }
+
+        public int? UnitId { get; set; }
 
         public int? SupplierId { get; set; }
 

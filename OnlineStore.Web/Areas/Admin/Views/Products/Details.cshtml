@@ -1,139 +1,147 @@
 ﻿@model OnlineStore.Data.Entities.Product
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<h2>@Model.Name</h2>
 <div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    @*Details information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chi tiết</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ShortDescrition)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ShortDescrition)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ShortDescrition)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ShortDescrition)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Active)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Active)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Color)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Color)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StatusId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StatusId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StatusId)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.StatusId)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategoryId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SubCategoryId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SubCategoryId)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.SubCategoryId)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BrandId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BrandId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BrandId)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.BrandId)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UnitId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitId)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.UnitId)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SupplierId)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SupplierId)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SupplierId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-
-    </dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.SupplierId)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    @*Common information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chung</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <i class="ace-icon fa fa-wrench bigger-110 icon-only"></i> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </p>

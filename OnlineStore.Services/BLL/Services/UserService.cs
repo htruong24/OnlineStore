@@ -95,20 +95,10 @@ namespace OnlineStore.Services.BLL.Services
                             ? query.OrderBy(c => c.Username)
                             : query.OrderByDescending(c => c.Username));
                         break;
-                    case "FirstName":
+                    case "Name":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.FirstName) :
-                                 query.OrderByDescending(c => c.FirstName));
-                        break;
-                    case "LastName":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.LastName) :
-                                 query.OrderByDescending(c => c.LastName));
-                        break;
-                    case "FullName":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.FullName) :
-                                 query.OrderByDescending(c => c.FullName));
+                                 query.OrderBy(c => c.Name) :
+                                 query.OrderByDescending(c => c.Name));
                         break;
                     case "Gender":
                         query = (Pagination.SortDirection == "ascending" ?
@@ -161,9 +151,7 @@ namespace OnlineStore.Services.BLL.Services
                 if (!string.IsNullOrEmpty(Filter?.Keyword))
                 {
                     query = query.Where(x => x.Username.Contains(Filter.Keyword)
-                                             || x.FirstName.Contains(Filter.Keyword)
-                                             || x.LastName.Contains(Filter.Keyword)
-                                             || x.FullName.Contains(Filter.Keyword)
+                                             || x.Name.Contains(Filter.Keyword)
                                              || x.Address.Contains(Filter.Keyword)
                                              || x.Telephone.Contains(Filter.Keyword)
                                              || x.CellPhone.Contains(Filter.Keyword)

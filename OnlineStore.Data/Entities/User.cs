@@ -18,13 +18,7 @@ namespace OnlineStore.Data.Entities
         [StringLength(50)]
         public string Password { get; set; }
 
-        [StringLength(50)]
-        public string FirstName { get; set; }
-
-        [StringLength(50)]
-        public string LastName { get; set; }
-
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
         public int? Gender { get; set; }
 

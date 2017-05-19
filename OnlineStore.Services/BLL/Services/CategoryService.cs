@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Security.Cryptography.X509Certificates;
 using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
@@ -27,6 +28,8 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var category = _unitOfWork.GetRepository<Data.Entities.Category>().GetById(categoryId);
+                category.Creator = GetReferenceUser(category.CreatedBy);
+                category.Modifier = GetReferenceUser(category.ModifiedBy);
                 return category;
             }
         }
@@ -120,9 +123,21 @@ namespace OnlineStore.Services.BLL.Services
 
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
-                return query.ToList();
+                var categories = query.ToList();
 
+                foreach (var category in categories)
+                {
+                    category.Creator = GetReferenceUser(category.CreatedBy);
+                    category.Modifier = GetReferenceUser(category.ModifiedBy);
+                }
+
+                return categories;
             }
+        }
+
+        public User GetReferenceUser(object userId)
+        {
+            return _unitOfWork.GetRepository<User>().GetById(userId);
         }
     }
 }

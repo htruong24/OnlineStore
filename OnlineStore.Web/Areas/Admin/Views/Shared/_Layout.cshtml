@@ -493,9 +493,9 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Home</a>
+                        <a href="~/Admin">Trang chủ</a>
                     </li>
-                    <li class="active">Dashboard</li>
+                    <li class="active">@ViewBag.Module</li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -568,14 +568,7 @@
                 </div><!-- /.ace-settings-container -->
 
                 <div class="page-header">
-                    <h1>
-                        Dashboard
-                        <small>
-                            <i class="ace-icon fa fa-angle-double-right"></i>
-                            @*overview &amp; stats*@
-                            @ViewBag.Title
-                        </small>
-                    </h1>
+                    <h1>@ViewBag.Title</h1>
                 </div><!-- /.page-header -->
 
                 <div class="row">

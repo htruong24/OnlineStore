@@ -24,14 +24,8 @@
                     <th class="sorting sortable" data-sortfield="Username">
                         @Html.DisplayNameFor(model => model.Username)
                     </th>
-                    <th class="sorting sortable" data-sortfield="FirstName">
-                        @Html.DisplayNameFor(model => model.FirstName)
-                    </th>
-                    <th class="sorting sortable" data-sortfield="LastName">
-                        @Html.DisplayNameFor(model => model.LastName)
-                    </th>
-                    <th class="sorting sortable" data-sortfield="FullName">
-                        @Html.DisplayNameFor(model => model.FullName)
+                    <th class="sorting sortable" data-sortfield="Name">
+                        @Html.DisplayNameFor(model => model.Name)
                     </th>
                     <th class="sorting sortable" data-sortfield="Gender">
                         @Html.DisplayNameFor(model => model.Gender)
@@ -94,13 +88,7 @@
                             </a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FullName)
+                            @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Gender)

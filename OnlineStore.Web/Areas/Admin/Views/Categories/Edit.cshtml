@@ -4,7 +4,8 @@
 
 @model OnlineStore.Data.Entities.Category
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Module = "Danh mục";
+    ViewBag.Title = "Cập nhật";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -39,7 +40,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Cập nhật
+                </button>
             </div>
         </div>
     </div>

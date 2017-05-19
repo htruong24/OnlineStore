@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly CategoryService _categoryService;
+        private readonly UserService _userService;
 
         public CategoriesController()
         {
             this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._userService = new UserService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/Categories

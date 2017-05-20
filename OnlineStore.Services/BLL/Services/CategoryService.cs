@@ -28,8 +28,8 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var category = _unitOfWork.GetRepository<Data.Entities.Category>().GetById(categoryId);
-                category.Creator = GetReferenceUser(category.CreatedBy);
-                category.Modifier = GetReferenceUser(category.ModifiedBy);
+                category.Creator = _unitOfWork.GetRepository<User>().GetById(category.CreatedBy);
+                category.Modifier = _unitOfWork.GetRepository<User>().GetById(category.ModifiedBy);
                 return category;
             }
         }
@@ -127,17 +127,12 @@ namespace OnlineStore.Services.BLL.Services
 
                 foreach (var category in categories)
                 {
-                    category.Creator = GetReferenceUser(category.CreatedBy);
-                    category.Modifier = GetReferenceUser(category.ModifiedBy);
+                    category.Creator = _unitOfWork.GetRepository<User>().GetById(category.CreatedBy);
+                    category.Modifier = _unitOfWork.GetRepository<User>().GetById(category.ModifiedBy);
                 }
 
                 return categories;
             }
-        }
-
-        public User GetReferenceUser(object userId)
-        {
-            return _unitOfWork.GetRepository<User>().GetById(userId);
         }
     }
 }

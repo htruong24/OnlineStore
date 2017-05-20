@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class SubCategoriesController : Controller
     {
         private readonly SubCategoryService _subCategoryService;
+        private readonly CategoryService _categoryService;
 
         public SubCategoriesController()
         {
             this._subCategoryService = new SubCategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/SubCategories
@@ -69,6 +71,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/SubCategories/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = GetCategories();
+
             return View();
         }
 
@@ -97,6 +101,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var subCategory = _subCategoryService.GetSubCategory(id);
+            ViewBag.Categories = GetCategories();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -117,6 +122,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 _subCategoryService.UpdateSubCategory(subCategory);
                 return RedirectToAction("Index");
             }
+            
             return View(subCategory);
         }
 
@@ -165,6 +171,21 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     subCategory.ModifiedOn = DateTime.Now;
                 }
             }
+        }
+
+        // Get categories
+        public List<Category> GetCategories()
+        {
+            _categoryService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+
+            
+
+            return _categoryService.GetCategories().ToList();
         }
     }
 }

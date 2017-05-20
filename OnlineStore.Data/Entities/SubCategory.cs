@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace OnlineStore.Data.Entities
 {
     using System;
@@ -12,20 +14,38 @@ namespace OnlineStore.Data.Entities
         public int Id { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [DisplayName("Danh mục cha")]
         public int? CategoryId { get; set; }
 
+        [DisplayName("Ngày tạo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
+        [DisplayName("Người tạo")]
         public string CreatedBy { get; set; }
 
+        [DisplayName("Ngày cập nhật")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]
+        [DisplayName("Người cập nhật")]
         public string ModifiedBy { get; set; }
+
+        [NotMapped]
+        public User Creator { get; set; }
+
+        [NotMapped]
+        public User Modifier { get; set; }
+
+        [NotMapped]
+        public Category Category { get; set; }
     }
 }

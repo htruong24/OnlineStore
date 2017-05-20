@@ -29,7 +29,7 @@ namespace OnlineStore.Services.BLL.Services
             {
                 var category =
                     _unitOfWork.GetRepository<Data.Entities.Category>()
-                        .Get(x => x.Id == categoryId, null, "CreatedBy,ModifiedBy")
+                        .Get(x => x.Id == categoryId, null, "CreatedBy,ModifiedBy,SubCategories")
                         .FirstOrDefault();
                 return category;
             }

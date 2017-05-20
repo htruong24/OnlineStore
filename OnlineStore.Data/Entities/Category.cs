@@ -4,14 +4,15 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel;
+    using System.Collections.Generic;
 
     [Table("Category")]
     public partial class Category
     {
-        //public Category()
-        //{
-        //    SubCategories = new HashSet<SubCategory>();
-        //}
+        public Category()
+        {
+            SubCategories = new HashSet<SubCategory>();
+        }
 
         [Key]
         public int Id { get; set; }
@@ -48,6 +49,6 @@
         [ForeignKey("ModifiedById")]
         public virtual User ModifiedBy { get; set; }
 
-        //public virtual ICollection<SubCategory> SubCategories { get; set; }
+        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

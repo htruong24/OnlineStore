@@ -22,7 +22,10 @@
                     <th class="sorting sortable" data-sortfield="Description">
                         @Html.DisplayNameFor(model => model.Description)
                     </th>
-                    <th class="sorting sortable" data-sortfield="CategoryId">
+                    <th class="sorting sortable" data-sortfield="OrderNumber">
+                        @Html.DisplayNameFor(model => model.OrderNumber)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Category">
                         @Html.DisplayNameFor(model => model.CategoryId)
                     </th>
                     <th class="sorting_disabled"></th>
@@ -45,6 +48,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.ValueFor(modelItem => item.Category.OrderNumber)
                         </td>
                         <td>
                             @Html.ValueFor(modelItem => item.Category.Name)

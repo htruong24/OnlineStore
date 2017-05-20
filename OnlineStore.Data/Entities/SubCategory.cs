@@ -1,10 +1,9 @@
-namespace OnlineStore.Data.Entities
+﻿namespace OnlineStore.Data.Entities
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    using System.ComponentModel;
 
     [Table("SubCategory")]
     public partial class SubCategory
@@ -12,30 +11,41 @@ namespace OnlineStore.Data.Entities
         public int Id { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [DisplayName("Thứ tự")]
+        public int? OrderNumber { get; set; }
+
+        [DisplayName("Danh mục cha")]
         public int? CategoryId { get; set; }
 
+        [DisplayName("Ngày tạo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
-        public string CreatedBy { get; set; }
+        [DisplayName("Người tạo")]
+        public string CreatedById { get; set; }
 
+        [DisplayName("Ngày cập nhật")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]
-        public string ModifiedBy { get; set; }
+        [DisplayName("Người cập nhật")]
+        public string ModifiedById { get; set; }
 
+        [ForeignKey("CreatedById")]
+        public virtual User CreatedBy { get; set; }
+
+        [ForeignKey("ModifiedById")]
+        public virtual User ModifiedBy { get; set; }
+
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
-
-        //public virtual User User { get; set; }
-
-        //public virtual User User1 { get; set; }
-
-        //public virtual SubCategory SubCategory1 { get; set; }
-
-        //public virtual SubCategory SubCategory2 { get; set; }
     }
 }

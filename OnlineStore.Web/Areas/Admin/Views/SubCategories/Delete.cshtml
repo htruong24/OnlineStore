@@ -31,6 +31,12 @@
                         @Html.DisplayFor(model => model.Description)
                     </dd>
                     <dt>
+                        @Html.DisplayNameFor(model => model.OrderNumber)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.OrderNumber)
+                    </dd>
+                    <dt>
                         @Html.DisplayNameFor(model => model.CategoryId)
                     </dt>
                     <dd>
@@ -58,7 +64,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -70,7 +76,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>

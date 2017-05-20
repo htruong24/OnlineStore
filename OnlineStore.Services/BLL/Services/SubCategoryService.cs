@@ -26,7 +26,10 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var subCategory = _unitOfWork.GetRepository<Data.Entities.SubCategory>().GetById(subCategoryId);
+                var subCategory =
+                    _unitOfWork.GetRepository<Data.Entities.SubCategory>()
+                        .Get(x => x.Id == subCategoryId, null, "CreatedBy,ModifiedBy,Category")
+                        .FirstOrDefault();
                 return subCategory;
             }
         }
@@ -62,8 +65,8 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<SubCategory>().Get(null, null, "CreatedBy,ModifiedBy");
-                
+                var query = _unitOfWork.GetRepository<SubCategory>().Get(null, null, "CreatedBy,ModifiedBy,Category");
+
                 // Sorting
                 switch (Pagination.SortField)
                 {
@@ -82,6 +85,16 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Description) :
                                  query.OrderByDescending(c => c.Description));
                         break;
+                    case "OrderNumber":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.OrderNumber) :
+                                 query.OrderByDescending(c => c.OrderNumber));
+                        break;
+                    case "Category":
+                        query = (Pagination.SortDirection == "ascending"
+                            ? query.OrderBy(c => c.Category.Name)
+                            : query.OrderByDescending(c => c.Category.Name));
+                        break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.CreatedOn) :
@@ -89,8 +102,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "CreatedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedBy) :
-                                 query.OrderByDescending(c => c.CreatedBy));
+                                 query.OrderBy(c => c.CreatedBy.Name) :
+                                 query.OrderByDescending(c => c.CreatedBy.Name));
                         break;
                     case "ModifiedOn":
                         query = (Pagination.SortDirection == "ascending" ?
@@ -121,13 +134,6 @@ namespace OnlineStore.Services.BLL.Services
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
                 var subCategories = query.ToList();
-
-                //foreach (var subCategory in subCategories)
-                //{
-                //    subCategory.Creator = _unitOfWork.GetRepository<User>().GetById(subCategory.CreatedBy);
-                //    subCategory.Modifier = _unitOfWork.GetRepository<User>().GetById(subCategory.ModifiedBy);
-                //    subCategory.Category = _unitOfWork.GetRepository<Category>().GetById(subCategory.CategoryId);
-                //}
 
                 return subCategories;
             }

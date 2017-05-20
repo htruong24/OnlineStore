@@ -86,6 +86,11 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Description) :
                                  query.OrderByDescending(c => c.Description));
                         break;
+                    case "OrderNumber":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.OrderNumber) :
+                                 query.OrderByDescending(c => c.OrderNumber));
+                        break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.CreatedOn) :
@@ -93,8 +98,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "CreatedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedBy) :
-                                 query.OrderByDescending(c => c.CreatedBy));
+                                 query.OrderBy(c => c.CreatedBy.Name) :
+                                 query.OrderByDescending(c => c.CreatedBy.Name));
                         break;
                     case "ModifiedOn":
                         query = (Pagination.SortDirection == "ascending" ?

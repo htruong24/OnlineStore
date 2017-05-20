@@ -1,15 +1,13 @@
-namespace OnlineStore.Data.Entities
+﻿namespace OnlineStore.Data.Entities
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    using System.ComponentModel;
 
     [Table("Category")]
     public partial class Category
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         //public Category()
         //{
         //    SubCategories = new HashSet<SubCategory>();
@@ -19,18 +17,29 @@ namespace OnlineStore.Data.Entities
         public int Id { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [DisplayName("Thứ tự")]
+        public int? OrderNumber { get; set; }
+
+        [DisplayName("Ngày tạo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
+        [DisplayName("Người tạo")]
         public string CreatedById { get; set; }
 
+        [DisplayName("Ngày cập nhật")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]
+        [DisplayName("Người cập nhật")]
         public string ModifiedById { get; set; }
 
         [ForeignKey("CreatedById")]
@@ -39,8 +48,6 @@ namespace OnlineStore.Data.Entities
         [ForeignKey("ModifiedById")]
         public virtual User ModifiedBy { get; set; }
 
-        //[NotMapped]
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         //public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

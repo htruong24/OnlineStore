@@ -9,6 +9,7 @@ namespace OnlineStore.Data.Entities
     [Table("User")]
     public partial class User
     {
+        [Key]
         [StringLength(30)]
         public string Id { get; set; }
 

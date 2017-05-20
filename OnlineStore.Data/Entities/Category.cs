@@ -1,5 +1,3 @@
-﻿using System.ComponentModel;
-
 namespace OnlineStore.Data.Entities
 {
     using System;
@@ -11,37 +9,38 @@ namespace OnlineStore.Data.Entities
     [Table("Category")]
     public partial class Category
     {
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        //public Category()
+        //{
+        //    SubCategories = new HashSet<SubCategory>();
+        //}
+
+        [Key]
         public int Id { get; set; }
 
-
         [StringLength(50)]
-        [DisplayName("Tên")]
         public string Name { get; set; }
 
-        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
-        [DisplayName("Ngày tạo")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
-        [DisplayName("Người tạo")]
-        public string CreatedBy { get; set; }
+        public string CreatedById { get; set; }
 
-        [DisplayName("Ngày cập nhật")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]
-        [DisplayName("Người cập nhật")]
-        public string ModifiedBy { get; set; }
+        public string ModifiedById { get; set; }
 
-        [NotMapped]
-        public User Creator { get; set; }
+        [ForeignKey("CreatedById")]
+        public virtual User CreatedBy { get; set; }
 
-        [NotMapped]
-        public User Modifier { get; set; }
+        [ForeignKey("ModifiedById")]
+        public virtual User ModifiedBy { get; set; }
 
+        //[NotMapped]
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

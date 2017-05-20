@@ -27,9 +27,6 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var subCategory = _unitOfWork.GetRepository<Data.Entities.SubCategory>().GetById(subCategoryId);
-                subCategory.Creator = _unitOfWork.GetRepository<User>().GetById(subCategory.CreatedBy);
-                subCategory.Modifier = _unitOfWork.GetRepository<User>().GetById(subCategory.ModifiedBy);
-                subCategory.Category = _unitOfWork.GetRepository<Category>().GetById(subCategory.CategoryId);
                 return subCategory;
             }
         }
@@ -65,7 +62,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<SubCategory>().All();
+                var query = _unitOfWork.GetRepository<SubCategory>().Get(null, null, "CreatedBy,ModifiedBy");
                 
                 // Sorting
                 switch (Pagination.SortField)
@@ -125,12 +122,12 @@ namespace OnlineStore.Services.BLL.Services
 
                 var subCategories = query.ToList();
 
-                foreach (var subCategory in subCategories)
-                {
-                    subCategory.Creator = _unitOfWork.GetRepository<User>().GetById(subCategory.CreatedBy);
-                    subCategory.Modifier = _unitOfWork.GetRepository<User>().GetById(subCategory.ModifiedBy);
-                    subCategory.Category = _unitOfWork.GetRepository<Category>().GetById(subCategory.CategoryId);
-                }
+                //foreach (var subCategory in subCategories)
+                //{
+                //    subCategory.Creator = _unitOfWork.GetRepository<User>().GetById(subCategory.CreatedBy);
+                //    subCategory.Modifier = _unitOfWork.GetRepository<User>().GetById(subCategory.ModifiedBy);
+                //    subCategory.Category = _unitOfWork.GetRepository<Category>().GetById(subCategory.CategoryId);
+                //}
 
                 return subCategories;
             }

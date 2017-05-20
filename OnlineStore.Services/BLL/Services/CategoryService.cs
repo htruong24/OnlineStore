@@ -27,9 +27,10 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var category = _unitOfWork.GetRepository<Data.Entities.Category>().GetById(categoryId);
-                category.Creator = _unitOfWork.GetRepository<User>().GetById(category.CreatedBy);
-                category.Modifier = _unitOfWork.GetRepository<User>().GetById(category.ModifiedBy);
+                var category =
+                    _unitOfWork.GetRepository<Data.Entities.Category>()
+                        .Get(x => x.Id == categoryId, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
                 return category;
             }
         }
@@ -65,7 +66,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Category>().All();
+                var query = _unitOfWork.GetRepository<Category>().Get(null, null, "CreatedBy,ModifiedBy");
                 
                 // Sorting
                 switch (Pagination.SortField)
@@ -124,12 +125,6 @@ namespace OnlineStore.Services.BLL.Services
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
                 var categories = query.ToList();
-
-                foreach (var category in categories)
-                {
-                    category.Creator = _unitOfWork.GetRepository<User>().GetById(category.CreatedBy);
-                    category.Modifier = _unitOfWork.GetRepository<User>().GetById(category.ModifiedBy);
-                }
 
                 return categories;
             }

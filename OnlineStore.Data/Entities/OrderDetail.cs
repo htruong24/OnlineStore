@@ -9,7 +9,6 @@ namespace OnlineStore.Data.Entities
     [Table("OrderDetail")]
     public partial class OrderDetail
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int? OrderId { get; set; }

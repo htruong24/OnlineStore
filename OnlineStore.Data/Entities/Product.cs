@@ -9,7 +9,6 @@ namespace OnlineStore.Data.Entities
     [Table("Product")]
     public partial class Product
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

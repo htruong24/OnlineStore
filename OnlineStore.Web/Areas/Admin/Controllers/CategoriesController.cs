@@ -154,15 +154,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 if (category.Id == 0)
                 {
-                    category.CreatedBy = user.Id;
+                    category.CreatedById = user.Id;
                     category.CreatedOn = DateTime.Now;
-                    category.ModifiedBy = user.Id;
+                    category.ModifiedById = user.Id;
                     category.ModifiedOn = DateTime.Now;
                 }
                 // Update
                 else
                 {
-                    category.ModifiedBy = user.Id;
+                    category.ModifiedById = user.Id;
                     category.ModifiedOn = DateTime.Now;
                 }
             }

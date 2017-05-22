@@ -20,3 +20,4 @@ D:\PROJECT\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll
 D:\PROJECT\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.pdb
 D:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
 D:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb
+C:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.csprojResolveAssemblyReference.cache

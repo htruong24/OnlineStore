@@ -17,10 +17,16 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ProductService _productService;
+        private readonly BrandService _brandService;
+        private readonly SubCategoryService _subCategoryService;
+        private readonly UnitService _unitService;
 
         public ProductsController()
         {
             this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._subCategoryService = new SubCategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._unitService = new UnitService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/Products
@@ -69,6 +75,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
+            ViewBag.SubCategories = GetSubCategories();
+            ViewBag.Brands = GetBrands();
+            ViewBag.Units = GetUnits();
+
             return View();
         }
 
@@ -97,6 +107,9 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var product = _productService.GetProduct(id);
+            ViewBag.SubCategories = GetSubCategories();
+            ViewBag.Brands = GetBrands();
+            ViewBag.Units = GetUnits();
             if (product == null)
             {
                 return HttpNotFound();
@@ -165,6 +178,42 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     product.ModifiedOn = DateTime.Now;
                 }
             }
+        }
+
+        // Get brands
+        public List<Brand> GetBrands()
+        {
+            _brandService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _brandService.GetBrands();
+        }
+
+        // Get Sub Categories
+        public List<SubCategory> GetSubCategories()
+        {
+            _subCategoryService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _subCategoryService.GetSubCategories();
+        }
+
+        // Get Units
+        public List<Unit> GetUnits()
+        {
+            _unitService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _unitService.GetUnits();
         }
     }
 }

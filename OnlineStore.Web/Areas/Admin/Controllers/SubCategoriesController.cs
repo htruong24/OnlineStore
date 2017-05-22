@@ -47,10 +47,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             _subCategoryService.Pagination = info;
             _subCategoryService.Filter = filter;
-            var brands = _subCategoryService.GetSubCategories();
+            var subCategories = _subCategoryService.GetSubCategories();
             TempData["SortingPagingInfo"] = _subCategoryService.Pagination;
 
-            return PartialView(brands);
+            return PartialView(subCategories);
         }
 
         // GET: Admin/SubCategories/Details/5
@@ -182,10 +182,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 SortDirection = "ascending",
                 PageSize = 0
             };
-
-            
-
-            return _categoryService.GetCategories().ToList();
+            return _categoryService.GetCategories();
         }
     }
 }

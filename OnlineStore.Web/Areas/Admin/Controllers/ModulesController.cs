@@ -162,15 +162,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 if (module.Id == 0)
                 {
-                    module.CreatedBy = user.Id;
+                    module.CreatedById = user.Id;
                     module.CreatedOn = DateTime.Now;
-                    module.ModifiedBy = user.Id;
+                    module.ModifiedById = user.Id;
                     module.ModifiedOn = DateTime.Now;
                 }
                 // Update
                 else
                 {
-                    module.ModifiedBy = user.Id;
+                    module.ModifiedById = user.Id;
                     module.ModifiedOn = DateTime.Now;
                 }
             }

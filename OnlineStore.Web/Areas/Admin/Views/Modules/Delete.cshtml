@@ -1,7 +1,8 @@
 ﻿@model OnlineStore.Data.Entities.Module
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Module = "Chức năng";
+    ViewBag.Title = "Xóa danh mục";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -66,7 +67,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -78,7 +79,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>
@@ -89,9 +90,12 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
-    </div>
+    <button type="submit" class="btn btn-white btn-danger btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 red"></i>
+        Xác nhận
+    </button>
 }
 
+<div style="padding-top: 20px;">
+    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
+</div>

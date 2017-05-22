@@ -153,15 +153,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 if (product.Id == 0)
                 {
-                    product.CreatedBy = user.Id;
+                    product.CreatedById = user.Id;
                     product.CreatedOn = DateTime.Now;
-                    product.ModifiedBy = user.Id;
+                    product.ModifiedById = user.Id;
                     product.ModifiedOn = DateTime.Now;
                 }
                 // Update
                 else
                 {
-                    product.ModifiedBy = user.Id;
+                    product.ModifiedById = user.Id;
                     product.ModifiedOn = DateTime.Now;
                 }
             }

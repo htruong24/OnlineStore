@@ -4,7 +4,8 @@
 
 @model OnlineStore.Data.Entities.Product
 @{
-    ViewBag.Title = "Tạo mới người nhận hàng";
+    ViewBag.Module = "Sản phẩm";
+    ViewBag.Title = "Tạo mới";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm())
@@ -107,7 +108,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tạo mới" class="btn btn-default" />
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Lưu lại
+                </button>
             </div>
         </div>
     </div>

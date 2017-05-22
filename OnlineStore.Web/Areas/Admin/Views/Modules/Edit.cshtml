@@ -4,7 +4,8 @@
 
 @model OnlineStore.Data.Entities.Module
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Module = "Chức năng";
+    ViewBag.Title = "Cập nhật";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,9 +14,9 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(x => x.CreatedOn)
-    @Html.HiddenFor(x => x.CreatedBy)
+    @Html.HiddenFor(x => x.CreatedById)
     @Html.HiddenFor(x => x.ModifiedOn)
-    @Html.HiddenFor(x => x.ModifiedBy)
+    @Html.HiddenFor(x => x.ModifiedById)
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -55,7 +56,10 @@
         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Cập nhật
+                </button>
             </div>
         </div>
     </div>

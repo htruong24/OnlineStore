@@ -26,7 +26,9 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var brand = _unitOfWork.GetRepository<Data.Entities.Brand>().GetById(brandId);
+                var brand = _unitOfWork.GetRepository<Data.Entities.Brand>()
+                        .Get(x => x.Id == brandId, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
                 return brand;
             }
         }
@@ -62,8 +64,8 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Brand>().All();
-                
+                var query = _unitOfWork.GetRepository<Brand>().Get(null, null, "CreatedBy,ModifiedBy");
+
                 // Sorting
                 switch (Pagination.SortField)
                 {

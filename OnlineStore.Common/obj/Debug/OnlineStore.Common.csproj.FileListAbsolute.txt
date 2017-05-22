@@ -14,7 +14,6 @@ D:\TA\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
 D:\TA\Online Store\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb
 C:\PROJECT\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll
 C:\PROJECT\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.pdb
-C:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.csprojResolveAssemblyReference.cache
 C:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.dll
 C:\PROJECT\OnlineStore\OnlineStore.Common\obj\Debug\OnlineStore.Common.pdb
 D:\PROJECT\OnlineStore\OnlineStore.Common\bin\Debug\OnlineStore.Common.dll

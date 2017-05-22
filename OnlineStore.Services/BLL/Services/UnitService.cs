@@ -26,7 +26,10 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var unit = _unitOfWork.GetRepository<Data.Entities.Unit>().GetById(unitId);
+                var unit = _unitOfWork.GetRepository<Data.Entities.Unit>()
+                     .Get(x => x.Id == unitId, null, "CreatedBy,ModifiedBy")
+                     .FirstOrDefault();
+
                 return unit;
             }
         }
@@ -62,8 +65,8 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Unit>().All();
-                
+                var query = _unitOfWork.GetRepository<Unit>().Get(null, null, "CreatedBy,ModifiedBy");
+
                 // Sorting
                 switch (Pagination.SortField)
                 {
@@ -89,8 +92,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "CreatedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedBy) :
-                                 query.OrderByDescending(c => c.CreatedBy));
+                                 query.OrderBy(c => c.CreatedBy.Name) :
+                                 query.OrderByDescending(c => c.CreatedBy.Name));
                         break;
                     case "ModifiedOn":
                         query = (Pagination.SortDirection == "ascending" ?
@@ -99,8 +102,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "ModifiedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ModifiedBy) :
-                                 query.OrderByDescending(c => c.ModifiedBy));
+                                 query.OrderBy(c => c.ModifiedBy.Name) :
+                                 query.OrderByDescending(c => c.ModifiedBy.Name));
                         break;
                 }
 

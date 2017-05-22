@@ -17,7 +17,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly CategoryService _categoryService;
-        private readonly UserService _userService;
 
         public CategoriesController()
         {

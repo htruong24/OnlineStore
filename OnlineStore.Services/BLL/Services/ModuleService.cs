@@ -26,7 +26,9 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var module = _unitOfWork.GetRepository<Data.Entities.Module>().GetById(moduleId);
+                var module = _unitOfWork.GetRepository<Data.Entities.Module>()
+                        .Get(x => x.Id == moduleId, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
                 return module;
             }
         }
@@ -62,7 +64,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Module>().All();
+                var query = _unitOfWork.GetRepository<Module>().Get(null, null, "CreatedBy,ModifiedBy");
                 
                 // Sorting
                 switch (Pagination.SortField)
@@ -104,8 +106,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "CreatedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedBy) :
-                                 query.OrderByDescending(c => c.CreatedBy));
+                                 query.OrderBy(c => c.CreatedBy.Name) :
+                                 query.OrderByDescending(c => c.CreatedBy.Name));
                         break;
                     case "ModifiedOn":
                         query = (Pagination.SortDirection == "ascending" ?
@@ -114,8 +116,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "ModifiedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ModifiedBy) :
-                                 query.OrderByDescending(c => c.ModifiedBy));
+                                 query.OrderBy(c => c.ModifiedBy.Name) :
+                                 query.OrderByDescending(c => c.ModifiedBy.Name));
                         break;
                 }
 

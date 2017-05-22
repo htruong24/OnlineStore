@@ -1,9 +1,9 @@
 ﻿@model OnlineStore.Data.Entities.Brand
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Module = "Thương hiệu";
+    ViewBag.Title = "Chi tiết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<h2>@Model.Name</h2>
 <div>
     @*Details information*@
     <div class="widget-box">
@@ -47,7 +47,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -59,7 +59,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>
@@ -67,6 +67,11 @@
     </div>
 </div>
 <p>
-    <i class="ace-icon fa fa-wrench bigger-110 icon-only"></i> @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
-    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id })
+    </button>
+    <div style="padding-top: 20px;">
+        <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
+    </div>
 </p>

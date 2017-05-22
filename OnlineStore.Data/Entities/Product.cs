@@ -69,5 +69,17 @@
         [ForeignKey("ModifiedById")]
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
+
+        [ForeignKey("SubCategoryId")]
+        [DisplayName("Danh mục")]
+        public virtual SubCategory SubCategory { get; set; }
+
+        [ForeignKey("BrandId")]
+        [DisplayName("Nhãn hiệu")]
+        public virtual Brand Brand { get; set; }
+
+        [ForeignKey("UnitId")]
+        [DisplayName("Đơn vị tính")]
+        public virtual Unit Unit { get; set; }
     }
 }

@@ -86,13 +86,13 @@
                             @Html.DisplayFor(modelItem => item.StatusId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.SubCategoryId)
+                            @Html.DisplayFor(modelItem => item.SubCategory.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BrandId)
+                            @Html.DisplayFor(modelItem => item.Brand.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.UnitId)
+                            @Html.DisplayFor(modelItem => item.Unit.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SupplierId)

@@ -27,7 +27,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var product = _unitOfWork.GetRepository<Data.Entities.Product>()
-                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy")
+                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory")
                         .FirstOrDefault();
                 
                 return product;
@@ -65,7 +65,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Product>().Get(null, null, "CreatedBy,ModifiedBy");
+                var query = _unitOfWork.GetRepository<Product>().Get(null, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory");
                 
                 // Sorting
                 switch (Pagination.SortField)

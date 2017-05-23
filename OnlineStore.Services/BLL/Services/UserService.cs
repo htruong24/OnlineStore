@@ -145,6 +145,26 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Active) :
                                  query.OrderByDescending(c => c.Active));
                         break;
+                    case "CreatedOn":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.CreatedOn) :
+                                 query.OrderByDescending(c => c.CreatedOn));
+                        break;
+                    case "CreatedBy":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.CreatedBy.Name) :
+                                 query.OrderByDescending(c => c.CreatedBy.Name));
+                        break;
+                    case "ModifiedOn":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.ModifiedOn) :
+                                 query.OrderByDescending(c => c.ModifiedOn));
+                        break;
+                    case "ModifiedBy":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.ModifiedBy.Name) :
+                                 query.OrderByDescending(c => c.ModifiedBy.Name));
+                        break;
                 }
 
                 // Fitler

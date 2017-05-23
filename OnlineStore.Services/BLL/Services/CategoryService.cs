@@ -108,8 +108,8 @@ namespace OnlineStore.Services.BLL.Services
                         break;
                     case "ModifiedBy":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ModifiedBy) :
-                                 query.OrderByDescending(c => c.ModifiedBy));
+                                 query.OrderBy(c => c.ModifiedBy.Name) :
+                                 query.OrderByDescending(c => c.ModifiedBy.Name));
                         break;
                 }
 

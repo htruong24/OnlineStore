@@ -535,6 +535,14 @@
     <Content Include="Scripts\chosen_v1.4.2\index.proto.html" />
     <Content Include="Scripts\chosen_v1.4.2\options.html" />
     <Content Include="Scripts\common.js" />
+    <Content Include="assets\common\js\dropzone\basic.css" />
+    <Content Include="assets\common\js\dropzone\basic.min.css" />
+    <Content Include="assets\common\js\dropzone\dropzone-amd-module.js" />
+    <Content Include="assets\common\js\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="assets\common\js\dropzone\dropzone.css" />
+    <Content Include="assets\common\js\dropzone\dropzone.js" />
+    <Content Include="assets\common\js\dropzone\dropzone.min.css" />
+    <Content Include="assets\common\js\dropzone\dropzone.min.js" />
     <Content Include="Scripts\ensure.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />

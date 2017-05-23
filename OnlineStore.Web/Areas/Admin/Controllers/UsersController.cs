@@ -148,15 +148,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 if (string.IsNullOrEmpty(userModel.Id))
                 {
-                    userModel.CreatedBy = user.Id;
+                    userModel.CreatedById = user.Id;
                     userModel.CreatedOn = DateTime.Now;
-                    userModel.ModifiedBy = user.Id;
+                    userModel.ModifiedById = user.Id;
                     userModel.ModifiedOn = DateTime.Now;
                 }
                 // Update
                 else
                 {
-                    userModel.ModifiedBy = user.Id;
+                    userModel.ModifiedById = user.Id;
                     userModel.ModifiedOn = DateTime.Now;
                 }
             }

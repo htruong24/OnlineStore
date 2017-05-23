@@ -99,10 +99,27 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SupplierId, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SupplierId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplierId, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.SupplierId, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="dZUpload">Đính kèm công văn</label>
+            <div class="col-md-10">
+                <div id="dZUpload" class="dropzone dz-clickable">
+                    <div class="dz-default dz-message">Kéo tài liệu hoặc nhấp chuột để tải lên</div>
+                </div>
             </div>
         </div>
 
@@ -114,8 +131,62 @@
                 </button>
             </div>
         </div>
+
+        @*<form action="~/Products/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+                <input type="submit" value="Upload" />
+            </div>
+        </form>*@
+
     </div>
 }
 <div>
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
+
+<script>
+     $(document).ready(function () {
+         $("#dZUpload").dropzone({
+            url: sendUrl,
+            @*url: "@Url.Action("AddDocumentToSession", "Document", new { documentLocalId = Model.id })",*@
+            addRemoveLinks: true,
+            dictRemoveFile: "Xóa tài liệu",
+            removedfile: function(file) {
+                var _ref;
+
+                $.post(DELETEDOCUMENTURL, { documentLocalId: $("#DocumentLocalId")[0].value, fileName: file.name, fileSize: file.size, pathFile: "PathToIncomeDocument" }, function (data) {
+                    if (data.success == true) {
+                        return (_ref = file.previewElement) != null
+                            ? _ref.parentNode.removeChild(file.previewElement)
+                            : void 0;
+                    } else {
+                        console.info('delete document fail');
+                    }
+                });
+            },
+            sending: function (file, xhr, data) {
+                data.append("documentLocalId", $("#DocumentLocalId")[0].value);
+
+                //data.append("name", file.name);
+                //data.append("size", file.size);
+            },
+            success: function (file, response) {
+                //var imgName = response;
+                file.previewElement.classList.add("dz-success");
+                console.log("Successfully uploaded :");
+            },
+            error: function (file, response) {
+                file.previewElement.classList.add("dz-error");
+                console.log("error: " + response);
+            }
+        });
+    });
+
+</script>
+
+<style>
+.dropzone {
+    border: black dashed 3px;
+}
+</style>

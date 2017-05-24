@@ -210,6 +210,7 @@
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhotosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShipmentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StocksController.cs" />
@@ -648,6 +649,11 @@
     <Content Include="Areas\Admin\Views\Common\_ButtonDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Common\_ButtonActions.cshtml" />
     <Content Include="Areas\Admin\Views\Common\_ButtonBack.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\Index.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

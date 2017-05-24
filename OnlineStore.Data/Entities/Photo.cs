@@ -1,10 +1,9 @@
-namespace OnlineStore.Data.Entities
+﻿namespace OnlineStore.Data.Entities
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    using System.ComponentModel;
 
     [Table("Photo")]
     public partial class Photo
@@ -22,18 +21,32 @@ namespace OnlineStore.Data.Entities
         [StringLength(50)]
         public string Tite { get; set; }
 
-        public int? AlbumId { get; set; }
-
         public string Description { get; set; }
 
+        public bool? IsFeatured { get; set; }
+
+        [DisplayName("Ngày tạo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }
 
         [StringLength(30)]
-        public string CreatedBy { get; set; }
+        [DisplayName("Người tạo")]
+        public string CreatedById { get; set; }
 
+        [DisplayName("Ngày cập nhật")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? ModifiedOn { get; set; }
 
         [StringLength(30)]
-        public string ModifiedBy { get; set; }
+        [DisplayName("Người cập nhật")]
+        public string ModifiedById { get; set; }
+
+        [ForeignKey("CreatedById")]
+        [DisplayName("Người tạo")]
+        public virtual User CreatedBy { get; set; }
+
+        [ForeignKey("ModifiedById")]
+        [DisplayName("Người cập nhật")]
+        public virtual User ModifiedBy { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace OnlineStore.Common
     public class CommonConstants
     {
         public static string USER_SESSION = "USER_SESSION";
+        public static string PHOTO_SESSION = "PHOTO_SESSION";
         public static string CONNECTION_STRING = "OnlineStoreDbContext";
         public static string DEFAULT_PASSWORD = "123";
         public static string DEFAULT_EMAIL_PASSWORD = "123";

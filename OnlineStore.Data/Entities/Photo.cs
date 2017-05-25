@@ -10,7 +10,10 @@
     {
         public int Id { get; set; }
 
-        public int? ProductId { get; set; }
+        [StringLength(50)]
+        public string Tite { get; set; }
+
+        public string Description { get; set; }
 
         [StringLength(50)]
         public string Url { get; set; }
@@ -18,12 +21,10 @@
         [StringLength(50)]
         public string ThumbnailUrl { get; set; }
 
-        [StringLength(50)]
-        public string Tite { get; set; }
+        public int? FileSize { get; set; }
 
-        public string Description { get; set; }
-
-        public bool? IsFeatured { get; set; }
+        [StringLength(10)]
+        public string Extension { get; set; }
 
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

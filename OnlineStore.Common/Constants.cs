@@ -16,6 +16,11 @@ namespace OnlineStore.Common
         public static int PAGE_SIZE = 10;
     }
 
+    public class PhotoDirectories
+    {
+        public static string PRODUCT = "ProductPhotos";
+    }
+
     public class AutomaticTable
     {
         public static string USER = "USER";

@@ -32,39 +32,31 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         {
             try
             {
-                var _file = Request.Files.Count > 0 ? Request.Files[0] : null;
+                var uploadPhoto = Request.Files.Count > 0 ? Request.Files[0] : null;
 
-                if (_file != null && _file.ContentLength > 0)
+                if (uploadPhoto != null && uploadPhoto.ContentLength > 0)
                 {
-                    string path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings["PhotoPaths"];
-                    string fileName = productId + "_" + _file.FileName;
+                    // Save file to directory
+                    var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
+                    var fileName = productId + "_" + uploadPhoto.FileName;
+                    uploadPhoto.SaveAs(path + fileName);
 
-                    _file.SaveAs(path + fileName);
-
-                    var extension = Path.GetExtension(path + _file.FileName);
-
-                    List<Photo> photos = new List<Photo>();
-
-                    var photo = new Photo();
-                    photo.ProductId = productId;
-                    photo.Tite = fileName;
-
+                    // Save item to session
+                    var photos = new List<Photo>();
+                    var photo = new Photo
+                    {
+                        ProductId = productId,
+                        Tite = fileName,
+                        Extension = Path.GetExtension(path + uploadPhoto.FileName),
+                        FileSize = uploadPhoto.ContentLength
+                    };
                     photos.Add(photo);
-
                     Session[CommonConstants.PHOTO_SESSION] = photos;
-
-                    //WorkInProgress.DocumentFileUpload.Add(new NMDocumentUpload
-                    //{
-                    //    name = fileName,
-                    //    size = _file.ContentLength,
-                    //    documentLocalId = documentLocalId,
-                    //    extension = extension
-                    //});
                 }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
 
             return Json(new
@@ -73,7 +65,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             });
         }
 
-        public ActionResult RemoveProductPhotos(int productId, string fileName, int fileSize, string pathFile = "PathToIncomeDocument")
+        public ActionResult RemoveProductPhotos(int productId, string fileName, int fileSize)
         {
             var success = false;
 
@@ -82,29 +74,30 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             if (photos != null && photos.Any())
             {
                 fileName = productId + "_" + fileName;
-                var deleteDoc = photos.FirstOrDefault(d =>
+
+                var removedPhoto = photos.FirstOrDefault(d =>
                     d.ProductId == productId
                     && d.Tite == fileName);
 
-                if (deleteDoc != null)
+                if (removedPhoto != null)
                 {
-                    photos.Remove(deleteDoc);
-
-                    // Remove File
-                    string path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[pathFile] + fileName;
+                    // Remove photo from directory
+                    string path = HttpContext.Server.MapPath("~") +
+                                  ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
                     if (System.IO.File.Exists(path))
                     {
                         System.IO.File.Delete(path);
                     }
-                    Session[CommonConstants.PHOTO_SESSION] = photos;
-                    success = true;
 
+                    // Remove file from session
+                    photos.Remove(removedPhoto);
+                    Session[CommonConstants.PHOTO_SESSION] = photos;
+
+                    success = true;
                 }
             }
-            return Json(new { success }, JsonRequestBehavior.AllowGet);
+            return Json(new {success}, JsonRequestBehavior.AllowGet);
         }
-
-
 
         // GET: Admin/Photos
         public ActionResult Index()

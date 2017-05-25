@@ -1,0 +1,112 @@
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/app/photo/list.js"></script>
+@using OnlineStore.Common
+@model IEnumerable<OnlineStore.Data.Entities.Photo>
+@{
+    var info = (SortingPagingInfo)TempData["SortingPagingInfo"];
+}
+<div class="row">
+    <div class="col-xs-12">
+        <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable">
+            <thead>
+                <tr>
+                    <th class="center sorting_disabled">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace"/>
+                            <span class="lbl"></span>
+                        </label>
+                    </th>
+                    <th></th>
+                    <th class="sorting sortable" data-sortfield="Tite">
+                        @Html.DisplayNameFor(model => model.Tite)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Description">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="FileSize">
+                        @Html.DisplayNameFor(model => model.FileSize)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Extension">
+                        @Html.DisplayNameFor(model => model.Extension)
+                    </th>
+                    <th class="sorting_disabled"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace"/>
+                                <span class="lbl"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <img height="40" width="40" src="@item.Url"/>
+                        </td>
+                        <td>
+                            <a href="~/Admin/Photos/Details/@item.Id">
+                                @Html.DisplayFor(modelItem => item.Tite)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileSize)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Extension)
+                        </td>
+                        <td>
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="blue" href="~/Admin/Photos/Details/@item.Id">
+                                    <i class="ace-icon fa fa-search-plus bigger-130"></i>
+                                </a>
+                                <a class="green" href="~/Admin/Photos/Edit/@item.Id">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                </a>
+                                <a class="red" href="~/Admin/Photos/Delete/@item.Id">
+                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                </a>
+                            </div>
+                            <div class="hidden-md hidden-lg">
+                                <div class="inline pos-rel">
+                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="~/Admin/Photos/Details/@item.Id" class="tooltip-info" data-rel="tooltip" title="View">
+                                                <span class="blue">
+                                                    <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Admin/Photos/Edit/@item.Id" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <span class="green">
+                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="~/Admin/Photos/Delete/@item.Id" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                <span class="red">
+                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+
+@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Photos/Index" })

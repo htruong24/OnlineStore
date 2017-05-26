@@ -25,10 +25,152 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             this._photoService = new PhotoService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        // GET: Admin/Photos
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: List of photos
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Title",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _photoService.Pagination = info;
+            _photoService.Filter = filter;
+            var photos = _photoService.GetCategories();
+            TempData["SortingPagingInfo"] = _photoService.Pagination;
+
+            return PartialView(photos);
+        }
+
+        // GET: Admin/Photos/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(photo);
+        }
+
+        // GET: Admin/Photos/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Admin/Photos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Photo photo, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                UpdateDefaultProperties(photo);
+                _photoService.CreatePhoto(photo);
+                return RedirectToAction("Index");
+            }
+           
+            return View(photo);
+        }
+
+        // GET: Admin/Photos/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(photo);
+        }
+
+        // POST: Admin/Photos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Photo photo)
+        {
+            if (ModelState.IsValid)
+            {
+                UpdateDefaultProperties(photo);
+                _photoService.UpdatePhoto(photo);
+                return RedirectToAction("Index");
+            }
+            return View(photo);
+        }
+
+        // GET: Admin/Photos/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(photo);
+        }
+
+        // POST: Admin/Photos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            _photoService.DeletePhoto(id);
+            return RedirectToAction("Index");
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Photo photo)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (photo.Id == 0)
+                {
+                    photo.CreatedById = user.Id;
+                    photo.CreatedOn = DateTime.Now;
+                    photo.ModifiedById = user.Id;
+                    photo.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    photo.ModifiedById = user.Id;
+                    photo.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
 
         // Upload photos
-        public ActionResult AddProductPhotos(int productId, string pathFile = "PathToIncomeDocument")
+        public ActionResult AddProductPhotos(int productId)
         {
             try
             {
@@ -45,8 +187,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     var photos = new List<Photo>();
                     var photo = new Photo
                     {
-                        ProductId = productId,
-                        Tite = fileName,
+                        Title = fileName,
                         Extension = Path.GetExtension(path + uploadPhoto.FileName),
                         FileSize = uploadPhoto.ContentLength
                     };
@@ -69,15 +210,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         {
             var success = false;
 
-            var photos = (List<Photo>) Session[CommonConstants.PHOTO_SESSION];
+            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
 
             if (photos != null && photos.Any())
             {
                 fileName = productId + "_" + fileName;
 
                 var removedPhoto = photos.FirstOrDefault(d =>
-                    d.ProductId == productId
-                    && d.Tite == fileName);
+                     d.Title == fileName);
 
                 if (removedPhoto != null)
                 {
@@ -96,126 +236,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     success = true;
                 }
             }
-            return Json(new {success}, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Admin/Photos
-        public ActionResult Index()
-        {
-            var photos = db.Photos.Include(p => p.CreatedBy).Include(p => p.ModifiedBy);
-            return View(photos.ToList());
-        }
-
-        // GET: Admin/Photos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Photo photo = db.Photos.Find(id);
-            if (photo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(photo);
-        }
-
-        // GET: Admin/Photos/Create
-        public ActionResult Create()
-        {
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username");
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username");
-            return View();
-        }
-
-        // POST: Admin/Photos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProductId,Url,ThumbnailUrl,Tite,Description,IsFeatured,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Photo photo)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Photos.Add(photo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", photo.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", photo.ModifiedById);
-            return View(photo);
-        }
-
-        // GET: Admin/Photos/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Photo photo = db.Photos.Find(id);
-            if (photo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", photo.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", photo.ModifiedById);
-            return View(photo);
-        }
-
-        // POST: Admin/Photos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProductId,Url,ThumbnailUrl,Tite,Description,IsFeatured,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Photo photo)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(photo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", photo.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", photo.ModifiedById);
-            return View(photo);
-        }
-
-        // GET: Admin/Photos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Photo photo = db.Photos.Find(id);
-            if (photo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(photo);
-        }
-
-        // POST: Admin/Photos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Photo photo = db.Photos.Find(id);
-            db.Photos.Remove(photo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Json(new { success }, JsonRequestBehavior.AllowGet);
         }
     }
 }

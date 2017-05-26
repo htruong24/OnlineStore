@@ -397,6 +397,8 @@
     <Content Include="assets\common\images\sorting\sort_desc.png" />
     <Content Include="assets\common\js\common.js" />
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
+    <Content Include="assets\common\js\multifile\jquery.MultiFile.js" />
+    <Content Include="assets\common\js\multifile\jQuery.MultiFile.min.js" />
     <Content Include="assets\common\js\paging\paging.js" />
     <Content Include="assets\web\css\animate.css" />
     <Content Include="assets\web\css\bootstrap.min.css" />

@@ -29,7 +29,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return View();
         }
 
-        // GET: List of modules
+        // GET: List of categories
         public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)

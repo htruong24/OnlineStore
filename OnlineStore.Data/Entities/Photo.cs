@@ -11,7 +11,7 @@
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string Tite { get; set; }
+        public string Title { get; set; }
 
         public string Description { get; set; }
 

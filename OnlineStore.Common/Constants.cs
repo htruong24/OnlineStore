@@ -18,7 +18,7 @@ namespace OnlineStore.Common
 
     public class PhotoDirectories
     {
-        public static string PRODUCT = "ProductPhotos";
+        public static string PRODUCT = "Product";
     }
 
     public class AutomaticTable

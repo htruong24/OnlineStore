@@ -15,10 +15,8 @@
 
         public string Description { get; set; }
 
-        [StringLength(50)]
         public string Url { get; set; }
 
-        [StringLength(50)]
         public string ThumbnailUrl { get; set; }
 
         public int? FileSize { get; set; }

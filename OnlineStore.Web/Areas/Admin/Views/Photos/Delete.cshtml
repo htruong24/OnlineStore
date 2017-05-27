@@ -87,6 +87,8 @@
 {
     @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(x => x.Url)
+
     <button type="submit" class="btn btn-white btn-danger btn-bold">
         <i class="ace-icon fa fa-floppy-o bigger-120 red"></i>
         Xác nhận

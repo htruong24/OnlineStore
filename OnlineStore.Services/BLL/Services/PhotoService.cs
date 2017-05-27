@@ -76,6 +76,26 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Id) :
                                  query.OrderByDescending(c => c.Id));
                         break;
+                    case "Title":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Title) :
+                                 query.OrderByDescending(c => c.Title));
+                        break;
+                    case "Description":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Description) :
+                                 query.OrderByDescending(c => c.Description));
+                        break;
+                    case "FileSize":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.FileSize) :
+                                 query.OrderByDescending(c => c.FileSize));
+                        break;
+                    case "Extension":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Extension) :
+                                 query.OrderByDescending(c => c.Extension));
+                        break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.CreatedOn) :
@@ -101,7 +121,9 @@ namespace OnlineStore.Services.BLL.Services
                 // Fitler
                 if (!string.IsNullOrEmpty(Filter?.Keyword))
                 {
-                    query = query.Where(x => x.Description.Contains(Filter.Keyword));
+                    query = query.Where(x => x.Title.Contains(Filter.Keyword)
+                                             || x.Description.Contains(Filter.Keyword)
+                                             || x.Extension.Contains(Filter.Keyword));
                 }
 
                 // Paging

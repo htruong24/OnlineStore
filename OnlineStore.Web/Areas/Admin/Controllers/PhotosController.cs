@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection.Emit;
 using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Common;
@@ -79,11 +80,28 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Photo photo, HttpPostedFileBase file)
+        public ActionResult Create(Photo photo, HttpPostedFileBase uploadedPhoto)
         {
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(photo);
+                
+                // Save photo
+                if (uploadedPhoto != null && uploadedPhoto.ContentLength > 0)
+                {
+                    photo.Extension = Path.GetExtension(uploadedPhoto.FileName);
+                    photo.FileSize = uploadedPhoto.ContentLength;
+
+                    // Save file to directory
+                    var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
+                    var fileName = GetFileName(uploadedPhoto.FileName, path, 0);
+                    uploadedPhoto.SaveAs(path + fileName);
+
+                    // Update properties
+                    photo.Url = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                    photo.ThumbnailUrl = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                }
+
                 _photoService.CreatePhoto(photo);
                 return RedirectToAction("Index");
             }
@@ -140,9 +158,21 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // POST: Admin/Photos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string Url)
         {
             _photoService.DeletePhoto(id);
+
+            // Remove photo
+            if (!string.IsNullOrEmpty(Url))
+            {
+                // Remove photo from directory
+                string path = HttpContext.Server.MapPath("~") + Url;
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -169,8 +199,21 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             }
         }
 
+        // Get new file name if duplicated
+        public string GetFileName(string fileName, string filePath, int copyNumber)
+        {
+            if (System.IO.File.Exists(filePath + fileName))
+            {
+                ++copyNumber;
+                fileName = fileName.Replace(".", "(" + copyNumber + ").");
+                return GetFileName(fileName, filePath, copyNumber);
+            }
+            return fileName;
+        }
+
+
         // Upload photos
-        public ActionResult AddProductPhotos(int productId)
+        public ActionResult AddPhotos(int productId)
         {
             try
             {
@@ -205,6 +248,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 IsSuccess = false
             });
         }
+
+       
 
         public ActionResult RemoveProductPhotos(int productId, string fileName, int fileSize)
         {

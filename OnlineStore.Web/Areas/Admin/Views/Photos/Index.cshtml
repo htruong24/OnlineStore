@@ -4,14 +4,62 @@
     ViewBag.Title = "Danh sách";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div class="action-buttons" style="padding-bottom: 10px;">
-    <button class="btn btn-white btn-info btn-bold">
-        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-        @Html.ActionLink("Tạo mới", "Create")
-    </button>
+<div class="action-buttons row" style="padding-bottom: 10px;">
+
+    <div class="col-sm-2">
+        <button class="btn btn-white btn-info btn-bold">
+            <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+            @Html.ActionLink("Tạo mới", "Create")
+        </button>
+    </div>
+
+    @*Display Mode*@
+    <div class="col-sm-6">
+            <div class="col-sm-2">
+                Xem dạng:
+            </div>
+
+            <div class="col-sm-10">
+                <label class="radio-inline"><input type="radio" value="table" name="radDisplayMode" checked="checked"><b>Bảng</b></label>
+                <label class="radio-inline"><input type="radio" value="gallery" name="radDisplayMode"><b>Thư viện</b></label>
+            </div>
+    </div>
+
     @Html.Partial("_Search")
-    <input type="hidden" id="hdControllerName" value="Photos" />
+
+    <input type="hidden" id="hdControllerName" value="Photos"/>
+
 </div>
+
 <div id="search-container">
-    @Html.Action("_List", "Photos")
+    <div id="mode-list">
+        @Html.Action("_List", "Photos")    
+    </div>
+    <div id="mode-gallery">
+        @Html.Action("_List", "Photos")
+    </div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        UpdateDisplayMode();
+        $("input[type=radio][name='radDisplayMode']").change(function () {
+            UpdateDisplayMode();
+            console.log($("input[type=radio][name='radDisplayMode']:checked").val());
+        });
+    });
+
+    function UpdateDisplayMode() {
+        var radDisPlayMode = $("input[type=radio][name='radDisplayMode']:checked");
+
+        if (radDisPlayMode.val() === "table") {
+            $("#mode-list").show();
+            $("#mode-gallery").hide();
+        }
+        else if (radDisPlayMode.val() === "gallery") {
+            $("#mode-list").hide();
+            $("#mode-gallery").show();
+        }
+    }
+</script>

@@ -438,3 +438,5 @@ C:\PROJECT\OnlineStore\OnlineStore.Web\bin\Microsoft.Owin.Security.MicrosoftAcco
 C:\PROJECT\OnlineStore\OnlineStore.Web\obj\Debug\OnlineStore.Web.csprojResolveAssemblyReference.cache
 C:\PROJECT\OnlineStore\OnlineStore.Web\obj\Debug\OnlineStore.Web.dll
 C:\PROJECT\OnlineStore\OnlineStore.Web\obj\Debug\OnlineStore.Web.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Web\bin\OnlineStore.Data.dll.config
+D:\PROJECT\OnlineStore\OnlineStore.Web\bin\OnlineStore.Services.dll.config

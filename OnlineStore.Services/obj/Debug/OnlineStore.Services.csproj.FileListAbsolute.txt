@@ -70,3 +70,4 @@ C:\PROJECT\OnlineStore\OnlineStore.Services\bin\Debug\EntityFramework.SqlServer.
 C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.csprojResolveAssemblyReference.cache
 C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.dll
 C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Data.dll.config

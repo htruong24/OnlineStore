@@ -9,6 +9,7 @@ namespace OnlineStore.Services.BLL.Contracts
         Photo GetPhoto(int? photoId);
         void UpdatePhoto(Photo photo);
         void CreatePhoto(Photo photo);
+        void CreateMultiplePhotos(List<Photo> photos);
         void DeletePhoto(int? photoId);
         List<Photo> GetCategories();
     }

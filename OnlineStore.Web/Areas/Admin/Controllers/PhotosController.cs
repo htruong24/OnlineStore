@@ -109,6 +109,55 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return View(photo);
         }
 
+        // GET: Admin/Photos/Create_Multiple
+        public ActionResult Create_Multiple()
+        {
+            return View();
+        }
+
+        // POST: Admin/Photos/Create_Multiple
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_Multiple(HttpPostedFileBase[] uploadedPhotos)
+        {
+            if(uploadedPhotos != null && uploadedPhotos.Length > 0)
+            {
+                var insertPhotos = new List<Photo>();
+                foreach(var uploadedPhoto in uploadedPhotos)
+                {
+                    // Save photo
+                    if (uploadedPhoto.ContentLength > 0)
+                    {
+                        var photo = new Photo();
+
+                        UpdateDefaultProperties(photo);
+
+                        photo.Title = Path.GetFileName(uploadedPhoto.FileName);
+                        photo.Description = "";
+                        photo.Extension = Path.GetExtension(uploadedPhoto.FileName);
+                        photo.FileSize = uploadedPhoto.ContentLength;
+
+                        // Save file to directory
+                        var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
+                        var fileName = GetFileName(uploadedPhoto.FileName, path, 0);
+                        uploadedPhoto.SaveAs(path + fileName);
+
+                        // Update properties
+                        photo.Url = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                        photo.ThumbnailUrl = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+
+                        insertPhotos.Add(photo);
+                    }
+                }
+                _photoService.CreateMultiplePhotos(insertPhotos);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
         // GET: Admin/Photos/Edit/5
         public ActionResult Edit(int? id)
         {

@@ -6,10 +6,15 @@
 }
 <div class="action-buttons row" style="padding-bottom: 10px;">
 
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <button class="btn btn-white btn-info btn-bold">
             <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-            @Html.ActionLink("Tạo mới", "Create")
+            @Html.ActionLink("Thêm mới", "Create")
+        </button>
+
+        <button class="btn btn-white btn-success btn-bold">
+            <i class="ace-icon fa fa-floppy-o bigger-120 green"></i>
+            @Html.ActionLink("Thêm mới nhiều", "Create_Multiple")
         </button>
     </div>
 
@@ -32,14 +37,8 @@
 </div>
 
 <div id="search-container">
-    <div id="mode-list">
-        @Html.Action("_List", "Photos")    
-    </div>
-    <div id="mode-gallery">
-        @Html.Action("_List", "Photos")
-    </div>
+    @Html.Action("_List", "Photos")
 </div>
-
 
 <script>
     $(document).ready(function () {

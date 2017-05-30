@@ -53,6 +53,18 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
+        public void CreateMultiplePhotos(List<Photo> photos)
+        {
+            using (_unitOfWork)
+            {
+                foreach(var photo in photos)
+                {
+                    _unitOfWork.GetRepository<Photo>().Create(photo);
+                }
+                _unitOfWork.Save();
+            }
+        }
+
         public void DeletePhoto(int? photoId)
         {
             using (_unitOfWork)

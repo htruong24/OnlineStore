@@ -39,26 +39,3 @@
 <div id="search-container">
     @Html.Action("_List", "Photos")
 </div>
-
-<script>
-    $(document).ready(function () {
-        UpdateDisplayMode();
-        $("input[type=radio][name='radDisplayMode']").change(function () {
-            UpdateDisplayMode();
-            console.log($("input[type=radio][name='radDisplayMode']:checked").val());
-        });
-    });
-
-    function UpdateDisplayMode() {
-        var radDisPlayMode = $("input[type=radio][name='radDisplayMode']:checked");
-
-        if (radDisPlayMode.val() === "table") {
-            $("#mode-list").show();
-            $("#mode-gallery").hide();
-        }
-        else if (radDisPlayMode.val() === "gallery") {
-            $("#mode-list").hide();
-            $("#mode-gallery").show();
-        }
-    }
-</script>

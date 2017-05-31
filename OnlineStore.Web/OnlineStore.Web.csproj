@@ -660,6 +660,9 @@
     <Content Include="Areas\Admin\Views\Photos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_List.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\Create_Multiple.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_SelectedPhotos.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_PhotoList.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_TemporaryPhotos.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

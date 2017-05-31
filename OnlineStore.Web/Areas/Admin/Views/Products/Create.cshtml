@@ -107,19 +107,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SupplierId, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.SupplierId, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.SupplierId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-2 control-label" for="dZUpload">Đính kèm công văn</label>
+            <div class="control-label col-md-2">Chọn ảnh sản phẩm</div>
             <div class="col-md-10">
-                <div id="dZUpload" class="dropzone dz-clickable">
-                    <div class="dz-default dz-message">Kéo tài liệu hoặc nhấp chuột để tải lên</div>
-                </div>
+                <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
+                @*<a href="#modal-table" role="button" class="green" data-toggle="modal" onclick="javascript: fnSelectProductPhotos();">Chọn ảnh có sẵn</a>*@
+                <a href="#" class="green" onclick="javascript: fnSelectProductPhotos();">Chọn ảnh có sẵn</a>
             </div>
         </div>
 
@@ -132,13 +132,6 @@
             </div>
         </div>
 
-        @*<form action="~/Products/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
-            <div class="fallback">
-                <input name="file" type="file" multiple />
-                <input type="submit" value="Upload" />
-            </div>
-        </form>*@
-
     </div>
 }
 <div>
@@ -147,39 +140,17 @@
 
 <script>
     $(document).ready(function() {
-        $("#dZUpload").dropzone({
-            //url: sendUrl,
-            url: "/Admin/Photos/AddProductPhotos",
-            addRemoveLinks: true,
-            dictRemoveFile: "Xóa ảnh",
-            removedfile: function(file) {
-                var _ref;
-                $.post("/Admin/Photos/RemoveProductPhotos", { productId: @(Model?.Id ?? 0), fileName: file.name, fileSize: file.size }, function(data) {
-                    if (data.success == true) {
-                        return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                    } else {
-                        alert("Không thể xóa ảnh");
-                    }
-                });
-            },
-            sending: function(file, xhr, data) {
-                data.append("productId", @(Model?.Id ?? 0));
-            },
-            success: function(file, response) {
-                file.previewElement.classList.add("dz-success");
-                console.log("Successfully uploaded :");
-            },
-            error: function(file, response) {
-                file.previewElement.classList.add("dz-error");
-                console.log("error: " + response);
-            }
-        });
+        
     });
 
+    function fnSelectProductPhotos(productId)
+    {
+        $("#modal-title").text("Chọn ảnh đại diện cho sản phẩm");
+        var url = "/Admin/Photos/_SelectedPhotos";
+        $.get(url, function (data) {
+            $(".modal-body").html(data);
+        });
+        $('#modal-table').modal('show');
+    }
 </script>
 
-<style>
-.dropzone {
-    border: 2px dashed #0087F7;
-}
-</style>

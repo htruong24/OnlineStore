@@ -13,10 +13,6 @@
             <thead>
                 <tr>
                     <th class="center sorting_disabled">
-                        <label class="pos-rel">
-                            <input type="checkbox" class="ace"/>
-                            <span class="lbl"></span>
-                        </label>
                     </th>
                     <th></th>
                     <th class="sorting sortable" data-sortfield="Tite">
@@ -35,14 +31,11 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model)
+                @foreach (var item in Model)
             {
                     <tr>
                         <td class="center">
-                            <label class="pos-rel">
-                                <input type="checkbox" class="ace"/>
-                                <span class="lbl"></span>
-                            </label>
+                           <a href="#" onclick="javascript:fnSelectPhoto(@item.Id);">Chọn</a>
                         </td>
                         <td style="text-align: center;">
                             <img height="60" width="60" src="~/@item.Url" title="@item.Title" />
@@ -111,68 +104,26 @@
     </div>
 </div>
 
-@*Mode: Gallery*@
-<div class="row" id="mode-gallery">
-    <div class="col-xs-12">
-        <!-- PAGE CONTENT BEGINS -->
-        <div>
-            <ul class="ace-thumbnails clearfix">
-                @foreach (var item in Model)
-                {
-                    <li>
-                        <a href="~/@item.Url" title="Photo Title" data-rel="colorbox">
-                            <img width="150" height="150" alt="@item.Description" src="~/@item.Url" />
-                        </a>
-
-                        <div class="tags">
-                            <span class="label-holder">
-                                <span class="label label-info">@item.Title</span>
-                            </span>
-                        </div>
-
-                        <div class="tools">
-                            <a href="~/Admin/Photos/Details/@item.Id" title="Xem">
-                                <i class="ace-icon fa fa-search-plus"></i>
-                            </a>
-
-                            <a href="~/Admin/Photos/Edit/@item.Id" title="Sửa">
-                                <i class="ace-icon fa fa-pencil"></i>
-                            </a>
-
-                            <a href="~/Admin/Photos/Delete/@item.Id" title="Xóa">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div><!-- PAGE CONTENT ENDS -->
-    </div>
-</div>
-
-@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Photos/Index" })
-
+@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Photos/_SelectedPhotos" })
 
 
 <script>
     $(document).ready(function () {
-        UpdateDisplayMode();
-        $("input[type=radio][name='radDisplayMode']").change(function () {
-            UpdateDisplayMode();
-            console.log($("input[type=radio][name='radDisplayMode']:checked").val());
-        });
+
     });
 
-    function UpdateDisplayMode() {
-        var radDisPlayMode = $("input[type=radio][name='radDisplayMode']:checked");
-
-        if (radDisPlayMode.val() === "table") {
-            $("#mode-list").show();
-            $("#mode-gallery").hide();
-        }
-        else if (radDisPlayMode.val() === "gallery") {
-            $("#mode-list").hide();
-            $("#mode-gallery").show();
-        }
+    function fnSelectPhoto(photoId) {
+        $.ajax(
+        {
+            url: "/Photos/AddTemporaryPhoto",
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+                $("#selected-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error + ": " + xhr.responseText);
+            }
+        });
     }
 </script>

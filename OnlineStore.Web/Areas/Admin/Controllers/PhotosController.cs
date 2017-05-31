@@ -134,7 +134,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
                         UpdateDefaultProperties(photo);
 
-                        photo.Title = Path.GetFileName(uploadedPhoto.FileName);
+                        photo.Title = Path.GetFileNameWithoutExtension(uploadedPhoto.FileName);
                         photo.Description = "";
                         photo.Extension = Path.GetExtension(uploadedPhoto.FileName);
                         photo.FileSize = uploadedPhoto.ContentLength;
@@ -260,77 +260,168 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return fileName;
         }
 
-
-        // Upload photos
-        public ActionResult AddPhotos(int productId)
+        // GET: Admin/_SelectedPhotos  => Selected Photos
+        public ActionResult _SelectedPhotos()
         {
-            try
-            {
-                var uploadPhoto = Request.Files.Count > 0 ? Request.Files[0] : null;
+            var photos = new List<Photo>();
+            //var photo = new Photo
+            //{
+            //    Title = fileName,
+            //    Extension = Path.GetExtension(path + uploadPhoto.FileName),
+            //    FileSize = uploadPhoto.ContentLength
+            //};
+            //photos.Add(photo);
+            Session[CommonConstants.PHOTO_SESSION] = photos;
 
-                if (uploadPhoto != null && uploadPhoto.ContentLength > 0)
-                {
-                    // Save file to directory
-                    var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
-                    var fileName = productId + "_" + uploadPhoto.FileName;
-                    uploadPhoto.SaveAs(path + fileName);
+            return PartialView();
 
-                    // Save item to session
-                    var photos = new List<Photo>();
-                    var photo = new Photo
-                    {
-                        Title = fileName,
-                        Extension = Path.GetExtension(path + uploadPhoto.FileName),
-                        FileSize = uploadPhoto.ContentLength
-                    };
-                    photos.Add(photo);
-                    Session[CommonConstants.PHOTO_SESSION] = photos;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return Json(new
-            {
-                IsSuccess = false
-            });
         }
 
-       
-
-        public ActionResult RemoveProductPhotos(int productId, string fileName, int fileSize)
+        // GET: List of selected photos
+        public ActionResult _PhotoList(SortingPagingInfo info, DefaultFilter filter)
         {
-            var success = false;
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Title",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
 
+            _photoService.Pagination = info;
+            _photoService.Filter = filter;
+            var photos = _photoService.GetCategories();
+            TempData["SortingPagingInfo"] = _photoService.Pagination;
+
+            return PartialView(photos);
+        }
+
+        // GET: Admin/_TemporaryPhotos  => Temporary Photos
+        public ActionResult _TemporaryPhotos()
+        {
+            return PartialView();
+        }
+
+        public ActionResult AddTemporaryPhoto(int? photoId)
+        {
             var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
 
-            if (photos != null && photos.Any())
+            if(photoId != null && photoId != 0)
             {
-                fileName = productId + "_" + fileName;
-
-                var removedPhoto = photos.FirstOrDefault(d =>
-                     d.Title == fileName);
-
-                if (removedPhoto != null)
-                {
-                    // Remove photo from directory
-                    string path = HttpContext.Server.MapPath("~") +
-                                  ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-
-                    // Remove file from session
-                    photos.Remove(removedPhoto);
-                    Session[CommonConstants.PHOTO_SESSION] = photos;
-
-                    success = true;
-                }
+                var photo = _photoService.GetPhoto(photoId);
+                photos.Add(photo);
+                Session[CommonConstants.PHOTO_SESSION] = photos;
             }
-            return Json(new { success }, JsonRequestBehavior.AllowGet);
+
+            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
+        }
+
+        public ActionResult RemoveTemporaryPhoto(int? photoId)
+        {
+            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
+
+            var removedPhoto = photos.FirstOrDefault(p => p.Id == photoId);
+
+            if (removedPhoto != null)
+            {
+                photos.Remove(removedPhoto);
+                Session[CommonConstants.PHOTO_SESSION] = photos;
+            }
+
+            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
+        }
+
+        // ---------------- POPUP ----------------
+        // GET: Admin/Photos/Create
+        public ActionResult Create_Popup()
+        {
+            return PartialView();
+        }
+
+        // POST: Admin/Photos/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_Popup(Photo photo, HttpPostedFileBase uploadedPhoto)
+        {
+            if (ModelState.IsValid)
+            {
+                UpdateDefaultProperties(photo);
+
+                // Save photo
+                if (uploadedPhoto != null && uploadedPhoto.ContentLength > 0)
+                {
+                    photo.Extension = Path.GetExtension(uploadedPhoto.FileName);
+                    photo.FileSize = uploadedPhoto.ContentLength;
+
+                    // Save file to directory
+                    var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
+                    var fileName = GetFileName(uploadedPhoto.FileName, path, 0);
+                    uploadedPhoto.SaveAs(path + fileName);
+
+                    // Update properties
+                    photo.Url = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                    photo.ThumbnailUrl = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                }
+
+                _photoService.CreatePhoto(photo);
+                return RedirectToAction("Index");
+            }
+
+            return PartialView(photo);
+        }
+
+        // GET: Admin/Photos/Create_Multiple
+        public ActionResult Create_Multiple_Popup()
+        {
+            return PartialView();
+        }
+
+        // POST: Admin/Photos/Create_Multiple
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create_Multiple_Popup(HttpPostedFileBase[] uploadedPhotos)
+        {
+            if (uploadedPhotos != null && uploadedPhotos.Length > 0)
+            {
+                var insertPhotos = new List<Photo>();
+                foreach (var uploadedPhoto in uploadedPhotos)
+                {
+                    // Save photo
+                    if (uploadedPhoto.ContentLength > 0)
+                    {
+                        var photo = new Photo();
+
+                        UpdateDefaultProperties(photo);
+
+                        photo.Title = Path.GetFileNameWithoutExtension(uploadedPhoto.FileName);
+                        photo.Description = "";
+                        photo.Extension = Path.GetExtension(uploadedPhoto.FileName);
+                        photo.FileSize = uploadedPhoto.ContentLength;
+
+                        // Save file to directory
+                        var path = HttpContext.Server.MapPath("~") + ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT];
+                        var fileName = GetFileName(uploadedPhoto.FileName, path, 0);
+                        uploadedPhoto.SaveAs(path + fileName);
+
+                        // Update properties
+                        photo.Url = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+                        photo.ThumbnailUrl = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
+
+                        insertPhotos.Add(photo);
+                    }
+                }
+                _photoService.CreateMultiplePhotos(insertPhotos);
+
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

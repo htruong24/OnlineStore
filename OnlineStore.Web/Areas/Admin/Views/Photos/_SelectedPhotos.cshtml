@@ -1,0 +1,37 @@
+﻿@using OnlineStore.Common
+@model IEnumerable<OnlineStore.Data.Entities.Photo>
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Danh sách";
+}
+<div class="action-buttons row" style="padding-bottom: 10px;">
+
+    <div class="col-sm-6">
+        <button class="btn btn-white btn-info btn-bold">
+            <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+            @*@Html.ActionLink("Thêm mới", "Create")*@
+            <a href="#" onclick="javascript: fnCreatePhoto();">Thêm mới</a>
+        </button>
+
+        <button class="btn btn-white btn-success btn-bold">
+            <i class="ace-icon fa fa-floppy-o bigger-120 green"></i>
+            @*@Html.ActionLink("Thêm mới nhiều", "Create_Multiple")*@
+            <a href="#" onclick="javascript: fnCreateMultiplePhotos();">Thêm mới nhiều</a>
+        </button>
+    </div>
+
+    @Html.Partial("_Search")
+
+    <input type="hidden" id="hdControllerName" value="Photos" />
+
+</div>
+
+<div id="search-container">
+    @Html.Action("_PhotoList", "Photos")
+</div>
+
+<h3>Danh sách ảnh được chọn</h3>
+
+<div id="selected-photos">
+    @Html.Action("_TemporaryPhotos", "Photos")
+</div>

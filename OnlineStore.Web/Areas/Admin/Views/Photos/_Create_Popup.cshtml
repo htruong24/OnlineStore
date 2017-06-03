@@ -1,4 +1,5 @@
-﻿@*<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>*@
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/common/js/jQueryForm/jquery.form.min.js"></script>
 <script src="~/assets/admin/js/app/photo/edit.js"></script>
 
 @model OnlineStore.Data.Entities.Photo
@@ -48,26 +49,64 @@
     </div>
 }
 
-
 <script>
-    $("#btnCreate_Popup").click(function () {
-        var postData = $("#frmCreate_Popup").serializeArray();
-        $.ajax(
-            {
-                url: "/Photos/_Create_PopUp",
-                type: "POST",
-                data: postData,
-                success: function (data) {
-                    if (data.Result) {
-                        alert("Lưu thành công!");
-                        $('#sub-modal-table').modal('hide');
+    $(document).ready(function () {
+        alert("I'm here");
 
-                        fnSearch();
-                    }
-                },
-                error: function (xhr, textStatus, error) {
-                    alert(error);
-                }
-            });
+        var options = {
+            beforeSubmit: validate,  // pre-submit callback 
+            success: showResponse  // post-submit callback 
+        };
+        $("#frmCreate_Popup").submit(function () {
+            alert("I'm here");
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    }); 
+
+    // pre-submit callback 
+    function validate(formData, jqForm, options) {
+        //if ($('#fileUpload').get(0).files.length === 0 || $("#hdCbbId-CustomerId").val() == "" || $("#txtCbbName-CustomerId").val() == "") {
+        //    toastr.error('Please input all values');
+        //    return false;
+        //} else {
+        //    $('#excelImportSaleOrder').modal('hide');
+        //    $('#excelImportSaleOrder .close').click();
+        //    return true;
+        //}
+    }
+
+    // post-submit callback 
+    function showResponse(data, statusText, xhr, $form) {
+        alert("dadadadada");
+        if (data.Result) {
+            alert("Lưu thành công!");
+            $('#sub-modal-table').modal('hide');
+            fnSearchPopup();
+        }
+        else {
+            alert(data.ErrorMessage);
+        }
+    }
+
+    $("#btnCreate_Popup").click(function () {
+        $('#frmCreate_Popup').submit();
+        //var postData = $("#frmCreate_Popup").serializeArray();
+        //$.ajax(
+        //    {
+        //        url: "/Photos/_Create_PopUp",
+        //        type: "POST",
+        //        data: postData,
+        //        success: function (data) {
+        //            if (data.Result) {
+        //                alert("Lưu thành công!");
+        //                $('#sub-modal-table').modal('hide');
+        //                fnSearchPopup();
+        //            }
+        //        },
+        //        error: function (xhr, textStatus, error) {
+        //            alert(error);
+        //        }
+        //    });
     });
 </script>

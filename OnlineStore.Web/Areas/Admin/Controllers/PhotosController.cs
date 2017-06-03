@@ -262,7 +262,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/_SelectedPhotos  => Selected Photos
-        public ActionResult _SelectedPhotos()
+        public ActionResult _Index_Popup()
         {
             var photos = new List<Photo>();
             //var photo = new Photo

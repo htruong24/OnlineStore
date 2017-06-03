@@ -13,3 +13,9 @@
 .ui-datepicker {
     width: 18em !important;
 }
+
+.modal-body
+{
+    max-height: 500px !important;
+    overflow-y: scroll !important;
+}

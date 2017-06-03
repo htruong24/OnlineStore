@@ -142,15 +142,5 @@
     $(document).ready(function() {
         
     });
-
-    function fnSelectProductPhotos(productId)
-    {
-        $("#modal-title").text("Chọn ảnh đại diện cho sản phẩm");
-        var url = "/Admin/Photos/_SelectedPhotos";
-        $.get(url, function (data) {
-            $(".modal-body").html(data);
-        });
-        $('#modal-table').modal('show');
-    }
 </script>
 

@@ -1,4 +1,10 @@
-﻿@using OnlineStore.Common
+﻿@*<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
+<script src="~/assets/admin/js/jquery-ui.min.js"></script>
+<link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />*@
+<script src="~/assets/admin/js/app/photo/edit.js"></script>
+
+@using OnlineStore.Common
 @model IEnumerable<OnlineStore.Data.Entities.Photo>
 @{
     ViewBag.Module = "Thư viện ảnh";
@@ -6,16 +12,14 @@
 }
 <div class="action-buttons row" style="padding-bottom: 10px;">
 
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <button class="btn btn-white btn-info btn-bold">
             <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
-            @*@Html.ActionLink("Thêm mới", "Create")*@
             <a href="#" onclick="javascript: fnCreatePhoto();">Thêm mới</a>
         </button>
 
         <button class="btn btn-white btn-success btn-bold">
             <i class="ace-icon fa fa-floppy-o bigger-120 green"></i>
-            @*@Html.ActionLink("Thêm mới nhiều", "Create_Multiple")*@
             <a href="#" onclick="javascript: fnCreateMultiplePhotos();">Thêm mới nhiều</a>
         </button>
     </div>
@@ -27,7 +31,7 @@
 </div>
 
 <div id="search-container">
-    @Html.Action("_PhotoList", "Photos")
+    @Html.Action("_List_Popup", "Photos")
 </div>
 
 <h3>Danh sách ảnh được chọn</h3>
@@ -35,3 +39,10 @@
 <div id="selected-photos">
     @Html.Action("_TemporaryPhotos", "Photos")
 </div>
+
+
+<script>
+    $(document).ready(function () {
+
+    });
+</script>

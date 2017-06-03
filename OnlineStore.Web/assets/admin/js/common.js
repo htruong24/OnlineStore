@@ -170,3 +170,37 @@ function fnSearch() {
 //        }
 //    });
 //}
+
+//Pop-up functions
+
+function fnSearchPopup() {
+    var postData = $("#frmSearch").serializeArray();
+    fnLoadContent("search-container", "Admin/" + $("#hdControllerName").val() + "/" + "_List_Popup", postData);
+}
+
+function fnCreatePhoto() {
+    $("#sub-modal-table #modal-title").text("Thêm ảnh mới");
+    var url = "/Admin/Photos/_Create_Popup";
+    $.get(url, function (data) {
+        $("#sub-modal-table .modal-body").html(data);
+    });
+    $('#sub-modal-table').modal('show');
+}
+
+function fnCreateMultiplePhotos() {
+    $("#sub-modal-table #modal-title").text("Thêm nhiều ảnh mới");
+    var url = "/Admin/Photos/_Create_Popup";
+    $.get(url, function (data) {
+        $("#sub-modal-table .modal-body").html(data);
+    });
+    $('#sub-modal-table').modal('show');
+}
+
+function fnSelectProductPhotos(productId) {
+    $("#modal-table #modal-title").text("Chọn ảnh đại diện cho sản phẩm");
+    var url = "/Admin/Photos/_Index_Popup";
+    $.get(url, function (data) {
+        $("#modal-table .modal-body").html(data);
+    });
+    $('#modal-table').modal('show');
+}

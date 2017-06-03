@@ -14,6 +14,7 @@ using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
 using OnlineStore.Data.Interfaces;
 using OnlineStore.Services.BLL.Services;
+using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
@@ -278,7 +279,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         }
 
         // GET: List of selected photos
-        public ActionResult _PhotoList(SortingPagingInfo info, DefaultFilter filter)
+        public ActionResult _List_Popup(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)
             {
@@ -336,7 +337,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
         // ---------------- POPUP ----------------
         // GET: Admin/Photos/Create
-        public ActionResult Create_Popup()
+        public ActionResult _Create_Popup()
         {
             return PartialView();
         }
@@ -346,8 +347,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create_Popup(Photo photo, HttpPostedFileBase uploadedPhoto)
+        public ActionResult _Create_Popup(Photo photo, HttpPostedFileBase uploadedPhoto)
         {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(photo);
@@ -367,16 +374,20 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     photo.Url = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
                     photo.ThumbnailUrl = ConfigurationManager.AppSettings[PhotoDirectories.PRODUCT] + fileName;
                 }
-
                 _photoService.CreatePhoto(photo);
-                return RedirectToAction("Index");
+                return Json(jsonModel);
             }
-
-            return PartialView(photo);
+            jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "-1",
+                ErrorMessage = "Không thể tạo mới",
+                Result = false
+            };
+            return Json(jsonModel);
         }
 
         // GET: Admin/Photos/Create_Multiple
-        public ActionResult Create_Multiple_Popup()
+        public ActionResult _Create_Multiple_Popup()
         {
             return PartialView();
         }
@@ -386,8 +397,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create_Multiple_Popup(HttpPostedFileBase[] uploadedPhotos)
+        public ActionResult _Create_Multiple_Popup(HttpPostedFileBase[] uploadedPhotos)
         {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
             if (uploadedPhotos != null && uploadedPhotos.Length > 0)
             {
                 var insertPhotos = new List<Photo>();
@@ -419,9 +436,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 }
                 _photoService.CreateMultiplePhotos(insertPhotos);
 
-                return RedirectToAction("Index");
+                return Json(jsonModel);
             }
-            return View();
+            jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "-1",
+                ErrorMessage = "Không thể tạo mới",
+                Result = false
+            };
+            return Json(jsonModel);
         }
     }
 }

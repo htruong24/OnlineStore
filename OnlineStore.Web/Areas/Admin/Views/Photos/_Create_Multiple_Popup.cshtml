@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Tạo mới nhiều";
+}
+
+@using (Html.BeginForm("_Create_Multiple_Popup", "Photos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Tải ảnh</label>
+            <div class="col-md-9">
+                <input type="file" name="uploadedPhotos" class="multi" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Lưu lại
+                </button>
+            </div>
+        </div>
+    </div>
+}
+

@@ -660,9 +660,12 @@
     <Content Include="Areas\Admin\Views\Photos\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_List.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\Create_Multiple.cshtml" />
-    <Content Include="Areas\Admin\Views\Photos\_SelectedPhotos.cshtml" />
-    <Content Include="Areas\Admin\Views\Photos\_PhotoList.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Index_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_List_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_TemporaryPhotos.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Create_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Create_Multiple_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Search_Popup.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

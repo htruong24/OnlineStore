@@ -1,0 +1,73 @@
+﻿@*<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>*@
+<script src="~/assets/admin/js/app/photo/edit.js"></script>
+
+@model OnlineStore.Data.Entities.Photo
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Tạo mới";
+}
+@using (Html.BeginForm("_Create_PopUp", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id="frmCreate_Popup" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Tải ảnh</label>
+            <div class="col-md-9">
+                <input type="file" name="uploadedPhoto" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" id="btnCreate_Popup" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Lưu lại
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $("#btnCreate_Popup").click(function () {
+        var postData = $("#frmCreate_Popup").serializeArray();
+        $.ajax(
+            {
+                url: "/Photos/_Create_PopUp",
+                type: "POST",
+                data: postData,
+                success: function (data) {
+                    if (data.Result) {
+                        alert("Lưu thành công!");
+                        $('#sub-modal-table').modal('hide');
+
+                        fnSearch();
+                    }
+                },
+                error: function (xhr, textStatus, error) {
+                    alert(error);
+                }
+            });
+    });
+</script>

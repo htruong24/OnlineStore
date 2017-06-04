@@ -1,9 +1,16 @@
-﻿@{
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/common/js/multifile/jQuery.MultiFile.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
+<script src="~/assets/common/js/jQueryForm/jquery.form.min.js"></script>
+<script src="~/assets/common/js/toastr/toastr.min.js"></script>
+<link href="~/assets/common/js/toastr/toastr.min.css" rel="stylesheet" />
+
+@{
     ViewBag.Module = "Thư viện ảnh";
     ViewBag.Title = "Tạo mới nhiều";
 }
 
-@using (Html.BeginForm("_Create_Multiple_Popup", "Photos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("_Create_Multiple_Popup", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmSubmit_Popup" }))
 {
     @Html.AntiForgeryToken()
 
@@ -20,7 +27,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-white btn-info btn-bold">
+                <button type="button" id="btnSubmit_Popup" class="btn btn-white btn-info btn-bold">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                     Lưu lại
                 </button>
@@ -29,3 +36,35 @@
     </div>
 }
 
+<script>
+    $(document).ready(function () {
+        var options = {
+            beforeSubmit: validate,  // pre-submit callback
+            success: showResponse  // post-submit callback
+        };
+        $("#frmSubmit_Popup").submit(function () {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+
+    // pre-submit callback
+    function validate(formData, jqForm, options) {
+    }
+
+    // post-submit callback
+    function showResponse(data, statusText, xhr, $form) {
+        if (data.Result) {
+            $(".btn-close-sub-modal").trigger({ type: "click" });
+            toastr.success("Lưu thành công!");
+            fnSearchPopup();
+        }
+        else {
+            toastr.error(data.ErrorMessage);
+        }
+    }
+
+    $("#btnSubmit_Popup").click(function () {
+        $('#frmSubmit_Popup').submit();
+    });
+</script>

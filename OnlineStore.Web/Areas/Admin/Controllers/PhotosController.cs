@@ -308,9 +308,20 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
         public ActionResult AddTemporaryPhoto(int? photoId)
         {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "-1",
+                ErrorMessage = "Ảnh đã được chọn",
+                Result = false
+            };
+
             var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
 
-            if(photoId != null && photoId != 0)
+            var isExistedPhoto = photos.Find(x => x.Id == photoId) != null;
+            if (isExistedPhoto)
+                return Json(jsonModel);
+
+            if (photoId != null && photoId != 0)
             {
                 var photo = _photoService.GetPhoto(photoId);
                 photos.Add(photo);

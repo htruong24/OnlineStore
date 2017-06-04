@@ -399,6 +399,7 @@
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\common\js\multifile\jquery.MultiFile.js" />
     <Content Include="assets\common\js\multifile\jQuery.MultiFile.min.js" />
+    <Content Include="assets\common\js\paging\paging_popup.js" />
     <Content Include="assets\common\js\paging\paging.js" />
     <Content Include="assets\web\css\animate.css" />
     <Content Include="assets\web\css\bootstrap.min.css" />
@@ -669,6 +670,7 @@
     <Content Include="Areas\Admin\Views\Photos\_Details_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_Edit_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_Delete_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\_Paging_Popup.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

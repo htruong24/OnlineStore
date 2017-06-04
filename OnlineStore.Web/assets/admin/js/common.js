@@ -191,7 +191,7 @@ function fnCreatePhoto() {
 
 function fnCreateMultiplePhotos() {
     $("#sub-modal-table #modal-title").text("Thêm nhiều ảnh mới");
-    var url = "/Admin/Photos/_Create_Popup";
+    var url = "/Admin/Photos/_Create_Multiple_Popup";
     $.get(url, function (data) {
         $("#sub-modal-table .modal-body").html(data);
     });
@@ -263,4 +263,39 @@ function fnSelectProductPhotos(productId) {
     $('#modal-table').modal('show');
 }
 
+function fnRemovePhoto(photoId) {
+    $.ajax(
+    {
+        url: "/Photos/RemoveTemporaryPhoto",
+        type: "POST",
+        data: { photoId: photoId },
+        success: function (data) {
+            $("#selected-photos").html(data);
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+}
 
+function fnSelectPhoto(photoId) {
+    $.ajax(
+    {
+        url: "/Photos/AddTemporaryPhoto",
+        type: "POST",
+        data: { photoId: photoId },
+        success: function (data) {
+            if (data.ErrorCode && data.ErrorCode !== "0")
+            {
+                toastr.warning(data.ErrorMessage);
+            }
+            else
+            {
+                $("#selected-photos").html(data);
+            }
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error + ": " + xhr.responseText);
+        }
+    });
+}

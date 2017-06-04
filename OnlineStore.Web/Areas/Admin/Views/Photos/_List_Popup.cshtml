@@ -37,10 +37,10 @@
                            <a href="#" onclick="javascript:fnSelectPhoto(@item.Id);">Chọn</a>
                         </td>
                         <td style="text-align: center;">
-                            <img height="60" width="60" src="~/@item.Url" title="@item.Title" />
+                            <img height="60" width="60" src="~/@item.Url" title="@item.Title" target="_blank" />
                         </td>
                         <td>
-                            <a href="~/Admin/Photos/Details/@item.Id">
+                            <a href="#" onclick="javascript: fnDetailPhoto('@item.Id');">
                                 @Html.DisplayFor(modelItem => item.Title)
                             </a>
                         </td>
@@ -103,26 +103,10 @@
     </div>
 </div>
 
-@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Photos/_SelectedPhotos" })
-
+@Html.Action("_Paging_Popup", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Photos/_SelectedPhotos" })
 
 <script>
     $(document).ready(function () {
 
     });
-
-    function fnSelectPhoto(photoId) {
-        $.ajax(
-        {
-            url: "/Photos/AddTemporaryPhoto",
-            type: "POST",
-            data: { photoId: photoId },
-            success: function (data) {
-                $("#selected-photos").html(data);
-            },
-            error: function (xhr, textStatus, error) {
-                toastr.error(error + ": " + xhr.responseText);
-            }
-        });
-    }
 </script>

@@ -1,11 +1,4 @@
-﻿@*<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
-<script src="~/assets/admin/js/bootstrap.min.js"></script>
-<script src="~/assets/admin/js/jquery-ui.min.js"></script>
-<link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />*@
-<script src="~/assets/admin/js/app/photo/edit.js"></script>
-
-@using OnlineStore.Common
-@model IEnumerable<OnlineStore.Data.Entities.Photo>
+﻿@model IEnumerable<OnlineStore.Data.Entities.Photo>
 @{
     ViewBag.Module = "Thư viện ảnh";
     ViewBag.Title = "Danh sách";
@@ -24,7 +17,7 @@
         </button>
     </div>
 
-    @Html.Partial("_Search")
+    @Html.Partial("_Search_Popup")
 
     <input type="hidden" id="hdControllerName" value="Photos" />
 

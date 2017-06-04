@@ -178,6 +178,8 @@ function fnSearchPopup() {
     fnLoadContent("search-container", "Admin/" + $("#hdControllerName").val() + "/" + "_List_Popup", postData);
 }
 
+// CONTROLLER: Photos
+
 function fnCreatePhoto() {
     $("#sub-modal-table #modal-title").text("Thêm ảnh mới");
     var url = "/Admin/Photos/_Create_Popup";
@@ -196,6 +198,62 @@ function fnCreateMultiplePhotos() {
     $('#sub-modal-table').modal('show');
 }
 
+function fnEditPhoto(id) {
+    $("#sub-modal-table #modal-title").text("Cập nhật thông tin ảnh");
+    var url = "/Admin/Photos/_Edit_Popup";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { id : id },
+        success: function (data) {
+            $("#sub-modal-table .modal-body").html(data);
+            $('#sub-modal-table').modal('show');
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+    //var url = "/Admin/Photos/_Edit_Popup";
+    //$.get(url, function (data) {
+    //    $("#sub-modal-table .modal-body").html(data);
+    //});
+    //$('#sub-modal-table').modal('show');
+}
+
+function fnDetailPhoto(id) {
+    $("#sub-modal-table #modal-title").text("Chi tiết ảnh");
+    var url = "/Admin/Photos/_Details_Popup";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { id: id },
+        success: function (data) {
+            $("#sub-modal-table .modal-body").html(data);
+            $('#sub-modal-table').modal('show');
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+}
+
+function fnDeletePhoto(id) {
+    $("#sub-modal-table #modal-title").text("Xóa ảnh");
+    var url = "/Admin/Photos/_Delete_Popup";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { id: id },
+        success: function (data) {
+            $("#sub-modal-table .modal-body").html(data);
+            $('#sub-modal-table').modal('show');
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+}
+
 function fnSelectProductPhotos(productId) {
     $("#modal-table #modal-title").text("Chọn ảnh đại diện cho sản phẩm");
     var url = "/Admin/Photos/_Index_Popup";
@@ -204,3 +262,5 @@ function fnSelectProductPhotos(productId) {
     });
     $('#modal-table').modal('show');
 }
+
+

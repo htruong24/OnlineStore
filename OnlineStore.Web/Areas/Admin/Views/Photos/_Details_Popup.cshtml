@@ -1,0 +1,95 @@
+﻿@model OnlineStore.Data.Entities.Photo
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Chi tiết";
+}
+<div>
+    @*Details information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chi tiết</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Ảnh minh họa
+                    </dt>
+                    <dd>
+                        <img title="@Model.Title" height="100" width="100" src="~/@Model.Url" />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Title)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FileSize)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FileSize)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Extension)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Extension)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    @*Common information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chung</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @*@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id })*@
+        <a href="#" onclick="javascript: fnEditPhoto('@Model.Id');">Chỉnh sửa</a>
+    </button>
+</p>
+
+
+

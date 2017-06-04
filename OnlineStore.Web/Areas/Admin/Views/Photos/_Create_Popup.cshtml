@@ -1,13 +1,16 @@
 ﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
 <script src="~/assets/common/js/jQueryForm/jquery.form.min.js"></script>
-<script src="~/assets/admin/js/app/photo/edit.js"></script>
+<script src="~/assets/common/js/toastr/toastr.min.js"></script>
+<link href="~/assets/common/js/toastr/toastr.min.css" rel="stylesheet" />
+@*<script src="~/assets/admin/js/app/photo/edit.js"></script>*@
 
 @model OnlineStore.Data.Entities.Photo
 @{
     ViewBag.Module = "Thư viện ảnh";
     ViewBag.Title = "Tạo mới";
 }
-@using (Html.BeginForm("_Create_PopUp", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id="frmCreate_Popup" }))
+@using (Html.BeginForm("_Create_PopUp", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id="frmSubmit_Popup" }))
 {
     @Html.AntiForgeryToken()
 
@@ -40,7 +43,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="button" id="btnCreate_Popup" class="btn btn-white btn-info btn-bold">
+                <button type="button" id="btnSubmit_Popup" class="btn btn-white btn-info btn-bold">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
                     Lưu lại
                 </button>
@@ -51,14 +54,11 @@
 
 <script>
     $(document).ready(function () {
-        alert("I'm here");
-
         var options = {
             beforeSubmit: validate,  // pre-submit callback 
             success: showResponse  // post-submit callback 
         };
-        $("#frmCreate_Popup").submit(function () {
-            alert("I'm here");
+        $("#frmSubmit_Popup").submit(function () {
             $(this).ajaxSubmit(options);
             return false;
         });
@@ -78,19 +78,20 @@
 
     // post-submit callback 
     function showResponse(data, statusText, xhr, $form) {
-        alert("dadadadada");
         if (data.Result) {
-            alert("Lưu thành công!");
-            $('#sub-modal-table').modal('hide');
+            $(".btn-close-sub-modal").trigger({ type: "click" });
+            //$('#sub-modal-table').modal('hide');
+            //$('#sub-modal-table').hide();
+            toastr.success("Lưu thành công!");
             fnSearchPopup();
         }
         else {
-            alert(data.ErrorMessage);
+            toastr.error(data.ErrorMessage);
         }
     }
 
-    $("#btnCreate_Popup").click(function () {
-        $('#frmCreate_Popup').submit();
+    $("#btnSubmit_Popup").click(function () {
+        $('#frmSubmit_Popup').submit();
         //var postData = $("#frmCreate_Popup").serializeArray();
         //$.ajax(
         //    {

@@ -1,0 +1,95 @@
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
+<script src="~/assets/common/js/jQueryForm/jquery.form.min.js"></script>
+<script src="~/assets/common/js/toastr/toastr.min.js"></script>
+<link href="~/assets/common/js/toastr/toastr.min.css" rel="stylesheet" />
+
+@model OnlineStore.Data.Entities.Photo
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Cập nhật";
+}
+
+@using (Html.BeginForm("_Edit_PopUp", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmSubmit_Popup" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.CreatedOn)
+    @Html.HiddenFor(x => x.CreatedById)
+    @Html.HiddenFor(x => x.ModifiedOn)
+    @Html.HiddenFor(x => x.ModifiedById)
+
+    @Html.HiddenFor(x => x.Url)
+    @Html.HiddenFor(x => x.ThumbnailUrl)
+    @Html.HiddenFor(x => x.FileSize)
+    @Html.HiddenFor(x => x.Extension)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <img title="@Model.Title" height="100" width="100" src="~/@Model.Url" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" id="btnSubmit_Popup" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Cập nhật
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        var options = {
+            beforeSubmit: validate,  // pre-submit callback
+            success: showResponse  // post-submit callback
+        };
+        $("#frmSubmit_Popup").submit(function () {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+
+    // pre-submit callback
+    function validate(formData, jqForm, options) {
+    }
+
+    // post-submit callback
+    function showResponse(data, statusText, xhr, $form) {
+        if (data.Result) {
+            $(".btn-close-sub-modal").trigger({ type: "click" });
+            toastr.success("Cập nhật thành công!");
+            fnSearchPopup();
+        }
+        else {
+            toastr.error(data.ErrorMessage);
+        }
+    }
+
+    $("#btnSubmit_Popup").click(function () {
+        $('#frmSubmit_Popup').submit();
+    });
+</script>

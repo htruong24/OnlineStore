@@ -342,7 +342,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return PartialView();
         }
 
-        // POST: Admin/Photos/Create
+        // POST: Admin/Photos/_Create_Popup
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -386,7 +386,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return Json(jsonModel);
         }
 
-        // GET: Admin/Photos/Create_Multiple
+        // GET: Admin/Photos/_Create_Multiple_Popup
         public ActionResult _Create_Multiple_Popup()
         {
             return PartialView();
@@ -444,6 +444,94 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 ErrorMessage = "Không thể tạo mới",
                 Result = false
             };
+            return Json(jsonModel);
+        }
+
+        // GET: Admin/Photos/Edit/5
+        public ActionResult _Edit_Popup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(photo);
+        }
+
+        // POST: Admin/Photos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Edit_Popup(Photo photo)
+        {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+            if (ModelState.IsValid)
+            {
+                UpdateDefaultProperties(photo);
+                _photoService.UpdatePhoto(photo);
+                return Json(jsonModel);
+            }
+            jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "-1",
+                ErrorMessage = "Không thể cập nhật",
+                Result = false
+            };
+            return Json(jsonModel);
+        }
+
+        // GET: Admin/Photos/Details/5
+        public ActionResult _Details_Popup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(photo);
+        }
+
+        // GET: Admin/Photos/Delete/5
+        public ActionResult _Delete_Popup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(photo);
+        }
+
+        // POST: Admin/Photos/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _DeleteConfirmed_Popup(int id)
+        {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+            _photoService.DeletePhoto(id);
             return Json(jsonModel);
         }
     }

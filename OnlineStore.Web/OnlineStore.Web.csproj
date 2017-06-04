@@ -666,6 +666,9 @@
     <Content Include="Areas\Admin\Views\Photos\_Create_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_Create_Multiple_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Search_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Details_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Edit_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\Photos\_Delete_Popup.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

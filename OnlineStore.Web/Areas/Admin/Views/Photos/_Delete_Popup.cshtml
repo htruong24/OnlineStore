@@ -1,0 +1,134 @@
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
+<script src="~/assets/common/js/jQueryForm/jquery.form.min.js"></script>
+<script src="~/assets/common/js/toastr/toastr.min.js"></script>
+<link href="~/assets/common/js/toastr/toastr.min.css" rel="stylesheet" />
+
+@model OnlineStore.Data.Entities.Photo
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Xóa ảnh";
+}
+
+<div class="alert alert-danger">
+    Bạn có chắc muốn xóa ảnh này?
+</div>
+
+<div>
+    @*Details information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chi tiết</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Title)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FileSize)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FileSize)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Extension)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Extension)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    @*Common information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin chung</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedOn)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedOn)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("_DeleteConfirmed_Popup", "Photos", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmSubmit_Popup" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+
+    <button type="button" id="btnSubmit_Popup" class="btn btn-white btn-danger btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 red"></i>
+        Xác nhận
+    </button>
+}
+
+<script>
+    $(document).ready(function () {
+        var options = {
+            beforeSubmit: validate,  // pre-submit callback
+            success: showResponse  // post-submit callback
+        };
+        $("#frmSubmit_Popup").submit(function () {
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+
+    // pre-submit callback
+    function validate(formData, jqForm, options) {
+    }
+
+    // post-submit callback
+    function showResponse(data, statusText, xhr, $form) {
+        if (data.Result) {
+            $(".btn-close-sub-modal").trigger({ type: "click" });
+            toastr.success("Cập nhật thành công!");
+            fnSearchPopup();
+        }
+        else {
+            toastr.error(data.ErrorMessage);
+        }
+    }
+
+    $("#btnSubmit_Popup").click(function () {
+        $('#frmSubmit_Popup').submit();
+    });
+</script>

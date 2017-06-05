@@ -299,3 +299,19 @@ function fnSelectPhoto(photoId) {
         }
     });
 }
+
+function fnSaveTemporaryProducts() {
+    $(".btn-close-modal").trigger({ type: "click" });
+    $.ajax(
+        {
+            url: "/Photos/GetTemporaryPhoto",
+            type: "POST",
+            data: { },
+            success: function (data) {
+                $("#selected-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
+}

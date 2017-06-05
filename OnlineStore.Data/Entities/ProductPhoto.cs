@@ -5,24 +5,19 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel;
 
-    [Table("Photo")]
-    public partial class Photo
+    [Table("ProductPhoto")]
+    public partial class ProductPhoto
     {
         public int Id { get; set; }
 
-        [StringLength(50)]
-        public string Title { get; set; }
+        public int? ProductId { get; set; }
 
-        public string Description { get; set; }
+        public int? PhotoId { get; set; }
 
-        public string Url { get; set; }
+        public bool? Featured { get; set; }
 
-        public string ThumbnailUrl { get; set; }
-
-        public int? FileSize { get; set; }
-
-        [StringLength(10)]
-        public string Extension { get; set; }
+        [DisplayName("Thứ tự")]
+        public int? OrderNumber { get; set; }
 
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
@@ -48,7 +43,10 @@
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
 
-        [NotMapped]
-        public bool? Featured { get; set; }
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
+
+        [ForeignKey("PhotoId")]
+        public virtual Photo Photo { get; set; }
     }
 }

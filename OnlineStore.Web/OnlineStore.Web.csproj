@@ -211,6 +211,7 @@
     <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductPhotosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShipmentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StocksController.cs" />
@@ -671,6 +672,11 @@
     <Content Include="Areas\Admin\Views\Photos\_Edit_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_Delete_Popup.cshtml" />
     <Content Include="Areas\Admin\Views\Common\_Paging_Popup.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductPhotos\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductPhotos\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductPhotos\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductPhotos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductPhotos\Index.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

@@ -346,6 +346,11 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
         }
 
+        public ActionResult GetTemporaryPhoto()
+        {
+            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
+        }
+
         // ---------------- POPUP ----------------
         // GET: Admin/Photos/Create
         public ActionResult _Create_Popup()

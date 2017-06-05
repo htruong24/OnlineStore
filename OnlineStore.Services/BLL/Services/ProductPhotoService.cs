@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Security.Cryptography.X509Certificates;
 using OnlineStore.Common;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
@@ -9,7 +10,7 @@ using OnlineStore.Services.BLL.Contracts;
 
 namespace OnlineStore.Services.BLL.Services
 {
-    public class ProductService: IProductService
+    public class ProductPhotoService: IProductPhotoService
     {
         public SortingPagingInfo Pagination;
 
@@ -17,55 +18,55 @@ namespace OnlineStore.Services.BLL.Services
 
         private readonly UnitOfWork _unitOfWork;
 
-        public ProductService(UnitOfWork unitOfWork)
+        public ProductPhotoService(UnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
 
-        public Product GetProduct(int? productId)
+        public ProductPhoto GetProductPhoto(int? productPhotoId)
         {
             using (_unitOfWork)
             {
-                var product = _unitOfWork.GetRepository<Data.Entities.Product>()
-                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,ProductPhotos")
+                var productPhoto =
+                    _unitOfWork.GetRepository<Data.Entities.ProductPhoto>()
+                        .Get(x => x.Id == productPhotoId, null, "CreatedBy,ModifiedBy,Photo,Product")
                         .FirstOrDefault();
-                
-                return product;
+                return productPhoto;
             }
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProductPhoto(ProductPhoto productPhoto)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Data.Entities.Product>().Update(product);
+                _unitOfWork.GetRepository<Data.Entities.ProductPhoto>().Update(productPhoto);
                 _unitOfWork.Save();
             }
         }
 
-        public void CreateProduct(Product product)
+        public void CreateProductPhoto(ProductPhoto productPhoto)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Product>().Create(product);
+                _unitOfWork.GetRepository<ProductPhoto>().Create(productPhoto);
                 _unitOfWork.Save();
             }
         }
 
-        public void DeleteProduct(int? productId)
+        public void DeleteProductPhoto(int? productPhotoId)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Product>().Delete(productId);
+                _unitOfWork.GetRepository<ProductPhoto>().Delete(productPhotoId);
                 _unitOfWork.Save();
             }
         }
 
-        public List<Product> GetProducts()
+        public List<ProductPhoto> GetProductPhotos()
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Product>().Get(null, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,ProductPhotos");
+                var query = _unitOfWork.GetRepository<ProductPhoto>().Get(null, null, "CreatedBy,ModifiedBy,Photo,Product");
                 
                 // Sorting
                 switch (Pagination.SortField)
@@ -75,20 +76,10 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Id) :
                                  query.OrderByDescending(c => c.Id));
                         break;
-                    case "Name":
-                        query = (Pagination.SortDirection == "ascending"
-                            ? query.OrderBy(c => c.Name)
-                            : query.OrderByDescending(c => c.Name));
-                        break;
-                    case "ShortDescrition":
+                    case "OrderNumber":
                         query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ShortDescrition) :
-                                 query.OrderByDescending(c => c.ShortDescrition));
-                        break;
-                    case "Description":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.Description) :
-                                 query.OrderByDescending(c => c.Description));
+                                 query.OrderBy(c => c.OrderNumber) :
+                                 query.OrderByDescending(c => c.OrderNumber));
                         break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
@@ -115,9 +106,8 @@ namespace OnlineStore.Services.BLL.Services
                 // Fitler
                 if (!string.IsNullOrEmpty(Filter?.Keyword))
                 {
-                    query = query.Where(x => x.Name.Contains(Filter.Keyword)
-                                             || x.ShortDescrition.Contains(Filter.Keyword)
-                                             || x.Description.Contains(Filter.Keyword));
+                    //query = query.Where(x => x.Name.Contains(Filter.Keyword)
+                    //                         || x.Description.Contains(Filter.Keyword));
                 }
 
                 // Paging
@@ -129,8 +119,9 @@ namespace OnlineStore.Services.BLL.Services
 
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
-                return query.ToList();
+                var categories = query.ToList();
 
+                return categories;
             }
         }
     }

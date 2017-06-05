@@ -4,10 +4,16 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel;
+    using System.Collections.Generic;
 
     [Table("Product")]
     public partial class Product
     {
+        public Product()
+        {
+            ProductPhotos = new HashSet<ProductPhoto>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -81,5 +87,7 @@
         [ForeignKey("UnitId")]
         [DisplayName("Đơn vị tính")]
         public virtual Unit Unit { get; set; }
+
+        public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }

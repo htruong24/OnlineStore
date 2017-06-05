@@ -75,6 +75,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
+            Session[CommonConstants.PHOTO_SESSION] = new List<Photo>();
+
             ViewBag.SubCategories = GetSubCategories();
             ViewBag.Brands = GetBrands();
             ViewBag.Units = GetUnits();

@@ -124,7 +124,9 @@
         </div>
 
         @*Product photo*@
-        @Html.Action("_TemporaryPhotos", "Photos")
+        <div id="product-photos">
+            @Html.Action("_ProductPhotos", "Product")
+        </div>
 
 
         <div class="form-group">

@@ -677,6 +677,7 @@
     <Content Include="Areas\Admin\Views\ProductPhotos\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ProductPhotos\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductPhotos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\_ProductPhotos.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />

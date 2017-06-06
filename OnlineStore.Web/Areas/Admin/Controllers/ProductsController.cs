@@ -218,7 +218,11 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return _unitService.GetUnits();
         }
 
-        
+        // Get Product photos
+        public ActionResult _ProductPhotos()
+        {
+            return PartialView();
+        }
 
     }
 }

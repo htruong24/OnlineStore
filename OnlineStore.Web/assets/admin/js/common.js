@@ -281,7 +281,7 @@ function fnRemovePhoto(photoId) {
 function fnRemoveProductPhoto(photoId) {
     $.ajax(
         {
-            url: "/Photos/RemoveTemporaryPhoto",
+            url: "/Admin/Products/RemoveTemporaryProductPhoto",
             type: "POST",
             data: { photoId: photoId },
             success: function (data) {
@@ -319,7 +319,7 @@ function fnSaveTemporaryProducts() {
     $(".btn-close-modal").trigger({ type: "click" });
     $.ajax(
         {
-            url: "/Photos/GetTemporaryPhoto",
+            url: "/Admin/Products/_ProductPhotos",
             type: "POST",
             data: { },
             success: function (data) {

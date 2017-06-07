@@ -224,5 +224,20 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return PartialView();
         }
 
+        public ActionResult RemoveTemporaryProductPhoto(int? photoId)
+        {
+            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
+
+            var removedPhoto = photos.FirstOrDefault(p => p.Id == photoId);
+
+            if (removedPhoto != null)
+            {
+                photos.Remove(removedPhoto);
+                Session[CommonConstants.PHOTO_SESSION] = photos;
+            }
+
+            return PartialView("~/Areas/Admin/Views/Products/_ProductPhotos.cshtml");
+        }
+
     }
 }

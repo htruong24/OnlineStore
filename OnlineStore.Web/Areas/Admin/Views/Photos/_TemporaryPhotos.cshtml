@@ -1,7 +1,7 @@
 ﻿@using OnlineStore.Common
 @model OnlineStore.Data.Entities.Photo
 @{ 
-    var selectedPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION];
+    var selectedPhotos = ((List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION]).FindAll(x => x.Status != PhotoStatus.DELETE);
 }
 
 <div class="row" id="mode-list">

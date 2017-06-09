@@ -10,6 +10,8 @@ namespace OnlineStore.Common
     {
         public static string USER_SESSION = "USER_SESSION";
         public static string PHOTO_SESSION = "PHOTO_SESSION";
+        public static string PRODUCT_PHOTO_SESSION = "PRODUCT_PHOTO_SESSIONBC";
+        public static string TEMP_PHOTO_SESSION = "TEMP_PHOTO_SESSION";
         public static string CONNECTION_STRING = "OnlineStoreDbContext";
         public static string DEFAULT_PASSWORD = "123";
         public static string DEFAULT_EMAIL_PASSWORD = "123";
@@ -39,5 +41,12 @@ namespace OnlineStore.Common
     public class StatusGroups
     {
         public static int STATUS = 1;
+    }
+
+    public class PhotoStatus
+    {
+        public static string NEW = "NEW";
+        public static string UPDATE = "UPDATE";
+        public static string DELETE = "DELETE";
     }
 }

@@ -50,5 +50,8 @@
 
         [NotMapped]
         public bool? Featured { get; set; }
+
+        [NotMapped]
+        public string Status { get; set; }
     }
 }

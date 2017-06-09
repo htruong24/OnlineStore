@@ -264,7 +264,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/_SelectedPhotos  => Selected Photos
         public ActionResult _Index_Popup()
         {
-            var photos = new List<Photo>();
+            //var photos = new List<Photo>();
             //var photo = new Photo
             //{
             //    Title = fileName,
@@ -272,7 +272,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             //    FileSize = uploadPhoto.ContentLength
             //};
             //photos.Add(photo);
-            Session[CommonConstants.PHOTO_SESSION] = photos;
+            //Session[CommonConstants.PHOTO_SESSION] = photos;
+
+            var photos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION];
+            var productPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+            var tempPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.TEMP_PHOTO_SESSION];
+
+            var demo = tempPhotos;
+
+            Session[CommonConstants.PHOTO_SESSION] = productPhotos;
 
             return PartialView();
 
@@ -317,13 +325,19 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
 
-            var isExistedPhoto = photos.Find(x => x.Id == photoId) != null;
-            if (isExistedPhoto)
+            var productPhotos = (List<Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+
+            var tempPhotos = (List<Photo>)Session[CommonConstants.TEMP_PHOTO_SESSION];
+
+            var existedPhoto = photos.Find(x => x.Id == photoId);
+
+            if (existedPhoto != null && existedPhoto.Status != PhotoStatus.DELETE)
                 return Json(jsonModel);
 
             if (photoId != null && photoId != 0)
             {
                 var photo = _photoService.GetPhoto(photoId);
+                photo.Status = PhotoStatus.NEW;
                 photos.Add(photo);
                 Session[CommonConstants.PHOTO_SESSION] = photos;
             }
@@ -339,7 +353,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             if (removedPhoto != null)
             {
-                photos.Remove(removedPhoto);
+                //photos.Remove(removedPhoto);
+                removedPhoto.Status = PhotoStatus.DELETE;
                 Session[CommonConstants.PHOTO_SESSION] = photos;
             }
 

@@ -76,6 +76,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             Session[CommonConstants.PHOTO_SESSION] = new List<Photo>();
+            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = new List<Photo>();
+            Session[CommonConstants.TEMP_PHOTO_SESSION] = new List<Photo>();
 
             ViewBag.SubCategories = GetSubCategories();
             ViewBag.Brands = GetBrands();
@@ -221,18 +223,25 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // Get Product photos
         public ActionResult _ProductPhotos()
         {
+            var photos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION];
+            var productPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+
+            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = photos;
+
             return PartialView();
         }
 
         public ActionResult RemoveTemporaryProductPhoto(int? photoId)
         {
-            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
+            var photos = (List<Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
 
             var removedPhoto = photos.FirstOrDefault(p => p.Id == photoId);
 
             if (removedPhoto != null)
             {
-                photos.Remove(removedPhoto);
+                //photos.Remove(removedPhoto);
+                removedPhoto.Status = PhotoStatus.DELETE;
+                Session[CommonConstants.PRODUCT_PHOTO_SESSION] = photos;
                 Session[CommonConstants.PHOTO_SESSION] = photos;
             }
 

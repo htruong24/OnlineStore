@@ -47,11 +47,5 @@
         [ForeignKey("ModifiedById")]
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
-
-        [NotMapped]
-        public bool? Featured { get; set; }
-
-        [NotMapped]
-        public string Status { get; set; }
     }
 }

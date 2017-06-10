@@ -8,6 +8,7 @@
     ViewBag.Title = "Tạo mới";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -125,7 +126,7 @@
 
         @*Product photo*@
         <div id="product-photos">
-            @Html.Action("_ProductPhotos", "Products")
+            @Html.Action("_ProductPhotos", "ProductPhotos")
         </div>
 
         <div class="form-group">

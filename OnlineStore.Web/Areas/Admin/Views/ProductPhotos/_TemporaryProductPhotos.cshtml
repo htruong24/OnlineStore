@@ -1,7 +1,7 @@
 ﻿@using OnlineStore.Common
 @model OnlineStore.Data.Entities.Photo
-@{ 
-    var selectedPhotos = ((List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION]).FindAll(x => x.Status != PhotoStatus.DELETE);
+@{
+    var productPhotos = ((List<OnlineStore.Data.Entities.ProductPhoto>)Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION]).FindAll(x => x.Status != PhotoStatus.DELETE);
 }
 
 <div class="row" id="mode-list">
@@ -28,28 +28,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in selectedPhotos.OrderBy(x => x.Title))
+                @foreach (var item in productPhotos.OrderBy(x => x.Photo.Title))
                 {
                     <tr>
                         <td class="center">
-                            <a href="#" onclick="javascript:fnRemovePhoto(@item.Id);">Xóa</a>
+                            <a href="#" onclick="javascript:fnRemoveProductPhoto(@item.Id);">Xóa</a>
                         </td>
                         <td style="text-align: center;">
-                            <img height="60" width="60" src="~/@item.Url" title="@item.Title" />
+                            <img height="60" width="60" src="~/@item.Photo.Url" title="@item.Photo.Title" />
                         </td>
                         <td>
                             <a href="~/Admin/Photos/Details/@item.Id">
-                                @Html.DisplayFor(modelItem => item.Title)
+                                @Html.DisplayFor(modelItem => item.Photo.Title)
                             </a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Description)
+                            @Html.DisplayFor(modelItem => item.Photo.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FileSize)
+                            @Html.DisplayFor(modelItem => item.Photo.FileSize)
                         </td>
                         <td>
-                            @(Html.DisplayFor(modelItem => item.Extension).ToString().ToLower())
+                            @(Html.DisplayFor(modelItem => item.Photo.Extension).ToString().ToLower())
                         </td>
                     </tr>
                 }

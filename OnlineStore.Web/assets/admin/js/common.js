@@ -263,10 +263,10 @@ function fnSelectProductPhotos(productId) {
     $('#modal-table').modal('show');
 }
 
-function fnRemovePhoto(photoId) {
+function fnRemoveTemporaryProductPhoto(photoId) {
     $.ajax(
     {
-        url: "/Photos/RemoveTemporaryPhoto",
+            url: "/Admin/ProductPhotos/RemoveTemporaryProductPhoto",
         type: "POST",
         data: { photoId: photoId },
         success: function (data) {
@@ -281,7 +281,7 @@ function fnRemovePhoto(photoId) {
 function fnRemoveProductPhoto(photoId) {
     $.ajax(
         {
-            url: "/Admin/Products/RemoveTemporaryProductPhoto",
+            url: "/Admin/ProductPhotos/RemoveProductPhoto",
             type: "POST",
             data: { photoId: photoId },
             success: function (data) {
@@ -293,10 +293,10 @@ function fnRemoveProductPhoto(photoId) {
         });
 }
 
-function fnSelectPhoto(photoId) {
+function fnAddTemporaryProductPhoto(photoId) {
     $.ajax(
     {
-        url: "/Photos/AddTemporaryPhoto",
+        url: "/Admin/ProductPhotos/AddTemporaryProductPhoto",
         type: "POST",
         data: { photoId: photoId },
         success: function (data) {
@@ -315,15 +315,30 @@ function fnSelectPhoto(photoId) {
     });
 }
 
-function fnSaveTemporaryProducts() {
+function fnSaveProductPhotos() {
     $(".btn-close-modal").trigger({ type: "click" });
     $.ajax(
         {
-            url: "/Admin/Products/_ProductPhotos",
+            url: "/Admin/ProductPhotos/_ProductPhotos",
             type: "POST",
             data: { },
             success: function (data) {
                 $("#product-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
+}
+
+function fnSetFeaturedProductPhoto(photoId) {
+    $.ajax(
+        {
+            url: "/Admin/ProductPhotos/SetFeaturedProductPhoto",
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+                
             },
             error: function (xhr, textStatus, error) {
                 toastr.error(error);

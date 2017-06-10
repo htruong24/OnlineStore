@@ -8,7 +8,7 @@ namespace OnlineStore.Services.BLL.Contracts
     {
         Product GetProduct(int? productId);
         void UpdateProduct(Product product);
-        void CreateProduct(Product product);
+        Product CreateProduct(Product product);
         void DeleteProduct(int? productId);
         List<Product> GetProducts();
     }

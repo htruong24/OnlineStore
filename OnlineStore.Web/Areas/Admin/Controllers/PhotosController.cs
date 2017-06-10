@@ -264,23 +264,13 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/_SelectedPhotos  => Selected Photos
         public ActionResult _Index_Popup()
         {
-            //var photos = new List<Photo>();
-            //var photo = new Photo
-            //{
-            //    Title = fileName,
-            //    Extension = Path.GetExtension(path + uploadPhoto.FileName),
-            //    FileSize = uploadPhoto.ContentLength
-            //};
-            //photos.Add(photo);
-            //Session[CommonConstants.PHOTO_SESSION] = photos;
+            var photos = (List<OnlineStore.Data.Entities.ProductPhoto>)Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION];
+            var productPhotos = (List<OnlineStore.Data.Entities.ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
 
-            var photos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION];
-            var productPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
-            var tempPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.TEMP_PHOTO_SESSION];
+            var tempPhotos = new List<ProductPhoto>();
+            tempPhotos.AddRange(productPhotos);
 
-            var demo = tempPhotos;
-
-            Session[CommonConstants.PHOTO_SESSION] = productPhotos;
+            Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = tempPhotos;
 
             return PartialView();
 
@@ -306,64 +296,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             TempData["SortingPagingInfo"] = _photoService.Pagination;
 
             return PartialView(photos);
-        }
-
-        // GET: Admin/_TemporaryPhotos  => Temporary Photos
-        public ActionResult _TemporaryPhotos()
-        {
-            return PartialView();
-        }
-
-        public ActionResult AddTemporaryPhoto(int? photoId)
-        {
-            var jsonModel = new JsonModel<bool>
-            {
-                ErrorCode = "-1",
-                ErrorMessage = "Ảnh đã được chọn",
-                Result = false
-            };
-
-            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
-
-            var productPhotos = (List<Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
-
-            var tempPhotos = (List<Photo>)Session[CommonConstants.TEMP_PHOTO_SESSION];
-
-            var existedPhoto = photos.Find(x => x.Id == photoId);
-
-            if (existedPhoto != null && existedPhoto.Status != PhotoStatus.DELETE)
-                return Json(jsonModel);
-
-            if (photoId != null && photoId != 0)
-            {
-                var photo = _photoService.GetPhoto(photoId);
-                photo.Status = PhotoStatus.NEW;
-                photos.Add(photo);
-                Session[CommonConstants.PHOTO_SESSION] = photos;
-            }
-
-            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
-        }
-
-        public ActionResult RemoveTemporaryPhoto(int? photoId)
-        {
-            var photos = (List<Photo>)Session[CommonConstants.PHOTO_SESSION];
-
-            var removedPhoto = photos.FirstOrDefault(p => p.Id == photoId);
-
-            if (removedPhoto != null)
-            {
-                //photos.Remove(removedPhoto);
-                removedPhoto.Status = PhotoStatus.DELETE;
-                Session[CommonConstants.PHOTO_SESSION] = photos;
-            }
-
-            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
-        }
-
-        public ActionResult GetTemporaryPhoto()
-        {
-            return PartialView("~/Areas/Admin/Views/Photos/_TemporaryPhotos.cshtml");
         }
 
         // ---------------- POPUP ----------------

@@ -44,11 +44,27 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
-        public void CreateProductPhoto(ProductPhoto productPhoto)
+        public void CreateProductPhoto(ProductPhoto productPhoto, int productId)
         {
             using (_unitOfWork)
             {
                 _unitOfWork.GetRepository<ProductPhoto>().Create(productPhoto);
+                _unitOfWork.Save();
+            }
+        }
+
+        public void CreateMultipleProductPhotos(List<ProductPhoto> productPhotos, int productId)
+        {
+            using (_unitOfWork)
+            {
+                foreach (var productPhoto in productPhotos)
+                {
+                    if (productPhoto.Status != PhotoStatus.DELETE)
+                    {
+                        productPhoto.ProductId = productId;
+                        _unitOfWork.GetRepository<ProductPhoto>().Create(productPhoto);
+                    }
+                }
                 _unitOfWork.Save();
             }
         }
@@ -62,66 +78,11 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
-        public List<ProductPhoto> GetProductPhotos()
+        public List<ProductPhoto> GetProductPhotos(int? productId)
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<ProductPhoto>().Get(null, null, "CreatedBy,ModifiedBy,Photo,Product");
-                
-                // Sorting
-                switch (Pagination.SortField)
-                {
-                    case "Id":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.Id) :
-                                 query.OrderByDescending(c => c.Id));
-                        break;
-                    case "OrderNumber":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.OrderNumber) :
-                                 query.OrderByDescending(c => c.OrderNumber));
-                        break;
-                    case "CreatedOn":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedOn) :
-                                 query.OrderByDescending(c => c.CreatedOn));
-                        break;
-                    case "CreatedBy":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.CreatedBy.Name) :
-                                 query.OrderByDescending(c => c.CreatedBy.Name));
-                        break;
-                    case "ModifiedOn":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ModifiedOn) :
-                                 query.OrderByDescending(c => c.ModifiedOn));
-                        break;
-                    case "ModifiedBy":
-                        query = (Pagination.SortDirection == "ascending" ?
-                                 query.OrderBy(c => c.ModifiedBy.Name) :
-                                 query.OrderByDescending(c => c.ModifiedBy.Name));
-                        break;
-                }
-
-                // Fitler
-                if (!string.IsNullOrEmpty(Filter?.Keyword))
-                {
-                    //query = query.Where(x => x.Name.Contains(Filter.Keyword)
-                    //                         || x.Description.Contains(Filter.Keyword));
-                }
-
-                // Paging
-                Pagination.TotalRows = query.Count();
-                Pagination.PageCount =
-                    (int)Math.Ceiling((double)query.Count() / Pagination.PageSize);
-
-                var pageIndex = Pagination.CurrentPage - 1;
-
-                query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
-
-                var categories = query.ToList();
-
-                return categories;
+                return _unitOfWork.GetRepository<ProductPhoto>().Get(null, null, "CreatedBy,ModifiedBy,Photo").Where(x => x.ProductId == productId).ToList();
             }
         }
     }

@@ -101,6 +101,15 @@
                     <dd>
                         @Html.DisplayFor(model => model.SupplierId)
                     </dd>
+
+                    <dt>
+                        Danh sách ảnh
+                    </dt>
+
+                    <dd>
+                        @Html.Action("_ProductPhotos_Details", "ProductPhotos", new { productId = Model.Id })
+                    </dd>
+
                 </dl>
             </div>
         </div>

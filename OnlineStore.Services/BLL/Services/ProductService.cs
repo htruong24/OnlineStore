@@ -43,12 +43,13 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
-        public void CreateProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             using (_unitOfWork)
             {
                 _unitOfWork.GetRepository<Product>().Create(product);
                 _unitOfWork.Save();
+                return product;
             }
         }
 

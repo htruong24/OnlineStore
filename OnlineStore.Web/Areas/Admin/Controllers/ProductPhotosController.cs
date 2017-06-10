@@ -10,16 +10,20 @@ using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
 using OnlineStore.Services.BLL.Services;
 using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.Models;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class ProductPhotosController : Controller
     {
         private readonly ProductPhotoService _productPhotoService;
+        private readonly PhotoService _photoService;
 
         public ProductPhotosController()
         {
             this._productPhotoService = new ProductPhotoService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._photoService = new PhotoService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -142,13 +146,128 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Product Photos
+
+        public ActionResult AddTemporaryProductPhoto(int? photoId)
         {
-            if (disposing)
+            var jsonModel = new JsonModel<bool>
             {
-                db.Dispose();
+                ErrorCode = "-1",
+                ErrorMessage = "Ảnh đã được chọn",
+                Result = false
+            };
+
+            var temporaryProductPhotos = (List<ProductPhoto>)Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION];
+
+            var existedPhoto = temporaryProductPhotos.Find(x => x.Photo.Id == photoId);
+            if (existedPhoto != null && existedPhoto.Status != PhotoStatus.DELETE)
+                return Json(jsonModel);
+
+            if (photoId != null && photoId != 0)
+            {
+                var photo = _photoService.GetPhoto(photoId);
+
+                var productPhoto = new ProductPhoto();
+                productPhoto.Status = PhotoStatus.NEW;
+                productPhoto.PhotoId = photo.Id;
+                productPhoto.Photo = photo;
+                temporaryProductPhotos.Add(productPhoto);
+
+                Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = temporaryProductPhotos;
             }
-            base.Dispose(disposing);
+
+            return PartialView("~/Areas/Admin/Views/ProductPhotos/_TemporaryProductPhotos.cshtml");
+        }
+
+        public ActionResult RemoveTemporaryProductPhoto(int? photoId)
+        {
+            var temporaryProductPhotos = (List<ProductPhoto>)Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION];
+
+            var removedProductPhoto = temporaryProductPhotos.FirstOrDefault(p => p.Photo.Id == photoId);
+
+            if (removedProductPhoto != null)
+            {
+                //photos.Remove(removedPhoto);
+                removedProductPhoto.Status = PhotoStatus.DELETE;
+                Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = temporaryProductPhotos;
+            }
+
+            return PartialView("~/Areas/Admin/Views/ProductPhotos/_TemporaryProductPhotos.cshtml");
+        }
+
+        public ActionResult _TemporaryProductPhotos()
+        {
+            return PartialView();
+        }
+
+        // Get Product photos
+
+        public ActionResult _ProductPhotos()
+        {
+            var productPhotos = (List<ProductPhoto>)Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION];
+
+            var tempProductPhotos = new List<ProductPhoto>();
+            tempProductPhotos.AddRange(productPhotos);
+
+            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = tempProductPhotos;
+
+            return PartialView();
+        }
+
+        public ActionResult _ProductPhotos_Details(int? productId)
+        {
+            var productPhotos = _productPhotoService.GetProductPhotos(productId);
+
+            ViewBag.ProductPhotos = productPhotos;
+
+            return PartialView();
+        }
+
+        public ActionResult SetFeaturedProductPhoto(int? photoId)
+        {
+            var productPhotos = (List<ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+
+            foreach(var productPhoto in productPhotos)
+            {
+                productPhoto.Featured = false;
+            }
+
+            var removedProductPhoto = productPhotos.FirstOrDefault(p => p.Id == photoId);
+
+            if (removedProductPhoto != null)
+            {
+                //photos.Remove(removedPhoto);
+                removedProductPhoto.Featured = true;
+
+                var tempPhotos = new List<ProductPhoto>();
+                tempPhotos.AddRange(productPhotos);
+
+                Session[CommonConstants.PRODUCT_PHOTO_SESSION] = tempPhotos;
+                Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = tempPhotos;
+            }
+
+            return PartialView("~/Areas/Admin/Views/ProductPhotos/_ProductPhotos.cshtml");
+        }
+
+        public ActionResult RemoveProductPhoto(int? photoId)
+        {
+            var productPhotos = (List<ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+
+            var removedProductPhoto = productPhotos.FirstOrDefault(p => p.Id == photoId);
+
+            if (removedProductPhoto != null)
+            {
+                //photos.Remove(removedPhoto);
+                removedProductPhoto.Status = PhotoStatus.DELETE;
+
+                var tempPhotos = new List<ProductPhoto>();
+                tempPhotos.AddRange(productPhotos);
+
+                Session[CommonConstants.PRODUCT_PHOTO_SESSION] = tempPhotos;
+                Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = tempPhotos;
+            }
+
+            return PartialView("~/Areas/Admin/Views/ProductPhotos/_ProductPhotos.cshtml");
         }
     }
 }

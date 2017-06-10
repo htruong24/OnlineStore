@@ -11,6 +11,7 @@ using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
 using OnlineStore.Data.Interfaces;
 using OnlineStore.Services.BLL.Services;
+using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
@@ -20,6 +21,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         private readonly BrandService _brandService;
         private readonly SubCategoryService _subCategoryService;
         private readonly UnitService _unitService;
+        private readonly PhotoService _photoService;
+        private readonly ProductPhotoService _productPhotoService;
 
         public ProductsController()
         {
@@ -27,6 +30,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._subCategoryService = new SubCategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._unitService = new UnitService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._photoService = new PhotoService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._productPhotoService = new ProductPhotoService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/Products
@@ -75,9 +80,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
-            Session[CommonConstants.PHOTO_SESSION] = new List<Photo>();
-            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = new List<Photo>();
-            Session[CommonConstants.TEMP_PHOTO_SESSION] = new List<Photo>();
+            Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = new List<ProductPhoto>();
+            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = new List<ProductPhoto>();
 
             ViewBag.SubCategories = GetSubCategories();
             ViewBag.Brands = GetBrands();
@@ -96,10 +100,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(product);
-                _productService.CreateProduct(product);
+                var savedProduct =_productService.CreateProduct(product);
+                var productPhotos = (List<ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+                foreach(var productPhoto in productPhotos)
+                {
+                    UpdateDefaultProperties(productPhoto);
+                }
+                _productPhotoService.CreateMultipleProductPhotos(productPhotos, savedProduct.Id);
                 return RedirectToAction("Index");
             }
-
             return View(product);
         }
 
@@ -184,6 +193,28 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             }
         }
 
+        public void UpdateDefaultProperties(ProductPhoto productPhoto)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (productPhoto.Id == 0)
+                {
+                    productPhoto.CreatedById = user.Id;
+                    productPhoto.CreatedOn = DateTime.Now;
+                    productPhoto.ModifiedById = user.Id;
+                    productPhoto.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    productPhoto.ModifiedById = user.Id;
+                    productPhoto.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
+
         // Get brands
         public List<Brand> GetBrands()
         {
@@ -219,34 +250,5 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             };
             return _unitService.GetUnits();
         }
-
-        // Get Product photos
-        public ActionResult _ProductPhotos()
-        {
-            var photos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PHOTO_SESSION];
-            var productPhotos = (List<OnlineStore.Data.Entities.Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
-
-            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = photos;
-
-            return PartialView();
-        }
-
-        public ActionResult RemoveTemporaryProductPhoto(int? photoId)
-        {
-            var photos = (List<Photo>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
-
-            var removedPhoto = photos.FirstOrDefault(p => p.Id == photoId);
-
-            if (removedPhoto != null)
-            {
-                //photos.Remove(removedPhoto);
-                removedPhoto.Status = PhotoStatus.DELETE;
-                Session[CommonConstants.PRODUCT_PHOTO_SESSION] = photos;
-                Session[CommonConstants.PHOTO_SESSION] = photos;
-            }
-
-            return PartialView("~/Areas/Admin/Views/Products/_ProductPhotos.cshtml");
-        }
-
     }
 }

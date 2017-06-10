@@ -8,6 +8,11 @@
     [Table("ProductPhoto")]
     public partial class ProductPhoto
     {
+        public ProductPhoto()
+        {
+            Product = new Product();
+        }
+
         public int Id { get; set; }
 
         public int? ProductId { get; set; }
@@ -43,10 +48,14 @@
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
 
+        [NotMapped]
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
         [ForeignKey("PhotoId")]
         public virtual Photo Photo { get; set; }
+
+        [NotMapped]
+        public string Status { get; set; }
     }
 }

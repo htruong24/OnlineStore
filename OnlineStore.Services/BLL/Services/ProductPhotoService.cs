@@ -44,6 +44,36 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
+        public void UpdateMultipleProductPhotos(List<ProductPhoto> productPhotos, int productId)
+        {
+            using (_unitOfWork)
+            {
+                foreach (var productPhoto in productPhotos)
+                {
+                    if (productPhoto.Status == PhotoStatus.DELETE)
+                    {
+                        if (productPhoto.Id > 0)
+                        {
+                            _unitOfWork.GetRepository<ProductPhoto>().Delete(productPhoto.Id);
+                        }
+                    }
+                    else
+                    {
+                        if(productPhoto.Id > 0)
+                        {
+                            _unitOfWork.GetRepository<ProductPhoto>().Update(productPhoto);
+                        }
+                        else
+                        {
+                            productPhoto.ProductId = productId;
+                            _unitOfWork.GetRepository<ProductPhoto>().Create(productPhoto);
+                        }
+                    }
+                }
+                _unitOfWork.Save();
+            }
+        }
+
         public void CreateProductPhoto(ProductPhoto productPhoto, int productId)
         {
             using (_unitOfWork)

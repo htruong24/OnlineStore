@@ -223,6 +223,19 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return PartialView();
         }
 
+        public ActionResult _ProductPhotos_Edit(int? productId)
+        {
+            var productPhotos = _productPhotoService.GetProductPhotos(productId);
+
+            Session[CommonConstants.PRODUCT_PHOTO_SESSION] = productPhotos;
+
+            Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = productPhotos;
+
+            ViewBag.ProductPhotos = productPhotos;
+
+            return PartialView();
+        }
+
         public ActionResult SetFeaturedProductPhoto(int? photoId)
         {
             var productPhotos = (List<ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];

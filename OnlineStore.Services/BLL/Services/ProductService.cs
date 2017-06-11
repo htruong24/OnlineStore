@@ -57,6 +57,17 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
+                var product = _unitOfWork.GetRepository<Data.Entities.Product>()
+                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,ProductPhotos")
+                        .FirstOrDefault();
+
+                var productPhotos = product.ProductPhotos.ToList();
+
+                for (var i = 0; i < productPhotos.Count; i++)
+                {
+                   _unitOfWork.GetRepository<ProductPhoto>().Delete(productPhotos[i].Id);
+                }
+
                 _unitOfWork.GetRepository<Product>().Delete(productId);
                 _unitOfWork.Save();
             }

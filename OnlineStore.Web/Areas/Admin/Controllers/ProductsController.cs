@@ -141,6 +141,13 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 UpdateDefaultProperties(product);
                 _productService.UpdateProduct(product);
+                var productPhotos = (List<ProductPhoto>)Session[CommonConstants.PRODUCT_PHOTO_SESSION];
+                foreach (var productPhoto in productPhotos)
+                {
+                    UpdateDefaultProperties(productPhoto);
+                }
+                _productPhotoService.UpdateMultipleProductPhotos(productPhotos, product.Id);
+
                 return RedirectToAction("Index");
             }
             return View(product);

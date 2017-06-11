@@ -27,7 +27,7 @@
                             <img height="60" width="60" src="~/@item.Photo.Url" title="@item.Photo.Title" />
                         </td>
                         <td>
-                            <a href="~/Admin/Photos/Details/@item.Id">
+                            <a href="~/Admin/Photos/Details/@item.PhotoId">
                                 @Html.DisplayFor(modelItem => item.Photo.Title)
                             </a>
                         </td>
@@ -35,11 +35,10 @@
                             @Html.DisplayFor(modelItem => item.Photo.Description)
                         </td>
                         <td class="center">
-                            @{ 
-                                var isChecked = item.Featured == true ? "checked" : "";
+                            @if (item.Featured == true)
+                            {
+                                <span class="label label-success"><i class="ace-icon fa fa-check-square-o icon-only"></i></span>
                             }
-
-                            <input type="radio" name="Feature" @isChecked onclick="javascript: fnSetFeaturedProductPhoto(@item.Id)" /> 
                         </td>
                     </tr>
                 }

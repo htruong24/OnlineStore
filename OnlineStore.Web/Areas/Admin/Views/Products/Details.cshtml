@@ -51,7 +51,16 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.Active)
+                        @{
+                            if (Model.Active == true)
+                            {
+                                <span class="label label-info arrowed">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger arrowed">Tạm dừng</span>
+                            }
+                        }
                     </dd>
 
                     <dt>

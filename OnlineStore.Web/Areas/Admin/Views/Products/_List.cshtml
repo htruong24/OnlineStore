@@ -77,7 +77,16 @@
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Active)
+                            @{
+                                if (item.Active == true)
+                                {
+                                    <span class="label label-info arrowed">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger arrowed">Tạm dừng</span>
+                                }
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Color)

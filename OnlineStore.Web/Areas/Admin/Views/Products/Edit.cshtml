@@ -52,13 +52,26 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.Active)
                     @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Kích hoạt</div>
+            <div class="col-md-10">
+                <label>
+                    @{
+                        var isActive = Model.Active == true ? "checked" : "";
+                    }
+                    <input type="checkbox" name="Active" class="ace ace-switch ace-switch-6" id="btnCheck" value="false" @isActive onclick="javascript: fnSetActive();" />
+                    <span class="lbl"></span>
+                </label>
             </div>
         </div>
 
@@ -137,3 +150,9 @@
 <div>
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
+
+<script>
+    function fnSetActive() {
+        $("#btnCheck").val($("#btnCheck").is(':checked'));
+    }
+</script>

@@ -497,5 +497,20 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             _photoService.DeletePhoto(id);
             return Json(jsonModel);
         }
+
+        // GET: Admin/Photos/_PreviewPhoto/5
+        public ActionResult _PreviewPhoto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var photo = _photoService.GetPhoto(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(photo);
+        }
     }
 }

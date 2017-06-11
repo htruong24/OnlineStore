@@ -1,0 +1,11 @@
+﻿<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>
+<script src="~/assets/admin/js/bootstrap.min.js"></script>
+@model OnlineStore.Data.Entities.Photo
+@{
+    ViewBag.Module = "Thư viện ảnh";
+    ViewBag.Title = "Chi tiết";
+}
+
+<div style="text-align:center;">
+    <img title="@Model.Title" style="width:100%; max-height:600px;" src="~/@Model.Url" />
+</div>

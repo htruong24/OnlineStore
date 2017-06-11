@@ -52,18 +52,8 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Active)
-                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-
         <div class="form-group">
-            <div class="control-label col-md-2">Kích hoạt</div>
+            <label class="control-label col-md-2">Kích hoạt</label>
             <div class="col-md-10">
                 <label>
                     @{
@@ -124,7 +114,7 @@
         </div>
 
         <div class="form-group">
-            <div class="control-label col-md-2">Chọn ảnh sản phẩm</div>
+            <label class="control-label col-md-2">Chọn ảnh sản phẩm</label>
             <div class="col-md-10">
                 <i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
                 <a href="#" class="green" onclick="javascript: fnSelectProductPhotos();">Chọn ảnh có sẵn</a>

@@ -345,3 +345,21 @@ function fnSetFeaturedProductPhoto(photoId) {
             }
         });
 }
+
+// Preview photo
+function fnPreviewPhoto(id) {
+    $("#preview-photo-modal-table #modal-title").text("Chi tiết ảnh");
+    var url = "/Admin/Photos/_PreviewPhoto";
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { id: id },
+        success: function (data) {
+            $("#preview-photo-modal-table .modal-body").html(data);
+            $('#preview-photo-modal-table').modal('show');
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+}

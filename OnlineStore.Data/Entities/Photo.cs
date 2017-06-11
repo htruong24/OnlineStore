@@ -10,18 +10,25 @@
     {
         public int Id { get; set; }
 
+
         [StringLength(50)]
+        [DisplayName("Tên")]
         public string Title { get; set; }
 
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [DisplayName("Đường dẫn")]
         public string Url { get; set; }
 
+        [DisplayName("Đường dẫn thumbnail")]
         public string ThumbnailUrl { get; set; }
 
+        [DisplayName("Kích thước")]
         public int? FileSize { get; set; }
 
         [StringLength(10)]
+        [DisplayName("Phần mở rộng")]
         public string Extension { get; set; }
 
         [DisplayName("Ngày tạo")]

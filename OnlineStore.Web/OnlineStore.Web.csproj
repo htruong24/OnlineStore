@@ -221,6 +221,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -450,6 +451,7 @@
     <Content Include="assets\web\images\flag-spain.png" />
     <Content Include="assets\web\images\flag-us.png" />
     <Content Include="assets\web\images\icon-mega.png" />
+    <Content Include="assets\web\images\flag-vi.png" />
     <Content Include="assets\web\images\logo.png" />
     <Content Include="assets\web\images\payment.png" />
     <Content Include="assets\web\images\products\1.jpg" />
@@ -873,6 +875,12 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Shared\_MainSearch.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

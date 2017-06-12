@@ -3,13 +3,13 @@
         <div class="container">
             <div class="topbar-left">
                 <ul class="topbar-nav clearfix">
-                    <li><span class="phone">0(123) 456 789</span></li>
-                    <li><span class="email">info@plazathemes.com</span></li>
+                    <li><a href="tel:01696911552"><span class="phone">0169 691 1552</span></a></li>
+                    <li><a href="mailto:hieu.truongquan@gmail.com"><span class="email">hieu.truongquan@gmail.com</span></a></li>
                 </ul>
             </div>
             <div class="topbar-right">
                 <ul class="topbar-nav clearfix">
-                    <li><a href="#" class="login">Login</a></li>
+                    <li><a href="#" class="login">Đăng nhập</a></li>
                     <li class="dropdown">
                         <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -21,14 +21,14 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">USD</a>
+                        <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">VNĐ</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#">Euro</a></li>
                             <li><a href="#">US Dollar</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="language dropdown-toggle" data-toggle="dropdown"><img src="~/assets/web/images/flag-us.png" alt=""> English</a>
+                        <a href="#" class="language dropdown-toggle" data-toggle="dropdown"><img src="~/assets/web/images/flag-vi.png" alt=""> Tiếng Việt</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="#"><img src="~/assets/web/images/flag-us.png" alt=""> &nbsp;English</a></li>
                             <li><a href="#"><img src="~/assets/web/images/flag-spain.png" alt=""> &nbsp;Spanish</a></li>
@@ -50,42 +50,30 @@
                             <div class="col-sm-4">
                                 <div class="box-container time">
                                     <div class="box-inner">
-                                        <h2>working time</h2>
-                                        <p>Mon- Sun: 8.00 - 18.00</p>
+                                        <h2>Thời gian làm việc</h2>
+                                        <p>Thứ hai - Chủ nhật: 8.00 - 18.00</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="box-container free-shipping">
                                     <div class="box-inner">
-                                        <h2>Free shipping</h2>
-                                        <p>On order over $199</p>
+                                        <h2>Giao hàng miễn phí</h2>
+                                        <p>Với đơn hàng từ 500.000 đ trở lên</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="box-container money-back">
                                     <div class="box-inner">
-                                        <h2>Money back 100%</h2>
-                                        <p>Within 30 Days after delivery</p>
+                                        <h2>Hoàn trả tiền 100%</h2>
+                                        <p>Trong vòng 30 ngày sau khi giao hàng</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div><!-- /.support-client -->
-                    <form class="form-search">
-                        <input type="text" class="input-text" name="q" id="search" placeholder="Search products...">
-                        <div class="dropdown">
-                            <button type="button" class="btn" data-toggle="dropdown">All category <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="#">Computer</a></li>
-                                <li><a href="#">Camera</a></li>
-                                <li><a href="#">Smart Phone</a></li>
-                                <li><a href="#">Electronic</a></li>
-                            </ul>
-                        </div>
-                        <button type="submit" class="btn btn-danger"><span class="fa fa-search"></span></button>
-                    </form>
+                    @Html.Partial("_MainSearch")
                     <div class="mini-cart">
                         <div class="top-cart-title">
                             <a href="cart.html" class="dropdown-toggle" data-toggle="dropdown">

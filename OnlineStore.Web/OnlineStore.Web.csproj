@@ -207,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenusController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModulesController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
@@ -303,6 +304,8 @@
     <Content Include="assets\admin\js\ace-extra.min.js" />
     <Content Include="assets\admin\js\ace.min.js" />
     <Content Include="assets\admin\js\additional-methods.min.js" />
+    <Content Include="assets\admin\js\app\menu\edit.js" />
+    <Content Include="assets\admin\js\app\menu\list.js" />
     <Content Include="assets\admin\js\app\photo\edit.js" />
     <Content Include="assets\admin\js\app\photo\list.js" />
     <Content Include="assets\admin\js\app\category\edit.js" />
@@ -683,6 +686,12 @@
     <Content Include="Areas\Admin\Views\ProductPhotos\_ProductPhotos_Details.cshtml" />
     <Content Include="Areas\Admin\Views\ProductPhotos\_ProductPhotos_Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Photos\_PreviewPhoto.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menus\_List.cshtml" />
     <None Include="Properties\PublishProfiles\OnlineStore.pubxml" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
@@ -881,6 +890,7 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\_CategorySelection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

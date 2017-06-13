@@ -30,5 +30,6 @@ namespace OnlineStore.Data.Infrastructure
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProductPhoto> ProductPhotoes { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
     }
 }

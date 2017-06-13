@@ -1,0 +1,10 @@
+﻿@{ 
+    var categories = (List<OnlineStore.Data.Entities.Category>)ViewBag.Categories;
+}
+
+<ul class="dropdown-menu dropdown-menu-right">
+    @foreach (var category in categories)
+    {
+        <li><a href="#">@category.Name</a></li>
+    }
+</ul>

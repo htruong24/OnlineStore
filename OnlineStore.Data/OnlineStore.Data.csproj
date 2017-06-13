@@ -60,6 +60,7 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Function.cs" />
     <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\Module.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderDetail.cs" />

@@ -8,11 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Controllers
 {
     public class CategoriesController : Controller
     {
+        private readonly CategoryService _categoryService;
+
+        public CategoriesController()
+        {
+            this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
+
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Categories
@@ -123,6 +133,21 @@ namespace OnlineStore.Web.Controllers
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // Get Sub Categories
+        public ActionResult _CategorySelection()
+        {
+            _categoryService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+
+            ViewBag.Categories = _categoryService.GetCategories();
+
+            return PartialView();
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,10 @@
+﻿@{
+    var menus = (List<OnlineStore.Data.Entities.Menu>)ViewBag.Menus;
+}
+
+<ul class="menu clearfix visible-lg visible-md">
+    @foreach (var menu in menus)
+    {
+        <li title="@menu.Description"><a href="@menu.Url">@menu.Title</a></li>
+    }
+</ul>

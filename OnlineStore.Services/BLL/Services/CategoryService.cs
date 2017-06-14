@@ -66,7 +66,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Category>().Get(null, null, "CreatedBy,ModifiedBy");
+                var query = _unitOfWork.GetRepository<Category>().Get(null, null, "CreatedBy,ModifiedBy,SubCategories");
                 
                 // Sorting
                 switch (Pagination.SortField)

@@ -140,7 +140,22 @@ namespace OnlineStore.Web.Controllers
         {
             _categoryService.Pagination = new SortingPagingInfo
             {
-                SortField = "Name",
+                SortField = "OrderNumber",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+
+            ViewBag.Categories = _categoryService.GetCategories();
+
+            return PartialView();
+        }
+
+        // Main Menu
+        public ActionResult _MainMenu()
+        {
+            _categoryService.Pagination = new SortingPagingInfo
+            {
+                SortField = "OrderNumber",
                 SortDirection = "ascending",
                 PageSize = 0
             };

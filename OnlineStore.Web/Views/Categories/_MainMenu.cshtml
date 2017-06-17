@@ -8,7 +8,7 @@
         if (category.SubCategories.Count > 0)
         {
             <li>
-                <a href="/Categories/@category.Id">@category.Name</a>
+                <a href="/Categories/Details/@category.Id">@category.Name</a>
                 @if (category.SubCategories.Count > 0)
                 {
                     <div class="wrap-popup column1">
@@ -17,7 +17,7 @@
                             <ul class="nav">
                                 @foreach (var subCategory in category.SubCategories)
                                 {
-                                    <li><a href="/Subcategories/@subCategory.Id">@subCategory.Name</a></li>
+                                    <li><a href="/Subcategories/Details/@subCategory.Id">@subCategory.Name</a></li>
                                 }
                             </ul>
                         </div>
@@ -28,7 +28,7 @@
         else
         {
              <li class="nosub">
-                 <a href="/Categories/@category.Id">@category.Name</a>
+                 <a href="/Categories/Details/@category.Id">@category.Name</a>
             </li>
         }
     }

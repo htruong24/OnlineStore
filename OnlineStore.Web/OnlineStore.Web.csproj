@@ -229,6 +229,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
@@ -894,6 +895,17 @@
     <Content Include="Views\Categories\_CategorySelection.cshtml" />
     <Content Include="Views\Menus\_TopMenu.cshtml" />
     <Content Include="Views\Categories\_MainMenu.cshtml" />
+    <Content Include="Views\SubCategories\Create.cshtml" />
+    <Content Include="Views\SubCategories\Delete.cshtml" />
+    <Content Include="Views\SubCategories\Details.cshtml" />
+    <Content Include="Views\SubCategories\Edit.cshtml" />
+    <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\SubCategories\_List.cshtml" />
+    <Content Include="Views\SubCategories\_Grid.cshtml" />
+    <Content Include="Views\Categories\_List.cshtml" />
+    <Content Include="Views\Categories\_Gird.cshtml" />
+    <Content Include="Views\Shared\_Layout_Group.cshtml" />
+    <Content Include="Views\Shared\_Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

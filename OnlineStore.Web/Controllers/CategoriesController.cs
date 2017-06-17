@@ -26,7 +26,7 @@ namespace OnlineStore.Web.Controllers
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var categories = db.Categories.Include(c => c.CreatedBy).Include(c => c.ModifiedBy);
             return View(categories.ToList());

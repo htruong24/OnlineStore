@@ -1,12 +1,68 @@
-﻿<div class="featuredproductslider-container">
-    <div class="title-group1"><h2>Featured</h2></div>
+﻿<div class="row">
+    <div class="title-group1"><h2>Sản phẩm bán chạy</h2></div>
+    @for (int i = 0; i < 10; i++)
+    {
+        <div class="products-grid col-sm-3 col-xs-6">
+            <div class="images-container">
+                <a class="product-image" title="Accumsan elit " href="#"><img alt="Accumsan elit " src="~/assets/web/images/products/19.jpg"></a>
+            </div>
+            <div class="des-container">
+                <h2 class="product-name"><a title="Accumsan elit " href="#">Máy ảnh</a></h2>
+                <div class="price-box">
+                    <p class="special-price">
+                        <span class="price">200.000 đ</span>
+                    </p>
+                    <p class="old-price">
+                        <span class="price">190.000 đ</span>
+                    </p>
+                </div>
+            </div>
+            <div class="cart-container">
+                <button type="submit" class="btn btn-danger btn-cart">Mua</button>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .products-grid{
+        border-bottom:none;
+    }
+
+    .products-grid .images-container{
+        width: 100%;
+        border:none;
+        padding: 0px 10px 0px 10px;
+        text-align:center;
+    }
+
+    .product-image img
+    {
+        max-height: 150px;
+        height:100%;
+        width:auto;
+    }
+
+    .title-group1{
+        margin-bottom:none;
+    }
+
+    .cart-container
+    {
+        width: 100%;
+        text-align:center;
+    }
+</style>
+
+@*<div class="featuredproductslider-container">
+    <div class="title-group1"><h2>Sản phẩm bán chạy</h2></div>
     <div id="featured-products" class="owl-container">
         <div class="owl">
             <div class='productslider-item item'>
                 <div class="item-inner">
                     <div class="images-container">
                         <div class="product_icon">
-                            <div class='new-icon'><span>new</span></div>
+                            <div class='new-icon'><span>Mới</span></div>
                         </div>
                         <a href="#" title="Nunc facilisis" class="product-image">
                             <img src="~/assets/web/images/products/8.jpg" alt="Nunc facilisis" />
@@ -277,4 +333,4 @@
             </div>
         </div>
     </div>
-</div><!-- /.featuredproductslider-container -->
+</div>*@

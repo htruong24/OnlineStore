@@ -13,11 +13,21 @@
         @*@Html.Partial("_Advertisement")*@
         <!-- /advertisement -->
         <div class="row">
-            <div class="col-sm-3 col-left">
-                @Html.Action("_HotDeals", "Home")
+            <div class="col-sm-3 col-left" style="padding-top:150px;">
+                @*@Html.Action("_HotDeals", "Home")
                 @Html.Action("_SpecialOffer", "Home")
                 @Html.Action("_LatestNews", "Home")
-                @Html.Action("_ClientsSay", "Home")
+                @Html.Action("_ClientsSay", "Home")*@
+                @Html.Action("_Brand", "Home")
+                <div class="banner-left">
+                    <a href="#"><img src="~/assets/web/images/ads/ads-01.jpg" alt=""></a>
+                    <div class="banner-content">
+                        <h1>sale up to</h1>
+                        <h2>20% off</h2>
+                        <p>on selected products</p>
+                        <a href="#">buy now</a>
+                    </div>
+                </div>
             </div><!-- /.col-left -->
             <div class="col-sm-9 col-right">
                 @Html.Action("_FeaturedProduct", "Home")
@@ -184,6 +194,10 @@
             pagination: false,
             scrollPerPage: true
         });
+    });
+
+    $(document).ready(function () {
+        $("div.mega-menu-category").show();
     });
 </script>
 

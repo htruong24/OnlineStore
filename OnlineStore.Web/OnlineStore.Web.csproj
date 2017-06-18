@@ -923,6 +923,7 @@
     <Content Include="Views\Home\_LatestNews.cshtml" />
     <Content Include="Views\Home\_ClientsSay.cshtml" />
     <Content Include="Views\Home\_MainSlider.cshtml" />
+    <Content Include="Views\Home\_Brand.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

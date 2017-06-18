@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using OnlineStore.Common;
+using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
 using System.Web.Mvc;
 
 namespace OnlineStore.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly BrandService _brandService;
+
+        public HomeController()
+        {
+            this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -87,6 +94,21 @@ namespace OnlineStore.Web.Controllers
         public ActionResult _LatestNews()
         {
             return PartialView();
+        }
+
+        // Brand
+        public ActionResult _Brand()
+        {
+            _brandService.Pagination = new SortingPagingInfo
+            {
+                SortField = "OrderNumber",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+
+            var brands = _brandService.GetBrands();
+
+            return PartialView(brands);
         }
     }
 }

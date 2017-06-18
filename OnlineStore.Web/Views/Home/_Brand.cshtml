@@ -1,0 +1,19 @@
+﻿@model List<OnlineStore.Data.Entities.Brand>
+
+<div class="block block-layered-nav">
+    <div class="block-content">
+        <div id="narrow-by-list">
+            <div class="layered layered-Manufacturer">
+                <h2>THƯƠNG HIỆU</h2>
+                <div class="content-shopby">
+                    <ol>
+                        @foreach (var brand in Model)
+                        {
+                            <li><a href="/Brands/Details/@brand.Id">@brand.Name</a></li>
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /sort -->

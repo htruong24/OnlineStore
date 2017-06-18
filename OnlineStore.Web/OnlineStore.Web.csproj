@@ -222,6 +222,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -906,6 +907,22 @@
     <Content Include="Views\Categories\_Gird.cshtml" />
     <Content Include="Views\Shared\_Layout_Group.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />
+    <Content Include="Views\Shared\_Advertisement.cshtml" />
+    <Content Include="Views\Home\_TopCategories.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\Home\_PopularBrands.cshtml" />
+    <Content Include="Views\Home\_Random_BestSeller_HotSale.cshtml" />
+    <Content Include="Views\Home\_HotDeals.cshtml" />
+    <Content Include="Views\Home\_FeaturedProduct.cshtml" />
+    <Content Include="Views\Home\_NewArrivalProduct.cshtml" />
+    <Content Include="Views\Home\_SpecialOffer.cshtml" />
+    <Content Include="Views\Home\_LatestNews.cshtml" />
+    <Content Include="Views\Home\_ClientsSay.cshtml" />
+    <Content Include="Views\Home\_MainSlider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

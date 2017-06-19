@@ -924,6 +924,10 @@
     <Content Include="Views\Home\_ClientsSay.cshtml" />
     <Content Include="Views\Home\_MainSlider.cshtml" />
     <Content Include="Views\Home\_Brand.cshtml" />
+    <Content Include="Views\Home\_RecommendedProduct.cshtml" />
+    <Content Include="Views\Home\_TopFashion.cshtml" />
+    <Content Include="Views\Home\_TopFood.cshtml" />
+    <Content Include="Views\Home\_TopBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

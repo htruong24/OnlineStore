@@ -57,7 +57,16 @@ namespace OnlineStore.Web.Controllers
         // Popular Brands
         public ActionResult _PopularBrands()
         {
-            return PartialView();
+            _brandService.Pagination = new SortingPagingInfo
+            {
+                SortField = "OrderNumber",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+
+            var brands = _brandService.GetBrands();
+
+            return PartialView(brands);
         }
 
         // Random - Best Seller - Hot Sale
@@ -109,6 +118,30 @@ namespace OnlineStore.Web.Controllers
             var brands = _brandService.GetBrands();
 
             return PartialView(brands);
+        }
+
+        // Recommended Product
+        public ActionResult _RecommendedProduct()
+        {
+            return PartialView();
+        }
+
+        // Top Fashion
+        public ActionResult _TopFashion()
+        {
+            return PartialView();
+        }
+
+        // Top Food
+        public ActionResult _TopFood()
+        {
+            return PartialView();
+        }
+
+        // Top Books
+        public ActionResult _TopBooks()
+        {
+            return PartialView();
         }
     }
 }

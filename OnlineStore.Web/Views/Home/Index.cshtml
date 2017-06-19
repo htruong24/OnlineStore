@@ -47,17 +47,28 @@
                         </div>
                     </div>
                 </div>*@
-                @Html.Action("_Random_BestSeller_HotSale", "Home")
+                @*@Html.Action("_Random_BestSeller_HotSale", "Home")*@
             </div><!-- /.col-right -->
         </div>
+        <!--  Recommended Products-->
+        @Html.Action("_RecommendedProduct", "Home")
+
+        <!--  Recommended Products-->
+        @Html.Action("_TopFashion", "Home")
+
+        <!--  Recommended Products-->
+        @Html.Action("_TopFood", "Home")
+
+        <!--  Recommended Products-->
+        @Html.Action("_TopBooks", "Home")
+
+        <!-- Top Categories-->
+        @*@Html.Action("_TopCategories", "Home")*@
+
+        <!-- Popular Brands -->
+        @Html.Action("_PopularBrands", "Home")
     </div>
 </div><!-- /.main -->
-
-<!-- Top Categories-->
-@Html.Action("_TopCategories", "Home")
-
-<!-- Popular Brands -->
-@Html.Action("_PopularBrands", "Home")
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="~/assets/web/js/bootstrap.min.js"></script>

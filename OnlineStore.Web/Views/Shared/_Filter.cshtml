@@ -1,26 +1,13 @@
 ﻿<div class="col-sm-3 col-left">
     <div class="block block-layered-nav">
-        <div class="block-title">
+        @*<div class="block-title">
             <strong><span>Sort By</span></strong>
-        </div>
+        </div>*@
         <div class="block-content">
-            <p class="block-subtitle">Shopping Options</p>
+            @*<p class="block-subtitle">Shopping Options</p>*@
             <div id="narrow-by-list">
-                <div class="layered layered-Category">
-                    <h2>Category</h2>
-                    <div class="content-shopby">
-                        <ol>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Bags</a></li>
-                            <li><a href="#">Shoes</a></li>
-                            <li><a href="#">HandBag</a></li>
-                            <li><a href="#">Fashion</a></li>
-                        </ol>
-                    </div>
-                </div>
                 <div class="layered layered-price">
-                    <h2>Price</h2>
+                    <h2>Mức giá</h2>
                     <div class="content-shopby">
                         <div id="slider-range"></div>
                         <div id="search_pr">
@@ -31,7 +18,7 @@
                     </div>
                 </div>
                 <div class="layered layered-Manufacturer">
-                    <h2>Manufacturer</h2>
+                    <h2>Thương hiệu</h2>
                     <div class="content-shopby">
                         <ol>
                             <li><a href="#">Aliquam</a></li>
@@ -43,28 +30,41 @@
                     </div>
                 </div>
                 <div class="layered layered-Color">
-                    <h2>Color</h2>
+                    <h2>Màu sắc</h2>
                     <div class="content-shopby">
                         <ol>
-                            <li><a href="#">Red</a></li>
-                            <li><a href="#">Orange</a></li>
-                            <li><a href="#">Blue</a></li>
-                            <li><a href="#">Black</a></li>
-                            <li><a href="#">Green</a></li>
+                            <li><a href="#">Xanh</a></li>
+                            <li><a href="#">Trắng</a></li>
+                            <li><a href="#">Đỏ</a></li>
+                            <li><a href="#">Vàng</a></li>
+                            <li><a href="#">Đen</a></li>
                         </ol>
                     </div>
                 </div>
+                @*<div class="layered layered-Category">
+                    <h2>Category</h2>
+                    <div class="content-shopby">
+                        <ol>
+                            <li><a href="#">Clothing</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Bags</a></li>
+                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">HandBag</a></li>
+                            <li><a href="#">Fashion</a></li>
+                        </ol>
+                    </div>
+                </div>*@
             </div>
         </div>
     </div><!-- /sort -->
-    <div class="block block-list">
+    @*<div class="block block-list">
         <div class="block-title">
             <strong><span>Compare</span></strong>
         </div>
         <div class="block-content">
             <p class="empty">You have no items to compare.</p>
         </div>
-    </div><!-- /.compare -->
+    </div>*@<!-- /.compare -->
     @*<div class="banner-left">
         <a href="#"><img src="images/ads/ads-01.jpg" alt=""></a>
         <div class="banner-content">
@@ -74,5 +74,5 @@
             <a href="#">buy now</a>
         </div>
     </div>*@
-    @Html.Action("_SpecialOffer", "Home")
+    @*@Html.Action("_SpecialOffer", "Home")*@
 </div><!-- /.col-left -->

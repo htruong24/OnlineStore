@@ -173,5 +173,17 @@ namespace OnlineStore.Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // Grid
+        public ActionResult _Grid()
+        {
+            return PartialView();
+        }
+
+        // List
+        public ActionResult _List()
+        {
+            return PartialView();
+        }
     }
 }

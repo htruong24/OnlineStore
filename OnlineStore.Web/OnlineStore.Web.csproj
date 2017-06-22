@@ -929,6 +929,7 @@
     <Content Include="Views\Home\_TopFashion.cshtml" />
     <Content Include="Views\Home\_TopFood.cshtml" />
     <Content Include="Views\Home\_TopBooks.cshtml" />
+    <Content Include="Views\Shared\_Breadcrumbs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

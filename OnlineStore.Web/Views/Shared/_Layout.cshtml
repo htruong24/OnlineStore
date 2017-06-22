@@ -18,7 +18,9 @@
     <link href="~/assets/web/css/nivo-slider.css" rel="stylesheet">
     <link href="~/assets/web/css/animate.css" rel="stylesheet">
     <link href="~/assets/web/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/assets/web/css/cloud-zoom.css" rel="stylesheet" />
     <link href="~/assets/web/css/style.css" rel="stylesheet">
+    <link href="~/assets/web/css/jquery.bxslider.css" rel="stylesheet" />
     <link href="~/assets/web/css/responsive.css" rel="stylesheet">
     <link href="~/assets/web/css/jquery-ui.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
@@ -31,6 +33,8 @@
     <![endif]-->
     <script src="~/assets/web/js/jquery-1.11.0.min.js"></script>
     <script src="~/assets/web/js/jquery-ui.min.js"></script>
+    <script src="~/assets/web/js/cloud-zoom.js"></script>
+    <script src="~/assets/web/js/jquery.bxslider.min.js"></script>
 </head>
 @*<body>
         @Html.Action("TopMenu", "Menu")
@@ -54,6 +58,7 @@
 
 <body>
     @Html.Partial("_Header")
+    @Html.Partial("_Breadcrumbs")
     @RenderBody()
     @Html.Partial("_Footer")
 </body>

@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div class="container">
+        <div class="checkout">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="checkout-step">
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix" data-toggle="collapse" data-target="#checkout-one">
+                                <span class="number">1</span>
+                                <h2>PHƯƠNG THỨC ĐẶT HÀNG</h2>
+                            </div>
+                            <div id="checkout-one" class="collapse in">
+                                <div class="step-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h4>Đặt hàng như khách vãng lai hay đăng kí mới</h4>
+                                            <div class="line2 mtb20"></div>
+                                            <div class="form-group">
+                                                <label class="control-label">Hãy đăng kí mới để thuận tiện về sau:</label>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option2" name="register-type"> Đăng kí
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <p class="text-primary">Đăng kí và tiết kiệm thời gian!</p>
+                                            <p class="text-primary">Đăng kí với chúng tôi để thuận tiện về sau:</p>
+                                            <ul class="list-unstyled">
+                                                <li>+  Đặt hàng nhanh chóng và dễ dàng</li>
+                                                <li>+  Dễ dàng xem lịch sử giao hàng và trạng thái</li>
+                                            </ul>
+                                            <br>
+                                            <p><button type="button" class="btn btn-danger btn-md btn-continue fwb">TIẾP TỤC</button></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h4>Đăng nhập</h4>
+                                            <div class="line2 mtb20"></div>
+                                            <div class="form-group">
+                                                <label class="control-label">Đã đăng kí?</label>
+                                                <p class="text-muted">Xin đăng nhập bên dưới:</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Địa chỉ email *</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Mật khẩu *</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <p><a href="#">Quên mật khẩu của bạn?</a></p>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger btn-md btn-login fwb">ĐĂNG NHẬP</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-two">
+                                <span class="number">2</span>
+                                <h2>THÔNG TIN THANH TOÁN</h2>
+                            </div>
+                            <div id="checkout-two" class="collapse">
+                                <div class="step-content">
+                                    Thông tin thanh toán
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
+                                <span class="number">3</span>
+                                <h2>THÔNG TIN GIAO HÀNG</h2>
+                            </div>
+                            <div id="checkout-three" class="collapse">
+                                <div class="step-content">
+                                    Thông tin giao hàng
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-four">
+                                <span class="number">4</span>
+                                <h2>PHƯƠNG THỨC GIAO HÀNG</h2>
+                            </div>
+                            <div id="checkout-four" class="collapse">
+                                <div class="step-content">
+                                    Phương thức giao hàng
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-five">
+                                <span class="number">5</span>
+                                <h2>THÔNG TIN THANH TOÁN</h2>
+                            </div>
+                            <div id="checkout-five" class="collapse">
+                                <div class="step-content">
+                                    Thông tin thanh toán
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-six">
+                                <span class="number">6</span>
+                                <h2>XEM LẠI ĐƠN HÀNG</h2>
+                            </div>
+                            <div id="checkout-six" class="collapse">
+                                <div class="step-content">
+                                    Xem lại đơn hàng
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="block block-layered-nav">
+                        <div class="block-content">
+                            <h2>Quy trình thanh toán</h2>
+                            <ol class="checkout-progress">
+                                <li><span class="fa fa-play-circle-o"></span> Đại chỉ thanh toán</li>
+                                <li><span class="fa fa-play-circle-o"></span> Địa chỉ giao hàng</li>
+                                <li><span class="fa fa-play-circle-o"></span> Phương thức giao hàng</li>
+                                <li><span class="fa fa-play-circle-o"></span> Phương thức thanh toán</li>
+                            </ol>
+                        </div>
+                    </div><!-- /.block - Comments -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

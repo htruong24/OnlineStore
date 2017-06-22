@@ -106,7 +106,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 {
                     UpdateDefaultProperties(productPhoto);
                 }
-                _productPhotoService.CreateMultipleProductPhotos(productPhotos, savedProduct.Id);
+                _productPhotoService.CreateProductPhoto(productPhotos[0], savedProduct.Id);
                 return RedirectToAction("Index");
             }
             return View(product);

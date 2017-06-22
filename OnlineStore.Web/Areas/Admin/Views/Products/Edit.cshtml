@@ -58,8 +58,9 @@
                 <label>
                     @{
                         var isActive = Model.Active == true ? "checked" : "";
+                        var isActiveValue = Model.Active == true ? "true" : "false";
                     }
-                    <input type="checkbox" name="Active" class="ace ace-switch ace-switch-6" id="btnCheck" value="false" @isActive onclick="javascript: fnSetActive();" />
+                    <input type="checkbox" name="Active" class="ace ace-switch ace-switch-6" id="btnCheck" value="@isActiveValue" @isActive onclick="javascript: fnSetActive();" />
                     <span class="lbl"></span>
                 </label>
             </div>

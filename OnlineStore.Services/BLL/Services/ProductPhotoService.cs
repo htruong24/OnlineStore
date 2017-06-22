@@ -78,6 +78,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
+                productPhoto.ProductId = productId;
                 _unitOfWork.GetRepository<ProductPhoto>().Create(productPhoto);
                 _unitOfWork.Save();
             }

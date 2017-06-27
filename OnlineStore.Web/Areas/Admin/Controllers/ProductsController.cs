@@ -106,7 +106,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 {
                     UpdateDefaultProperties(productPhoto);
                 }
-                _productPhotoService.CreateProductPhoto(productPhotos[0], savedProduct.Id);
+                _productPhotoService.CreateMultipleProductPhotos(productPhotos, savedProduct.Id);
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -212,12 +212,16 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     productPhoto.CreatedOn = DateTime.Now;
                     productPhoto.ModifiedById = user.Id;
                     productPhoto.ModifiedOn = DateTime.Now;
+                    productPhoto.Photo.CreatedBy = null;
+                    productPhoto.Photo.ModifiedBy = null;
                 }
                 // Update
                 else
                 {
                     productPhoto.ModifiedById = user.Id;
                     productPhoto.ModifiedOn = DateTime.Now;
+                    productPhoto.Photo.CreatedBy = null;
+                    productPhoto.Photo.ModifiedBy = null;
                 }
             }
         }

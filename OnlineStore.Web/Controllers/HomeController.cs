@@ -9,10 +9,12 @@ namespace OnlineStore.Web.Controllers
     public class HomeController : BaseController
     {
         private readonly BrandService _brandService;
+        private readonly ProductService _productService;
 
         public HomeController()
         {
             this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         public ActionResult Index()
@@ -52,7 +54,16 @@ namespace OnlineStore.Web.Controllers
         // New Arrival Product
         public ActionResult _NewArrivalProduct()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 0
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // Top Categories

@@ -1,6 +1,38 @@
-﻿<div class="row">
+﻿@model List<OnlineStore.Data.Entities.Product>
+
+<div class="row">
     <div class="title-group1"><h2>Sản phẩm mới</h2></div>
-    @for (int i = 0; i < 8; i++)
+    @foreach (var product in Model)
+    {
+        var featuredImage = product.ProductPhotos.Where(x => x.Featured == true).FirstOrDefault();
+        var featuredImageUrl = "~/assets/web/images/products/21.jpg";
+        if (featuredImage != null)
+        {
+            featuredImageUrl = featuredImage.Photo.Url;
+        }
+
+        <div class="products-grid col-sm-3 col-xs-6">
+            <div class="images-container">
+                <a class="product-image" title="@product.Name" href="#"><img alt="@product.Name" src="~/@featuredImageUrl"></a>
+            </div>
+            <div class="des-container">
+                <h2 class="product-name"><a title="@product.Name" href="#">@product.Name</a></h2>
+                <div class="price-box">
+                    <p class="special-price">
+                        <span class="price">200.000 đ</span>
+                    </p>
+                    <p class="old-price">
+                        <span class="price">190.000 đ</span>
+                    </p>
+                </div>
+            </div>
+            <div class="cart-container">
+                <button type="submit" class="btn btn-danger btn-cart">Mua</button>
+            </div>
+        </div>
+    }
+
+    @*@for (int i = 0; i < 8; i++)
     {
         <div class="products-grid col-sm-3 col-xs-6">
             <div class="images-container">
@@ -21,7 +53,8 @@
                 <button type="submit" class="btn btn-danger btn-cart">Mua</button>
             </div>
         </div>
-    }
+    }*@
+
 </div>
 
 <style>

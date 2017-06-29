@@ -67,6 +67,7 @@
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductPhoto.cs" />
+    <Compile Include="Entities\RecommendProduct.cs" />
     <Compile Include="Entities\Shipment.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\StatusGroup.cs" />

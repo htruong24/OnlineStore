@@ -58,7 +58,7 @@ namespace OnlineStore.Web.Controllers
             {
                 SortField = "CreatedOn",
                 SortDirection = "descending",
-                PageSize = 0
+                PageSize = 8
             };
 
             var products = _productService.GetProducts();

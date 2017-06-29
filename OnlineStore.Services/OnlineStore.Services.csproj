@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BL\UserBL.cs" />
+    <Compile Include="BLL\Contracts\IRecommendProductService.cs" />
     <Compile Include="BLL\Contracts\IMenuService.cs" />
     <Compile Include="BLL\Contracts\IProductPhotoService.cs" />
     <Compile Include="BLL\Contracts\IPhotoService.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="BLL\Contracts\IUserService.cs" />
     <Compile Include="BLL\Services\AccountService.cs" />
     <Compile Include="BLL\Contracts\IAccountService.cs" />
+    <Compile Include="BLL\Services\RecommendProductService.cs" />
     <Compile Include="BLL\Services\MenuService.cs" />
     <Compile Include="BLL\Services\ProductPhotoService.cs" />
     <Compile Include="BLL\Services\PhotoService.cs" />

@@ -231,6 +231,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RecommendProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
@@ -936,6 +937,11 @@
     <Content Include="Views\ShoppingCart\Checkout.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\RecommendProducts\Create.cshtml" />
+    <Content Include="Views\RecommendProducts\Delete.cshtml" />
+    <Content Include="Views\RecommendProducts\Details.cshtml" />
+    <Content Include="Views\RecommendProducts\Edit.cshtml" />
+    <Content Include="Views\RecommendProducts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -106,9 +106,23 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Special Offer
-        public ActionResult _SpecialOffer()
+        public ActionResult _SpecialOffer(int? subCategoryId)
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            _productService.Filter = new DefaultFilter()
+            {
+                SubCategoryId = 3
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // Main Slider
@@ -156,19 +170,61 @@ namespace OnlineStore.Web.Controllers
         // Top Fashion
         public ActionResult _TopFashion()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            _productService.Filter = new DefaultFilter()
+            {
+                CategoryId = 1
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // Top Food
         public ActionResult _TopFood()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            _productService.Filter = new DefaultFilter()
+            {
+                CategoryId = 2
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // Top Books
         public ActionResult _TopBooks()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            _productService.Filter = new DefaultFilter()
+            {
+                CategoryId = 3
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
     }
 }

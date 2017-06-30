@@ -15,6 +15,7 @@
     @Html.HiddenFor(x => x.CreatedById)
     @Html.HiddenFor(x => x.ModifiedOn)
     @Html.HiddenFor(x => x.ModifiedById)
+    @Html.HiddenFor(x => x.NumberOfClicks)
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

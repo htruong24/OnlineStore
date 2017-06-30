@@ -34,7 +34,7 @@ namespace OnlineStore.Web.Controllers
             return View(categories.ToList());
         }
 
-        // GET: List of photos
+        // GET: List of products
         public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)
@@ -50,10 +50,10 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Pagination = info;
             _productService.Filter = filter;
-            var photos = _productService.GetProducts();
+            var products = _productService.GetProducts();
             TempData["SortingPagingInfo"] = _productService.Pagination;
 
-            return PartialView(photos);
+            return PartialView(products);
         }
 
         // GET: Categories/Details/5

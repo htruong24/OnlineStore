@@ -46,5 +46,9 @@
         [ForeignKey("ModifiedById")]
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
+
+        [NotMapped]
+        [ForeignKey("ProductId")]
+        public virtual Order Order { get; set; }
     }
 }

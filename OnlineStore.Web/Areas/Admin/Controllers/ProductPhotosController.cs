@@ -147,7 +147,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         }
 
         // Product Photos
-
         public ActionResult AddTemporaryProductPhoto(int? photoId)
         {
             var jsonModel = new JsonModel<bool>

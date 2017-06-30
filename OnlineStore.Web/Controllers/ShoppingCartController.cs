@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineStore.Common;
+using OnlineStore.Data.Entities;
+using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Controllers
 {
@@ -20,76 +23,41 @@ namespace OnlineStore.Web.Controllers
             return View();
         }
 
-        // GET: ShoppingCart/Details/5
-        public ActionResult Details(int id)
+        // Shoppping Cart
+        public ActionResult AddCartItem(OrderDetail orderDetail)
         {
-            return View();
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+
+            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+            cartItems.Add(orderDetail);
+
+            return Json(jsonModel);
         }
 
-        // GET: ShoppingCart/Create
-        public ActionResult Create()
+        public ActionResult RemoveCartItem(int? orderDetailId)
         {
-            return View();
-        }
-
-        // POST: ShoppingCart/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var jsonModel = new JsonModel<bool>
             {
-                // TODO: Add insert logic here
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+
+            var removedCartItem = cartItems.FirstOrDefault(p => p.Id == orderDetailId);
+            if (removedCartItem != null)
             {
-                return View();
+                cartItems.Remove(removedCartItem);
+                Session[CommonConstants.TEMPORARY_PRODUCT_PHOTO_SESSION] = removedCartItem;
             }
-        }
 
-        // GET: ShoppingCart/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ShoppingCart/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ShoppingCart/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ShoppingCart/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(jsonModel);
         }
     }
 }

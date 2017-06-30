@@ -897,7 +897,6 @@
     <Content Include="Views\SubCategories\Details.cshtml" />
     <Content Include="Views\SubCategories\Index.cshtml" />
     <Content Include="Views\SubCategories\_List.cshtml" />
-    <Content Include="Views\SubCategories\_Grid.cshtml" />
     <Content Include="Views\Categories\_List.cshtml" />
     <Content Include="Views\Shared\_Layout_Group.cshtml" />
     <Content Include="Views\Shared\_Filter.cshtml" />

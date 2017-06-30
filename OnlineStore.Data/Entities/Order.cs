@@ -9,6 +9,11 @@
     [Table("Order")]
     public partial class Order
     {
+        public Order()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -43,5 +48,7 @@
         [ForeignKey("ModifiedById")]
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

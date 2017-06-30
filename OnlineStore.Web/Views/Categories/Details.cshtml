@@ -1,4 +1,4 @@
-﻿@*<script src="~/assets/admin/js/jquery.2.1.1.min.js"></script>*@
+﻿@model List<OnlineStore.Data.Entities.Product>
 
 <div class="main">
     <div class="container">
@@ -44,8 +44,14 @@
                         </div>
                     </div><!--- /.pager -->
                 </div><!-- /.toolbar -->
-                <div id="viewmode-grid">@Html.Action("_Grid", "Categories")</div>
-                <div id="viewmode-list" style="display:none;">@Html.Action("_List", "Categories")</div>
+
+                <div id="search-container">
+                    @Html.Action("_List", "Categories", new { id = ViewBag.ProductId })
+                </div>
+
+                @*<div id="viewmode-grid">@Html.Action("_Grid", "Categories")</div>
+                <div id="viewmode-list" style="display: none;">@Html.Action("_List", "Categories")</div>*@
+
                 <div class="toolbar">
                     <div class="sorter">
                         <p class="view-mode">

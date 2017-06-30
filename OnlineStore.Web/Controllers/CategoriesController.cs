@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Controllers
     public class CategoriesController : Controller
     {
         private readonly CategoryService _categoryService;
+        private readonly ProductService _productService;
 
         public CategoriesController()
         {
             this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -32,107 +34,33 @@ namespace OnlineStore.Web.Controllers
             return View(categories.ToList());
         }
 
+        // GET: List of photos
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Title",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _productService.Pagination = info;
+            _productService.Filter = filter;
+            var photos = _productService.GetProducts();
+            TempData["SortingPagingInfo"] = _productService.Pagination;
+
+            return PartialView(photos);
+        }
+
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        // GET: Categories/Create
-        public ActionResult Create()
-        {
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username");
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username");
+            ViewBag.ProductId = id;
             return View();
-        }
-
-        // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,OrderNumber,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", category.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", category.ModifiedById);
-            return View(category);
-        }
-
-        // GET: Categories/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", category.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", category.ModifiedById);
-            return View(category);
-        }
-
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,OrderNumber,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", category.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", category.ModifiedById);
-            return View(category);
-        }
-
-        // GET: Categories/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
-        }
-
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         // Get Sub Categories
@@ -162,27 +90,6 @@ namespace OnlineStore.Web.Controllers
 
             ViewBag.Categories = _categoryService.GetCategories();
 
-            return PartialView();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        // Grid
-        public ActionResult _Grid()
-        {
-            return PartialView();
-        }
-
-        // List
-        public ActionResult _List()
-        {
             return PartialView();
         }
     }

@@ -77,7 +77,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Product>().Get(null, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,ProductPhotos,ProductPhotos.Photo");
+                var query = _unitOfWork.GetRepository<Product>().Get(null, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,SubCategory.Category,ProductPhotos,ProductPhotos.Photo");
                 
                 // Sorting
                 switch (Pagination.SortField)
@@ -125,11 +125,23 @@ namespace OnlineStore.Services.BLL.Services
                 }
 
                 // Fitler
-                if (!string.IsNullOrEmpty(Filter?.Keyword))
+                if (Filter != null)
                 {
-                    query = query.Where(x => x.Name.Contains(Filter.Keyword)
-                                             || x.ShortDescrition.Contains(Filter.Keyword)
-                                             || x.Description.Contains(Filter.Keyword));
+                    // Filter by keyword
+                    if (!string.IsNullOrEmpty(Filter.Keyword))
+                    {
+                        query = query.Where(x => x.Name.Contains(Filter.Keyword)
+                                                 || x.ShortDescrition.Contains(Filter.Keyword)
+                                                 || x.Description.Contains(Filter.Keyword));
+                    }
+                    if (Filter.CategoryId > 0)
+                    {
+                        query = query.Where(x => x.SubCategory.Category.Id == Filter.CategoryId);
+                    }
+                    if (Filter.SubCategoryId > 0)
+                    {
+                        query = query.Where(x => x.SubCategory.Id == Filter.SubCategoryId);
+                    }
                 }
 
                 // Paging

@@ -8,12 +8,22 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly ProductService _productService;
+
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
+
+        public ProductsController()
+        {
+            this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: Products
         public ActionResult Index()
@@ -133,6 +143,24 @@ namespace OnlineStore.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Update number of clicks
+        [HttpPost]
+        public ActionResult UpdateNumberOfClicks(int productId)
+        {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+
+            var product = _productService.GetProduct(productId);
+            product.NumberOfClicks = product.NumberOfClicks + 1;
+            _productService.UpdateProduct(product);
+           
+            return Json(jsonModel);
         }
     }
 }

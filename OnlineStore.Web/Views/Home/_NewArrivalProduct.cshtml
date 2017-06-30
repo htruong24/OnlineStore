@@ -1,10 +1,12 @@
 ﻿@model List<OnlineStore.Data.Entities.Product>
 
 <div class="row">
-    <div class="title-group1"><h2>Sản phẩm mới</h2></div>
+    <div class="title-group1">
+        <h2>Sản phẩm mới</h2>
+    </div>
     @foreach (var product in Model)
     {
-        var featuredImage = product.ProductPhotos.Where(x => x.Featured == true).FirstOrDefault();
+        var featuredImage = product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
         var featuredImageUrl = "~/assets/web/images/products/21.jpg";
         if (featuredImage != null)
         {
@@ -13,10 +15,11 @@
 
         <div class="products-grid col-sm-3 col-xs-6">
             <div class="images-container">
-                <a class="product-image" title="@product.Name" href="#"><img alt="@product.Name" src="~/@featuredImageUrl"></a>
+                <a class="product-image" title="@product.Name" href="/Products/Details/@product.Id" onclick="fnUpdateNumberOfClicks(@product.Id);"><img alt="@product.Name" src="~/@featuredImageUrl"></a>
             </div>
             <div class="des-container">
-                <h2 class="product-name"><a title="@product.Name" href="#">@product.Name</a></h2>
+                <h2 class="product-name"><a title="@product.Name" href="/Products/Details/@product.Id" onclick="fnUpdateNumberOfClicks(@product.Id);">@product.Name</a>
+                </h2>
                 <div class="price-box">
                     <p class="special-price">
                         <span class="price">200.000 đ</span>
@@ -62,12 +65,12 @@
         border-bottom: none;
     }
 
-        .products-grid .images-container {
-            width: 100%;
-            border: none;
-            padding: 0px 10px 0px 10px;
-            text-align: center;
-        }
+    .products-grid .images-container {
+        width: 100%;
+        border: none;
+        padding: 0px 10px 0px 10px;
+        text-align: center;
+    }
 
     .product-image img {
         max-height: 150px;
@@ -76,7 +79,7 @@
     }
 
     .title-group1 {
-        margin-bottom: none;
+        margin-bottom: 0px;
     }
 
     .cart-container {

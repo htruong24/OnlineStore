@@ -7,6 +7,7 @@ namespace OnlineStore.Services.BLL.Contracts
     public interface IRecommendProductService
     {
         RecommendProduct GetRecommendProduct(int? recommendProductId);
+        RecommendProduct GetRecommendProductByProductId(int? productId);
         void UpdateRecommendProduct(RecommendProduct recommendProduct);
         void CreateRecommendProduct(RecommendProduct recommendProduct);
         void DeleteRecommendProduct(int? recommendProductId);

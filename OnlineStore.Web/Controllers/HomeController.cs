@@ -141,7 +141,16 @@ namespace OnlineStore.Web.Controllers
         // Recommended Product
         public ActionResult _RecommendedProduct()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "NumberOfClicks",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // Top Fashion

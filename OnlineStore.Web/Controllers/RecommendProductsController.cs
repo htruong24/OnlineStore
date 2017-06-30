@@ -8,14 +8,22 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Controllers
 {
     public class RecommendProductsController : Controller
     {
-
+        private readonly RecommendProductService _recommendProductService;
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
+
+        public RecommendProductsController()
+        {
+            this._recommendProductService = new RecommendProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: RecommendProducts
         public ActionResult Index()
@@ -125,6 +133,36 @@ namespace OnlineStore.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Update recommend product
+        [HttpPost]
+        public ActionResult UpdateRecommendProduct(int productId)
+        {
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+
+            var recommendProduct = _recommendProductService.GetRecommendProduct(productId);
+
+            if (recommendProduct != null)
+            {
+                recommendProduct.NumberOfClicks = recommendProduct.NumberOfClicks + 1;
+                _recommendProductService.UpdateRecommendProduct(recommendProduct);
+            }
+            else
+            {
+                recommendProduct = new RecommendProduct
+                {
+                    ProductId = productId,
+                    NumberOfClicks = 1
+                };
+                _recommendProductService.CreateRecommendProduct(recommendProduct);
+            }
+            return Json(jsonModel);
         }
     }
 }

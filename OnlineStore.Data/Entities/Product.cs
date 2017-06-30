@@ -88,6 +88,8 @@
         [DisplayName("Đơn vị tính")]
         public virtual Unit Unit { get; set; }
 
+        public int? NumberOfClicks { get; set; }
+
         public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }

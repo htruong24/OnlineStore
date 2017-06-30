@@ -33,6 +33,17 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
+        public RecommendProduct GetRecommendProductByProductId(int? productId)
+        {
+            using (_unitOfWork)
+            {
+                var recommendProduct = _unitOfWork.GetRepository<Data.Entities.RecommendProduct>()
+                        .Get(x => x.ProductId == productId, null, "")
+                        .FirstOrDefault();
+                return recommendProduct;
+            }
+        }
+
         public void UpdateRecommendProduct(RecommendProduct recommendProduct)
         {
             using (_unitOfWork)

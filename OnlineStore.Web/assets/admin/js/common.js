@@ -280,17 +280,17 @@ function fnRemoveTemporaryProductPhoto(photoId) {
 
 function fnRemoveProductPhoto(photoId) {
     $.ajax(
-        {
-            url: "/Admin/ProductPhotos/RemoveProductPhoto",
-            type: "POST",
-            data: { photoId: photoId },
-            success: function (data) {
-                $("#product-photos").html(data);
-            },
-            error: function (xhr, textStatus, error) {
-                toastr.error(error);
-            }
-        });
+    {
+        url: "/Admin/ProductPhotos/RemoveProductPhoto",
+        type: "POST",
+        data: { photoId: photoId },
+        success: function (data) {
+            $("#product-photos").html(data);
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
 }
 
 function fnAddTemporaryProductPhoto(photoId) {
@@ -318,32 +318,32 @@ function fnAddTemporaryProductPhoto(photoId) {
 function fnSaveProductPhotos() {
     $(".btn-close-modal").trigger({ type: "click" });
     $.ajax(
-        {
-            url: "/Admin/ProductPhotos/_ProductPhotos",
-            type: "POST",
-            data: { },
-            success: function (data) {
-                $("#product-photos").html(data);
-            },
-            error: function (xhr, textStatus, error) {
-                toastr.error(error);
-            }
-        });
+    {
+        url: "/Admin/ProductPhotos/_ProductPhotos",
+        type: "POST",
+        data: { },
+        success: function (data) {
+            $("#product-photos").html(data);
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
 }
 
 function fnSetFeaturedProductPhoto(photoId) {
     $.ajax(
-        {
-            url: "/Admin/ProductPhotos/SetFeaturedProductPhoto",
-            type: "POST",
-            data: { photoId: photoId },
-            success: function (data) {
+    {
+        url: "/Admin/ProductPhotos/SetFeaturedProductPhoto",
+        type: "POST",
+        data: { photoId: photoId },
+        success: function (data) {
                 
-            },
-            error: function (xhr, textStatus, error) {
-                toastr.error(error);
-            }
-        });
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
 }
 
 // Preview photo

@@ -110,3 +110,20 @@ function CountBack(secs,iid,j) {
 	 if (CountActive)
 		setTimeout(function(){CountBack((secs+CountStepper),iid,j)}, SetTimeOutPeriod);
 }
+
+// --------- CUSTOM FUNCTIONS -----------
+
+function fnUpdateNumberOfClicks(productId) {
+    $.ajax(
+    {
+        url: "/Products/UpdateNumberOfClicks",
+        type: "POST",
+        data: { productId: productId },
+        success: function (data) {
+
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+        }
+    });
+}

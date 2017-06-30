@@ -11,5 +11,7 @@ namespace OnlineStore.Common
         public string Keyword { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public int CategoryId { get; set; }
+        public int SubCategoryId { get; set; }
     }
 }

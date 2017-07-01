@@ -931,6 +931,7 @@
     <Content Include="Views\RecommendProducts\Details.cshtml" />
     <Content Include="Views\RecommendProducts\Edit.cshtml" />
     <Content Include="Views\RecommendProducts\Index.cshtml" />
+    <Content Include="Views\Common\_Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -122,6 +122,11 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.ModifiedBy.Name) :
                                  query.OrderByDescending(c => c.ModifiedBy.Name));
                         break;
+                    case "NumberOfClicks":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.NumberOfClicks) :
+                                 query.OrderByDescending(c => c.NumberOfClicks));
+                        break;
                 }
 
                 // Fitler

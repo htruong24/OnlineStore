@@ -54,13 +54,13 @@
         @Html.Action("_RecommendedProduct", "Home")
 
         <!--  Recommended Products-->
-        @Html.Action("_TopFashion", "Home")
+        @Html.Action("_TopFashion", "Home", new { categoryId = 4 })
 
         <!--  Recommended Products-->
-        @Html.Action("_TopFood", "Home")
+        @Html.Action("_TopFood", "Home", new { categoryId = 11 })
 
         <!--  Recommended Products-->
-        @Html.Action("_TopBooks", "Home")
+        @Html.Action("_TopBooks", "Home", new { categoryId = 7 })
 
         <!-- Top Categories-->
         @*@Html.Action("_TopCategories", "Home")*@

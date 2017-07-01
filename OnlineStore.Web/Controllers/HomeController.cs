@@ -106,7 +106,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Special Offer
-        public ActionResult _SpecialOffer(int? subCategoryId)
+        public ActionResult _SpecialOffer(int subCategoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -117,7 +117,7 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Filter = new DefaultFilter()
             {
-                SubCategoryId = 3
+                SubCategoryId = subCategoryId
             };
 
             var products = _productService.GetProducts();
@@ -168,7 +168,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Top Fashion
-        public ActionResult _TopFashion()
+        public ActionResult _TopFashion(int categoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -179,7 +179,7 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Filter = new DefaultFilter()
             {
-                CategoryId = 1
+                CategoryId = categoryId
             };
 
             var products = _productService.GetProducts();
@@ -188,7 +188,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Top Food
-        public ActionResult _TopFood()
+        public ActionResult _TopFood(int categoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -199,7 +199,7 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Filter = new DefaultFilter()
             {
-                CategoryId = 2
+                CategoryId = categoryId
             };
 
             var products = _productService.GetProducts();
@@ -208,7 +208,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Top Books
-        public ActionResult _TopBooks()
+        public ActionResult _TopBooks(int categoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -219,7 +219,7 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Filter = new DefaultFilter()
             {
-                CategoryId = 3
+                CategoryId = categoryId
             };
 
             var products = _productService.GetProducts();

@@ -13,11 +13,20 @@
                     <div class="row">
                         <div class="col-sm-5">
                             <div class="product-img-box">
-                                <p class="product-image">
-                                    <a href="/assets/web/images/products/1.jpg" class="cloud-zoom" id="ma-zoom1">
-                                        <img src="/assets/web/images/products/1.jpg" alt="Fusce aliquam" title="Fusce aliquam" />
-                                    </a>
-                                </p>
+                                @{
+                                    var featuredImage = Model.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                    var featuredImageUrl = "~/assets/web/images/products/21.jpg";
+                                    if (featuredImage != null)
+                                    {
+                                        featuredImageUrl = featuredImage.Photo.Url;
+                                    }
+
+                                    <p class="product-image">
+                                        <a href="~/@featuredImageUrl" class="cloud-zoom" id="ma-zoom1">
+                                            <img src="~/@featuredImageUrl" alt="Fusce aliquam" title="Fusce aliquam" />
+                                        </a>
+                                    </p>
+                                }
                                 <div class="more-views thumbnail-container">
                                     <ul class="bxslider">
                                         @foreach (var productPhoto in Model.ProductPhotos.OrderBy(x => x.Featured))
@@ -110,7 +119,7 @@
             </div><!-- /.col-right -->
             <div class="col-sm-3 col-left">
                 <!--  Related Products-->
-                @Html.Action("_SpecialOffer", "Home", new { subCategoryId = 1 })
+                @Html.Action("_SpecialOffer", "Home", new { subCategoryId = Model.SubCategoryId })
 
                 <div class="banner-left">
                     <a href="#"><img src="/assets/web/images/ads/ads-01.jpg" alt=""></a>

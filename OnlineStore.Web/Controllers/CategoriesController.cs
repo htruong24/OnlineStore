@@ -59,7 +59,7 @@ namespace OnlineStore.Web.Controllers
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
-            ViewBag.ProductId = id;
+            ViewBag.CategoryId = id;
             return View();
         }
 

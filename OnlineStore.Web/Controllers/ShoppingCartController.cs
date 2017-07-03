@@ -97,6 +97,10 @@ namespace OnlineStore.Web.Controllers
         // Top Categories
         public ActionResult _MiniCart()
         {
+            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+
+            ViewBag.TotalAmount = cartItems.Count > 0 ? cartItems.Sum(x => x.Quantity*x.Price) : 0;
+
             return PartialView();
         }
     }

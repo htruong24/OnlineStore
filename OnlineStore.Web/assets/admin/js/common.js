@@ -141,10 +141,16 @@ function fnBack() {
     parent.history.back();
 }
 
-// Search
+// Search admin
 function fnSearch() {
     var postData = $("#frmSearch").serializeArray();
     fnLoadContent("search-container", "Admin/" + $("#hdControllerName").val() + "/" + "_List", postData);
+}
+
+// Search web
+function fnSearchWeb() {
+    var postData = $("#frmSearch").serializeArray();
+    fnLoadContent("search-container", $("#hdControllerName").val() + "/" + "_List", postData);
 }
 
 // Damage

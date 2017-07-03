@@ -410,6 +410,7 @@
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\common\js\multifile\jquery.MultiFile.js" />
     <Content Include="assets\common\js\multifile\jQuery.MultiFile.min.js" />
+    <Content Include="assets\common\js\paging\paging_web.js" />
     <Content Include="assets\common\js\paging\paging_popup.js" />
     <Content Include="assets\common\js\paging\paging.js" />
     <Content Include="assets\web\css\animate.css" />
@@ -932,6 +933,7 @@
     <Content Include="Views\RecommendProducts\Edit.cshtml" />
     <Content Include="Views\RecommendProducts\Index.cshtml" />
     <Content Include="Views\Common\_Paging.cshtml" />
+    <Content Include="Views\ShoppingCart\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

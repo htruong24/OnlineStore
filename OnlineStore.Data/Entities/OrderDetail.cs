@@ -48,7 +48,11 @@
         public virtual User ModifiedBy { get; set; }
 
         [NotMapped]
-        [ForeignKey("ProductId")]
+        [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
+
+        [NotMapped]
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
     }
 }

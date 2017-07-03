@@ -5,12 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Common;
 using OnlineStore.Data.Entities;
+using OnlineStore.Data.Infrastructure;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Services.BLL.Services;
 using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        private readonly OrderDetailService _orderDetailService;
+
+        public ShoppingCartController()
+        {
+            this._orderDetailService = new OrderDetailService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
+
         // GET: ShoppingCart
         public ActionResult Index()
         {
@@ -21,6 +31,14 @@ namespace OnlineStore.Web.Controllers
         public ActionResult Checkout()
         {
             return View();
+        }
+
+        // GET: List of products
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+
+            return PartialView(cartItems);
         }
 
         // Shoppping Cart

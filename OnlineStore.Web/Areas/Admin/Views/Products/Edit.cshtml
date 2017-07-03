@@ -1,5 +1,6 @@
 ﻿<script src="~/assets/admin/js/app/product/edit.js"></script>
 
+@using OnlineStore.Data.Entities
 @model OnlineStore.Data.Entities.Product
 @{
     ViewBag.Module = "Sản phẩm";
@@ -54,14 +55,28 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Kích hoạt</label>
+            @Html.LabelFor(model => model.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label>
                     @{
-                        var isActive = Model.Active == true ? "checked" : "";
-                        var isActiveValue = Model.Active == true ? "true" : "false";
+                        var isFeatured = Model.Featured == true ? "checked" : "";
+                        var isFeaturedValue = Model.Featured == true ? "true" : "false";
                     }
-                    <input type="checkbox" name="Active" class="ace ace-switch ace-switch-6" id="btnCheck" value="@isActiveValue" @isActive onclick="javascript: fnSetActive();" />
+                    <input type="checkbox" name="Featured" class="ace ace-switch ace-switch-6" id="btnCheckFeatured" value="@isFeaturedValue" @isFeatured onclick="javascript: fnSetFeatured();" />
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Publish, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <label>
+                    @{
+                        var isPublish = Model.Publish == true ? "checked" : "";
+                        var isPublishValue = Model.Publish == true ? "true" : "false";
+                    }
+                    <input type="checkbox" name="Publish" class="ace ace-switch ace-switch-6" id="btnCheckPublish" value="@isPublishValue" @isPublish onclick="javascript: fnSetPublish();"/>
                     <span class="lbl"></span>
                 </label>
             </div>
@@ -86,8 +101,24 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SubCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SubCategoryId, new SelectList(ViewBag.SubCategories, "Id", "Name"), "--- Chọn danh mục ---", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+                @*@Html.DropDownListFor(model => model.SubCategoryId, new SelectList(ViewBag.SubCategories, "Id", "Name"), "--- Chọn danh mục ---", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })*@
+                <select class="slSubCategory form-control">
+                    @{
+                        var subCategories = (List<SubCategory>)ViewBag.SubCategories;
+                        var categories = subCategories.GroupBy(x => new { x.Category.Id, x.Category.Name });
+
+                        foreach (var category in categories)
+                        {
+                            <optgroup label="@category.Key.Name">
+                                @foreach (var subCategory in category)
+                                {
+                                    <option value="@subCategory.Id">@subCategory.Name</option>
+                                }
+                            </optgroup>
+                        }
+                    }
+                </select>
             </div>
         </div>
 
@@ -144,7 +175,18 @@
 </div>
 
 <script>
-    function fnSetActive() {
-        $("#btnCheck").val($("#btnCheck").is(':checked'));
+    $(document).ready(function() {
+        $(".slSubCategory").select2({
+            placeholder: "Chọn một danh mục",
+            allowClear: true
+        });
+    });
+
+    function fnSetFeatured() {
+        $("#btnCheckFeatured").val($("#btnCheckFeatured").is(':checked'));
+    }
+
+    function fnSetPublished() {
+        $("#btnCheckPublish").val($("#btnCheckPublish").is(':checked'));
     }
 </script>

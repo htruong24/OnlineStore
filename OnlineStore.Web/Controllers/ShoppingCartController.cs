@@ -15,10 +15,12 @@ namespace OnlineStore.Web.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly OrderDetailService _orderDetailService;
+        private readonly ProductService _productService;
 
         public ShoppingCartController()
         {
             this._orderDetailService = new OrderDetailService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: ShoppingCart
@@ -42,7 +44,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Shoppping Cart
-        public ActionResult AddCartItem(OrderDetail orderDetail)
+        public ActionResult AddCartItem(int? productId)
         {
             var jsonModel = new JsonModel<bool>
             {
@@ -52,7 +54,21 @@ namespace OnlineStore.Web.Controllers
             };
 
             var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
-            cartItems.Add(orderDetail);
+
+            var newCartItem = cartItems.Find(x => x.ProductId == productId);
+
+            if (newCartItem != null)
+            {
+                newCartItem.Quantity += 1;
+            }
+            else
+            {
+                newCartItem = new OrderDetail();
+                newCartItem.ProductId = productId;
+                newCartItem.Quantity = 1;
+                newCartItem.Price = _productService.GetProduct((productId)).Price;
+                cartItems.Add(newCartItem);
+            }
 
             return Json(jsonModel);
         }

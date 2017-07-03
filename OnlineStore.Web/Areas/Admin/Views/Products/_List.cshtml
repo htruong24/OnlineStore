@@ -28,8 +28,11 @@
                     <th class="sorting sortable" data-sortfield="Price">
                         @Html.DisplayNameFor(model => model.Price)
                     </th>
-                    <th class="sorting sortable" data-sortfield="Active">
-                        @Html.DisplayNameFor(model => model.Active)
+                    <th class="sorting sortable" data-sortfield="Featured">
+                        @Html.DisplayNameFor(model => model.Featured)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Publish">
+                        @Html.DisplayNameFor(model => model.Publish)
                     </th>
                     <th class="sorting sortable" data-sortfield="Color">
                         @Html.DisplayNameFor(model => model.Color)
@@ -78,13 +81,25 @@
                         </td>
                         <td>
                             @{
-                                if (item.Active == true)
+                                if (item.Featured == true)
                                 {
-                                    <span class="label label-info arrowed">Hoạt động</span>
+                                    <span class="label label-info arrowed">Nổi bật</span>
                                 }
                                 else
                                 {
-                                    <span class="label label-danger arrowed">Tạm dừng</span>
+                                    <span class="label label-danger arrowed">Bình thường</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{
+                                if (item.Publish == true)
+                                {
+                                    <span class="label label-info arrowed">Hiển thị</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger arrowed">Ẩn</span>
                                 }
                             }
                         </td>

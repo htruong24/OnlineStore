@@ -30,8 +30,11 @@
         [DisplayName("Giá")]
         public decimal? Price { get; set; }
 
-        [DisplayName("Hoạt động")]
-        public bool? Active { get; set; }
+        [DisplayName("Hiển thị sản phẩm")]
+        public bool? Publish { get; set; }
+
+        [DisplayName("Sản phẩm nổi bật")]
+        public bool? Featured { get; set; }
 
         [StringLength(50)]
         [DisplayName("Màu")]

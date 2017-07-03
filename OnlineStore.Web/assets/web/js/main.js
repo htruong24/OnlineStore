@@ -1,4 +1,4 @@
-$(function(){
+﻿$(function(){
 	/* Mega Menu */
 	$('.mega-menu-title').click(function(){
 		if($('.mega-menu-category').is(':visible')){
@@ -114,16 +114,34 @@ function CountBack(secs,iid,j) {
 // --------- CUSTOM FUNCTIONS -----------
 
 function fnUpdateNumberOfClicks(productId) {
+    //$.ajax(
+    //{
+    //    url: "/Products/UpdateNumberOfClicks",
+    //    type: "POST",
+    //    data: { productId: productId },
+    //    success: function (data) {
+
+    //    },
+    //    error: function (xhr, textStatus, error) {
+    //        toastr.error(error);
+    //    }
+    //});
+}
+
+// --------- SHOPPING CART -----------
+function fnAddCartItem(productId) {
     $.ajax(
     {
-        url: "/Products/UpdateNumberOfClicks",
+        url: "/ShoppingCart/AddCartItem",
         type: "POST",
         data: { productId: productId },
         success: function (data) {
-
+            toastr.success("Thêm sản phẩm vào giỏ hàng thành công!");
         },
         error: function (xhr, textStatus, error) {
             toastr.error(error);
         }
     });
 }
+
+

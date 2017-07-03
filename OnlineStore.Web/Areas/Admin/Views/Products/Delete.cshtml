@@ -51,18 +51,35 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.Active)
+                        @Html.DisplayNameFor(model => model.Featured)
                     </dt>
 
                     <dd>
                         @{
-                            if (Model.Active == true)
+                            if (Model.Featured == true)
                             {
-                                <span class="label label-info arrowed">Hoạt động</span>
+                                <span class="label label-info arrowed">Nổi bật</span>
                             }
                             else
                             {
-                                <span class="label label-danger arrowed">Tạm dừng</span>
+                                <span class="label label-danger arrowed">Bình thường</span>
+                            }
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Publish)
+                    </dt>
+
+                    <dd>
+                        @{
+                            if (Model.Publish == true)
+                            {
+                                <span class="label label-info arrowed">Hiển thị</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger arrowed">Ẩn</span>
                             }
                         }
                     </dd>

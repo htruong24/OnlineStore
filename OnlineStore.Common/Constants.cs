@@ -23,6 +23,11 @@ namespace OnlineStore.Common
         public static string PRODUCT = "Product";
     }
 
+    public class Placeholder
+    {
+        public static string PRODUCT = "~/assets/common/images/placeholder/no_image.gif";
+    }
+
     public class AutomaticTable
     {
         public static string USER = "USER";

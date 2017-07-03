@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class SuppliersController : Controller
+    public class SuppliersController : BaseController
     {
         private readonly SupplierService _supplierService;
 

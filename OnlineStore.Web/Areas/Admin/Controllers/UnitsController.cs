@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class UnitsController : Controller
+    public class UnitsController : BaseController
     {
         private readonly UnitService _unitService;
 

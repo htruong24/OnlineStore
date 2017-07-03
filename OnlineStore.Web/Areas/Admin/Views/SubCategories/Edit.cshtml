@@ -2,6 +2,7 @@
 <link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/assets/admin/js/app/subcategory/edit.js"></script>
 
+@using OnlineStore.Data.Entities
 @model OnlineStore.Data.Entities.SubCategory
 @{
     ViewBag.Module = "Danh mục con";
@@ -49,8 +50,25 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "Id", "Name"), "--- Chọn danh mục ---", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                @*@Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Categories, "Id", "Name"), "--- Chọn danh mục ---", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })*@
+                <select name="CategoryId" class="slCategory form-control">
+                    @{
+                        var categories = (List<Category>)ViewBag.Categories;
+
+                        foreach (var category in categories)
+                        {
+                            if (category.Id == Model.CategoryId)
+                            {
+                                <option value="@category.Id" selected="selected">@category.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        }
+                    }
+                </select>
             </div>
         </div>
 
@@ -69,5 +87,15 @@
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
 
+<script>
+    $(document).ready(function() {
+        $(".slCategory").select2({
+            placeholder: "Chọn một danh mục",
+            allowClear: true
+        });
 
+        //$('slSubCategory').val('US'); // Select the option with a value of 'US'
+        //$('slSubCategory').trigger('change'); // Notify any JS components that the value changed
+    });
+</script>
 

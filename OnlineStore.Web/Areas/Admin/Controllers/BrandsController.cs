@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class BrandsController : Controller
+    public class BrandsController : BaseController
     {
         private readonly BrandService _brandService;
 

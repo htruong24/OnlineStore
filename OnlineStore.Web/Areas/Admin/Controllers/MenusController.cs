@@ -14,7 +14,7 @@ using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class MenusController : Controller
+    public class MenusController : BaseController
     {
         private readonly MenuService _menuService;
 

@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class StocksController : Controller
+    public class StocksController : BaseController
     {
         private readonly StockService _stockService;
 

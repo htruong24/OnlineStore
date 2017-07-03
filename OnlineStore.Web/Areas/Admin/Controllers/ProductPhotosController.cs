@@ -15,7 +15,7 @@ using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class ProductPhotosController : Controller
+    public class ProductPhotosController : BaseController
     {
         private readonly ProductPhotoService _productPhotoService;
         private readonly PhotoService _photoService;

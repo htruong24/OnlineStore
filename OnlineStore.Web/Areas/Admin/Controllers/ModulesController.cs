@@ -9,7 +9,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class ModulesController : Controller
+    public class ModulesController : BaseController
     {
         private readonly ModuleService _moduleService;
 

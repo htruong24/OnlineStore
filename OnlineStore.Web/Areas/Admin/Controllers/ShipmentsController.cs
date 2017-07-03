@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class ShipmentsController : Controller
+    public class ShipmentsController : BaseController
     {
         private readonly ShipmentService _shipmentService;
 

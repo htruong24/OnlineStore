@@ -15,7 +15,7 @@ using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly ProductService _productService;
         private readonly BrandService _brandService;

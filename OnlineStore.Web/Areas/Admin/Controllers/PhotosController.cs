@@ -18,7 +18,7 @@ using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class PhotosController : Controller
+    public class PhotosController : BaseController
     {
         private readonly PhotoService _photoService;
 

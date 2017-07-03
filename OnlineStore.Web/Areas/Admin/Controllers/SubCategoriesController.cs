@@ -14,7 +14,7 @@ using OnlineStore.Services.BLL.Services;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class SubCategoriesController : Controller
+    public class SubCategoriesController : BaseController
     {
         private readonly SubCategoryService _subCategoryService;
         private readonly CategoryService _categoryService;

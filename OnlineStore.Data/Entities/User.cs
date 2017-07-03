@@ -71,5 +71,13 @@
         [StringLength(30)]
         [DisplayName("Người cập nhật")]
         public string ModifiedById { get; set; }
+
+        [ForeignKey("CreatedById")]
+        [DisplayName("Người tạo")]
+        public virtual User CreatedBy { get; set; }
+
+        [ForeignKey("ModifiedById")]
+        [DisplayName("Người cập nhật")]
+        public virtual User ModifiedBy { get; set; }
     }
 }

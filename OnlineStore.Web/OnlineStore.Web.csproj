@@ -986,8 +986,8 @@
     <Content Include="Views\RecommendProducts\Index.cshtml" />
     <Content Include="Views\Common\_Paging.cshtml" />
     <Content Include="Views\ShoppingCart\_List.cshtml" />
-    <Content Include="Views\ShoppingCart\_MiniCart.cshtml" />
     <Content Include="Views\Shared\_MobileMenu.cshtml" />
+    <Content Include="Views\ShoppingCart\_MyCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

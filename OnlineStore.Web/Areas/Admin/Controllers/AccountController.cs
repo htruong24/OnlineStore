@@ -11,7 +11,7 @@ using OnlineStore.Services.Models;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
         private readonly AccountService _accountService;
         public AccountController()

@@ -27,7 +27,9 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var user = _unitOfWork.GetRepository<Data.Entities.User>().GetById(userId);
+                var user = _unitOfWork.GetRepository<Data.Entities.User>()
+                        .Get(x => x.Id == userId, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
                 return user;
             }
         }

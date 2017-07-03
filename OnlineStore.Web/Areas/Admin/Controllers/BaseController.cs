@@ -15,7 +15,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             base.OnAuthorization(filterContext);
             if (Session[CommonConstants.USER_SESSION] == null)
             {
-                Response.Redirect("~/Admin/Account/Login");
+                Response.Redirect("~/Admin/Account/Login", false);
             }
         }
 

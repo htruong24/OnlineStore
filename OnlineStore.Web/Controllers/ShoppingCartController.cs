@@ -95,9 +95,9 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Top Categories
-        public ActionResult _MiniCart()
+        public ActionResult _MyCart()
         {
-            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] != null ? (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION] : new List<OrderDetail>();
 
             ViewBag.TotalAmount = cartItems.Count > 0 ? cartItems.Sum(x => x.Quantity*x.Price) : 0;
 

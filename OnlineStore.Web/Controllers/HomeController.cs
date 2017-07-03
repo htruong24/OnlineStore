@@ -48,7 +48,21 @@ namespace OnlineStore.Web.Controllers
         // Featured Product
         public ActionResult _FeaturedProduct()
         {
-            return PartialView();
+            _productService.Pagination = new SortingPagingInfo
+            {
+                SortField = "CreatedOn",
+                SortDirection = "descending",
+                PageSize = 8
+            };
+
+            _productService.Filter = new DefaultFilter()
+            {
+                Featured = true
+            };
+
+            var products = _productService.GetProducts();
+
+            return PartialView(products);
         }
 
         // New Arrival Product

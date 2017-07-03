@@ -1,4 +1,5 @@
-﻿@model List<OnlineStore.Data.Entities.Product>
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.Product>
 
 <div class="row">
     <div class="title-group1">
@@ -7,7 +8,7 @@
     @foreach (var product in Model)
     {
         var featuredImage = product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
-        var featuredImageUrl = "~/assets/web/images/products/21.jpg";
+        var featuredImageUrl = Placeholder.PRODUCT;
         if (featuredImage != null)
         {
             featuredImageUrl = featuredImage.Photo.Url;

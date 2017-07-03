@@ -93,5 +93,11 @@ namespace OnlineStore.Web.Controllers
 
             return Json(jsonModel);
         }
+
+        // Top Categories
+        public ActionResult _MiniCart()
+        {
+            return PartialView();
+        }
     }
 }

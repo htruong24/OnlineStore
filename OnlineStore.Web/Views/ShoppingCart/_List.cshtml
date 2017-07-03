@@ -25,7 +25,7 @@
                             @foreach (var orderDetail in Model)
                             {
                                 var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
-                                var featuredImageUrl = "~/assets/web/images/products/21.jpg";
+                                var featuredImageUrl = Placeholder.PRODUCT;
                                 if (featuredImage != null)
                                 {
                                     featuredImageUrl = featuredImage.Photo.Url;

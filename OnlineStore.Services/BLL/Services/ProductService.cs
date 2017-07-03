@@ -147,6 +147,10 @@ namespace OnlineStore.Services.BLL.Services
                     {
                         query = query.Where(x => x.SubCategory.Id == Filter.SubCategoryId);
                     }
+                    if (Filter.Featured)
+                    {
+                        query = query.Where(x => x.Featured == true);
+                    }
                 }
 
                 // Paging

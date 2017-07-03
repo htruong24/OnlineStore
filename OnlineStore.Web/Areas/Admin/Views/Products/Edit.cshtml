@@ -113,7 +113,14 @@
                             <optgroup label="@category.Key.Name">
                                 @foreach (var subCategory in category)
                                 {
-                                    <option value="@subCategory.Id">@subCategory.Name</option>
+                                    if (Model.SubCategoryId == subCategory.Id)
+                                    {
+                                        <option value="@subCategory.Id" selected="selected">@subCategory.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@subCategory.Id">@subCategory.Name</option>
+                                    }
                                 }
                             </optgroup>
                         }
@@ -133,7 +140,14 @@
 
                         foreach (var brand in brands)
                         {
-                            <option value="@brand.Id">@brand.Name</option>
+                            if (Model.BrandId == brand.Id)
+                            {
+                                <option value="@brand.Id" selected="selected">@brand.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@brand.Id">@brand.Name</option>
+                            }
                         }
                     }
                 </select>

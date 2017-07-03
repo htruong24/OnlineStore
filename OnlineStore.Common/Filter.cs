@@ -13,5 +13,6 @@ namespace OnlineStore.Common
         public string ToDate { get; set; }
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
+        public bool Featured { get; set; }
     }
 }

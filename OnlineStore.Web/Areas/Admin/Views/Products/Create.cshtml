@@ -51,26 +51,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <label>
-                    <input type="checkbox" name="Featured" class="ace ace-switch ace-switch-6" id="btnCheckFeatured" value="false" onclick="javascript: fnSetFeatured();"/>
-                    <span class="lbl"></span>
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Publish, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <label>
-                    <input type="checkbox" name="Publish" class="ace ace-switch ace-switch-6" id="btnCheckPublish" value="false" onclick="javascript: fnSetPublished();" />
-                    <span class="lbl"></span>
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
@@ -113,9 +93,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BrandId, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BrandId, new SelectList(ViewBag.Brands, "Id", "Name"), "--- Chọn thương hiệu ---", new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.BrandId, "", new {@class = "text-danger"})
-
+                @*@Html.DropDownListFor(model => model.BrandId, new SelectList(ViewBag.Brands, "Id", "Name"), "--- Chọn thương hiệu ---", new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.BrandId, "", new {@class = "text-danger"})*@
                 <select name="BrandId" class="slBrand form-control">
                     @{
                         var brands = (List<Brand>)ViewBag.Brands;
@@ -132,8 +111,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UnitId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.UnitId, new SelectList(ViewBag.Units, "Id", "Name"), "--- Chọn đơn vị tính ---", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
+                @*@Html.DropDownListFor(model => model.UnitId, new SelectList(ViewBag.Units, "Id", "Name"), "--- Chọn đơn vị tính ---", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })*@
+                <select name="UnitId" class="slUnit form-control">
+                    @{
+                        var units = (List<Unit>)ViewBag.Units;
+
+                        foreach (var unit in units)
+                        {
+                            <option value="@unit.Id">@unit.Name</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
 
@@ -145,6 +134,26 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label>
+                    <input type="checkbox" name="Featured" class="ace ace-switch ace-switch-6" id="btnCheckFeatured" value="false" onclick="javascript: fnSetFeatured();" />
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Publish, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label>
+                    <input type="checkbox" name="Publish" class="ace ace-switch ace-switch-6" id="btnCheckPublish" value="false" onclick="javascript: fnSetPublished();" />
+                    <span class="lbl"></span>
+                </label>
+            </div>
+        </div>
+        
         <div class="form-group">
             <label class="control-label col-md-2">Chọn ảnh sản phẩm</label>
             <div class="col-md-10">
@@ -185,6 +194,11 @@
             allowClear: true
         });
 
+        $(".slUnit").select2({
+            placeholder: "Chọn đơn vị tính",
+            allowClear: true
+        });
+
         //$('slSubCategory').val('US'); // Select the option with a value of 'US'
         //$('slSubCategory').trigger('change'); // Notify any JS components that the value changed
     });
@@ -198,3 +212,8 @@
     }
 </script>
 
+<style>
+    .select2-search:after{
+        display:none;
+    }
+</style>

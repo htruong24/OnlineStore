@@ -2,7 +2,7 @@
     <div class="top-cart-title">
         <a href="/ShoppingCart" class="dropdown-toggle">
             Giỏ hàng
-            <span class="price">@ViewBag.TotalAmount</span>
+            <span class="price">@ViewBag.TotalAmount.ToString("N0").Replace(',', '.')</span>
         </a>
     </div>
 </div>

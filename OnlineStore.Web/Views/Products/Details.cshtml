@@ -1,4 +1,5 @@
-﻿@model OnlineStore.Data.Entities.Product
+﻿@using OnlineStore.Common
+@model OnlineStore.Data.Entities.Product
 
 @{
     ViewBag.Title = "Details";
@@ -49,7 +50,7 @@
                                 <div class="price-box">
                                     <p class="special-price">
                                         <span class="price-label">Special Price</span>
-                                        <span id="product-price-1" class="price">@Model.Price đ</span>
+                                        <span id="product-price-1" class="price">@Model.Price.ToCurrency() đ</span>
                                     </p>
                                     @*<p class="old-price">
                                         <span class="price-label">Regular Price:</span>
@@ -60,7 +61,7 @@
                             <div class="short-description">
                                 <div class="std">@Model.ShortDescrition</div>
                             </div>
-                            <p class="availability in-stock">Availability: <span>In stock</span></p>
+                            <p class="availability in-stock">Có sẵn: <span>Trong kho</span></p>
                             <form class="form-horizontal">
                                 @*<div class="form-group">
                                     <label class="col-md-2 col-sm-3 control-label">Kích thước <em>*</em></label>

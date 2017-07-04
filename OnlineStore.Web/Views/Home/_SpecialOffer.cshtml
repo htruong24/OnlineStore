@@ -1,4 +1,5 @@
-﻿@model List<OnlineStore.Data.Entities.Product>
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.Product>
 @{
     var productCount = 0;
 }
@@ -44,11 +45,11 @@
                         </h2>
                         <div class="price-box">
                             <p class="special-price">
-                                <span class="price">$169.99</span>
+                                <span class="price">@product.Price.ToCurrency() đ</span>
                             </p>
-                            <p class="old-price">
+                            @*<p class="old-price">
                                 <span class="price">$189.00</span>
-                            </p>
+                            </p>*@
                         </div>
                     </div>
                 </div>

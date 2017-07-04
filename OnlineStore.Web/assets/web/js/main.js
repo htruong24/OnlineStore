@@ -137,6 +137,19 @@ function fnAddCartItem(productId) {
         data: { productId: productId },
         success: function (data) {
             toastr.success("Thêm sản phẩm vào giỏ hàng thành công!");
+            //Load cart
+            $.ajax(
+            {
+                url: "/ShoppingCart/_MyCart",
+                type: "GET",
+                data: { productId: productId },
+                success: function (data) {
+                    $("#cart-container").html(data);
+                },
+                error: function (xhr, textStatus, error) {
+                    toastr.error(error);
+                }
+            });
         },
         error: function (xhr, textStatus, error) {
             toastr.error(error);

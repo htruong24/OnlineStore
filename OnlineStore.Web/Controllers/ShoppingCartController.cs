@@ -53,8 +53,7 @@ namespace OnlineStore.Web.Controllers
                 Result = true
             };
 
-            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
-
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
             var newCartItem = cartItems.Find(x => x.ProductId == productId);
 
             if (newCartItem != null)
@@ -69,6 +68,7 @@ namespace OnlineStore.Web.Controllers
                 newCartItem.Price = _productService.GetProduct((productId)).Price;
                 cartItems.Add(newCartItem);
             }
+            Session[CommonConstants.SHOPPING_CART_SESSION] = cartItems;
 
             return Json(jsonModel);
         }

@@ -25,7 +25,7 @@ namespace OnlineStore.Common
 
     public class Placeholder
     {
-        public static string PRODUCT = "~/assets/common/images/placeholder/no_image.gif";
+        public static string PRODUCT = "assets/common/images/placeholder/no_image.gif";
     }
 
     public class AutomaticTable

@@ -78,7 +78,9 @@
                     @Html.Partial("_MainSearch")
 
                     <!-- Mini cart -->
-                    @Html.Action("_MyCart", "ShoppingCart")
+                    <div id="cart-container">
+                        @Html.Action("_MyCart", "ShoppingCart")
+                    </div>
                 </div>
             </div>
             <div class="row">

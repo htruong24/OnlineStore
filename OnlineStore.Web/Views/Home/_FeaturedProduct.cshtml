@@ -21,7 +21,7 @@
                 </h2>
                 <div class="price-box">
                     <p class="special-price">
-                        <span class="price">@product.Price đ</span>
+                        <span class="price">@product.Price.ToCurrency() đ</span>
                     </p>
                     @*<p class="old-price">
                         <span class="price">190.000 đ</span>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="cart-container">
-                <button type="submit" class="btn btn-danger btn-cart">Mua</button>
+                <button onclick="javascript:fnAddCartItem(@product.Id);" class="btn btn-danger btn-cart">Mua</button>
             </div>
         </div>
     }

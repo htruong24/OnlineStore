@@ -130,19 +130,23 @@ function fnUpdateNumberOfClicks(productId) {
 
 // --------- SHOPPING CART -----------
 function fnAddCartItem(productId) {
+    var quantity = 1;
+    if ($("#orderQuantity").length > 0)
+    {
+        quantity = parseInt($("#orderQuantity").val());
+    }
+
     $.ajax(
     {
         url: "/ShoppingCart/AddCartItem",
-        type: "POST",
-        data: { productId: productId },
+        type: "GET",
+        data: { productId: productId, quantity: quantity },
         success: function (data) {
-            toastr.success("Thêm sản phẩm vào giỏ hàng thành công!");
             //Load cart
             $.ajax(
             {
                 url: "/ShoppingCart/_MyCart",
                 type: "GET",
-                data: { productId: productId },
                 success: function (data) {
                     $("#cart-container").html(data);
                 },
@@ -150,6 +154,8 @@ function fnAddCartItem(productId) {
                     toastr.error(error);
                 }
             });
+
+            toastr.success("Thêm sản phẩm vào giỏ hàng thành công!");
         },
         error: function (xhr, textStatus, error) {
             toastr.error(error);

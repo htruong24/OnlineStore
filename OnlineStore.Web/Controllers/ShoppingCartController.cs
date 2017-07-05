@@ -44,7 +44,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Shoppping Cart
-        public ActionResult AddCartItem(int? productId)
+        public ActionResult AddCartItem(int? productId, int quantity)
         {
             var jsonModel = new JsonModel<bool>
             {
@@ -58,19 +58,23 @@ namespace OnlineStore.Web.Controllers
 
             if (newCartItem != null)
             {
-                newCartItem.Quantity += 1;
+                newCartItem.Quantity += quantity;
             }
             else
             {
-                newCartItem = new OrderDetail();
-                newCartItem.ProductId = productId;
-                newCartItem.Quantity = 1;
-                newCartItem.Price = _productService.GetProduct((productId)).Price;
+                newCartItem = new OrderDetail()
+                {
+                    ProductId = productId,
+                    Quantity = quantity
+                };
+                var product = _productService.GetProduct((productId));
+                newCartItem.Product = product;
+                newCartItem.Price = product.Price;
                 cartItems.Add(newCartItem);
             }
             Session[CommonConstants.SHOPPING_CART_SESSION] = cartItems;
 
-            return Json(jsonModel);
+            return Json(jsonModel, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveCartItem(int? orderDetailId)
@@ -82,7 +86,7 @@ namespace OnlineStore.Web.Controllers
                 Result = true
             };
 
-            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
 
             var removedCartItem = cartItems.FirstOrDefault(p => p.Id == orderDetailId);
             if (removedCartItem != null)
@@ -92,6 +96,43 @@ namespace OnlineStore.Web.Controllers
             }
 
             return Json(jsonModel);
+        }
+
+        public ActionResult UpdateShoppingCart(string productIds, string quantities)
+        {
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+
+            var jsonModel = new JsonModel<bool>
+            {
+                ErrorCode = "0",
+                ErrorMessage = "",
+                Result = true
+            };
+
+            string[] productIdArr = productIds.Split(';');
+            string[] quantityArr = quantities.Split(';');
+
+            var removeProducts = new List<int>();
+
+            for (var i = 0; i < productIdArr.Count(); i++)
+            {
+                var cartItem = cartItems.FirstOrDefault(p => p.Id == int.Parse(productIdArr[i]));
+                if (cartItem != null)
+                {
+                    cartItem.Quantity = int.Parse(quantityArr[i]);
+                }
+            }
+
+            for (var j = 0; j < cartItems.Count; j++)
+            {
+                var existedItem = productIdArr.FirstOrDefault(x => int.Parse(x) == cartItems[j].Id);
+                if (existedItem == null)
+                {
+                    cartItems.Remove(cartItems[j]);
+                }
+            }
+
+            return Json(jsonModel, JsonRequestBehavior.AllowGet);
         }
 
         // Top Categories

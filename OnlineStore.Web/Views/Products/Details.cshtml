@@ -89,16 +89,16 @@
                                     <div class="col-md-3 col-sm-5">
                                         <div class="input-group qty">
                                             <span class="input-group-btn">
-                                                <button class="btn" type="button">-</button>
+                                                <button class="btn" type="button" onclick="javascript: SubtractQuantity();">-</button>
                                             </span>
-                                            <input type="text" class="form-control" value="3">
+                                            <input type="text" id="orderQuantity" class="form-control" value="1">
                                             <span class="input-group-btn">
-                                                <button class="btn" type="button">+</button>
+                                                <button class="btn" type="button" onclick="javascript: AddQuantity();">+</button>
                                             </span>
                                         </div><!-- /input-group -->
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-danger btn-cart">Mua</button>
+                                <button onclick="javascript:fnAddCartItem(@Model.Id);" class="btn btn-danger btn-cart">Mua</button>
                             </form>
                         </div><!-- /.product-shop -->
                     </div>
@@ -148,4 +148,20 @@
             pause: 3000
         });
     });
+
+    function AddQuantity()
+    {
+        var currentQuantity = parseInt($("#orderQuantity").val());
+        $("#orderQuantity").val(currentQuantity + 1);
+    }
+
+    function SubtractQuantity()
+    {
+        var currentQuantity = parseInt($("#orderQuantity").val());
+        if (currentQuantity > 1)
+        {
+            ("#orderQuantity").val(currentQuantity - 1);
+        }
+    }
+
 </script>

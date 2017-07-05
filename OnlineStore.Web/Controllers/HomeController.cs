@@ -120,7 +120,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Special Offer
-        public ActionResult _SpecialOffer(int subCategoryId)
+        public ActionResult _SpecialOffer(int? subCategoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -131,7 +131,7 @@ namespace OnlineStore.Web.Controllers
 
             _productService.Filter = new DefaultFilter()
             {
-                SubCategoryId = subCategoryId
+                SubCategoryId = subCategoryId == null ? 0 : subCategoryId.Value
             };
 
             var products = _productService.GetProducts();

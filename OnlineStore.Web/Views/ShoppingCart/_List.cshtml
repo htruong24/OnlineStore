@@ -1,23 +1,26 @@
-﻿@model List<OnlineStore.Data.Entities.OrderDetail>
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.OrderDetail>
 <div class="main">
     <div class="container">
         <div class="cart">
             <form>
+                <div class="text-right">
+                    <a href="#" class="btn btn-default btn-md">TIẾP TỤC MUA HÀNG</a>
+                    <button type="submit" class="btn btn-danger btn-md">CẬP NHẬT GIỎ HÀNG</button>
+                </div>
+
+                <div class="line2"></div>
+
                 <div class="table-responsive">
                     <table class="table custom-table">
                         <thead>
                             <tr class="first last">
                                 <th>Xóa</th>
                                 <th>Ảnh sản phẩm</th>
-                                <th>Sản phẩm</th>
-                                <th>Edit</th>
+                                <th>Tên sản phẩm</th>
+                                @*<th>Edit</th>*@
                                 <th>Số lượng</th>
-                                <th>Tổng phụ</th>
+                                <th>Đơn giá</th>
                                 <th>Tổng cộng</th>
                             </tr>
                         </thead>
@@ -31,8 +34,8 @@
                                     featuredImageUrl = featuredImage.Photo.Url;
                                 }
 
-                                <tr>
-                                    <td class="text-center"><a class="btn-remove" href="#"><span class="fa fa-trash-o"></span></a></td>
+                                <tr class="order-details" id="product-@orderDetail.ProductId">
+                                    <td class="text-center"><a class="btn-remove" href="#" onclick="javascript: RemoveProduct(@orderDetail.ProductId);"><span class="fa fa-trash-o"></span></a></td>
                                     <td>
                                         <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
                                             <img alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
@@ -40,35 +43,36 @@
                                     </td>
                                     <td>
                                         <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
-                                        <div class="text-muted">
+                                        @*<div class="text-muted">
                                             Kích thước: 42<br>
                                             Màu: Đỏ
-                                        </div>
+                                        </div>*@
                                     </td>
-                                    <td class="text-center"><a href="#">Chỉnh sửa</a></td>
+                                    @*<td class="text-center"><a href="#">Chỉnh sửa</a></td>*@
                                     <td class="qty">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn" type="button">-</button>
+                                                <button class="btn btn-subtract-quantity" type="button">-</button>
                                             </span>
-                                            <input type="text" class="form-control" value="@orderDetail.Quantity">
+                                            <input type="text" class="form-control order-quantity" value="@orderDetail.Quantity">
+                                            <input type="hidden" class="order-price" value="@orderDetail.Price">
+                                            <input type="hidden" class="order-productId" value="@orderDetail.ProductId">
                                             <span class="input-group-btn">
-                                                <button class="btn" type="button">+</button>
+                                                <button class="btn btn-add-quantity" type="button">+</button>
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="subtotal">@orderDetail.Price đ</td>
-                                    <td class="grandtotal">200.000 đ</td>
+                                    <td class="subtotal">@orderDetail.Price.ToCurrency() đ</td>
+                                    @{ 
+                                        var amount = orderDetail.Quantity * orderDetail.Price;
+                                    }
+                                    <td class="grandtotal">@amount.ToCurrency() đ</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                <div class="text-right">
-                    <a href="#" class="btn btn-default btn-md">TIẾP TỤC MUA HÀNG</a>
-                    <button type="submit" class="btn btn-danger btn-md">CẬP NHẬT GIỎ HÀNG</button>
-                </div>
-                <div class="line2"></div>
+               
                 <div class="row">
                     @*<div class="col-sm-4">
                             <h4>ƯỚC TÍNH PHÍ GIAO HÀNG VÀ THUẾ</h4>
@@ -106,13 +110,16 @@
                         </div>*@
                     <div class="col-sm-offset-8 col-sm-4">
                         <table class="table table-cart-total">
-                            <tr>
+                            @*<tr>
                                 <td>Tổng cộng:</td>
                                 <td class="text-right">200.000 đ</td>
-                            </tr>
+                            </tr>*@
                             <tr>
                                 <td>Tổng cộng:</td>
-                                <td class="text-right">200.000 đ</td>
+                                @{ 
+                                    var totalAmount = Model.Sum(x => x.Price * x.Quantity);
+                                }
+                                <td class="text-right total-amount">@totalAmount.ToCurrency() đ</td>
                             </tr>
                         </table>
                         <div class="text-right">
@@ -127,3 +134,77 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(".btn-add-quantity").each(function () {
+            $(this).click(function () {
+                var orderQty = $(this).closest(".qty").find(".order-quantity");
+                var currentQuantity = parseInt($(orderQty).val());
+                $(orderQty).val(currentQuantity + 1);
+
+                UpdateAmount();
+            });
+        });
+
+        $(".btn-subtract-quantity").each(function () {
+            $(this).click(function () {
+                var orderQty = $(this).closest(".qty").find(".order-quantity");
+                var currentQuantity = parseInt($(orderQty).val());
+                if (currentQuantity > 1)
+                {
+                    $(orderQty).val(currentQuantity - 1);
+                }
+
+                UpdateAmount();
+            });
+        });
+    });
+
+    function UpdateAmount()
+    {
+        var totalAmount = 0;
+
+        $(".order-quantity").each(function () {
+            var orderQty = parseInt($(this).val());
+            var orderPrice = parseInt($(this).closest(".qty").find(".order-price").val());
+            var grandTotal = $(this).closest(".qty").parent().find(".grandtotal");
+            var amount = orderQty * orderPrice;
+            $(grandTotal).html(formatNumber(amount) + " đ");
+            totalAmount += amount;
+        });
+
+        $(".total-amount").html(formatNumber(totalAmount) + " đ");
+        $(".mini-cart .price").html(formatNumber(totalAmount));
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+    }
+
+    function RemoveProduct(id)
+    {
+        $("tr#product-" + id).remove();
+        UpdateAmount();
+    }
+
+    function UpdateShopppingCart() {
+        var productIds = [];
+        var quantities = [];
+        $(".order-quantity").each(function () {
+            productIds.push($(this).val());
+            quantities.push($(this).closest(".qty").find(".order-productId").val());
+            $.ajax(
+                {
+                    url: "/ShoppingCart/UpdateShoppingCart",
+                    type: "GET",
+                    data: { productIds: productIds, quantities: quantities },
+                    success: function (data) {
+                        toastr.success("Cập nhật giỏ hàng thành công!");
+                    },
+                    error: function (xhr, textStatus, error) {
+                        toastr.error(error);
+                    }
+                });
+        });
+    }
+</script>

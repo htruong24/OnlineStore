@@ -5,8 +5,8 @@
         <div class="cart">
             <form>
                 <div class="text-right">
-                    <a href="#" class="btn btn-default btn-md">TIẾP TỤC MUA HÀNG</a>
-                    <button type="submit" class="btn btn-danger btn-md">CẬP NHẬT GIỎ HÀNG</button>
+                    <a href="/" class="btn btn-default btn-md">TIẾP TỤC MUA HÀNG</a>
+                    <button type="button" class="btn btn-danger btn-md" onclick="javascript: UpdateShopppingCart();">CẬP NHẬT GIỎ HÀNG</button>
                 </div>
 
                 <div class="line2"></div>
@@ -123,7 +123,7 @@
                             </tr>
                         </table>
                         <div class="text-right">
-                            <p><button type="button" class="btn btn-default btn-md fwb">TIẾN HÀNH ĐẶT HÀNG</button></p>
+                            <p><a href="/ShoppingCart/Checkout" class="btn btn-default btn-md fwb">TIẾN HÀNH ĐẶT HÀNG</a></p>
                             @*<a href="/ShoppingCart/Checkout" class="btn btn-default btn-md">TIẾN HÀNH ĐẶT HÀNG</a>*@
                             @*<p><a href="#" class="text-muted">Checkout with multiples address</a></p>*@
                         </div>
@@ -191,20 +191,20 @@
         var productIds = [];
         var quantities = [];
         $(".order-quantity").each(function () {
-            productIds.push($(this).val());
-            quantities.push($(this).closest(".qty").find(".order-productId").val());
-            $.ajax(
-                {
-                    url: "/ShoppingCart/UpdateShoppingCart",
-                    type: "GET",
-                    data: { productIds: productIds, quantities: quantities },
-                    success: function (data) {
-                        toastr.success("Cập nhật giỏ hàng thành công!");
-                    },
-                    error: function (xhr, textStatus, error) {
-                        toastr.error(error);
-                    }
-                });
+            quantities.push($(this).val());
+            productIds.push($(this).closest(".qty").find(".order-productId").val());
+        });
+        $.ajax(
+        {
+            url: "/ShoppingCart/UpdateShoppingCart",
+            type: "GET",
+            data: { productIds: productIds.join(';'), quantities: quantities.join(';') },
+            success: function (data) {
+                toastr.success("Cập nhật giỏ hàng thành công!");
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
         });
     }
 </script>

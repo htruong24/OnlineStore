@@ -29,17 +29,23 @@ namespace OnlineStore.Web.Controllers
             return View();
         }
 
+        // GET: Successful
+        public ActionResult Successful()
+        {
+            return View();
+        }
+
         // GET: Checkout
         public ActionResult Checkout()
         {
-            return View();
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+            return View(cartItems);
         }
 
         // GET: List of products
         public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
-            var cartItems = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
-
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
             return PartialView(cartItems);
         }
 
@@ -116,7 +122,7 @@ namespace OnlineStore.Web.Controllers
 
             for (var i = 0; i < productIdArr.Count(); i++)
             {
-                var cartItem = cartItems.FirstOrDefault(p => p.Id == int.Parse(productIdArr[i]));
+                var cartItem = cartItems.FirstOrDefault(p => p.ProductId == int.Parse(productIdArr[i]));
                 if (cartItem != null)
                 {
                     cartItem.Quantity = int.Parse(quantityArr[i]);
@@ -125,7 +131,7 @@ namespace OnlineStore.Web.Controllers
 
             for (var j = 0; j < cartItems.Count; j++)
             {
-                var existedItem = productIdArr.FirstOrDefault(x => int.Parse(x) == cartItems[j].Id);
+                var existedItem = productIdArr.FirstOrDefault(x => int.Parse(x) == cartItems[j].ProductId);
                 if (existedItem == null)
                 {
                     cartItems.Remove(cartItems[j]);

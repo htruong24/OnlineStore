@@ -1,4 +1,5 @@
-﻿
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.OrderDetail>
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,12 +14,19 @@
                         <div class="checkout-step-item">
                             <div class="step-title clearfix" data-toggle="collapse" data-target="#checkout-one">
                                 <span class="number">1</span>
-                                <h2>PHƯƠNG THỨC ĐẶT HÀNG</h2>
+                                <h2>PHƯƠNG THỨC THANH TOÁN</h2>
                             </div>
                             <div id="checkout-one" class="collapse in">
                                 <div class="step-content">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai
+                                                </label>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-sm-6">
                                             <h4>Đặt hàng như khách vãng lai hay đăng kí mới</h4>
                                             <div class="line2 mtb20"></div>
                                             <div class="form-group">
@@ -62,7 +70,7 @@
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-danger btn-md btn-login fwb">ĐĂNG NHẬP</button>
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -70,11 +78,27 @@
                         <div class="checkout-step-item">
                             <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-two">
                                 <span class="number">2</span>
-                                <h2>THÔNG TIN THANH TOÁN</h2>
+                                <h2>PHƯƠNG THỨC THANH TOÁN</h2>
                             </div>
                             <div id="checkout-two" class="collapse">
                                 <div class="step-content">
-                                    Thông tin thanh toán
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Thanh toán bằng:</label>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option1" name="paymenttype-type" checked>Tiền mặt khi nhận hàng
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option2" name="paymenttype-type">Chuyển khoản
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +109,60 @@
                             </div>
                             <div id="checkout-three" class="collapse">
                                 <div class="step-content">
-                                    Thông tin giao hàng
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h4>ĐỊA CHỈ</h4>
+                                            @*<p class="text-muted">Enter your destination to get shipping &amp; tax</p>*@
+                                            <div class="form-group">
+                                                <label class="control-label">Thành phố <em>*</em></label>
+                                                <select class="form-control">
+                                                    <option>-- Select options  --</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Địa chỉ <em>*</em></label>
+                                                <textarea type="text" class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Mã bưu điện</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            @*<div class="form-group">
+                                                <button type="button" class="btn btn-default btn-md">GET A QUOTE</button>
+                                            </div>*@
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h4>CHÚ THÍCH</h4>
+                                            <div class="form-group">
+                                                <label class="control-label">Số điện thoại</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            @*<p class="text-muted">Enter your coupon code if you have one</p>*@
+                                            <div class="form-group">
+                                                @*<label class="control-label">&nbsp;</label>*@
+                                                <textarea rows="8" type="text" class="form-control"></textarea>
+                                            </div>
+                                            @*<div class="form-group">
+                                                <button type="button" class="btn btn-default btn-md">APPLY COUPON</button>
+                                            </div>*@
+                                        </div>
+                                        @*<div class="col-sm-4">
+                                            <table class="table table-cart-total">
+                                                <tr>
+                                                    <td>Subtotal:</td>
+                                                    <td class="text-right">$250.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grandtotal:</td>
+                                                    <td class="text-right">$250.00</td>
+                                                </tr>
+                                            </table>
+                                            <div class="text-right">
+                                                <p><button type="button" class="btn btn-default btn-md fwb">PROCCED TO CHECKOUT</button></p>
+                                                <p><a href="#" class="text-muted">Checkout with multiples address</a></p>
+                                            </div>
+                                        </div>*@
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,11 +173,27 @@
                             </div>
                             <div id="checkout-four" class="collapse">
                                 <div class="step-content">
-                                    Phương thức giao hàng
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Giao hàng:</label>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option1" name="paymenttype-type" checked>Tận nơi
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" value="option2" name="paymenttype-type">Giao hàng bưu điện
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout-step-item">
+                        @*<div class="checkout-step-item">
                             <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-five">
                                 <span class="number">5</span>
                                 <h2>THÔNG TIN THANH TOÁN</h2>
@@ -110,18 +203,76 @@
                                     Thông tin thanh toán
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="checkout-step-item">
                             <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-six">
-                                <span class="number">6</span>
+                                <span class="number">5</span>
                                 <h2>XEM LẠI ĐƠN HÀNG</h2>
                             </div>
                             <div id="checkout-six" class="collapse">
                                 <div class="step-content">
-                                    Xem lại đơn hàng
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table custom-table">
+                                                <thead>
+                                                    <tr class="first last">
+                                                        <th>Ảnh sản phẩm</th>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Đơn giá</th>
+                                                        <th>Tổng cộng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var orderDetail in Model)
+                                                    {
+                                                        var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                                        var featuredImageUrl = Placeholder.PRODUCT;
+                                                        if (featuredImage != null)
+                                                        {
+                                                            featuredImageUrl = featuredImage.Photo.Url;
+                                                        }
+
+                                                        <tr class="order-details" id="product-@orderDetail.ProductId">
+                                                            <td>
+                                                                <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
+                                                                    <img alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
+                                                            </td>
+                                                            <td class="qty" style="text-align:center; font-size:20px;">
+                                                                <label><b>@orderDetail.Quantity</b></label>
+                                                            </td>
+                                                            <td class="subtotal">@orderDetail.Price.ToCurrency() đ</td>
+                                                            @{
+                                                                var amount = orderDetail.Quantity * orderDetail.Price;
+                                                            }
+                                                            <td class="grandtotal">@amount.ToCurrency() đ</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                            <div class="col-sm-offset-8 col-sm-4">
+                                                <table class="table table-cart-total">
+                                                    <tr>
+                                                        <td>Tổng cộng:</td>
+                                                        @{
+                                                            var totalAmount = Model.Sum(x => x.Price * x.Quantity);
+                                                        }
+                                                        <td class="text-right total-amount">@totalAmount.ToCurrency() đ</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row" style="text-align:center; margin-bottom:5px;">
+                        <div class="col-sm-12"><a href="/ShoppingCart/Successful" class="btn btn-default btn-md">XÁC NHẬN</a></div>   
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -129,10 +280,10 @@
                         <div class="block-content">
                             <h2>Quy trình thanh toán</h2>
                             <ol class="checkout-progress">
-                                <li><span class="fa fa-play-circle-o"></span> Đại chỉ thanh toán</li>
-                                <li><span class="fa fa-play-circle-o"></span> Địa chỉ giao hàng</li>
-                                <li><span class="fa fa-play-circle-o"></span> Phương thức giao hàng</li>
-                                <li><span class="fa fa-play-circle-o"></span> Phương thức thanh toán</li>
+                                <li><span class="fa fa-play-circle-o"></span> Nhập thông tin giao hàng</li>
+                                <li><span class="fa fa-play-circle-o"></span> Chọn phương thức thanh toán</li>
+                                <li><span class="fa fa-play-circle-o"></span> Chọn phương thức giao hàng</li>
+                                <li><span class="fa fa-play-circle-o"></span> Xác nhận thanh đơn hàng qua email hoặc điện thoại</li>
                             </ol>
                         </div>
                     </div><!-- /.block - Comments -->

@@ -989,6 +989,7 @@
     <Content Include="Views\Shared\_MobileMenu.cshtml" />
     <Content Include="Views\ShoppingCart\_MyCart.cshtml" />
     <Content Include="Views\ShoppingCart\Successful.cshtml" />
+    <Content Include="Views\Shared\_HiddenSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

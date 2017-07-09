@@ -10,12 +10,6 @@ function fnLoad(action) {
 }
 
 function fnLoadContent(container, action, parameters) {
-    //$('#' + container).empty().load(rootPath + action, parameters, function (response, status, XMLHttpRequest) {
-    //    if (status === "Error") {
-    //        toastr.error("Oops! Something went wrong.");
-    //        $("#loadingContent").remove();
-    //    }
-    //});
     $('#' + container).empty().append(loadingContent);
     $.ajax({
         type: "GET",

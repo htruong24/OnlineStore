@@ -1,5 +1,11 @@
 ﻿@model List<OnlineStore.Data.Entities.Product>
 
+<!--Hidden fields-->
+<input type="hidden" id="hdControllerName" value="Categories" />
+
+<!--Hidden search-->
+@Html.Partial("_HiddenSearch")
+
 <div class="main">
     <div class="container">
         <div class="row">
@@ -25,22 +31,11 @@
                         <div class="sort-by hidden-xs">
                             <label>Sắp xếp theo:</label>
                             <select class="form-control input-sm">
-                                <option selected="selected">Vị trí</option>
-                                <option>Tên</option>
+                                <option selected="selected">Tên</option>
                                 <option>Giá</option>
                             </select>
-                            <a title="Set Descending Direction" href="#"><span class="fa fa-sort-amount-desc"></span></a>
-                        </div>
-                        <div class="limiter hidden-xs">
-                            <label>Hiển thị:</label>
-                            <div class="limiter-inner">
-                                <select class="form-control input-sm">
-                                    <option>10</option>
-                                    <option selected="selected">20</option>
-                                    <option>30</option>
-                                    <option>40</option>
-                                </select>
-                            </div>
+                            <span class="fa fa-sort-amount-asc"></span>
+                            <span class="fa fa-sort-amount-desc"></span>
                         </div>
                     </div><!--- /.pager -->
                 </div><!-- /.toolbar -->
@@ -48,41 +43,6 @@
                 <div id="search-container">
                     @Html.Action("_List", "Categories", new { CategoryId = ViewBag.CategoryId })
                 </div>
-
-                @*<div id="viewmode-grid">@Html.Action("_Grid", "Categories")</div>
-                <div id="viewmode-list" style="display: none;">@Html.Action("_List", "Categories")</div>*@
-
-                <div class="toolbar">
-                    <div class="sorter">
-                        <p class="view-mode">
-                            <label>View as:</label>
-                            <a class="grid view-selected" onclick="toggleViewMode();" title="Grid">Grid</a>&nbsp;
-                            <a class="list" title="List" onclick="toggleViewMode();" href="#">List</a>&nbsp;
-                        </p>
-                    </div><!-- /.sorter -->
-                    <div class="pager">
-                        <div class="sort-by hidden-xs">
-                            <label>Sắp xếp theo:</label>
-                            <select class="form-control input-sm">
-                                <option selected="selected">Vị trí</option>
-                                <option>Tên</option>
-                                <option>Giá</option>
-                            </select>
-                            <a title="Set Descending Direction" href="#"><span class="fa fa-sort-amount-desc"></span></a>
-                        </div>
-                        <div class="limiter hidden-xs">
-                            <label>Hiển thị:</label>
-                            <div class="limiter-inner">
-                                <select class="form-control input-sm">
-                                    <option>10</option>
-                                    <option selected="selected">20</option>
-                                    <option>30</option>
-                                    <option>40</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div><!-- /.pager -->
-                </div><!-- /.toolbar -->
             </div><!-- /.col-right -->
         </div>
     </div>
@@ -94,6 +54,11 @@
         color: #fff !important;
         background: #d8373e;
         border-color: #d8373e;
+    }
+
+    .pager .sort-by {
+        border-left: 0px;
+        border-right: 0px;
     }
 </style>
 
@@ -135,13 +100,13 @@
         $('input[name="last_price"]').val($("#slider-range").slider("values", 1));
 
         //search price from input box
-        $('#search_price').each(function () {
-            $(this).live('click', function () {
-                return false;
-            })
-        });
-        $('#slider-range a:first').addClass('first_item');
-        $('#slider-range a:last').addClass('last_item');
+        //$('#search_price').each(function () {
+        //    $(this).live('click', function () {
+        //        return false;
+        //    })
+        //});
+        //$('#slider-range a:first').addClass('first_item');
+        //$('#slider-range a:last').addClass('last_item');
     });
 
     function toggleViewMode() {

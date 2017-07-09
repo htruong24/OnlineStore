@@ -163,4 +163,25 @@ function fnAddCartItem(productId) {
     });
 }
 
+// Search web
+function fnSearchWeb() {
+    var postData = $("#frmSearch").serializeArray();
+    fnLoadContent("search-container", $("#hdControllerName").val() + "/" + "_List", postData);
+}
 
+function fnLoadContent(container, action, parameters) {
+    $('#' + container).empty().append(loadingContent);
+    $.ajax({
+        type: "GET",
+        url: rootPath + action,
+        data: parameters,
+        success: function (data) {
+            $("#" + container).html(data);
+            $("#loadingContent").remove();
+        },
+        error: function (xhr, textStatus, error) {
+            toastr.error(error);
+            $("#loadingContent").remove();
+        }
+    });
+}

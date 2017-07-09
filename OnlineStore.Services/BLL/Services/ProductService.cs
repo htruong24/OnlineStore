@@ -92,6 +92,11 @@ namespace OnlineStore.Services.BLL.Services
                             ? query.OrderBy(c => c.Name)
                             : query.OrderByDescending(c => c.Name));
                         break;
+                    case "Price":
+                        query = (Pagination.SortDirection == "ascending"
+                            ? query.OrderBy(c => c.Price)
+                            : query.OrderByDescending(c => c.Price));
+                        break;
                     case "ShortDescrition":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.ShortDescrition) :

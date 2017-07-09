@@ -31,11 +31,13 @@
                         <div class="sort-by hidden-xs">
                             <label>Sắp xếp theo:</label>
                             <select id="slSorting" class="form-control input-sm">
-                                <option selected="selected">Tên</option>
-                                <option>Giá</option>
+                                <option value="Name-ascending" selected="selected">Tên: Từ A-Z</option>
+                                <option value="Name-descending">Tên: Từ Z-A</option>
+                                <option value="Price-ascending">Giá: Từ nhỏ nhất đến lớn nhất</option>
+                                <option value="Price-descending">Giá: Từ lớn nhất đến nhỏ nhất</option>
                             </select>
-                            <span id="sorting-ascending" class="fa fa-sort-amount-asc">A-Z</span>
-                            <span id="sorting-descending" style="display:none;" class="fa fa-sort-amount-desc">Z-A</span>
+                            <span id="sorting-ascending" class="fa fa-sort-amount-asc"></span>
+                            <span id="sorting-descending" style="display:none;" class="fa fa-sort-amount-desc"></span>
                         </div>
                     </div><!--- /.pager -->
                 </div><!-- /.toolbar -->
@@ -112,26 +114,18 @@
         LoadSorting();
 
         $("#slSorting").change(function () {
-            var sortfield = $(this).val();
-            if ($("#hdSortField").val() === sortfield) {
-                if ($("#hdSortDirection").val() === "ascending") {
-                    $("#hdSortDirection").val("descending");
-                }
-                else {
-                    $("#hdSortDirection").val("ascending");
-                    $(this).parent().removeClass("sorting");
-                }
-            }
-            else {
-                $("#hdSortField").val(sortfield);
-                $("#hdSortDirection").val("ascending");
-            }
+            var sortArr = $(this).val().split("-");
+            var sortField = sortArr[0];
+            var sortDirection = sortArr[1];
+
+            $("#hdSortField").val(sortField);
+            $("#hdSortDirection").val(sortDirection);
+
             fnSearchWeb();
         });
     });
 
     function LoadSorting() {
-        var sortField = $("#hdSortField").val();
         var sortDirection = $("#hdSortDirection").val();
 
         if (sortDirection === "ascending") {

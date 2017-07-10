@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel;
     using System.Collections.Generic;
+    using System.Text.RegularExpressions;
 
     [Table("Product")]
     public partial class Product
@@ -20,6 +21,9 @@
         [StringLength(50)]
         [DisplayName("Tên")]
         public string Name { get; set; }
+
+        [DisplayName("Đường dẫn")]
+        public string MetaTitle { get; set; }
 
         [DisplayName("Mô tả ngắn")]
         public string ShortDescrition { get; set; }

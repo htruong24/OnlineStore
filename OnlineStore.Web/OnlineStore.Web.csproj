@@ -990,6 +990,7 @@
     <Content Include="Views\ShoppingCart\_MyCart.cshtml" />
     <Content Include="Views\ShoppingCart\Successful.cshtml" />
     <Content Include="Views\Shared\_HiddenSearch.cshtml" />
+    <Content Include="Views\Home\_Breadcrumb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

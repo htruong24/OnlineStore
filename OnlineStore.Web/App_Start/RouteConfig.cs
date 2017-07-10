@@ -13,6 +13,26 @@ namespace OnlineStore.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Product Detail", "san-pham/{metatitle}-{id}",
+                new { controller = "Products", action = "Details", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Category Detail", "danh-muc/{metatitle}-{id}",
+                new { controller = "Categories", action = "Details", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("SubCategory Detail", "danh-muc-con/{metatitle}-{id}",
+                new { controller = "SubCategories", action = "Details", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Brand Detail", "thuong-hieu/{metatitle}-{id}",
+                new { controller = "Brands", action = "Details", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Home", action = "Index", id = UrlParameter.Optional},
                 new[] { "OnlineStore.Web.Controllers" }

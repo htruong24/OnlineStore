@@ -19,6 +19,9 @@
                     <th class="sorting sortable" data-sortfield="Name">
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
+                    <th class="sorting sortable" data-sortfield="MetaTitle">
+                        @Html.DisplayNameFor(model => model.MetaTitle)
+                    </th>
                     <th class="sorting sortable" data-sortfield="ShortDescrition">
                         @Html.DisplayNameFor(model => model.ShortDescrition)
                     </th>
@@ -69,6 +72,9 @@
                             <a href="~/Admin/Products/Details/@item.Id">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MetaTitle)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ShortDescrition)

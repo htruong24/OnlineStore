@@ -15,6 +15,9 @@
         [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Đường dẫn")]
+        public string MetaTitle { get; set; }
+
         [DisplayName("Mô tả")]
         public string Description { get; set; }
 

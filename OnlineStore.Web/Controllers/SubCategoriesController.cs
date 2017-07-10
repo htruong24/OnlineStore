@@ -59,16 +59,8 @@ namespace OnlineStore.Web.Controllers
         // GET: SubCategories/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SubCategory subCategory = db.SubCategories.Find(id);
-            if (subCategory == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subCategory);
+            ViewBag.SubCategoryId = id;
+            return View();
         }
     }
 }

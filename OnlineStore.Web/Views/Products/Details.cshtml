@@ -4,6 +4,10 @@
 @{
     ViewBag.Title = "Details";
     Layout = "/Views/Shared/_Layout.cshtml";
+
+    <!--For Breadcrumb-->
+    ViewBag.BreadcrumbType = "Product";
+    ViewBag.ObjectId = Model.Id;
 }
 
 <div class="main">

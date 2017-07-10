@@ -1,5 +1,11 @@
 ﻿@model List<OnlineStore.Data.Entities.Product>
 
+@{
+    <!--For Breadcrumb-->
+    ViewBag.BreadcrumbType = "Category";
+    ViewBag.ObjectId = ViewBag.CategoryId;
+}
+
 <!--Hidden fields-->
 <input type="hidden" id="hdControllerName" value="Categories" />
 

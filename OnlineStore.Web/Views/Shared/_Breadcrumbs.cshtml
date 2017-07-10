@@ -1,9 +1,7 @@
 ﻿<div class="breadcrumbs">
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Category</a></li>
-            <li class="active">Detail Product</li>
+            @Html.Action("_Breadcrumb", "Home", new { type = ViewBag.BreadcrumbType, id = ViewBag.ObjectId })
         </ul>
     </div>
 </div>

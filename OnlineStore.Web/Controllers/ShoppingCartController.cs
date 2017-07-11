@@ -32,6 +32,7 @@ namespace OnlineStore.Web.Controllers
         // GET: Successful
         public ActionResult Successful()
         {
+            ViewBag.Message = Utils.SendMail("tqhieu91@gmail.com", "nexmitesting@gmail.com", "Cindy Shop", "", "Xác nhận đơn hàng", "Đặt hàng thành công! <br/> Đây là thông tin đơn hàng của bạn!");
             return View();
         }
 

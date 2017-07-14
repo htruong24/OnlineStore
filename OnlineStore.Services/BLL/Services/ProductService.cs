@@ -27,7 +27,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var product = _unitOfWork.GetRepository<Data.Entities.Product>()
-                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,ProductPhotos,ProductPhotos.Photo")
+                        .Get(x => x.Id == productId, null, "CreatedBy,ModifiedBy,Unit,Brand,SubCategory,SubCategory.Category,ProductPhotos,ProductPhotos.Photo")
                         .FirstOrDefault();
                 
                 return product;

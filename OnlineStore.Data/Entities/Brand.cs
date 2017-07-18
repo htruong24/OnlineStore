@@ -21,6 +21,9 @@
         [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [DisplayName("Danh mục")]
+        public string SubCategoryIds { get; set; }
+
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }

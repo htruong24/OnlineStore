@@ -2,6 +2,7 @@
 <link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/assets/admin/js/app/brand/edit.js"></script>
 
+@using OnlineStore.Data.Entities
 @model OnlineStore.Data.Entities.Brand
 @{
     ViewBag.Module = "Thương hiệu";
@@ -38,6 +39,28 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(model => model.SubCategoryIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="hidden" id="hdSubCategoryIds" name="SubCategoryIds" />
+                <select class="slSubCategory form-control" multiple="multiple">
+                    @{
+                        var subCategories = (List<SubCategory>)ViewBag.SubCategories;
+                        var categories = subCategories.GroupBy(x => new { x.Category.Id, x.Category.Name });
+
+                        foreach (var category in categories)
+                        {
+                            <optgroup label="@category.Key.Name">
+                                @foreach (var subCategory in category)
+                                {
+                                    <option value="@subCategory.Id">@subCategory.Name</option>
+                                }
+                            </optgroup>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-white btn-info btn-bold">
                     <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
@@ -50,3 +73,31 @@
 <div>
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".slSubCategory").select2({
+            placeholder: "Chọn một danh mục",
+            allowClear: true
+        });
+
+        $(".slSubCategory").on("change", function (e)
+        {
+            if ($(this).val() == null)
+            {
+                $("#hdSubCategoryIds").val("");
+            }
+            else
+            {
+                $("#hdSubCategoryIds").val($(this).val().join());
+            }
+            console.log($("#hdSubCategoryIds").val());
+        });
+    });
+</script>
+
+<style>
+    .select2-search:after {
+        display: none;
+    }
+</style>

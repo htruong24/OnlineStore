@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class BrandsController : BaseController
     {
         private readonly BrandService _brandService;
+        private readonly SubCategoryService _subCategoryService;
 
         public BrandsController()
         {
             this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._subCategoryService = new SubCategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/Brands
@@ -69,6 +71,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Brands/Create
         public ActionResult Create()
         {
+            ViewBag.SubCategories = GetSubCategories();
             return View();
         }
 
@@ -97,6 +100,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var brand = _brandService.GetBrand(id);
+            ViewBag.SubCategories = GetSubCategories();
             if (brand == null)
             {
                 return HttpNotFound();
@@ -165,6 +169,18 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     brand.ModifiedOn = DateTime.Now;
                 }
             }
+        }
+
+        // Get Sub Categories
+        public List<SubCategory> GetSubCategories()
+        {
+            _subCategoryService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _subCategoryService.GetSubCategories();
         }
     }
 }

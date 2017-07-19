@@ -124,7 +124,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Special Offer
-        public ActionResult _SpecialOffer(int? subCategoryId)
+        public ActionResult _RelatedProducts(int? subCategoryId)
         {
             _productService.Pagination = new SortingPagingInfo
             {
@@ -246,7 +246,7 @@ namespace OnlineStore.Web.Controllers
         }
 
         // Breadcrumb
-        public ActionResult _Breadcrumb(string type, int? id)
+        public ActionResult _Breadcrumb(string type, int? id, string title)
         {
             var breadcrumbHtml = "<li><a href='/'>Trang chủ</a></li>";
 
@@ -267,6 +267,10 @@ namespace OnlineStore.Web.Controllers
                 var subCategory = _subCategoryService.GetSubCategory(id);
                 breadcrumbHtml += "<li><a href='/danh-muc/" + subCategory.Category.MetaTitle + "-" + subCategory.Category.Id + "'>" + subCategory.Category.Name + "</a></li>";
                 breadcrumbHtml += "<li class='active'>" + subCategory.Name + "</li>";
+            }
+            else
+            {
+                breadcrumbHtml += "<li class='active'>" + title + "</li>";
             }
 
             ViewBag.BreadcrumbHtml = breadcrumbHtml;

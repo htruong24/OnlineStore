@@ -1,7 +1,7 @@
 ﻿<div class="breadcrumbs">
     <div class="container">
         <ul class="breadcrumb">
-            @Html.Action("_Breadcrumb", "Home", new { type = ViewBag.BreadcrumbType, id = ViewBag.ObjectId })
+            @Html.Action("_Breadcrumb", "Home", new { type = ViewBag.BreadcrumbType, id = ViewBag.ObjectId, title = ViewBag.Title })
         </ul>
     </div>
 </div>

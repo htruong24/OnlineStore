@@ -29,6 +29,16 @@ namespace OnlineStore.Services.BLL.Services
                 var brand = _unitOfWork.GetRepository<Data.Entities.Brand>()
                         .Get(x => x.Id == brandId, null, "CreatedBy,ModifiedBy")
                         .FirstOrDefault();
+                var subCategoryIds = Array.ConvertAll(brand.SubCategoryIds.Split(','), x => int.Parse(x));
+                var subcategories = new List<SubCategory>();
+                foreach (var id in subCategoryIds)
+                {
+                    var subcategory = _unitOfWork.GetRepository<SubCategory>().GetById(id);
+                    subcategories.Add(subcategory);
+                }
+                brand.SubCategoryList = subcategories;
+                brand.SubCategoryDisplayText = string.Join(", ", subcategories.Select(x => "<a target='_blank' href='/danh-muc-con/" + x.MetaTitle + "-" + x.Id + "'>" + x.Name + "</a>").ToList()); 
+
                 return brand;
             }
         }
@@ -119,11 +129,25 @@ namespace OnlineStore.Services.BLL.Services
                     (int)Math.Ceiling((double)query.Count() / Pagination.PageSize);
 
                 var pageIndex = Pagination.CurrentPage - 1;
-
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
-                return query.ToList();
-
+                var results = query.ToList();
+                foreach(var brand in results)
+                {
+                    if(brand.SubCategoryIds != null)
+                    {
+                        var subCategoryIds = Array.ConvertAll(brand.SubCategoryIds.Split(','), x => int.Parse(x));
+                        var subcategories = new List<SubCategory>();
+                        foreach (var id in subCategoryIds)
+                        {
+                            var subcategory = _unitOfWork.GetRepository<SubCategory>().GetById(id);
+                            subcategories.Add(subcategory);
+                        }
+                        brand.SubCategoryList = subcategories;
+                        brand.SubCategoryDisplayText = string.Join(", ", subcategories.Select(x => "<a target='_blank' href='/danh-muc-con/" + x.MetaTitle + "-" + x.Id + "'>" + x.Name + "</a>").ToList());
+                    }
+                }
+                return results;
             }
         }
     }

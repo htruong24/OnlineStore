@@ -31,10 +31,10 @@
                         @Html.DisplayFor(model => model.MetaTitle)
                     </dd>
                     <dt>
-                        @Html.DisplayNameFor(model => model.Description)
+                        @Html.DisplayNameFor(model => model.SubCategoryDisplayText)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.Description)
+                        @Html.Raw(Model.SubCategoryDisplayText)
                     </dd>
                 </dl>
             </div>

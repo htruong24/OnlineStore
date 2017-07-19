@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel;
+    using System.Collections.Generic;
 
     [Table("Brand")]
     public partial class Brand
@@ -23,6 +24,13 @@
 
         [DisplayName("Danh mục")]
         public string SubCategoryIds { get; set; }
+
+        [NotMapped]
+        public List<SubCategory> SubCategoryList { get; set; }
+
+        [NotMapped]
+        [DisplayName("Danh mục")]
+        public string SubCategoryDisplayText { get; set; }
 
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

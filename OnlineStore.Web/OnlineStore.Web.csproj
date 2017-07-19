@@ -965,7 +965,7 @@
     <Content Include="Views\Home\_HotDeals.cshtml" />
     <Content Include="Views\Home\_FeaturedProduct.cshtml" />
     <Content Include="Views\Home\_NewArrivalProduct.cshtml" />
-    <Content Include="Views\Home\_SpecialOffer.cshtml" />
+    <Content Include="Views\Home\_RelatedProducts.cshtml" />
     <Content Include="Views\Home\_LatestNews.cshtml" />
     <Content Include="Views\Home\_ClientsSay.cshtml" />
     <Content Include="Views\Home\_MainSlider.cshtml" />

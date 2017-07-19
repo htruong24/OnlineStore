@@ -33,6 +33,31 @@ namespace OnlineStore.Web
                 new[] { "OnlineStore.Web.Controllers" }
                 );
 
+            routes.MapRoute("Shopping Cart", "gio-hang",
+                new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Check Out", "thanh-toan",
+                new { controller = "ShoppingCart", action = "Checkout", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Về chúng tôi", "ve-chung-toi",
+                new { controller = "Home", action = "AboutUs", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Liên hệ", "lien-he",
+                new { controller = "Home", action = "Contact", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
+            routes.MapRoute("Chính sách", "chinh-sach",
+                new { controller = "Home", action = "Policy", id = UrlParameter.Optional },
+                new[] { "OnlineStore.Web.Controllers" }
+                );
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Home", action = "Index", id = UrlParameter.Optional},
                 new[] { "OnlineStore.Web.Controllers" }

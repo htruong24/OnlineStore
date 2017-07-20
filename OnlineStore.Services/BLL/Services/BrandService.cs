@@ -122,6 +122,15 @@ namespace OnlineStore.Services.BLL.Services
                     query = query.Where(x => x.Name.Contains(Filter.Keyword)
                                              || x.Description.Contains(Filter.Keyword));
                 }
+                // Fitler
+                if (Filter != null)
+                {
+                    // Filter by keyword
+                    if (Filter.SubCategoryId > 0)
+                    {
+                        query = query.Where(x => x.SubCategoryIds.Split(',').Contains(Filter.SubCategoryId.ToString()));
+                    }
+                }
 
                 // Paging
                 Pagination.TotalRows = query.Count();

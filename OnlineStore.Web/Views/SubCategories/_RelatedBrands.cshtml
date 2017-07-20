@@ -1,0 +1,13 @@
+﻿@model List<OnlineStore.Data.Entities.Brand>
+
+<div class="layered layered-brand">
+    <h2>Thương hiệu liên quan</h2>
+    <div class="content-shopby">
+        <ol>
+            @foreach (var brand in Model)
+            {
+                <li><a href="#">@brand.Name</a></li>
+            }
+        </ol>
+    </div>
+</div>

@@ -991,6 +991,8 @@
     <Content Include="Views\ShoppingCart\Successful.cshtml" />
     <Content Include="Views\Shared\_HiddenSearch.cshtml" />
     <Content Include="Views\Home\_Breadcrumb.cshtml" />
+    <Content Include="Views\SubCategories\_RelatedBrands.cshtml" />
+    <Content Include="Views\SubCategories\_Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

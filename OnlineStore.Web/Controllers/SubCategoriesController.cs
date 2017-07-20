@@ -18,11 +18,13 @@ namespace OnlineStore.Web.Controllers
     {
         private readonly SubCategoryService _subCategoryService;
         private readonly ProductService _productService;
+        private readonly BrandService _brandService;
 
         public SubCategoriesController()
         {
             this._subCategoryService = new SubCategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -61,6 +63,34 @@ namespace OnlineStore.Web.Controllers
         {
             ViewBag.SubCategoryId = id;
             return View();
+        }
+
+        // Related brands
+        public ActionResult _RelatedBrands(int? subCategoryId)
+        {
+            _brandService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 10
+            };
+
+            _brandService.Filter = new DefaultFilter()
+            {
+                SubCategoryId = subCategoryId == null ? 0 : subCategoryId.Value
+            };
+
+            var brands = _brandService.GetBrands();
+
+            return PartialView(brands);
+        }
+
+        //Filter
+        public ActionResult _Filter(int? subCategoryId)
+        {
+            ViewBag.SubCategoryId = subCategoryId;
+
+            return PartialView();
         }
     }
 }

@@ -18,11 +18,13 @@ namespace OnlineStore.Web.Controllers
     {
         private readonly CategoryService _categoryService;
         private readonly ProductService _productService;
+        private readonly BrandService _brandService;
 
         public CategoriesController()
         {
             this._categoryService = new CategoryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._productService = new ProductService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._brandService = new BrandService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -91,6 +93,34 @@ namespace OnlineStore.Web.Controllers
             ViewBag.Categories = _categoryService.GetCategories();
 
             return PartialView();
+        }
+
+        //Filter
+        public ActionResult _Filter(int? categoryId)
+        {
+            ViewBag.CategoryId = categoryId;
+
+            return PartialView();
+        }
+
+        // Related brands
+        public ActionResult _RelatedBrands(int? categoryId)
+        {
+            _brandService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 10
+            };
+
+            _brandService.Filter = new DefaultFilter()
+            {
+                CategoryId = categoryId == null ? 0 : categoryId.Value
+            };
+
+            var brands = _brandService.GetBrands();
+
+            return PartialView(brands);
         }
     }
 }

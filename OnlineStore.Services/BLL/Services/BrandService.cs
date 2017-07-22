@@ -132,9 +132,8 @@ namespace OnlineStore.Services.BLL.Services
                     }
                     if (Filter.CategoryId > 0)
                     {
-                        // Get Categories
-
-                        //query = query.Where(x => x.SubCategoryIds.StartsWith(Filter.CategoryId.ToString() + ",") || x.SubCategoryIds.EndsWith("," + Filter.SubCategoryId.ToString()) || x.SubCategoryIds.Contains("," + Filter.SubCategoryId.ToString() + ",") || x.SubCategoryIds == Filter.SubCategoryId.ToString());
+                        var category = _unitOfWork.GetRepository<Data.Entities.Category>().Get(x => x.Id == Filter.CategoryId, null, "CreatedBy,ModifiedBy,SubCategories").FirstOrDefault();
+                        query = query.Where(x => category.SubCategories.Any(y => x.SubCategoryIds.StartsWith(y.Id + ",")) || category.SubCategories.Any(z => x.SubCategoryIds.EndsWith("," + z.Id)) || category.SubCategories.Any(h => x.SubCategoryIds.Contains("," + h.Id + ",")) || category.SubCategories.Any(l => x.SubCategoryIds == l.Id.ToString()));
                     }
                 }
 

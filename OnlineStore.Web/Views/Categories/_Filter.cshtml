@@ -1,0 +1,21 @@
+﻿<div class="col-sm-3 col-left">
+    <div class="block block-layered-nav">
+        <div class="block-content">
+            <div id="narrow-by-list">
+                <div class="layered layered-price">
+                    <h2>Mức giá</h2>
+                    <div class="content-shopby">
+                        <div id="slider-range"></div>
+                        <div id="search_pr">
+                            <input type="text" name="first_price" class="form-control">
+                            <input type="text" name="last_price" class="form-control">
+                            <button id="search_price" name="search_price" type="button" class="btn btn-default">SHOW</button>
+                        </div>
+                    </div>
+                </div>
+                <!--Related brands-->
+                @Html.Action("_RelatedBrands", "Categories", new { categoryId = ViewBag.CategoryId })
+            </div>
+        </div>
+    </div><!-- /sort -->
+</div><!-- /.col-left -->

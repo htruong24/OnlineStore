@@ -128,7 +128,13 @@ namespace OnlineStore.Services.BLL.Services
                     // Filter by keyword
                     if (Filter.SubCategoryId > 0)
                     {
-                        query = query.Where(x => x.SubCategoryIds.Split(',').Contains(Filter.SubCategoryId.ToString()));
+                        query = query.Where(x => x.SubCategoryIds.StartsWith(Filter.SubCategoryId.ToString() + ",") || x.SubCategoryIds.EndsWith("," + Filter.SubCategoryId.ToString()) || x.SubCategoryIds.Contains("," + Filter.SubCategoryId.ToString() + ",") || x.SubCategoryIds == Filter.SubCategoryId.ToString());
+                    }
+                    if (Filter.CategoryId > 0)
+                    {
+                        // Get Categories
+
+                        //query = query.Where(x => x.SubCategoryIds.StartsWith(Filter.CategoryId.ToString() + ",") || x.SubCategoryIds.EndsWith("," + Filter.SubCategoryId.ToString()) || x.SubCategoryIds.Contains("," + Filter.SubCategoryId.ToString() + ",") || x.SubCategoryIds == Filter.SubCategoryId.ToString());
                     }
                 }
 
@@ -141,9 +147,9 @@ namespace OnlineStore.Services.BLL.Services
                 query = Pagination.PageSize == 0 ? query.AsQueryable() : query.AsQueryable().Skip(pageIndex * Pagination.PageSize).Take(Pagination.PageSize);
 
                 var results = query.ToList();
-                foreach(var brand in results)
+                foreach (var brand in results)
                 {
-                    if(brand.SubCategoryIds != null)
+                    if (brand.SubCategoryIds != null)
                     {
                         var subCategoryIds = Array.ConvertAll(brand.SubCategoryIds.Split(','), x => int.Parse(x));
                         var subcategories = new List<SubCategory>();

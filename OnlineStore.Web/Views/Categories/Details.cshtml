@@ -1,9 +1,8 @@
-﻿@model List<OnlineStore.Data.Entities.Product>
-
+﻿@model OnlineStore.Data.Entities.Category
 @{
     <!--For Breadcrumb-->
     ViewBag.BreadcrumbType = "Category";
-    ViewBag.ObjectId = ViewBag.CategoryId;
+    ViewBag.ObjectId = Model.Id;
 }
 
 <!--Hidden fields-->
@@ -15,17 +14,15 @@
 <div class="main">
     <div class="container">
         <div class="row">
-            
-            @*@Html.Partial("_Filter")*@
 
-            @Html.Action("_Filter", "Categories", new { categoryId = ViewBag.CategoryId })
+            @Html.Action("_Filter", "Categories", new { categoryId = Model.Id })
             
             <div class="col-sm-9 col-right">
                 <div class="banner">
                     <a href="#"><img alt="" src="~/assets/web/images/ads/ads-17.jpg"></a>
                 </div>
                 <div class="page-title">
-                    <h1>TÊN DANH MỤC</h1>
+                    <h1>@Model.Name</h1>
                 </div>
                 <div class="toolbar">
                     <div class="sorter">
@@ -51,7 +48,7 @@
                 </div><!-- /.toolbar -->
 
                 <div id="search-container">
-                    @Html.Action("_List", "Categories", new { CategoryId = ViewBag.CategoryId })
+                    @Html.Action("_List", "Categories", new { CategoryId = Model.Id })
                 </div>
             </div><!-- /.col-right -->
         </div>

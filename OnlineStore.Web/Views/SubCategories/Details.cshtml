@@ -1,9 +1,9 @@
-﻿@model List<OnlineStore.Data.Entities.Product>
+﻿@model OnlineStore.Data.Entities.SubCategory
 
 @{
     <!--For Breadcrumb-->
     ViewBag.BreadcrumbType = "SubCategory";
-    ViewBag.ObjectId = ViewBag.SubCategoryId;
+    ViewBag.ObjectId = Model.Id;
 }
 
 <!--Hidden fields-->
@@ -18,7 +18,7 @@
 
             @*@Html.Partial("_Filter")*@
 
-            @Html.Action("_Filter", "SubCategories", new { subCategoryId = ViewBag.SubCategoryId })
+            @Html.Action("_Filter", "SubCategories", new { subCategoryId = Model.Id })
 
             <div class="col-sm-9 col-right">
                 <div class="banner">
@@ -51,7 +51,7 @@
                 </div><!-- /.toolbar -->
 
                 <div id="search-container">
-                    @Html.Action("_List", "Categories", new { SubCategoryId = ViewBag.SubCategoryId })
+                    @Html.Action("_List", "Categories", new { SubCategoryId = Model.Id })
                 </div>
             </div><!-- /.col-right -->
         </div>

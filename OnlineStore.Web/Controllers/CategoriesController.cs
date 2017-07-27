@@ -61,6 +61,7 @@ namespace OnlineStore.Web.Controllers
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.CategoryId = id;
             var category = _categoryService.GetCategory(id);
             return View(category);
         }

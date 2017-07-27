@@ -29,12 +29,16 @@ namespace OnlineStore.Services.BLL.Services
                 var brand = _unitOfWork.GetRepository<Data.Entities.Brand>()
                         .Get(x => x.Id == brandId, null, "CreatedBy,ModifiedBy")
                         .FirstOrDefault();
-                var subCategoryIds = Array.ConvertAll(brand.SubCategoryIds.Split(','), x => int.Parse(x));
+
                 var subcategories = new List<SubCategory>();
-                foreach (var id in subCategoryIds)
+                if(!string.IsNullOrEmpty(brand.SubCategoryIds))
                 {
-                    var subcategory = _unitOfWork.GetRepository<SubCategory>().GetById(id);
-                    subcategories.Add(subcategory);
+                    var subCategoryIds = Array.ConvertAll(brand.SubCategoryIds.Split(','), x => int.Parse(x));
+                    foreach (var id in subCategoryIds)
+                    {
+                        var subcategory = _unitOfWork.GetRepository<SubCategory>().GetById(id);
+                        subcategories.Add(subcategory);
+                    }
                 }
                 brand.SubCategoryList = subcategories;
                 brand.SubCategoryDisplayText = string.Join(", ", subcategories.Select(x => "<a target='_blank' href='/danh-muc-con/" + x.MetaTitle + "-" + x.Id + "'>" + x.Name + "</a>").ToList()); 

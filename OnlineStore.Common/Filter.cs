@@ -14,5 +14,7 @@ namespace OnlineStore.Common
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
         public bool Featured { get; set; }
+        public string PriceRange { get; set; }
+        public string Brands { get; set; }
     }
 }

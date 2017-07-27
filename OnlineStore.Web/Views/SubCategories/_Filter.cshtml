@@ -3,14 +3,21 @@
         <div class="block-content">
             <div id="narrow-by-list">
                 <div class="layered layered-price">
-                    <h2>Mức giá</h2>
-                    <div class="content-shopby">
-                        <div id="slider-range"></div>
-                        <div id="search_pr">
-                            <input type="text" name="first_price" class="form-control">
-                            <input type="text" name="last_price" class="form-control">
-                            <button id="search_price" name="search_price" type="button" class="btn btn-default">SHOW</button>
+                    <h2>Giá sản phẩm</h2>
+                    <div class="content-shopby form-horizontal" style="text-align:center;">
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <label class="control-label col-sm-2">Từ:</label>
+                            <div class="col-sm-10 form-inline">
+                                <input type="number" class="form-control" id="from-price" placeholder=""> đ
+                            </div>
                         </div>
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <label class="control-label col-sm-2">Đến:</label>
+                            <div class="col-sm-10 form-inline">
+                                <input type="number" class="form-control" id="to-price" placeholder=""> đ
+                            </div>
+                        </div>
+                        <button id="search_price" name="search_price" type="button" class="btn btn-default">Lọc</button>
                     </div>
                 </div>
                 <!--Related brands-->

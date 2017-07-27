@@ -156,6 +156,11 @@ namespace OnlineStore.Services.BLL.Services
                     {
                         query = query.Where(x => x.Featured == true);
                     }
+                    if (!string.IsNullOrEmpty(Filter.Brands))
+                    {
+                        var brands = Array.ConvertAll(Filter.Brands.Split(','), x => x);
+                        query = query.Where(x => x.BrandId != null && brands.Contains(x.BrandId.ToString()));
+                    }
                 }
 
                 // Paging

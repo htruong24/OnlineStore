@@ -864,6 +864,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\materialize\css\materialize.css" />
+    <Content Include="Scripts\materialize\css\materialize.min.css" />
+    <Content Include="Scripts\materialize\js\materialize.js" />
+    <Content Include="Scripts\materialize\js\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -995,6 +999,18 @@
     <Content Include="Views\SubCategories\_Filter.cshtml" />
     <Content Include="Views\Categories\_RelatedBrands.cshtml" />
     <Content Include="Views\Categories\_Filter.cshtml" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="Scripts\materialize\fonts\roboto\Roboto-Thin.woff2" />
+    <Content Include="Scripts\materialize\LICENSE" />
+    <Content Include="Scripts\materialize\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

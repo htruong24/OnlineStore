@@ -156,6 +156,25 @@ namespace OnlineStore.Services.BLL.Services
                     {
                         query = query.Where(x => x.Featured == true);
                     }
+                    if (!string.IsNullOrEmpty(Filter.PriceRange))
+                    {
+                        var prices = Filter.PriceRange.Split(':');
+                        var fromPrice = string.IsNullOrEmpty(prices[0]) ? 0: int.Parse(prices[0]);
+                        var toPrice = string.IsNullOrEmpty(prices[1]) ? 0 : int.Parse(prices[1]);
+
+                        if (fromPrice != 0 && toPrice != 0)
+                        {
+                            query = query.Where(x => x.Price >= fromPrice && x.Price <= toPrice);
+                        }
+                        else if (fromPrice != 0 && toPrice == 0)
+                        {
+                            query = query.Where(x => x.Price >= fromPrice);
+                        }
+                        else if (fromPrice == 0 && toPrice != 0)
+                        {
+                            query = query.Where(x => x.Price <= toPrice);
+                        }
+                    }
                     if (!string.IsNullOrEmpty(Filter.Brands))
                     {
                         var brands = Array.ConvertAll(Filter.Brands.Split(','), x => x);

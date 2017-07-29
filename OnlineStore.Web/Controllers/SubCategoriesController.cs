@@ -61,6 +61,7 @@ namespace OnlineStore.Web.Controllers
         // GET: SubCategories/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.SubCategoryId = id;
             var subCategory = _subCategoryService.GetSubCategory(id);
             return View(subCategory);
         }

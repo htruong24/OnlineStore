@@ -17,9 +17,10 @@
         <input type="hidden" name="PageSize" id="hdPageSize" value="@info.PageSize" />
         <input type="hidden" name="CurrentPage" id="hdCurrentPage" value="@info.CurrentPage" />
         <input type="hidden" name="Keyword" id="hdKeyword" value="" />
-        <input type="hidden" name="CategoryId" id="hdCategoryId" />
+        <input type="hidden" name="CategoryId" id="hdCategoryId" value="@ViewBag.CategoryId"/>
+        <input type="hidden" name="SubCategoryId" id="hdSubCategoryId" value="@ViewBag.SubCategoryId" />
         <input type="hidden" name="PriceRange" id="hdPriceRange" />
-        <input type="hidden" name="Brands" id="hdBrands" value="@ViewBag.CategoryId" />
+        <input type="hidden" name="Brands" id="hdBrands"/>
     </form>
 </div><!-- /.nav-search -->
 

@@ -14,7 +14,7 @@
                         <div class="checkout-step-item">
                             <div class="step-title clearfix" data-toggle="collapse" data-target="#checkout-one">
                                 <span class="number">1</span>
-                                <h2>PHƯƠNG THỨC THANH TOÁN</h2>
+                                <h2>ĐỐI TƯỢNG THANH TOÁN</h2>
                             </div>
                             <div id="checkout-one" class="collapse in">
                                 <div class="step-content">
@@ -22,7 +22,7 @@
                                         <div class="col-sm-12">
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai
+                                                    <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai <b>(không cần đăng nhập, xác nhận thông tin qua email hoặc số điện thoại)</b>
                                                 </label>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                 <span class="number">2</span>
                                 <h2>PHƯƠNG THỨC THANH TOÁN</h2>
                             </div>
-                            <div id="checkout-two" class="collapse">
+                            <div id="checkout-two" class="collapse in">
                                 <div class="step-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -88,12 +88,12 @@
                                                 <label class="control-label">Thanh toán bằng:</label>
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" value="option1" name="paymenttype-type" checked>Tiền mặt khi nhận hàng
+                                                        <input type="radio" value="Tiền mặt khi nhận hàng" name="paymentmethod" checked>Tiền mặt khi nhận hàng
                                                     </label>
                                                 </div>
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" value="option2" name="paymenttype-type">Chuyển khoản
+                                                        <input type="radio" value="Tiền mặt khi nhận hàng" name="paymentmethod">Chuyển khoản
                                                     </label>
                                                 </div>
                                             </div>
@@ -107,7 +107,7 @@
                                 <span class="number">3</span>
                                 <h2>THÔNG TIN GIAO HÀNG</h2>
                             </div>
-                            <div id="checkout-three" class="collapse">
+                            <div id="checkout-three" class="collapse in">
                                 <div class="step-content">
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -116,7 +116,10 @@
                                             <div class="form-group">
                                                 <label class="control-label">Thành phố <em>*</em></label>
                                                 <select class="form-control">
-                                                    <option>-- Select options  --</option>
+                                                    <option>-- Chọn thành phố  --</option>
+                                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                    <option value="Buôn Ma Thuột">Buôn Ma Thuột</option>
+                                                    <option value="Vũng Tàu">Vũng Tàu</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -127,20 +130,20 @@
                                                 <label class="control-label">Mã bưu điện</label>
                                                 <input type="text" class="form-control">
                                             </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Số điện thoại <em>*</em></label>
+                                                <input type="text" class="form-control">
+                                            </div>
                                             @*<div class="form-group">
                                                 <button type="button" class="btn btn-default btn-md">GET A QUOTE</button>
                                             </div>*@
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>CHÚ THÍCH</h4>
-                                            <div class="form-group">
-                                                <label class="control-label">Số điện thoại</label>
-                                                <input type="text" class="form-control">
-                                            </div>
                                             @*<p class="text-muted">Enter your coupon code if you have one</p>*@
                                             <div class="form-group">
                                                 @*<label class="control-label">&nbsp;</label>*@
-                                                <textarea rows="8" type="text" class="form-control"></textarea>
+                                                <textarea rows="14" type="text" class="form-control"></textarea>
                                             </div>
                                             @*<div class="form-group">
                                                 <button type="button" class="btn btn-default btn-md">APPLY COUPON</button>
@@ -171,7 +174,7 @@
                                 <span class="number">4</span>
                                 <h2>PHƯƠNG THỨC GIAO HÀNG</h2>
                             </div>
-                            <div id="checkout-four" class="collapse">
+                            <div id="checkout-four" class="collapse in">
                                 <div class="step-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -179,12 +182,12 @@
                                                 <label class="control-label">Giao hàng:</label>
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" value="option1" name="paymenttype-type" checked>Tận nơi
+                                                        <input type="radio" value="Tận nơi" name="paymenttype" checked>Tận nơi
                                                     </label>
                                                 </div>
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" value="option2" name="paymenttype-type">Giao hàng bưu điện
+                                                        <input type="radio" value="Qua bưu điện" name="paymenttype">Qua bưu điện
                                                     </label>
                                                 </div>
                                             </div>
@@ -207,9 +210,9 @@
                         <div class="checkout-step-item">
                             <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-six">
                                 <span class="number">5</span>
-                                <h2>XEM LẠI ĐƠN HÀNG</h2>
+                                <h2>XEM LẠI THÔNG TIN ĐƠN HÀNG</h2>
                             </div>
-                            <div id="checkout-six" class="collapse">
+                            <div id="checkout-six" class="collapse in">
                                 <div class="step-content">
                                     <div class="row">
                                         <div class="table-responsive">

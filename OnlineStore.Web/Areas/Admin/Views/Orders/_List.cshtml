@@ -16,19 +16,34 @@
                             <span class="lbl"></span>
                         </label>
                     </th>
-                    <th class="sorting sortable" data-sortfield="CustomerId">
-                        @Html.DisplayNameFor(model => model.CustomerId)
+                    <th class="sorting sortable" data-sortfield="Code">
+                        @Html.DisplayNameFor(model => model.Code)
                     </th>
-                    <th class="sorting sortable" data-sortfield="StatusId">
-                        @Html.DisplayNameFor(model => model.StatusId)
+                    <th class="sorting sortable" data-sortfield="CustomerName">
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Email">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Telephone">
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="PaymentMethod">
+                        @Html.DisplayNameFor(model => model.PaymentMethod)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="DeliveryMethod">
+                        @Html.DisplayNameFor(model => model.DeliveryMethod)
                     </th>
                     <th class="sorting sortable" data-sortfield="Note">
                         @Html.DisplayNameFor(model => model.Note)
                     </th>
+                    <th class="sorting sortable" data-sortfield="StatusId">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
                     <th class="sorting sortable" data-sortfield="CreatedOn">
                         <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>@Html.DisplayNameFor(model => model.CreatedOn)
                     </th>
-                    <th class="sorting sortable" data-sortfield="CreatedBy">
+                    @*<th class="sorting sortable" data-sortfield="CreatedBy">
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </th>
                     <th class="sorting sortable" data-sortfield="ModifiedOn">
@@ -36,12 +51,12 @@
                     </th>
                     <th class="sorting sortable" data-sortfield="ModifiedBy">
                         @Html.DisplayNameFor(model => model.ModifiedBy)
-                    </th>
+                    </th>*@
                     <th class="sorting_disabled"></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+            @foreach (var item in Model)
             {
                     <tr>
                         <td class="center">
@@ -52,19 +67,36 @@
                         </td>
                         <td>
                             <a href="~/Admin/Orders/Details/@item.Id">
-                                @Html.DisplayFor(modelItem => item.CustomerId)
+                                @Html.DisplayFor(modelItem => item.Code)
                             </a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StatusId)
+                            <a href="~/Admin/Orders/Details/@item.Id">
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telephone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentMethod)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryMethod)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Note)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                            @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
                         </td>
                         <td>
@@ -72,7 +104,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedBy)
-                        </td>
+                        </td>*@
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
                                 <a class="blue" href="~/Admin/Orders/Details/@item.Id">

@@ -1,37 +1,104 @@
 ﻿@model OnlineStore.Data.Entities.Order
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Module = "Đơn hàng";
+    ViewBag.Title = "Xóa đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<h2>Xóa</h2>
 
 <div class="alert alert-danger">
-    Bạn có chắc muốn xóa bản ghi này?
+    Bạn có chắc muốn xóa đơn hàng này?
 </div>
 
 <div>
     @*Details information*@
     <div class="widget-box">
         <div class="widget-header widget-header-flat">
-            <h4 class="widget-title smaller">Thông tin chi tiết</h4>
+            <h4 class="widget-title smaller">Thông tin khách hàng</h4>
         </div>
         <div class="widget-body">
             <div class="widget-main">
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.CustomerId)
+                        @Html.DisplayNameFor(model => model.CustomerName)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.CustomerId)
+                        @Html.DisplayFor(model => model.CustomerName)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.StatusId)
+                        @Html.DisplayNameFor(model => model.Telephone)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.StatusId)
+                        @Html.DisplayFor(model => model.Telephone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    @*Order information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Thông tin đơn hàng</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PaymentObject)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PaymentObject)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PaymentMethod)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PaymentMethod)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryMethod)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryMethod)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PostalCode)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PostalCode)
                     </dd>
 
                     <dt>
@@ -41,7 +108,26 @@
                     <dd>
                         @Html.DisplayFor(model => model.Note)
                     </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Status)
+                    </dd>
                 </dl>
+            </div>
+        </div>
+    </div>
+    @*Order Details information*@
+    <div class="widget-box">
+        <div class="widget-header widget-header-flat">
+            <h4 class="widget-title smaller">Chi tiết đơn hàng</h4>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main">
+                Chi tiết đơn hàng
             </div>
         </div>
     </div>
@@ -63,7 +149,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -75,7 +161,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>

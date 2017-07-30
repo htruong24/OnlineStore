@@ -17,13 +17,44 @@
         [Key]
         public int Id { get; set; }
 
+        [DisplayName("Mã số")]
+        public string Code { get; set; }
+
         [StringLength(30)]
         public string CustomerId { get; set; }
 
-        public int? StatusId { get; set; }
+        [DisplayName("Tên khách hàng")]
+        public string CustomerName { get; set; }
+
+        [DisplayName("Đối tượng thanh toán")]
+        public string PaymentObject { get; set; }
+
+        [DisplayName("Phương thức thanh toán")]
+        public string PaymentMethod { get; set; }
+
+        [DisplayName("Phương thức giao hàng")]
+        public string DeliveryMethod { get; set; }
+
+        [DisplayName("Số điện thoại")]
+        public string Telephone { get; set; }
+
+        [DisplayName("Email")]
+        public string Email { get; set; }
+
+        [DisplayName("Thành phố")]
+        public string City { get; set; }
+
+        [DisplayName("Địa chỉ")]
+        public string Address { get; set; }
+
+        [DisplayName("Mã bưu điện")]
+        public string PostalCode { get; set; }
 
         [DisplayName("Ghi chú")]
         public string Note { get; set; }
+
+        [DisplayName("Trạng thái")]
+        public string Status { get; set; }
 
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

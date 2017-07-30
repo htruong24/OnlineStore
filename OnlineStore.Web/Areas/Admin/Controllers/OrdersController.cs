@@ -69,6 +69,18 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Orders/Create
         public ActionResult Create()
         {
+            var paymentObjects = new string[] { "Khách vãng lai" };
+            var paymentMethods = new string[] { "Tiền mặt khi nhận hàng", "Chuyển khoản" };
+            var deliveryMethods = new string[] { "Tận nơi", "Qua bưu điện" };
+            var cities = new string[] { "Hồ Chí Minh", "Đà Nẵng", "Vũng Tàu", "Đồng Nai", "Buôn Ma Thuột" };
+            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng" };
+
+            ViewBag.PaymentObjects = paymentObjects.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.PaymentMethods = paymentMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.DeliveryMethods = deliveryMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.Cities = cities.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.Statuses = statuses.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+
             return View();
         }
 
@@ -96,6 +108,18 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var paymentObjects = new string[] { "Khách vãng lai" };
+            var paymentMethods = new string[] { "Tiền mặt khi nhận hàng", "Chuyển khoản" };
+            var deliveryMethods = new string[] { "Tận nơi", "Qua bưu điện" };
+            var cities = new string[] { "Hồ Chí Minh", "Đà Nẵng", "Vũng Tàu", "Đồng Nai", "Buôn Ma Thuột" };
+            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng" };
+
+            ViewBag.PaymentObjects = paymentObjects.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.PaymentMethods = paymentMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.DeliveryMethods = deliveryMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.Cities = cities.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            ViewBag.Statuses = statuses.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+
             var order = _orderService.GetOrder(id);
             if (order == null)
             {

@@ -26,7 +26,9 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var order = _unitOfWork.GetRepository<Data.Entities.Order>().GetById(orderId);
+                var order = _unitOfWork.GetRepository<Data.Entities.Order>()
+                        .Get(x => x.Id == orderId, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
                 return order;
             }
         }
@@ -72,6 +74,46 @@ namespace OnlineStore.Services.BLL.Services
                                  query.OrderBy(c => c.Id) :
                                  query.OrderByDescending(c => c.Id));
                         break;
+                    case "Code":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Code) :
+                                 query.OrderByDescending(c => c.Code));
+                        break;
+                    case "CustomerName":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.CustomerName) :
+                                 query.OrderByDescending(c => c.CustomerName));
+                        break;
+                    case "Email":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Email) :
+                                 query.OrderByDescending(c => c.Email));
+                        break;
+                    case "Telephone":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Telephone) :
+                                 query.OrderByDescending(c => c.Telephone));
+                        break;
+                    case "PaymentMethod":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.PaymentMethod) :
+                                 query.OrderByDescending(c => c.PaymentMethod));
+                        break;
+                    case "DeliveryMethod":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.DeliveryMethod) :
+                                 query.OrderByDescending(c => c.DeliveryMethod));
+                        break;
+                    case "Note":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Note) :
+                                 query.OrderByDescending(c => c.Note));
+                        break;
+                    case "Status":
+                        query = (Pagination.SortDirection == "ascending" ?
+                                 query.OrderBy(c => c.Status) :
+                                 query.OrderByDescending(c => c.Status));
+                        break;
                     case "CreatedOn":
                         query = (Pagination.SortDirection == "ascending" ?
                                  query.OrderBy(c => c.CreatedOn) :
@@ -97,9 +139,14 @@ namespace OnlineStore.Services.BLL.Services
                 // Fitler
                 if (!string.IsNullOrEmpty(Filter?.Keyword))
                 {
-                    //query = query.Where(x => x.Name.Contains(Filter.Keyword)
-                    //                         || x.ShortDescrition.Contains(Filter.Keyword)
-                    //                         || x.Description.Contains(Filter.Keyword));
+                    query = query.Where(x => x.Code.Contains(Filter.Keyword)
+                                             || x.CustomerName.Contains(Filter.Keyword)
+                                             || x.Email.Contains(Filter.Keyword)
+                                             || x.Telephone.Contains(Filter.Keyword)
+                                             || x.PaymentMethod.Contains(Filter.Keyword)
+                                             || x.DeliveryMethod.Contains(Filter.Keyword)
+                                             || x.Note.Contains(Filter.Keyword)
+                                             || x.Status.Contains(Filter.Keyword));
                 }
 
                 // Paging

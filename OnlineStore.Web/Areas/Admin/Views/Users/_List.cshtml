@@ -57,21 +57,21 @@
                     <th class="sorting sortable" data-sortfield="CreatedOn">
                         <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>@Html.DisplayNameFor(model => model.CreatedOn)
                     </th>
-                    <th class="sorting sortable" data-sortfield="CreatedBy">
+                    @*<th class="sorting sortable" data-sortfield="CreatedBy">
                         @Html.DisplayNameFor(model => model.CreatedBy)
-                    </th>
+                    </th>*@
                     <th class="sorting sortable" data-sortfield="ModifiedOn">
                         <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>@Html.DisplayNameFor(model => model.ModifiedOn)
                     </th>
-                    <th class="sorting sortable" data-sortfield="ModifiedBy">
+                    @*<th class="sorting sortable" data-sortfield="ModifiedBy">
                         @Html.DisplayNameFor(model => model.ModifiedBy)
-                    </th>
+                    </th>*@
                     <th class="sorting_disabled"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
-            {
+                {
                     <tr>
                         <td class="center">
                             <label class="pos-rel">
@@ -120,15 +120,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.CreatedOn)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.CreatedBy)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedOn)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.ModifiedBy)
-                        </td>
+                        </td>*@
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
                                 <a class="blue" href="~/Admin/Users/Details/@item.Id">

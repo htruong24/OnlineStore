@@ -4,291 +4,294 @@
     ViewBag.Title = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="main">
     <div class="container">
         <div class="checkout">
             <div class="row">
                 <div class="col-sm-9">
-                    <div class="checkout-step">
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix" data-toggle="collapse" data-target="#checkout-one">
-                                <span class="number">1</span>
-                                <h2>ĐỐI TƯỢNG THANH TOÁN</h2>
-                            </div>
-                            <div id="checkout-one" class="collapse in">
-                                <div class="step-content">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" value="Khách vãng lai" name="PaymentObject" checked> Thanh toán như khách vãng lai <b>(không cần đăng nhập, xác nhận thông tin qua email hoặc số điện thoại)</b>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        @*<div class="col-sm-6">
-                                            <h4>Đặt hàng như khách vãng lai hay đăng kí mới</h4>
-                                            <div class="line2 mtb20"></div>
-                                            <div class="form-group">
-                                                <label class="control-label">Hãy đăng kí mới để thuận tiện về sau:</label>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" value="option2" name="register-type"> Đăng kí
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <p class="text-primary">Đăng kí và tiết kiệm thời gian!</p>
-                                            <p class="text-primary">Đăng kí với chúng tôi để thuận tiện về sau:</p>
-                                            <ul class="list-unstyled">
-                                                <li>+  Đặt hàng nhanh chóng và dễ dàng</li>
-                                                <li>+  Dễ dàng xem lịch sử giao hàng và trạng thái</li>
-                                            </ul>
-                                            <br>
-                                            <p><button type="button" class="btn btn-danger btn-md btn-continue fwb">TIẾP TỤC</button></p>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h4>Đăng nhập</h4>
-                                            <div class="line2 mtb20"></div>
-                                            <div class="form-group">
-                                                <label class="control-label">Đã đăng kí?</label>
-                                                <p class="text-muted">Xin đăng nhập bên dưới:</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Địa chỉ email *</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Mật khẩu *</label>
-                                                <input type="password" class="form-control">
-                                            </div>
-                                            <p><a href="#">Quên mật khẩu của bạn?</a></p>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-danger btn-md btn-login fwb">ĐĂNG NHẬP</button>
-                                            </div>
-                                        </div>*@
-                                    </div>
+                    <form id="frmCheckout" action="~/Orders/Create" method="post">
+                        <div class="checkout-step">
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix" data-toggle="collapse" data-target="#checkout-one">
+                                    <span class="number">1</span>
+                                    <h2>ĐỐI TƯỢNG THANH TOÁN</h2>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-two">
-                                <span class="number">2</span>
-                                <h2>PHƯƠNG THỨC THANH TOÁN</h2>
-                            </div>
-                            <div id="checkout-two" class="collapse in">
-                                <div class="step-content">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Thanh toán bằng:</label>
+                                <div id="checkout-one" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
                                                 <div class="radio">
                                                     <label>
-                                                        <input type="radio" value="Tiền mặt khi nhận hàng" name="PaymentMethod" checked>Tiền mặt khi nhận hàng
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" value="Tiền mặt khi nhận hàng" name="PaymentMethod">Chuyển khoản
+                                                        <input type="radio" value="Khách vãng lai" name="PaymentObject" checked> Thanh toán như khách vãng lai <b>(không cần đăng nhập, xác nhận thông tin qua email hoặc số điện thoại)</b>
                                                     </label>
                                                 </div>
                                             </div>
+                                            @*<div class="col-sm-6">
+                                    <h4>Đặt hàng như khách vãng lai hay đăng kí mới</h4>
+                                    <div class="line2 mtb20"></div>
+                                    <div class="form-group">
+                                        <label class="control-label">Hãy đăng kí mới để thuận tiện về sau:</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" value="option1" name="register-type" checked> Thanh toán như khách vãng lai
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" value="option2" name="register-type"> Đăng kí
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p class="text-primary">Đăng kí và tiết kiệm thời gian!</p>
+                                    <p class="text-primary">Đăng kí với chúng tôi để thuận tiện về sau:</p>
+                                    <ul class="list-unstyled">
+                                        <li>+  Đặt hàng nhanh chóng và dễ dàng</li>
+                                        <li>+  Dễ dàng xem lịch sử giao hàng và trạng thái</li>
+                                    </ul>
+                                    <br>
+                                    <p><button type="button" class="btn btn-danger btn-md btn-continue fwb">TIẾP TỤC</button></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4>Đăng nhập</h4>
+                                    <div class="line2 mtb20"></div>
+                                    <div class="form-group">
+                                        <label class="control-label">Đã đăng kí?</label>
+                                        <p class="text-muted">Xin đăng nhập bên dưới:</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Địa chỉ email *</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Mật khẩu *</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                    <p><a href="#">Quên mật khẩu của bạn?</a></p>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger btn-md btn-login fwb">ĐĂNG NHẬP</button>
+                                    </div>
+                                </div>*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
-                                <span class="number">3</span>
-                                <h2>THÔNG TIN GIAO HÀNG</h2>
-                            </div>
-                            <div id="checkout-three" class="collapse in">
-                                <div class="step-content">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <h4>THÔNG TIN KHÁCH HÀNG</h4>
-                                            <div class="form-group">
-                                                <label class="control-label">Tên khách hàng <em>*</em></label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Số điện thoại <em>*</em></label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Email <em>*</em></label>
-                                                <input type="email" class="form-control">
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-two">
+                                    <span class="number">2</span>
+                                    <h2>PHƯƠNG THỨC THANH TOÁN</h2>
+                                </div>
+                                <div id="checkout-two" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Thanh toán bằng:</label>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" value="Tiền mặt khi nhận hàng" name="PaymentMethod" checked>Tiền mặt khi nhận hàng
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" value="Tiền mặt khi nhận hàng" name="PaymentMethod">Chuyển khoản
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
+                                    <span class="number">3</span>
+                                    <h2>THÔNG TIN GIAO HÀNG</h2>
+                                </div>
+                                <div id="checkout-three" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <h4>THÔNG TIN KHÁCH HÀNG</h4>
+                                                <div class="form-group">
+                                                    <label class="control-label">Tên khách hàng <em>*</em></label>
+                                                    <input type="text" name="CustomerName" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Số điện thoại <em>*</em></label>
+                                                    <input type="text" name="Telephone" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Email <em>*</em></label>
+                                                    <input type="email" name="Email" class="form-control">
+                                                </div>
+                                            </div>
 
-                                        <div class="col-sm-4">
-                                            <h4>ĐỊA CHỈ</h4>
-                                            @*<p class="text-muted">Enter your destination to get shipping &amp; tax</p>*@
-                                            <div class="form-group">
-                                                <label class="control-label">Thành phố <em>*</em></label>
-                                                <select class="form-control">
-                                                    <option>-- Chọn thành phố  --</option>
-                                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                                    <option value="Buôn Ma Thuột">Buôn Ma Thuột</option>
-                                                    <option value="Vũng Tàu">Vũng Tàu</option>
-                                                </select>
+                                            <div class="col-sm-4">
+                                                <h4>ĐỊA CHỈ</h4>
+                                                @*<p class="text-muted">Enter your destination to get shipping &amp; tax</p>*@
+                                                <div class="form-group">
+                                                    <label class="control-label">Thành phố <em>*</em></label>
+                                                    <select name="City" class="form-control">
+                                                        <option>-- Chọn thành phố  --</option>
+                                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                        <option value="Buôn Ma Thuột">Buôn Ma Thuột</option>
+                                                        <option value="Vũng Tàu">Vũng Tàu</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Mã bưu điện</label>
+                                                    <input name="PostalCode" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Địa chỉ <em>*</em></label>
+                                                    <textarea name="Address" type="text" class="form-control"></textarea>
+                                                </div>
+                                                @*<div class="form-group">
+                                        <button type="button" class="btn btn-default btn-md">GET A QUOTE</button>
+                                    </div>*@
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Địa chỉ <em>*</em></label>
-                                                <textarea type="text" class="form-control"></textarea>
+                                            <div class="col-sm-4">
+                                                <h4>CHÚ THÍCH</h4>
+                                                @*<p class="text-muted">Enter your coupon code if you have one</p>*@
+                                                <div class="form-group">
+                                                    @*<label class="control-label">&nbsp;</label>*@
+                                                    <textarea name="Note" rows="10" type="text" class="form-control"></textarea>
+                                                </div>
+                                                @*<div class="form-group">
+                                        <button type="button" class="btn btn-default btn-md">APPLY COUPON</button>
+                                    </div>*@
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Mã bưu điện</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                            @*<div class="form-group">
-                                                <button type="button" class="btn btn-default btn-md">GET A QUOTE</button>
-                                            </div>*@
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <h4>CHÚ THÍCH</h4>
-                                            @*<p class="text-muted">Enter your coupon code if you have one</p>*@
-                                            <div class="form-group">
-                                                @*<label class="control-label">&nbsp;</label>*@
-                                                <textarea rows="10" type="text" class="form-control"></textarea>
-                                            </div>
-                                            @*<div class="form-group">
-                                                <button type="button" class="btn btn-default btn-md">APPLY COUPON</button>
-                                            </div>*@
-                                        </div>
-                                        @*<div class="col-sm-4">
-                                            <table class="table table-cart-total">
-                                                <tr>
-                                                    <td>Subtotal:</td>
-                                                    <td class="text-right">$250.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Grandtotal:</td>
-                                                    <td class="text-right">$250.00</td>
-                                                </tr>
-                                            </table>
-                                            <div class="text-right">
-                                                <p><button type="button" class="btn btn-default btn-md fwb">PROCCED TO CHECKOUT</button></p>
-                                                <p><a href="#" class="text-muted">Checkout with multiples address</a></p>
-                                            </div>
-                                        </div>*@
+                                            @*<div class="col-sm-4">
+                                    <table class="table table-cart-total">
+                                        <tr>
+                                            <td>Subtotal:</td>
+                                            <td class="text-right">$250.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Grandtotal:</td>
+                                            <td class="text-right">$250.00</td>
+                                        </tr>
+                                    </table>
+                                    <div class="text-right">
+                                        <p><button type="button" class="btn btn-default btn-md fwb">PROCCED TO CHECKOUT</button></p>
+                                        <p><a href="#" class="text-muted">Checkout with multiples address</a></p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-four">
-                                <span class="number">4</span>
-                                <h2>PHƯƠNG THỨC GIAO HÀNG</h2>
-                            </div>
-                            <div id="checkout-four" class="collapse in">
-                                <div class="step-content">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label class="control-label">Giao hàng:</label>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" value="Tận nơi" name="paymenttype" checked>Tận nơi
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" value="Qua bưu điện" name="paymenttype">Qua bưu điện
-                                                    </label>
-                                                </div>
-                                            </div>
+                                </div>*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @*<div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-five">
-                                <span class="number">5</span>
-                                <h2>THÔNG TIN THANH TOÁN</h2>
-                            </div>
-                            <div id="checkout-five" class="collapse">
-                                <div class="step-content">
-                                    Thông tin thanh toán
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-four">
+                                    <span class="number">4</span>
+                                    <h2>PHƯƠNG THỨC GIAO HÀNG</h2>
+                                </div>
+                                <div id="checkout-four" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Giao hàng:</label>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" value="Tận nơi" name="DeliveryMethod" checked>Tận nơi
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" value="Qua bưu điện" name="DeliveryMethod">Qua bưu điện
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>*@
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-six">
-                                <span class="number">5</span>
-                                <h2>XEM LẠI THÔNG TIN ĐƠN HÀNG</h2>
-                            </div>
-                            <div id="checkout-six" class="collapse in">
-                                <div class="step-content">
-                                    <div class="row">
-                                        <div class="table-responsive">
-                                            <table class="table custom-table">
-                                                <thead>
-                                                    <tr class="first last">
-                                                        <th>Ảnh sản phẩm</th>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Số lượng</th>
-                                                        <th>Đơn giá</th>
-                                                        <th>Tổng cộng</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach (var orderDetail in Model)
-                                                    {
-                                                        var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
-                                                        var featuredImageUrl = Placeholder.PRODUCT;
-                                                        if (featuredImage != null)
-                                                        {
-                                                            featuredImageUrl = featuredImage.Photo.Url;
-                                                        }
-
-                                                        <tr class="order-details" id="product-@orderDetail.ProductId">
-                                                            <td>
-                                                                <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
-                                                                    <img alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
-                                                            </td>
-                                                            <td class="qty" style="text-align:center; font-size:20px;">
-                                                                <label><b>@orderDetail.Quantity</b></label>
-                                                            </td>
-                                                            <td class="subtotal">@orderDetail.Price.ToCurrency() đ</td>
-                                                            @{
-                                                                var amount = orderDetail.Quantity * orderDetail.Price;
-                                                            }
-                                                            <td class="grandtotal">@amount.ToCurrency() đ</td>
+                            @*<div class="checkout-step-item">
+                    <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-five">
+                        <span class="number">5</span>
+                        <h2>THÔNG TIN THANH TOÁN</h2>
+                    </div>
+                    <div id="checkout-five" class="collapse">
+                        <div class="step-content">
+                            Thông tin thanh toán
+                        </div>
+                    </div>
+                </div>*@
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-six">
+                                    <span class="number">5</span>
+                                    <h2>XEM LẠI THÔNG TIN ĐƠN HÀNG</h2>
+                                </div>
+                                <div id="checkout-six" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table custom-table">
+                                                    <thead>
+                                                        <tr class="first last">
+                                                            <th>Ảnh sản phẩm</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Đơn giá</th>
+                                                            <th>Tổng cộng</th>
                                                         </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
-                                            <div class="col-sm-offset-8 col-sm-4">
-                                                <table class="table table-cart-total">
-                                                    <tr>
-                                                        <td>Tổng cộng:</td>
-                                                        @{
-                                                            var totalAmount = Model.Sum(x => x.Price * x.Quantity);
-                                                        }
-                                                        <td class="text-right total-amount">@totalAmount.ToCurrency() đ</td>
-                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var orderDetail in Model)
+                                                        {
+                                                            var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                                            var featuredImageUrl = Placeholder.PRODUCT;
+                                                            if (featuredImage != null)
+                                                            {
+                                                                featuredImageUrl = featuredImage.Photo.Url;
+                                                            }
+
+                                                            <tr class="order-details" id="product-@orderDetail.ProductId">
+                                                                <td>
+                                                                    <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
+                                                                        <img alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
+                                                                </td>
+                                                                <td class="qty" style="text-align:center; font-size:20px;">
+                                                                    <label><b>@orderDetail.Quantity</b></label>
+                                                                </td>
+                                                                <td class="subtotal">@orderDetail.Price.ToCurrency() đ</td>
+                                                                @{
+                                                                    var amount = orderDetail.Quantity * orderDetail.Price;
+                                                                }
+                                                                <td class="grandtotal">@amount.ToCurrency() đ</td>
+                                                            </tr>
+                                                                    }
+                                                    </tbody>
                                                 </table>
+                                                <div class="col-sm-offset-8 col-sm-4">
+                                                    <table class="table table-cart-total">
+                                                        <tr>
+                                                            <td>Tổng cộng:</td>
+                                                            @{
+                                                                var totalAmount = Model.Sum(x => x.Price * x.Quantity);
+                                                            }
+                                                            <td class="text-right total-amount">@totalAmount.ToCurrency() đ</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" style="text-align:center; margin-bottom:5px;">
-                        <div class="col-sm-12"><a href="/ShoppingCart/Successful" class="btn btn-default btn-md">XÁC NHẬN</a></div>   
-                    </div>
+                        <div class="row" style="text-align:center; margin-bottom:5px;">
+                            <div class="col-sm-12">
+                                <input type="submit" class="btn btn-default btn-md" value="XÁC NHẬN" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-sm-3">
                     <div class="block block-layered-nav">

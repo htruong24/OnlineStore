@@ -230,6 +230,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenusController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RecommendProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -1011,6 +1012,11 @@
     <Content Include="Scripts\materialize\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="Scripts\materialize\LICENSE" />
     <Content Include="Scripts\materialize\README.md" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

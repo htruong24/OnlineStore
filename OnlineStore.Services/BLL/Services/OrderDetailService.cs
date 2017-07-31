@@ -115,5 +115,18 @@ namespace OnlineStore.Services.BLL.Services
 
             }
         }
+
+        public void CreateMultipleOrderDetails(List<OrderDetail> orderDetails, int orderId)
+        {
+            using (_unitOfWork)
+            {
+                foreach (var orderDetail in orderDetails)
+                {
+                    orderDetail.OrderId = orderId;
+                    _unitOfWork.GetRepository<OrderDetail>().Create(orderDetail);
+                }
+                _unitOfWork.Save();
+            }
+        }
     }
 }

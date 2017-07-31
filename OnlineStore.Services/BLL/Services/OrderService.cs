@@ -42,13 +42,35 @@ namespace OnlineStore.Services.BLL.Services
             }
         }
 
-        public void CreateOrder(Order order)
+        public Order CreateOrder(Order order)
         {
             using (_unitOfWork)
             {
                 _unitOfWork.GetRepository<Order>().Create(order);
                 _unitOfWork.Save();
+
+                order.Code = GenerateOrderCode(order.Id);
+
+                _unitOfWork.GetRepository<Order>().Update(order);
+                _unitOfWork.Save();
+
+                return order;
             }
+        }
+
+        public string GenerateOrderCode(int orderCode)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var stringChars = new char[10];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var randomStr = new String(stringChars);
+            return randomStr + orderCode.ToString();
         }
 
         public void DeleteOrder(int? orderId)
@@ -160,6 +182,28 @@ namespace OnlineStore.Services.BLL.Services
 
                 return query.ToList();
 
+            }
+        }
+
+        public Order GetOrderByEmailAndCode(string email, string code)
+        {
+            using (_unitOfWork)
+            {
+                var order = _unitOfWork.GetRepository<Data.Entities.Order>()
+                        .Get(x => x.Email == email && x.Code == code, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
+                return order;
+            }
+        }
+
+        public Order GetOrderByTelephoneAndCode(string telephone, string code)
+        {
+            using (_unitOfWork)
+            {
+                var order = _unitOfWork.GetRepository<Data.Entities.Order>()
+                        .Get(x => x.Telephone == telephone && x.Code == code, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
+                return order;
             }
         }
     }

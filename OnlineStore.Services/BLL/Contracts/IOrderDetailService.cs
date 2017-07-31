@@ -11,5 +11,6 @@ namespace OnlineStore.Services.BLL.Contracts
         void CreateOrderDetail(OrderDetail orderDetail);
         void DeleteOrderDetail(int? orderDetailId);
         List<OrderDetail> GetOrderDetails();
+        void CreateMultipleOrderDetails(List<OrderDetail> orderDetails, int orderId);
     }
 }

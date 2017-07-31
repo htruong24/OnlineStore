@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Controllers
     public class OrdersController : Controller
     {
         private readonly OrderService _orderService;
+        private readonly OrderDetailService _orderDetailService;
 
         public OrdersController()
         {
             this._orderService = new OrderService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._orderDetailService = new OrderDetailService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // POST: Orders/Create
@@ -32,7 +34,14 @@ namespace OnlineStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(order);
-                _orderService.CreateOrder(order);
+                var savedOrder = _orderService.CreateOrder(order);
+                var orderDetails = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+                foreach (var orderDetail in orderDetails)
+                {
+                    UpdateDefaultProperties(orderDetail);
+                }
+                _orderDetailService.CreateMultipleOrderDetails(orderDetails, savedOrder.Id);
+
                 return RedirectToAction("Successful", "ShoppingCart");
             }
             return RedirectToAction("Checkout", "ShoppingCart");
@@ -57,6 +66,28 @@ namespace OnlineStore.Web.Controllers
                 {
                     order.ModifiedById = user.Id;
                     order.ModifiedOn = DateTime.Now;
+                }
+            }
+        }
+
+        public void UpdateDefaultProperties(OrderDetail orderDetail)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (orderDetail.Id == 0)
+                {
+                    orderDetail.CreatedById = user.Id;
+                    orderDetail.CreatedOn = DateTime.Now;
+                    orderDetail.ModifiedById = user.Id;
+                    orderDetail.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    orderDetail.ModifiedById = user.Id;
+                    orderDetail.ModifiedOn = DateTime.Now;
                 }
             }
         }

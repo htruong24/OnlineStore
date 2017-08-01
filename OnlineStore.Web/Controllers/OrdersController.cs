@@ -91,5 +91,10 @@ namespace OnlineStore.Web.Controllers
                 }
             }
         }
+
+        public ActionResult CheckOrder()
+        {
+            return View();
+        }
     }
 }

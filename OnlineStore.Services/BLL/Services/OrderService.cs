@@ -190,7 +190,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var order = _unitOfWork.GetRepository<Data.Entities.Order>()
-                        .Get(x => x.Email == email && x.Code == code, null, "CreatedBy,ModifiedBy")
+                        .Get(x => x.Email == email && x.Code == code, null, "CreatedBy,ModifiedBy,OrderDetails,OrderDetails.Product,OrderDetails.Product.ProductPhotos,OrderDetails.Product.ProductPhotos.Photo")
                         .FirstOrDefault();
                 return order;
             }
@@ -201,7 +201,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var order = _unitOfWork.GetRepository<Data.Entities.Order>()
-                        .Get(x => x.Telephone == telephone && x.Code == code, null, "CreatedBy,ModifiedBy")
+                        .Get(x => x.Telephone == telephone && x.Code == code, null, "CreatedBy,ModifiedBy,OrderDetails,OrderDetails.Product,OrderDetails.Product.ProductPhotos,OrderDetails.Product.ProductPhotos.Photo")
                         .FirstOrDefault();
                 return order;
             }

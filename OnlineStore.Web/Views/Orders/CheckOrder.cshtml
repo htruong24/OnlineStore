@@ -19,47 +19,14 @@
                             <label class="control-label">Mã đơn hàng <em>*</em></label>
                             <input type="text" name="OrderCode" class="form-control">
                         </div>
-                        <div style="text-align:center;">
+                        <div style="text-align:center; padding-bottom:10px;">
                             <input type="button" class="btn btn-default btn-md" onclick="SearchOrder()"  value="TÌM KIẾM">
                         </div>
                     </form>
                 </div>
-                <hr />
+
                 <div id="order-info">
-                    @*Order information*@
-                    <div class="widget-box">
-                        <div class="widget-header widget-header-flat">
-                            <h4 class="widget-title">THÔNG TIN ĐƠN HÀNG</h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="widget-main">
-                            </div>
-                        </div>
-                    </div>
-                    @*Order Details information*@
-                    <div class="widget-box">
-                        <div class="widget-header widget-header-flat">
-                            <h4 class="widget-title smaller">Chi tiết đơn hàng</h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="widget-main">
-                                <div class="table-responsive">
-                                    <table class="table custom-table">
-                                        <thead>
-                                            <tr class="first last">
-                                                <th>Ảnh sản phẩm</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Số lượng</th>
-                                                <th>Đơn giá</th>
-                                                <th>Tổng cộng</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -67,17 +34,9 @@
 </div>
 
 
-
 <script>
-    $(document).ready(function () {
-        $(".chk-brand").on("change", function (e) {
-            var brands = GetBrands();
-            $("#hdBrands").val(brands);
-            fnSearchWeb();
-        });
-    });
-
     function SearchOrder() {
+        $('#order-info').empty().append(loadingContent);
         var postData = $("#frmSearchOrder").serializeArray(); 
         $.ajax(
         {
@@ -85,9 +44,11 @@
             type: "POST",
             data: postData,
             success: function (data) {
-                $("#cart-container").html(data);
+                $("#loadingContent").remove();
+                $("#order-info").html(data);
             },
             error: function (xhr, textStatus, error) {
+                $("#loadingContent").remove();
                 toastr.error(error);
             }
         });

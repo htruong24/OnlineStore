@@ -1018,6 +1018,8 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\CheckOrder.cshtml" />
+    <Content Include="Views\Orders\SearchOrder.cshtml" />
+    <Content Include="Views\Home\_RecentlyPreviewProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

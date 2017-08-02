@@ -11,6 +11,7 @@ using OnlineStore.Data.Infrastructure;
 using OnlineStore.Data.Interfaces;
 using OnlineStore.Services.BLL.Services;
 using OnlineStore.Services.Models;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Controllers
 {
@@ -37,6 +38,9 @@ namespace OnlineStore.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var product = _productService.GetProduct(id);
+            var previewProducts = Session[CommonConstants.RECENTLY_PREVIEW_PRODUCT] == null ? new List<Product>() : (List<Product>)Session[CommonConstants.RECENTLY_PREVIEW_PRODUCT];
+            previewProducts.Add(product);
+            Session[CommonConstants.RECENTLY_PREVIEW_PRODUCT] = previewProducts;
             if (product == null)
             {
                 return HttpNotFound();

@@ -47,11 +47,9 @@
         [DisplayName("Người cập nhật")]
         public virtual User ModifiedBy { get; set; }
 
-        [NotMapped]
         [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
 
-        [NotMapped]
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
     }

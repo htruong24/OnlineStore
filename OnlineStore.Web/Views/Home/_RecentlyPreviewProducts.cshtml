@@ -1,0 +1,69 @@
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.Product>
+
+@if (Model.Count > 0)
+{
+    <div class="row">
+        <div class="title-group1"><h2>Sản phẩm vừa xem qua</h2></div>
+        @foreach (var product in Model.Take(6))
+        {
+            var featuredImage = product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+            var featuredImageUrl = Placeholder.PRODUCT;
+            if (featuredImage != null)
+            {
+                featuredImageUrl = featuredImage.Photo.Url;
+            }
+
+            <div class="products-grid col-sm-2 col-xs-4">
+                <div class="images-container">
+                    <a class="product-image" title="@product.Name" href="/san-pham/@product.MetaTitle-@product.Id" onclick="fnUpdateNumberOfClicks(@product.Id);"><img alt="@product.Name" src="~/@featuredImageUrl"></a>
+                </div>
+                <div class="des-container">
+                    <h2 class="product-name">
+                        <a title="@product.Name" href="/san-pham/@product.MetaTitle-@product.Id" onclick="fnUpdateNumberOfClicks(@product.Id);">@product.Name</a>
+                    </h2>
+                    <div class="price-box">
+                        <p class="special-price">
+                            <span class="price">@product.Price.ToCurrency() đ</span>
+                        </p>
+                        @*<p class="old-price">
+                                <span class="price">190.000 đ</span>
+                            </p>*@
+                    </div>
+                </div>
+                <div class="cart-container">
+                    <button onclick="javascript:fnAddCartItem(@product.Id);" class="btn btn-danger btn-cart">Mua</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <style>
+        .products-grid {
+            border-bottom: none;
+        }
+
+            .products-grid .images-container {
+                width: 100%;
+                border: none;
+                padding: 0px 10px 0px 10px;
+                text-align: center;
+            }
+
+        .product-image img {
+            max-height: 150px;
+            height: 100%;
+            width: auto;
+        }
+
+        .title-group1 {
+            margin-bottom: 0px;
+        }
+
+        .cart-container {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+}
+

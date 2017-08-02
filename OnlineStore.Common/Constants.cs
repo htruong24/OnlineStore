@@ -10,6 +10,7 @@ namespace OnlineStore.Common
     {
         public static string USER_SESSION = "USER_SESSION";
         public static string TEMPORARY_PRODUCT_PHOTO_SESSION = "TEMPORARY_PRODUCT_PHOTO_SESSION";
+        public static string RECENTLY_PREVIEW_PRODUCT = "RECENTLY_PREVIEW_PRODUCT";
         public static string PRODUCT_PHOTO_SESSION = "PRODUCT_PHOTO_SESSION";
         public static string SHOPPING_CART_SESSION = "SHOPPING_CART_SESSION";
         public static string CONNECTION_STRING = "OnlineStoreDbContext";

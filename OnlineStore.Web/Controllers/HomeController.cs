@@ -1,7 +1,9 @@
 ﻿using OnlineStore.Common;
+using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
 using OnlineStore.Data.Interfaces;
 using OnlineStore.Services.BLL.Services;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace OnlineStore.Web.Controllers
@@ -121,6 +123,16 @@ namespace OnlineStore.Web.Controllers
         public ActionResult _HotDeals()
         {
             return PartialView();
+
+            
+        }
+
+        // Recently Preview Products
+        public ActionResult _RecentlyPreviewProducts()
+        {
+            List<Product> products = Session[CommonConstants.RECENTLY_PREVIEW_PRODUCT] == null ? new List<Product>() : (List<Product>)Session[CommonConstants.RECENTLY_PREVIEW_PRODUCT];
+
+            return PartialView(products);
         }
 
         // Special Offer

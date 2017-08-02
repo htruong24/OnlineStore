@@ -34,6 +34,7 @@ namespace OnlineStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(order);
+                order.Status = "Mới đặt hàng";
                 var savedOrder = _orderService.CreateOrder(order);
                 var orderDetails = (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
                 foreach (var orderDetail in orderDetails)
@@ -95,6 +96,13 @@ namespace OnlineStore.Web.Controllers
         public ActionResult CheckOrder()
         {
             return View();
+        }
+
+        public ActionResult SearchOrder(string Email, string OrderCode)
+        {
+            var order = _orderService.GetOrderByEmailAndCode(Email, OrderCode);
+
+            return PartialView(order);
         }
     }
 }

@@ -10,15 +10,9 @@
                 @Html.Action("_MainSlider", "Home")
             </div>
         </div>
-        @*@Html.Partial("_Advertisement")*@
         <!-- /advertisement -->
         <div class="row">
             <div class="col-sm-3 col-left" style="padding-top:150px;">
-                @*@Html.Action("_HotDeals", "Home")
-                @Html.Action("_SpecialOffer", "Home")
-                @Html.Action("_LatestNews", "Home")
-                @Html.Action("_ClientsSay", "Home")*@
-                @*@Html.Action("_Brand", "Home")*@
                 <div class="banner-left">
                     <a href="#"><img src="~/assets/web/images/ads/ads-01.jpg" alt=""></a>
                     <div class="banner-content">
@@ -31,24 +25,8 @@
             </div><!-- /.col-left -->
             <div class="col-sm-9 col-right">
                 @Html.Action("_FeaturedProduct", "Home")
-                @*<div class="banner">
-                    <a href="#"><img alt="" src="~/assets/web/images/ads/ads-05.jpg"></a>
-                </div>*@
                 @Html.Action("_NewArrivalProduct", "Home")
-                @*<div class="row">
-                    <div class="col-smc-7">
-                        <div class="banner">
-                            <a href="#"><img alt="" src="~/assets/web/images/ads/ads-06.jpg"></a>
-                        </div>
-                    </div>
-                    <div class="col-smc-5">
-                        <div class="banner">
-                            <a href="#"><img alt="" src="~/assets/web/images/ads/ads-07.jpg"></a>
-                        </div>
-                    </div>
-                </div>*@
-                @*@Html.Action("_Random_BestSeller_HotSale", "Home")*@
-            </div><!-- /.col-right -->
+            </div>
         </div>
         <!--  Recommended Products-->
         @Html.Action("_RecommendedProduct", "Home")
@@ -62,13 +40,13 @@
         <!--  Recommended Products-->
         @Html.Action("_TopBooks", "Home", new { categoryId = 7 })
 
-        <!-- Top Categories-->
-        @*@Html.Action("_TopCategories", "Home")*@
+        <!-- Recently preview products -->
+        @Html.Action("_RecentlyPreviewProducts", "Home")
 
         <!-- Popular Brands -->
         @Html.Action("_PopularBrands", "Home")
     </div>
-</div><!-- /.main -->
+</div>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="~/assets/web/js/bootstrap.min.js"></script>
@@ -108,155 +86,10 @@
             }
         });
     });
-    $(document).ready(function() {
-        /* timely-owl */
-        //$("#timely-owl .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 1,
-        //    itemsDesktop: [1199, 1],
-        //    itemsDesktopSmall: [991, 1],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 1000,
-        //    paginationSpeed: 1000,
-        //    rewindSpeed: 1000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true,
-        //});
-        /* special-offer slider */
-        //$("#special-offer .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 1,
-        //    itemsDesktop: [1199, 1],
-        //    itemsDesktopSmall: [991, 1],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 3000,
-        //    paginationSpeed: 3000,
-        //    rewindSpeed: 3000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true,
-        //});
-        /* latest-news slider */
-        //$("#latest-news .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 1,
-        //    itemsDesktop: [1199, 1],
-        //    itemsDesktopSmall: [991, 1],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 1000,
-        //    paginationSpeed: 1000,
-        //    rewindSpeed: 1000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true,
-        //});
-        /* clients-say slider */
-        //$("#clients-say .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 1,
-        //    itemsDesktop: [1199, 1],
-        //    itemsDesktopSmall: [991, 1],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 3000,
-        //    paginationSpeed: 3000,
-        //    rewindSpeed: 3000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true,
-        //});
-        /* featured-products slider */
-        //$("#featured-products .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 4,
-        //    itemsDesktop: [1199, 3],
-        //    itemsDesktopSmall: [991, 2],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 3000,
-        //    paginationSpeed: 3000,
-        //    rewindSpeed: 3000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true,
-        //});
-        /* new-products slider */
-        //$("#new-products .owl").owlCarousel({
-        //    autoPlay: false,
-        //    items: 4,
-        //    itemsDesktop: [1199, 3],
-        //    itemsDesktopSmall: [991, 2],
-        //    itemsTablet: [767, 2],
-        //    itemsMobile: [480, 1],
-        //    slideSpeed: 3000,
-        //    paginationSpeed: 3000,
-        //    rewindSpeed: 3000,
-        //    navigation: true,
-        //    stopOnHover: true,
-        //    pagination: false,
-        //    scrollPerPage: true
-        //});
-    });
-
     $(document).ready(function () {
         $("div.mega-menu-category").show();
     });
 </script>
-
-@*<!-- Hot Deals Timer 1-->
-<script type="text/javascript">
-    var dthen1 = new Date("12/25/33 11:59:00 PM");
-    start = "08/04/15 03:02:11 AM";
-    start_date = Date.parse(start);
-    var dnow1 = new Date(start_date);
-    if (CountStepper > 0)
-        ddiff = new Date((dnow1) - (dthen1));
-    else
-        ddiff = new Date((dthen1) - (dnow1));
-    gsecs1 = Math.floor(ddiff.valueOf() / 1000);
-
-    var iid1 = "countbox_1";
-    CountBack_slider(gsecs1, "countbox_1", 1);
-</script>
-<!-- Hot Deals Timer 2-->
-<script type="text/javascript">
-    var dthen2 = new Date("05/21/26 11:59:00 PM");
-    start = "08/04/15 03:02:11 AM";
-    start_date = Date.parse(start);
-    var dnow2 = new Date(start_date);
-    if (CountStepper > 0)
-        ddiff = new Date((dnow2) - (dthen2));
-    else
-        ddiff = new Date((dthen2) - (dnow2));
-    gsecs2 = Math.floor(ddiff.valueOf() / 1000);
-
-    var iid2 = "countbox_2";
-    CountBack_slider(gsecs2, "countbox_2", 2);
-</script>
-<!-- Hot Deals Timer 3-->
-<script type="text/javascript">
-    var dthen3 = new Date("05/21/33 11:59:00 PM");
-    start = "08/04/15 03:02:11 AM";
-    start_date = Date.parse(start);
-    var dnow3 = new Date(start_date);
-    if (CountStepper > 0)
-        ddiff = new Date((dnow3) - (dthen3));
-    else
-        ddiff = new Date((dthen3) - (dnow3));
-    gsecs3 = Math.floor(ddiff.valueOf() / 1000);
-
-    var iid3 = "countbox_3";
-    CountBack_slider(gsecs3, "countbox_3", 3);
-</script>*@
 
 <style>
     .breadcrumbs {

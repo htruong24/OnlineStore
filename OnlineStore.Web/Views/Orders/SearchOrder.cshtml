@@ -1,0 +1,159 @@
+﻿@using OnlineStore.Common
+@model OnlineStore.Data.Entities.Order
+
+@if (Model != null)
+{
+    <div>
+        @*Order information*@
+        <div class="widget-box">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title">THÔNG TIN ĐƠN HÀNG</h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PaymentObject)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PaymentObject)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PaymentMethod)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PaymentMethod)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DeliveryMethod)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DeliveryMethod)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.City)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.City)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PostalCode)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PostalCode)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Note)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Note)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        @*Order Details information*@
+        <div class="widget-box">
+            <div class="widget-header widget-header-flat">
+                <h4 class="widget-title smaller">Chi tiết đơn hàng</h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div class="table-responsive">
+                        <table class="table custom-table">
+                            <thead>
+                                <tr class="first last">
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Tổng cộng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderDetail in Model.OrderDetails)
+                                {
+                                    var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                    var featuredImageUrl = Placeholder.PRODUCT;
+                                    if (featuredImage != null)
+                                    {
+                                        featuredImageUrl = featuredImage.Photo.Url;
+                                    }
+
+                                    <tr class="order-details" id="product-@orderDetail.ProductId">
+                                        <td>
+                                            <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
+                                                <img alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
+                                        </td>
+                                        <td class="qty" style="text-align:center; font-size:20px;">
+                                            <label><b>@orderDetail.Quantity</b></label>
+                                        </td>
+                                        <td class="subtotal">@orderDetail.Price.ToCurrency() đ</td>
+                                        @{
+                                            var amount = orderDetail.Quantity * orderDetail.Price;
+                                        }
+                                        <td class="grandtotal">@amount.ToCurrency() đ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" style="text-align:right;">Tổng cộng:</td>
+                                    @{
+                                        var totalAmount = Model.OrderDetails.Sum(x => x.Price * x.Quantity);
+                                    }
+                                    <td class="text-right total-amount" style="font-size: 24px;font-weight: bold;">@totalAmount.ToCurrency() đ</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="col-sm-offset-8 col-sm-4">
+                            <table class="table table-cart-total"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div style="text-align:center; font-size: 14px; background-color: black; color: white; margin-bottom: 10px; padding: 10px;">Không tìm thấy thông tin đơn hàng! Bạn vui lòng kiểm tra lại thử xem sao!</div>
+}
+
+<style>
+    .dl-horizontal dt {
+           width: 165px;
+       }
+</style>
+

@@ -408,6 +408,8 @@
     <Content Include="assets\common\images\sorting\sort_asc.png" />
     <Content Include="assets\common\images\sorting\sort_both.png" />
     <Content Include="assets\common\images\sorting\sort_desc.png" />
+    <Content Include="assets\common\js\bootstrap-wysiwyg\bootstrap-wysiwyg.min.js" />
+    <Content Include="assets\common\js\bootstrap-wysiwyg\jquery.hotkeys.min.js" />
     <Content Include="assets\common\js\common.js" />
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\common\js\multifile\jquery.MultiFile.js" />
@@ -1020,6 +1022,9 @@
     <Content Include="Views\Orders\CheckOrder.cshtml" />
     <Content Include="Views\Orders\SearchOrder.cshtml" />
     <Content Include="Views\Home\_RecentlyPreviewProducts.cshtml" />
+    <Content Include="Views\Brands\_List.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
+    <Content Include="Views\Home\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

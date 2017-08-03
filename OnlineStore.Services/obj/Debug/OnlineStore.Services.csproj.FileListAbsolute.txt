@@ -71,3 +71,5 @@ C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.cspro
 C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.dll
 C:\PROJECT\OnlineStore\OnlineStore.Services\obj\Debug\OnlineStore.Services.pdb
 D:\PROJECT\OnlineStore\OnlineStore.Services\bin\Debug\OnlineStore.Data.dll.config
+D:\PROJECT\OnlineStore\OnlineStore.Services\bin\Debug\System.Web.Mvc.dll
+D:\PROJECT\OnlineStore\OnlineStore.Services\bin\Debug\System.Web.Mvc.xml

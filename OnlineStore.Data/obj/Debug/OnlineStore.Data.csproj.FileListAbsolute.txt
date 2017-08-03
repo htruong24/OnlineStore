@@ -92,3 +92,5 @@ D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\EntityFramework.SqlServer.xml
 D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.csprojResolveAssemblyReference.cache
 D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.dll
 D:\PROJECT\OnlineStore\OnlineStore.Data\obj\Debug\OnlineStore.Data.pdb
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\System.Web.Mvc.dll
+D:\PROJECT\OnlineStore\OnlineStore.Data\bin\Debug\System.Web.Mvc.xml

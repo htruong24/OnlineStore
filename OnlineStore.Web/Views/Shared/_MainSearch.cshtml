@@ -1,7 +1,6 @@
 ﻿<form class="form-search" id="frm-main-search">
-    <input type="text" class="input-text" name="q" id="search" placeholder="Tìm kiểm sản phẩm...">
+    <input type="text" class="input-text" name="q" id="search" placeholder="Tìm kiểm sản phẩm..." style="width:370px;">
     <div class="dropdown">
-        <button type="button" class="btn" data-toggle="dropdown">Tất cả danh mục <span class="fa fa-angle-down"></span></button>
         @Html.Action("_CategorySelection", "Categories")
     </div>
     <button type="submit" class="btn btn-danger"><span class="fa fa-search"></span></button>

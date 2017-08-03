@@ -1,67 +1,153 @@
 ﻿@model OnlineStore.Data.Entities.Brand
-
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    <!--For Breadcrumb-->
+    ViewBag.BreadcrumbType = "Brand";
+    ViewBag.ObjectId = Model.Id;
 }
 
-<h2>Details</h2>
+<!--Hidden fields-->
+<input type="hidden" id="hdControllerName" value="Brands" />
 
-<div>
-    <h4>Brand</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy.Username)
-        </dt>
+<!--Hidden search-->
+@Html.Partial("_HiddenSearch")
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy.Username)
-        </dd>
+<div class="main">
+    <div class="container">
+        <div class="row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy.Username)
-        </dt>
+            @*@Html.Action("_Filter", "Categories", new { categoryId = Model.Id })*@
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy.Username)
-        </dd>
+            <div class="col-sm-9 col-right">
+                <div class="banner">
+                    <a href="#"><img alt="" src="~/assets/web/images/ads/ads-17.jpg"></a>
+                </div>
+                <div class="page-title">
+                    <h1>@Model.Name</h1>
+                </div>
+                <div class="toolbar">
+                    <div class="sorter">
+                        <p class="view-mode">
+                            <label>Xem đưới dạng:</label>
+                            <a class="grid view-selected" onclick="toggleViewMode();" title="Grid">Lưới</a>&nbsp;
+                            <a class="list" onclick="toggleViewMode();" title="List" href="#">Danh sách</a>&nbsp;
+                        </p>
+                    </div><!-- /.sorter -->
+                    <div class="pager">
+                        <div class="sort-by hidden-xs">
+                            <label>Sắp xếp theo:</label>
+                            <select id="slSorting" class="form-control input-sm">
+                                <option value="Name-ascending" selected="selected">Tên: Từ A-Z</option>
+                                <option value="Name-descending">Tên: Từ Z-A</option>
+                                <option value="Price-ascending">Giá: Từ nhỏ nhất đến lớn nhất</option>
+                                <option value="Price-descending">Giá: Từ lớn nhất đến nhỏ nhất</option>
+                            </select>
+                            <span id="sorting-ascending" class="fa fa-sort-amount-asc"></span>
+                            <span id="sorting-descending" style="display:none;" class="fa fa-sort-amount-desc"></span>
+                        </div>
+                    </div><!--- /.pager -->
+                </div><!-- /.toolbar -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedOn)
-        </dd>
-
-    </dl>
+                <div id="search-container">
+                    @Html.Action("_List", "Brands", new { BrandId = Model.Id })
+                </div>
+            </div><!-- /.col-right -->
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<style>
+    .view-selected, .view-selected:before {
+        color: #fff !important;
+        background: #d8373e;
+        border-color: #d8373e;
+    }
+
+    .pager .sort-by {
+        border-left: 0px;
+        border-right: 0px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        /* slider price */
+        var currencies = "$";
+        var toolbar_status = "1";
+        var rate = "1";
+        var min = "99"
+        min = Number(min);
+        var max = "999"
+        max = Number(max);
+        var currentMinPrice = "99"
+        currentMinPrice = Number(currentMinPrice);
+        var currentMaxPrice = "999"
+        //alert('min: '+min+'--max: '+ max+ 'currentMin: '+currentMinPrice);
+        currentMaxPrice = Number(currentMaxPrice);
+        var params = "";
+        params = $.trim(params);
+        //slider
+        $("#slider-range").slider({
+            range: true,
+            min: min,
+            max: max,
+            values: [currentMinPrice, currentMaxPrice],
+            slide: function (event, ui) {
+                $("#amount").val(currencies + ui.values[0] + " - " + currencies + ui.values[1]);
+                $('input[name="first_price"]').val(ui.values[0]);
+                $('input[name="last_price"]').val(ui.values[1]);
+            },
+            stop: function (event, ui) {
+            }
+        });
+
+        $("#amount").val(currencies + $("#slider-range").slider("values", 0) +
+            " - " + currencies + $("#slider-range").slider("values", 1));
+        $('input[name="first_price"]').val($("#slider-range").slider("values", 0));
+        $('input[name="last_price"]').val($("#slider-range").slider("values", 1));
+
+        //search price from input box
+        //$('#search_price').each(function () {
+        //    $(this).live('click', function () {
+        //        return false;
+        //    })
+        //});
+        //$('#slider-range a:first').addClass('first_item');
+        //$('#slider-range a:last').addClass('last_item');
+
+        //Paging
+        LoadSorting();
+
+        $("#slSorting").change(function () {
+            var sortArr = $(this).val().split("-");
+            var sortField = sortArr[0];
+            var sortDirection = sortArr[1];
+
+            $("#hdSortField").val(sortField);
+            $("#hdSortDirection").val(sortDirection);
+
+            fnSearchWeb();
+        });
+    });
+
+    function LoadSorting() {
+        var sortDirection = $("#hdSortDirection").val();
+
+        if (sortDirection === "ascending") {
+            $("#sorting-ascending").show();
+            $("#sorting-descending").hide();
+        }
+        else {
+            $("#sorting-ascending").hide();
+            $("#sorting-descending").show();
+        }
+    }
+
+    function toggleViewMode() {
+        $("#viewmode-grid").toggle();
+        $("#viewmode-list").toggle();
+
+        $(".grid").toggleClass("view-selected");
+        $(".list").toggleClass("view-selected");
+    }
+</script>

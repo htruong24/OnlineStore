@@ -44,6 +44,9 @@
                             @Html.DisplayFor(modelItem => item.Url)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.OrderNumber)
+                        </td>
+                        <td>
                             @{
                                 if (item.Active == true)
                                 {
@@ -54,9 +57,6 @@
                                     <span class="label label-danger arrowed">Tạm dừng</span>
                                 }
                             }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderNumber)
                         </td>
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">

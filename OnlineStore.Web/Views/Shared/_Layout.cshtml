@@ -79,7 +79,9 @@
 <body>
     @Html.Partial("_Header")
     @Html.Partial("_Breadcrumbs")
-    @RenderBody()
+    <div id="content-container">
+        @RenderBody()
+    </div>
     @Html.Partial("_Footer")
 </body>
 

@@ -1023,8 +1023,9 @@
     <Content Include="Views\Orders\SearchOrder.cshtml" />
     <Content Include="Views\Home\_RecentlyPreviewProducts.cshtml" />
     <Content Include="Views\Brands\_List.cshtml" />
-    <Content Include="Views\Home\SearchResult.cshtml" />
+    <Content Include="Views\Home\_SearchResult.cshtml" />
     <Content Include="Views\Home\_List.cshtml" />
+    <Content Include="Views\Home\_SearchResultList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

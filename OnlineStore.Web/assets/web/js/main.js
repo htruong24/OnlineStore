@@ -128,3 +128,12 @@ function fnLoadContent(container, action, parameters) {
         }
     });
 }
+
+// Main search
+function fnSearchMain() {
+    $("div.mega-menu-category").hide();
+    $(".breadcrumbs").hide();
+
+    var postData = $("#frmSearch").serializeArray();
+    fnLoadContent("content-container", "Home/_SearchResult", postData);
+}

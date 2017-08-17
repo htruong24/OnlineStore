@@ -1,12 +1,5 @@
-﻿@model OnlineStore.Data.Entities.Category
-@{
-    <!--For Breadcrumb-->
-    ViewBag.BreadcrumbType = "Category";
-    ViewBag.ObjectId = Model.Id;
-}
-
-<!--Hidden fields-->
-<input type="hidden" id="hdControllerName" value="Categories" />
+﻿@using OnlineStore.Common
+@model DefaultFilter
 
 <!--Hidden search-->
 @Html.Partial("_HiddenSearch")
@@ -14,15 +7,9 @@
 <div class="main">
     <div class="container">
         <div class="row">
-
-            @Html.Action("_Filter", "Categories", new { categoryId = Model.Id })
-            
-            <div class="col-sm-9 col-right">
-                <div class="banner">
-                    <a href="#"><img alt="" src="~/assets/web/images/ads/ads-17.jpg"></a>
-                </div>
-                <div class="page-title">
-                    <h1>@Model.Name</h1>
+            <div class="col-sm-12">
+                <div class="page-title" style="padding-top:25px;">
+                    <h2>Tìm thấy <span id="result-number"><b style="color:silver;">100</b></span> kết quả</h2>
                 </div>
                 <div class="toolbar">
                     <div class="sorter">
@@ -31,26 +18,24 @@
                             <a class="grid view-selected" onclick="toggleViewMode();" title="Grid">Lưới</a>&nbsp;
                             <a class="list" onclick="toggleViewMode();" title="List" href="#">Danh sách</a>&nbsp;
                         </p>
-                    </div><!-- /.sorter -->
+                    </div>
                     <div class="pager">
                         <div class="sort-by hidden-xs">
                             <label>Sắp xếp theo:</label>
                             <select id="slSorting" class="form-control input-sm">
-                                <option value="Name-ascending" selected="selected">Tên: Từ A-Z</option>
-                                <option value="Name-descending">Tên: Từ Z-A</option>
-                                <option value="Price-ascending">Giá: Từ nhỏ nhất đến lớn nhất</option>
+                                <option value="Price-ascending" selected="selected">Giá: Từ nhỏ nhất đến lớn nhất</option>
                                 <option value="Price-descending">Giá: Từ lớn nhất đến nhỏ nhất</option>
                             </select>
                             <span id="sorting-ascending" class="fa fa-sort-amount-asc"></span>
                             <span id="sorting-descending" style="display:none;" class="fa fa-sort-amount-desc"></span>
                         </div>
-                    </div><!--- /.pager -->
-                </div><!-- /.toolbar -->
+                    </div>
+                </div>
 
                 <div id="search-container">
-                    @Html.Action("_List", "Categories", new { CategoryId = Model.Id })
+                    @Html.Action("_SearchResultList", "Home", new { CategoryId = Model.CategoryId, Keyword = Model.Keyword })
                 </div>
-            </div><!-- /.col-right -->
+            </div>
         </div>
     </div>
 </div>
@@ -67,6 +52,10 @@
         border-left: 0px;
         border-right: 0px;
     }
+
+    .breadcrumbs {
+        display: none;
+    }
 </style>
 
 <script>
@@ -82,7 +71,7 @@
             $("#hdSortField").val(sortField);
             $("#hdSortDirection").val(sortDirection);
 
-            fnSearchWeb();
+            fnSearchMain();
         });
     });
 
@@ -107,3 +96,5 @@
         $(".list").toggleClass("view-selected");
     }
 </script>
+
+

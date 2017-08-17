@@ -1,7 +1,16 @@
 ﻿<form class="form-search" id="frm-main-search">
-    <input type="text" class="input-text" name="q" id="search" placeholder="Tìm kiểm sản phẩm..." style="width:370px;">
+    <input type="text" class="input-text" id="txtKeyword" placeholder="Tìm kiểm sản phẩm..." style="width:370px;">
     <div class="dropdown">
         @Html.Action("_CategorySelection", "Categories")
     </div>
-    <button type="submit" class="btn btn-danger"><span class="fa fa-search"></span></button>
+    <button type="button" onclick="searchMain()" class="btn btn-danger"><span class="fa fa-search"></span></button>
 </form>
+
+<script>
+    function searchMain()
+    {
+        $("#hdKeyword").val($("#txtKeyword").val());
+        $("#hdCategoryId").val($("#slCategorySearch").val());
+        fnSearchMain();
+    }
+</script>

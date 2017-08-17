@@ -289,5 +289,33 @@ namespace OnlineStore.Web.Controllers
                
             return PartialView();
         }
+
+        // ---- MAIN SEARCH --
+        public ActionResult _SearchResultList(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Title",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _productService.Pagination = info;
+            _productService.Filter = filter;
+            var products = _productService.GetProducts();
+            TempData["SortingPagingInfo"] = _productService.Pagination;
+
+            return PartialView(products);
+        }
+
+        public ActionResult _SearchResult(DefaultFilter filter)
+        {
+            return PartialView(filter);
+        }
+
     }
 }

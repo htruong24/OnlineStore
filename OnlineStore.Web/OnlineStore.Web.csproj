@@ -414,6 +414,7 @@
     <Content Include="assets\common\js\jQueryForm\jquery.form.min.js" />
     <Content Include="assets\common\js\multifile\jquery.MultiFile.js" />
     <Content Include="assets\common\js\multifile\jQuery.MultiFile.min.js" />
+    <Content Include="assets\common\js\paging\paging_home.js" />
     <Content Include="assets\common\js\paging\paging_web.js" />
     <Content Include="assets\common\js\paging\paging_popup.js" />
     <Content Include="assets\common\js\paging\paging.js" />
@@ -1026,6 +1027,7 @@
     <Content Include="Views\Home\_SearchResult.cshtml" />
     <Content Include="Views\Home\_List.cshtml" />
     <Content Include="Views\Home\_SearchResultList.cshtml" />
+    <Content Include="Views\Home\_Paging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

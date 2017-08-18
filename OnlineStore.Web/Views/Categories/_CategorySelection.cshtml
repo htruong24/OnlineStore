@@ -2,17 +2,10 @@
     var categories = (List<OnlineStore.Data.Entities.Category>)ViewBag.Categories;
 }
 
-@*<ul class="dropdown-menu dropdown-menu-right">
+<select class="form-control" name="CategoryId" id="slCategorySearch" style="height:54px; font-weight:bold; border:none; border-left:1px dashed silver;">
+    <option>Tất cả</option>
     @foreach (var category in categories)
     {
-        <li><a href="#">@category.Name</a></li>
-    }
-</ul>*@
-
-<select class="form-control" id="slCategorySearch" style="height:54px; font-weight:bold; border:none; border-left:1px dashed silver;">
-    @foreach (var category in categories)
-    {
-
         <option value="@category.Id">@category.Name</option>
     }
 </select>

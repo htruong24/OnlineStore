@@ -1,0 +1,125 @@
+﻿<div id="grid-pager" class="ui-state-default ui-jqgrid-pager ui-corner-bottom" dir="ltr" style="width: 100%; padding-top: 10px; margin-bottom:20px;">
+    <div id="pg_grid-pager" class="ui-pager-control" role="group">
+        <table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table" style="width: 100%; table-layout: fixed; height: 100%;" role="row">
+            <tbody>
+                <tr>
+                    <td id="grid-pager_left" align="left">
+                        <table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table navtable" style="float: left; table-layout: auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="ui-pg-button ui-corner-all" title="" id="add_grid-table" data-original-title="Add new row"></td>
+                                    <td class="ui-pg-button ui-corner-all" title="" id="refresh_grid-table" data-original-title="Reload Grid">
+                                        <div class="ui-pg-div"><span class="ui-icon ace-icon fa fa-refresh green"></span></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td id="grid-pager_center" align="center" style="white-space: pre; width: 343px;"><table cellspacing="0" cellpadding="0" border="0" style="table-layout: auto;" class="ui-pg-table"><tbody><tr><td id="first_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-left bigger-140"></span></td><td id="prev_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-left bigger-140"></span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td dir="ltr">Trang <input id="txtCurrentPage" class="ui-pg-input" type="text" size="2" maxlength="7" value="@ViewBag.CurrentPage" role="textbox"> trong <span id="sp_1_grid-pager">@(ViewBag.TotalPages)</span></td><td class="ui-pg-button" style="width: 4px; cursor: pointer;"><span class="ui-separator"></span></td><td id="next_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-right bigger-140"></span></td><td id="last_grid-pager" class="ui-pg-button ui-corner-all" style="cursor: pointer;"><span class="ui-icon ace-icon fa fa-angle-double-right bigger-140"></span></td><td dir="ltr"><select class="ui-pg-selbox" role="listbox"><option role="option" value="10" selected="selected">10</option><option role="option" value="20">20</option><option role="option" value="50">50</option><option role="option" value="100">100</option></select></td></tr></tbody></table></td>
+                    <td id="grid-pager_right" align="right">
+                        <div dir="ltr" style="text-align: right" class="ui-paging-info">Hiển thị @ViewBag.FromRecord - @ViewBag.ToRecord trong số @ViewBag.TotalRows</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" id="totalPages" value="@ViewBag.TotalPages" />
+    <input type="hidden" id="pgSize" value="@ViewBag.PageSize" />
+</div>
+
+<script src="~/assets/common/js/paging/paging_home.js"></script>
+
+
+<style>
+    .ui-pg-table > tbody > tr > .ui-pg-button > .ui-icon {
+        display: inline-block;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        line-height: 22px;
+        text-align: center;
+        position: static;
+        float: none;
+        margin: 0 2px !important;
+        color: gray;
+        border: 1px solid #CCC;
+        background-color: #FFF;
+        border-radius: 100%;
+    }
+
+    .bigger-140 {
+        font-size: 140% !important;
+    }
+
+    .ui-pg-table > tbody > tr > .ui-pg-button > .ui-icon:hover {
+        color: #699AB5;
+        border-color: #699AB5;
+    }
+
+    textarea:hover, input[type=text]:hover, input[type=password]:hover, input[type=datetime]:hover, input[type=datetime-local]:hover, input[type=date]:hover, input[type=month]:hover, input[type=time]:hover, input[type=week]:hover, input[type=number]:hover, input[type=email]:hover, input[type=url]:hover, input[type=search]:hover, input[type=tel]:hover, input[type=color]:hover {
+        border-color: #b5b5b5;
+    }
+
+    textarea, input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], input[type=email], input[type=url], input[type=search], input[type=tel], input[type=color] {
+        border-radius: 0 !important;
+        color: #858585;
+        background-color: #fff;
+        border: 1px solid #d5d5d5;
+        padding: 5px 4px 6px;
+        font-size: 14px;
+        font-family: inherit;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        -webkit-transition-duration: .1s;
+        transition-duration: .1s;
+    }
+
+    select {
+        padding: 3px 4px;
+        height: 30px;
+    }
+
+    .form-control, select {
+        border-radius: 0;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        color: #858585;
+        background-color: #fff;
+        border: 1px solid #d5d5d5;
+    }
+
+    .ui-icon {
+        text-indent: initial;
+    }
+
+    .ui-pg-div .ui-icon:hover {
+        -moz-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+        opacity: 1;
+        position: static;
+        margin: 0 1px;
+    }
+
+    .ui-pg-div .ui-icon {
+        display: inline-block;
+        width: 18px;
+        float: none;
+        position: static;
+        text-align: center;
+        opacity: .85;
+        -webkit-transition: all .12s;
+        -o-transition: all .12s;
+        transition: all .12s;
+        margin: 0 1px;
+        vertical-align: middle;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .green {
+        color: #69aa46 !important;
+    }
+</style>

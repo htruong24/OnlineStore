@@ -109,7 +109,7 @@
             }
         </ol>
     </div>
-    @Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Categories/Index" })
+    @Html.Action("_Paging", "Home", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/Home/_SearchResultList" })
 }
 
 <script type="text/javascript">

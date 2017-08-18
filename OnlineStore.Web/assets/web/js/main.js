@@ -135,5 +135,13 @@ function fnSearchMain() {
     $(".breadcrumbs").hide();
 
     var postData = $("#frmSearch").serializeArray();
+    fnLoadContent("search-result-container", "Home/_SearchResultList", postData);
+}
+
+function fnSearchHome() {
+    $("div.mega-menu-category").hide();
+    $(".breadcrumbs").hide();
+
+    var postData = $("#frm-main-search").serializeArray();
     fnLoadContent("content-container", "Home/_SearchResult", postData);
 }

@@ -1,5 +1,5 @@
 ﻿<form class="form-search" id="frm-main-search">
-    <input type="text" class="input-text" id="txtKeyword" placeholder="Tìm kiểm sản phẩm..." style="width:370px;">
+    <input type="text" class="input-text" name="Keyword" id="txtKeyword" placeholder="Tìm kiểm sản phẩm..." style="width:370px;">
     <div class="dropdown">
         @Html.Action("_CategorySelection", "Categories")
     </div>
@@ -11,6 +11,6 @@
     {
         $("#hdKeyword").val($("#txtKeyword").val());
         $("#hdCategoryId").val($("#slCategorySearch").val());
-        fnSearchMain();
+        fnSearchHome();
     }
 </script>

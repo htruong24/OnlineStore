@@ -15,14 +15,24 @@
         [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Mật khẩu")]
+        public string Password { get; set; }
+
+        [DisplayName("Giới tính")]
+        public int? Gender { get; set; }
+
+        [DisplayName("Ngày sinh")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DateOfBirth { get; set; }
+
         [DisplayName("Địa chỉ")]
         public string Address { get; set; }
 
-        [DisplayName("Di động")]
+        [DisplayName("Số điện thoại")]
         [StringLength(20)]
         public string Telephone { get; set; }
 
-        [DisplayName("Bàn")]
+        [DisplayName("Điện thoại bàn")]
         [StringLength(20)]
         public string CellPhone { get; set; }
 

@@ -58,7 +58,7 @@ namespace OnlineStore.Web
                 new[] { "OnlineStore.Web.Controllers" }
                 );
 
-            routes.MapRoute("Theo dõi đơn hàng", "theo-doi-don-hang",
+            routes.MapRoute("Kiểm tra đơn hàng", "kiem-tra-don-hang",
                 new { controller = "Orders", action = "CheckOrder", id = UrlParameter.Optional },
                 new[] { "OnlineStore.Web.Controllers" }
                 );

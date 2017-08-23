@@ -15,7 +15,6 @@
         [StringLength(50)]
         public string Username { get; set; }
 
-        [StringLength(50)]
         public string Password { get; set; }
 
         public string Name { get; set; }

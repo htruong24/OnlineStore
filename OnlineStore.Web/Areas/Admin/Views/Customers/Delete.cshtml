@@ -1,12 +1,12 @@
 ﻿@model OnlineStore.Data.Entities.Customer
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Module = "Khách hàng";
+    ViewBag.Title = "Xóa khách hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<h2>Xóa</h2>
 
 <div class="alert alert-danger">
-    Bạn có chắc muốn xóa bản ghi này?
+    Bạn có chắc muốn khách hàng này?
 </div>
 
 <div>
@@ -27,6 +27,22 @@
                     </dd>
 
                     <dt>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dt>
+
+                    <dd>
+                        @(Model.Gender == 1 ? "Nam" : (Model.Gender == 0 ? "Nữ" : ""))
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayNameFor(model => model.DateOfBirth)
+                    </dd>
+
+                    <dt>
                         @Html.DisplayNameFor(model => model.Address)
                     </dt>
 
@@ -43,27 +59,11 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.CellPhone)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.CellPhone)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.Email)
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.Email)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Fax)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Fax)
                     </dd>
 
                     <dt>
@@ -95,7 +95,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -107,7 +107,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>
@@ -118,8 +118,12 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
-    </div>
+    <button type="submit" class="btn btn-white btn-danger btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 red"></i>
+        Xác nhận
+    </button>
 }
+
+<div style="padding-top: 20px;">
+    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
+</div>

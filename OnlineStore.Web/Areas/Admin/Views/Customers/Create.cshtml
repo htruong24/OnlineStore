@@ -1,10 +1,10 @@
 ﻿<script src="~/assets/admin/js/jquery-ui.min.js"></script>
 <link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/assets/admin/js/app/customer/edit.js"></script>
-
 @model OnlineStore.Data.Entities.Customer
 @{
-    ViewBag.Title = "Tạo mới khách hàng";
+    ViewBag.Module = "Khách hàng";
+    ViewBag.Title = "Tạo mới";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm())
@@ -28,14 +28,14 @@
             <div class="col-md-10">
                 <div class="radio-inline">
                     <label>
-                        <input name="Gender" type="radio" class="ace" />
+                        <input name="Gender" value="1" checked type="radio" class="ace" />
                         <span class="lbl">Nam</span>
                     </label>
                 </div>
                 <div class="radio-inline">
                     <label>
-                        <input name="Gender" type="radio" class="ace" />
-                        <span class="lbl">Nam</span>
+                        <input name="Gender" value="0" type="radio" class="ace" />
+                        <span class="lbl">Nữ</span>
                     </label>
                 </div>
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
@@ -45,8 +45,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -67,26 +67,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CellPhone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CellPhone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CellPhone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -100,7 +84,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tạo mới" class="btn btn-default" />
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Lưu lại
+                </button>
             </div>
         </div>
     </div>

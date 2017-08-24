@@ -53,7 +53,7 @@
                             </a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Gender)
+                            @(item.Gender == 1 ? "Nam" : (item.Gender == 0 ? "Nữ" : ""))
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DateOfBirth)

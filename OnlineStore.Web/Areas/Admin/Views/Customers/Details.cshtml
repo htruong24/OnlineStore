@@ -1,6 +1,7 @@
 ﻿@model OnlineStore.Data.Entities.Customer
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Module = "Khách hàng";
+    ViewBag.Title = "Chi tiết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <h2>@Model.Name</h2>
@@ -22,6 +23,22 @@
                     </dd>
 
                     <dt>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dt>
+
+                    <dd>
+                        @(Model.Gender == 1 ? "Nam" : (Model.Gender == 0 ? "Nữ" : ""))
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateOfBirth)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </dd>
+
+                    <dt>
                         @Html.DisplayNameFor(model => model.Address)
                     </dt>
 
@@ -38,27 +55,11 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.CellPhone)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.CellPhone)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.Email)
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.Email)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Fax)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Fax)
                     </dd>
 
                     <dt>
@@ -90,7 +91,7 @@
                         @Html.DisplayNameFor(model => model.CreatedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedBy)
+                        @Html.DisplayFor(model => model.CreatedBy.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.ModifiedOn)
@@ -102,7 +103,7 @@
                         @Html.DisplayNameFor(model => model.ModifiedBy)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.ModifiedBy)
+                        @Html.DisplayFor(model => model.ModifiedBy.Name)
                     </dd>
                 </dl>
             </div>

@@ -17,7 +17,7 @@ function fnLoadContent(container, action, parameters) {
         data: parameters,
         success: function (data) {
             $("#" + container).html(data);
-           $("#loadingContent").remove();
+            $("#loadingContent").remove();
         },
         error: function (xhr, textStatus, error) {
             toastr.error(error);
@@ -204,7 +204,7 @@ function fnEditPhoto(id) {
     $.ajax({
         type: "GET",
         url: url,
-        data: { id : id },
+        data: { id: id },
         success: function (data) {
             $("#sub-modal-table .modal-body").html(data);
             $('#sub-modal-table').modal('show');
@@ -265,85 +265,83 @@ function fnSelectProductPhotos(productId) {
 
 function fnRemoveTemporaryProductPhoto(photoId) {
     $.ajax(
-    {
+        {
             url: "/Admin/ProductPhotos/RemoveTemporaryProductPhoto",
-        type: "POST",
-        data: { photoId: photoId },
-        success: function (data) {
-            $("#selected-photos").html(data);
-        },
-        error: function (xhr, textStatus, error) {
-            toastr.error(error);
-        }
-    });
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+                $("#selected-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
 }
 
 function fnRemoveProductPhoto(photoId) {
     $.ajax(
-    {
-        url: "/Admin/ProductPhotos/RemoveProductPhoto",
-        type: "POST",
-        data: { photoId: photoId },
-        success: function (data) {
-            $("#product-photos").html(data);
-        },
-        error: function (xhr, textStatus, error) {
-            toastr.error(error);
-        }
-    });
+        {
+            url: "/Admin/ProductPhotos/RemoveProductPhoto",
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+                $("#product-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
 }
 
 function fnAddTemporaryProductPhoto(photoId) {
     $.ajax(
-    {
-        url: "/Admin/ProductPhotos/AddTemporaryProductPhoto",
-        type: "POST",
-        data: { photoId: photoId },
-        success: function (data) {
-            if (data.ErrorCode && data.ErrorCode !== "0")
-            {
-                toastr.warning(data.ErrorMessage);
+        {
+            url: "/Admin/ProductPhotos/AddTemporaryProductPhoto",
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+                if (data.ErrorCode && data.ErrorCode !== "0") {
+                    toastr.warning(data.ErrorMessage);
+                }
+                else {
+                    $("#selected-photos").html(data);
+                }
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error + ": " + xhr.responseText);
             }
-            else
-            {
-                $("#selected-photos").html(data);
-            }
-        },
-        error: function (xhr, textStatus, error) {
-            toastr.error(error + ": " + xhr.responseText);
-        }
-    });
+        });
 }
 
 function fnSaveProductPhotos() {
     $(".btn-close-modal").trigger({ type: "click" });
     $.ajax(
-    {
-        url: "/Admin/ProductPhotos/_ProductPhotos",
-        type: "POST",
-        data: { },
-        success: function (data) {
-            $("#product-photos").html(data);
-        },
-        error: function (xhr, textStatus, error) {
-            toastr.error(error);
-        }
-    });
+        {
+            url: "/Admin/ProductPhotos/_ProductPhotos",
+            type: "POST",
+            data: {},
+            success: function (data) {
+                $("#product-photos").html(data);
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
 }
 
 function fnSetFeaturedProductPhoto(photoId) {
     $.ajax(
-    {
-        url: "/Admin/ProductPhotos/SetFeaturedProductPhoto",
-        type: "POST",
-        data: { photoId: photoId },
-        success: function (data) {
-                
-        },
-        error: function (xhr, textStatus, error) {
-            toastr.error(error);
-        }
-    });
+        {
+            url: "/Admin/ProductPhotos/SetFeaturedProductPhoto",
+            type: "POST",
+            data: { photoId: photoId },
+            success: function (data) {
+
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+            }
+        });
 }
 
 // Preview photo
@@ -363,3 +361,11 @@ function fnPreviewPhoto(id) {
         }
     });
 }
+
+// Date time picker
+$(document).ready(function () {
+    $(".date-picker").datepicker(
+        {
+            dateFormat: "dd/mm/yy"
+        });
+});

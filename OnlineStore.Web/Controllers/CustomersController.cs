@@ -8,11 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Controllers
 {
     public class CustomersController : Controller
     {
+        private readonly CustomerService _customerService;
+
+        public CustomersController()
+        {
+            this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
+
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
 
         // GET: Customers
@@ -40,8 +50,6 @@ namespace OnlineStore.Web.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username");
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username");
             return View();
         }
 
@@ -50,19 +58,58 @@ namespace OnlineStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Password,Gender,DateOfBirth,Address,Telephone,CellPhone,Email,Fax,Description,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Customer customer)
+        public ActionResult Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                customer.Password = Encryptor.MD5Hash(customer.Password);
+                UpdateDefaultProperties(customer);
+                _customerService.CreateCustomer(customer);
+                Session[CommonConstants.CUSTOMER_SESSION] = customer;
+                return RedirectToAction("Account");
             }
-
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", customer.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", customer.ModifiedById);
             return View(customer);
         }
+
+        // GET: Customers/Create
+        public ActionResult Account()
+        {
+            var customer = Session[CommonConstants.CUSTOMER_SESSION];
+            return View(customer);
+        }
+
+        // Login
+        public ActionResult Login()
+        {
+            var customer = Session[CommonConstants.CUSTOMER_SESSION];
+            return View(customer);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Customer customer, string returnUrl)
+        {
+            if (string.IsNullOrEmpty(customer.Email) || string.IsNullOrEmpty(customer.Password))
+            {
+                ViewBag.Error = "Bạn chưa nhập đủ thông tin.";
+            }
+            else
+            {
+                var returnCustomer = _customerService.GetCustomer(customer.Email, Encryptor.MD5Hash(customer.Password));
+                if (returnCustomer != null)
+                {
+                    Session[CommonConstants.CUSTOMER_SESSION] = returnCustomer;
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return RedirectToAction("Account", "Customer");
+                }
+                ViewBag.Error = "Email hoặc mật khẩu không đúng.";
+            }
+            return View(customer);
+        }
+
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
@@ -132,6 +179,24 @@ namespace OnlineStore.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Customer customer)
+        {
+            if (customer.Id == 0)
+            {
+                customer.CreatedById = "1";
+                customer.CreatedOn = DateTime.Now;
+                customer.ModifiedById = "1";
+                customer.ModifiedOn = DateTime.Now;
+            }
+            // Update
+            else
+            {
+                customer.ModifiedById = "1";
+                customer.ModifiedOn = DateTime.Now;
+            }
         }
     }
 }

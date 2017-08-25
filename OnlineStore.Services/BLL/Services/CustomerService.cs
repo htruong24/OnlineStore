@@ -157,5 +157,17 @@ namespace OnlineStore.Services.BLL.Services
 
             }
         }
+
+        public Customer GetCustomer(string email, string password)
+        {
+            using (_unitOfWork)
+            {
+                var customer = _unitOfWork.GetRepository<Data.Entities.Customer>()
+                        .Get(x => x.Email == email && x.Password == password, null, "CreatedBy,ModifiedBy")
+                        .FirstOrDefault();
+
+                return customer;
+            }
+        }
     }
 }

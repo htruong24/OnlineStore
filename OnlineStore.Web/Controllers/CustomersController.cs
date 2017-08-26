@@ -66,7 +66,7 @@ namespace OnlineStore.Web.Controllers
                 UpdateDefaultProperties(customer);
                 _customerService.CreateCustomer(customer);
                 Session[CommonConstants.CUSTOMER_SESSION] = customer;
-                return RedirectToAction("Account");
+                return RedirectToAction("Account", "Customers");
             }
             return View(customer);
         }
@@ -103,13 +103,18 @@ namespace OnlineStore.Web.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    return RedirectToAction("Account", "Customer");
+                    return RedirectToAction("Account", "Customers");
                 }
                 ViewBag.Error = "Email hoặc mật khẩu không đúng.";
             }
             return View(customer);
         }
 
+        public ActionResult Logout()
+        {
+            Session.Remove(CommonConstants.CUSTOMER_SESSION);
+            return RedirectToAction("Login", "Customers");
+        }
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)

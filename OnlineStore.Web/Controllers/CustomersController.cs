@@ -116,6 +116,30 @@ namespace OnlineStore.Web.Controllers
             return RedirectToAction("Login", "Customers");
         }
 
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeEmail(Customer customer)
+        {
+            return View();
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(Customer customer)
+        {
+            return View();
+        }
+
+
+
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {

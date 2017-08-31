@@ -18,6 +18,10 @@
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
 
+        [NotMapped]
+        [DisplayName("Nhập lại mật khẩu")]
+        public string ConfirmPassword { get; set; }
+
         [DisplayName("Giới tính")]
         public int? Gender { get; set; }
 

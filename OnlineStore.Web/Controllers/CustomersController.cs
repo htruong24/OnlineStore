@@ -118,7 +118,8 @@ namespace OnlineStore.Web.Controllers
 
         public ActionResult ChangeEmail()
         {
-            return View();
+            var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            return View(customer);
         }
 
         [HttpPost]
@@ -129,7 +130,8 @@ namespace OnlineStore.Web.Controllers
 
         public ActionResult ChangePassword()
         {
-            return View();
+            var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            return View(customer);
         }
 
         [HttpPost]
@@ -138,7 +140,20 @@ namespace OnlineStore.Web.Controllers
             return View();
         }
 
+        public ActionResult Orders()
+        {
+            return View();
+        }
 
+        public ActionResult Address()
+        {
+            return View();
+        }
+
+        public ActionResult PromotionInformation()
+        {
+            return View();
+        }
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
@@ -147,13 +162,11 @@ namespace OnlineStore.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            var customer = _customerService.GetCustomer(id);
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", customer.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", customer.ModifiedById);
             return View(customer);
         }
 
@@ -162,16 +175,15 @@ namespace OnlineStore.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Password,Gender,DateOfBirth,Address,Telephone,CellPhone,Email,Fax,Description,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Customer customer)
+        public ActionResult Edit(Customer customer)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                UpdateDefaultProperties(customer);
+                _customerService.UpdateCustomer(customer);
+                Session[CommonConstants.CUSTOMER_SESSION] = customer;
+                return RedirectToAction("Account");
             }
-            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Username", customer.CreatedById);
-            ViewBag.ModifiedById = new SelectList(db.Users, "Id", "Username", customer.ModifiedById);
             return View(customer);
         }
 

@@ -11,30 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3 col-left">
-                <div class="block block-layered-nav">
-                    <div class="block-title">
-                        <strong><span>Xin chào, @customer.Name </span></strong>
-                    </div>
-                    <div class="block-content">
-                        <div id="narrow-by-list">
-                            <div class="layered layered-Category">
-                                @*<h2>Category</h2>*@
-                                <div class="content-shopby">
-                                    <ol>
-                                        <li><a href="/Customers/Account">Thông tin cá nhân</a></li>
-                                        <li><a href="/Customers/Edit">Cập nhật thông tin cá nhân</a></li>
-                                        <li><a href="/Customers/Orders">Đơn hàng của tôi</a></li>
-                                        <li><a href="/Customers/Address">Địa chỉ giao hàng</a></li>
-                                        <li><a href="/Customers/ChangeEmail">Đổi email</a></li>
-                                        <li><a href="/Customers/ChangePassword">Đổi mật khẩu</a></li>
-                                        <li><a href="/Customer/PromotionInformation">Thông tin khuyến mại</a></li>
-                                        <li><a href="/Customers/Logout"><img src="~/assets/web/images/flag-spain.png" alt=""> &nbsp;Đăng xuất</a></li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_Menu")
             </div>
             <div class="col-sm-9 col-right">
                 <h2>Xin chào, @Model.Name</h2>

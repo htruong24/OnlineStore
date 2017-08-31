@@ -1,0 +1,36 @@
+﻿@using OnlineStore.Common
+@using OnlineStore.Data.Entities
+@model OnlineStore.Data.Entities.Customer
+@{
+    var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+}
+
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong><span>Xin chào, @customer.Name </span></strong>
+    </div>
+    <div class="block-content">
+        <div id="narrow-by-list">
+            <div class="layered layered-Category">
+                <div class="content-shopby account-menu">
+                    <ol>
+                        <li><a href="/Customers/Account">Thông tin cá nhân</a></li>
+                        <li><a href="/Customers/Edit/@customer.Id">Cập nhật thông tin cá nhân</a></li>
+                        <li><a href="/Customers/Orders">Đơn hàng của tôi</a></li>
+                        <li><a href="/Customers/Address">Địa chỉ giao hàng</a></li>
+                        <li><a href="/Customers/ChangeEmail">Đổi email</a></li>
+                        <li><a href="/Customers/ChangePassword">Đổi mật khẩu</a></li>
+                        <li><a href="/Customers/PromotionInformation">Thông tin khuyến mại</a></li>
+                        <li><a href="/Customers/Logout"><img src="~/assets/web/images/flag-spain.png" alt=""> &nbsp;Đăng xuất</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .account-menu ol li a {
+        text-transform:initial;
+    }
+</style>

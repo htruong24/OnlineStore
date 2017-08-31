@@ -1039,6 +1039,9 @@
     <Content Include="Views\Customers\Orders.cshtml" />
     <Content Include="Views\Customers\ChangePassword.cshtml" />
     <Content Include="Views\Customers\ChangeEmail.cshtml" />
+    <Content Include="Views\Customers\Address.cshtml" />
+    <Content Include="Views\Customers\PromotionInformation.cshtml" />
+    <Content Include="Views\Customers\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,6 +22,10 @@
         [DisplayName("Nhập lại mật khẩu")]
         public string ConfirmPassword { get; set; }
 
+        [NotMapped]
+        [DisplayName("Mật khẩu mới")]
+        public string NewPassword { get; set; }
+
         [DisplayName("Giới tính")]
         public int? Gender { get; set; }
 
@@ -43,6 +47,10 @@
         [DisplayName("Email")]
         [StringLength(50)]
         public string Email { get; set; }
+
+        [NotMapped]
+        [DisplayName("Email mới")]
+        public string NewEmail { get; set; }
 
         [DisplayName("Fax")]
         [StringLength(50)]

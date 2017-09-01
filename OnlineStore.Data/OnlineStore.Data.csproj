@@ -60,6 +60,8 @@
     <Compile Include="Entities\AutomaticValue.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Function.cs" />
     <Compile Include="Entities\Group.cs" />

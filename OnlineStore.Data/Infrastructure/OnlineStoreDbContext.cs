@@ -34,5 +34,6 @@ namespace OnlineStore.Data.Infrastructure
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
     }
 }

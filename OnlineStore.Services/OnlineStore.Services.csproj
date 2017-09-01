@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BL\UserBL.cs" />
+    <Compile Include="BLL\Contracts\IAddressService.cs" />
+    <Compile Include="BLL\Contracts\ICountryService.cs" />
+    <Compile Include="BLL\Contracts\ICityService.cs" />
     <Compile Include="BLL\Contracts\IRecommendProductService.cs" />
     <Compile Include="BLL\Contracts\IMenuService.cs" />
     <Compile Include="BLL\Contracts\IProductPhotoService.cs" />

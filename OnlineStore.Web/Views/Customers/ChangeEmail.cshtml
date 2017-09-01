@@ -10,7 +10,7 @@
             <div class="col-sm-3 col-left">
                 @Html.Partial("_Menu")
             </div>
-            <<div class="col-sm-9 col-right">
+            <div class="col-sm-9 col-right">
                 <h2>@ViewBag.Title</h2>
 
                 @using (Html.BeginForm())
@@ -20,10 +20,10 @@
                     <div class="form-horizontal">
                         <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.CurrentEmail, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CurrentEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CurrentEmail, "", new { @class = "text-danger" })
                             </div>
                         </div>
 

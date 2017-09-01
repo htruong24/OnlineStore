@@ -125,7 +125,18 @@ namespace OnlineStore.Web.Controllers
         [HttpPost]
         public ActionResult ChangeEmail(Customer customer)
         {
-            return View();
+            var currentCustomer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            if (currentCustomer.Email == customer.CurrentEmail)
+            {
+                var newEmail = customer.NewEmail;
+                customer = currentCustomer;
+                customer.Email = newEmail;
+                UpdateDefaultProperties(customer);
+                _customerService.UpdateCustomer(customer);
+                Session[CommonConstants.CUSTOMER_SESSION] = customer;
+                return RedirectToAction("Account", "Customers");
+            }
+            return View(customer);
         }
 
         public ActionResult ChangePassword()
@@ -137,7 +148,18 @@ namespace OnlineStore.Web.Controllers
         [HttpPost]
         public ActionResult ChangePassword(Customer customer)
         {
-            return View();
+            var currentCustomer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            if (currentCustomer.Password == Encryptor.MD5Hash(customer.CurrentPassword))
+            {
+                var newPassword = customer.NewPassword;
+                customer = currentCustomer;
+                customer.Password = Encryptor.MD5Hash(newPassword);
+                UpdateDefaultProperties(customer);
+                _customerService.UpdateCustomer(customer);
+                Session[CommonConstants.CUSTOMER_SESSION] = customer;
+                return RedirectToAction("Account", "Customers");
+            }
+            return View(customer);
         }
 
         public ActionResult Orders()

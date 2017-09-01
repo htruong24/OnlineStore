@@ -32,5 +32,7 @@ namespace OnlineStore.Data.Infrastructure
         public virtual DbSet<ProductPhoto> ProductPhotoes { get; set; }
         public virtual DbSet<RecommendProduct> RecommendProducts { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
     }
 }

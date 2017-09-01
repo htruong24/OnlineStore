@@ -19,6 +19,10 @@
         public string Password { get; set; }
 
         [NotMapped]
+        [DisplayName("Mật khẩu hiện tại")]
+        public string CurrentPassword { get; set; }
+
+        [NotMapped]
         [DisplayName("Nhập lại mật khẩu")]
         public string ConfirmPassword { get; set; }
 
@@ -45,8 +49,11 @@
         public string CellPhone { get; set; }
 
         [DisplayName("Email")]
-        [StringLength(50)]
         public string Email { get; set; }
+
+        [NotMapped]
+        [DisplayName("Email hiện tại")]
+        public string CurrentEmail { get; set; }
 
         [NotMapped]
         [DisplayName("Email mới")]

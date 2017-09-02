@@ -10,6 +10,6 @@ namespace OnlineStore.Services.BLL.Contracts
         void UpdateCity(City city);
         void CreateCity(City city);
         void DeleteCity(int? cityId);
-        List<City> GetCitys();
+        List<City> GetCities();
     }
 }

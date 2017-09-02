@@ -91,6 +91,9 @@
     <Compile Include="BLL\Services\CustomerService.cs" />
     <Compile Include="BLL\Services\SupplierService.cs" />
     <Compile Include="BLL\Services\SubCategoryService.cs" />
+    <Compile Include="BLL\Services\CountryService.cs" />
+    <Compile Include="BLL\Services\AddressService.cs" />
+    <Compile Include="BLL\Services\CityService.cs" />
     <Compile Include="BLL\Services\UnitService.cs" />
     <Compile Include="BLL\Services\CategoryService.cs" />
     <Compile Include="BLL\Services\FunctionService.cs" />

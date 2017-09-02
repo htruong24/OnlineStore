@@ -10,6 +10,6 @@ namespace OnlineStore.Services.BLL.Contracts
         void UpdateAddress(Address address);
         void CreateAddress(Address address);
         void DeleteAddress(int? addressId);
-        List<Address> GetAddresss();
+        List<Address> GetAddresses();
     }
 }

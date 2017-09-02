@@ -10,6 +10,6 @@ namespace OnlineStore.Services.BLL.Contracts
         void UpdateCountry(Country menu);
         void CreateCountry(Country menu);
         void DeleteCountry(int? country);
-        List<Country> GetCountrys();
+        List<Country> GetCountries();
     }
 }

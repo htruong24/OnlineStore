@@ -72,7 +72,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.Categories = GetCategories();
-
             return View();
         }
 

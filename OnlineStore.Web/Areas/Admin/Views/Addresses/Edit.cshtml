@@ -1,19 +1,25 @@
-﻿@model OnlineStore.Data.Entities.Address
+﻿<script src="~/assets/admin/js/jquery-ui.min.js"></script>
+<link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/assets/admin/js/app/address/edit.js"></script>
 
+@using OnlineStore.Data.Entities
+@model OnlineStore.Data.Entities.Address
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Module = "Địa chỉ";
+    ViewBag.Title = "Cập nhật";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+    @Html.HiddenFor(x => x.CreatedOn)
+    @Html.HiddenFor(x => x.CreatedById)
+    @Html.HiddenFor(x => x.ModifiedOn)
+    @Html.HiddenFor(x => x.ModifiedById)
+
     <div class="form-horizontal">
-        <h4>Address</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -36,7 +42,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CityId, new { htmlAttributes = new { @class = "form-control" } })
+                <select name="CityId" class="slCity form-control">
+                    @{
+                        var cities = (List<City>)ViewBag.Cities;
+
+                        foreach (var city in cities)
+                        {
+                            if (city.Id == Model.CityId)
+                            {
+                                <option value="@city.Id" selected="selected">@city.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@city.Id">@city.Name</option>
+                            }
+                        }
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +66,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CustomerId, new { htmlAttributes = new { @class = "form-control" } })
+                <select name="CustomerId" class="slCustomer form-control">
+                    @{
+                        var customers = (List<Customer>)ViewBag.Customers;
+
+                        foreach (var customer in customers)
+                        {
+                            if (customer.Id == Model.CustomerId)
+                            {
+                                <option value="@customer.Id" selected="selected">@customer.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@customer.Id">@customer.Name</option>
+                            }
+                        }
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,45 +96,30 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedById, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedById, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedById, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ModifiedById, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ModifiedById, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ModifiedById, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button type="submit" class="btn btn-white btn-info btn-bold">
+                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                    Cập nhật
+                </button>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".slCity").select2({
+            placeholder: "Chọn thành phố",
+            allowClear: true
+        });
+
+        $(".slCustomer").select2({
+            placeholder: "Chọn khách hàng",
+            allowClear: true
+        });
+    });
+</script>

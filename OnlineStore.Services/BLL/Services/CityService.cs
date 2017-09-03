@@ -104,7 +104,7 @@ namespace OnlineStore.Services.BLL.Services
                 // Fitler
                 if (!string.IsNullOrEmpty(Filter?.Keyword))
                 {
-                    query = query.Where(x => x.Name.Contains(Filter.Keyword);
+                    query = query.Where(x => x.Name.Contains(Filter.Keyword));
                 }
 
                 // Paging

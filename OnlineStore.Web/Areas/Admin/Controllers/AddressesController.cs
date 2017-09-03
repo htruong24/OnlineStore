@@ -8,17 +8,52 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class AddressesController : Controller
     {
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        private readonly CityService _cityService;
+        private readonly CustomerService _customerService;
+        private readonly AddressService _addressService;
+
+        public AddressesController()
+        {
+            this._cityService = new CityService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._addressService = new AddressService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
+
 
         // GET: Admin/Addresses
         public ActionResult Index()
         {
-            return View(db.Addresses.ToList());
+            return View();
+        }
+
+        // GET: List of customer
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _customerService.Pagination = info;
+            _customerService.Filter = filter;
+            var customers = _customerService.GetCustomers();
+            TempData["SortingPagingInfo"] = _customerService.Pagination;
+
+            return PartialView(customers);
         }
 
         // GET: Admin/Addresses/Details/5
@@ -28,17 +63,19 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Addresses.Find(id);
-            if (address == null)
+            var customer = _customerService.GetCustomer(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(address);
+            return View(customer);
         }
 
         // GET: Admin/Addresses/Create
         public ActionResult Create()
         {
+            ViewBag.Cities = GetCities();
+            ViewBag.Customers = GetCustomers();
             return View();
         }
 
@@ -47,15 +84,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Value,PostalCode,CityId,CustomerId,Note,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Address address)
+        public ActionResult Create(Address address)
         {
             if (ModelState.IsValid)
             {
-                db.Addresses.Add(address);
-                db.SaveChanges();
+                UpdateDefaultProperties(address);
+                _addressService.CreateAddress(address);
                 return RedirectToAction("Index");
             }
-
             return View(address);
         }
 
@@ -66,7 +102,9 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Addresses.Find(id);
+            var address = _addressService.GetAddress(id);
+            ViewBag.Cities = GetCities();
+            ViewBag.Customers = GetCustomers();
             if (address == null)
             {
                 return HttpNotFound();
@@ -79,12 +117,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Value,PostalCode,CityId,CustomerId,Note,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Address address)
+        public ActionResult Edit(Address address)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(address).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(address);
+                _addressService.UpdateAddress(address);
                 return RedirectToAction("Index");
             }
             return View(address);
@@ -97,7 +135,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Address address = db.Addresses.Find(id);
+            var address = _addressService.GetAddress(id);
             if (address == null)
             {
                 return HttpNotFound();
@@ -110,19 +148,55 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Address address = db.Addresses.Find(id);
-            db.Addresses.Remove(address);
-            db.SaveChanges();
+            _addressService.DeleteAddress(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Get countries
+        public List<City> GetCities()
         {
-            if (disposing)
+            _cityService.Pagination = new SortingPagingInfo
             {
-                db.Dispose();
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _cityService.GetCities();
+        }
+
+        // Get countries
+        public List<Customer> GetCustomers()
+        {
+            _customerService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _customerService.GetCustomers();
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Address address)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (address.Id == 0)
+                {
+                    address.CreatedById = user.Id;
+                    address.CreatedOn = DateTime.Now;
+                    address.ModifiedById = user.Id;
+                    address.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    address.ModifiedById = user.Id;
+                    address.ModifiedOn = DateTime.Now;
+                }
             }
-            base.Dispose(disposing);
         }
     }
 }

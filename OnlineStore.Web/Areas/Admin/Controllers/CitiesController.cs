@@ -8,17 +8,49 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class CitiesController : Controller
     {
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        private readonly CityService _cityService;
+        private readonly CountryService _countryService;
+
+        public CitiesController()
+        {
+            this._cityService = new CityService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._countryService = new CountryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: Admin/Cities
         public ActionResult Index()
         {
-            return View(db.Cities.ToList());
+            return View();
+        }
+
+        // GET: List of cities
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _cityService.Pagination = info;
+            _cityService.Filter = filter;
+            var units = _cityService.GetCities();
+            TempData["SortingPagingInfo"] = _cityService.Pagination;
+
+            return PartialView(units);
         }
 
         // GET: Admin/Cities/Details/5
@@ -28,7 +60,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = db.Cities.Find(id);
+            var city = _cityService.GetCity(id);
+            ;
             if (city == null)
             {
                 return HttpNotFound();
@@ -39,6 +72,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // GET: Admin/Cities/Create
         public ActionResult Create()
         {
+            ViewBag.Countries = GetCountries();
             return View();
         }
 
@@ -47,15 +81,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CountryId,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] City city)
+        public ActionResult Create(City city)
         {
             if (ModelState.IsValid)
             {
-                db.Cities.Add(city);
-                db.SaveChanges();
+                UpdateDefaultProperties(city);
+                _cityService.CreateCity(city);
                 return RedirectToAction("Index");
             }
-
             return View(city);
         }
 
@@ -66,7 +99,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = db.Cities.Find(id);
+            var city = _cityService.GetCity(id);
+            ViewBag.Countries = GetCountries();
             if (city == null)
             {
                 return HttpNotFound();
@@ -79,12 +113,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CountryId,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] City city)
+        public ActionResult Edit(City city)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(city).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(city);
+                _cityService.UpdateCity(city);
                 return RedirectToAction("Index");
             }
             return View(city);
@@ -97,7 +131,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            City city = db.Cities.Find(id);
+            var city = _cityService.GetCity(id);
             if (city == null)
             {
                 return HttpNotFound();
@@ -110,19 +144,43 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            City city = db.Cities.Find(id);
-            db.Cities.Remove(city);
-            db.SaveChanges();
+            _cityService.DeleteCity(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Get countries
+        public List<Country> GetCountries()
         {
-            if (disposing)
+            _countryService.Pagination = new SortingPagingInfo
             {
-                db.Dispose();
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _countryService.GetCountries();
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(City city)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (city.Id == 0)
+                {
+                    city.CreatedById = user.Id;
+                    city.CreatedOn = DateTime.Now;
+                    city.ModifiedById = user.Id;
+                    city.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    city.ModifiedById = user.Id;
+                    city.ModifiedOn = DateTime.Now;
+                }
             }
-            base.Dispose(disposing);
         }
     }
 }

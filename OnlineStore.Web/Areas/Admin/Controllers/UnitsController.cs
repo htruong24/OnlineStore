@@ -29,7 +29,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return View();
         }
 
-        // GET: List of brand
+        // GET: List of units
         public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
         {
             if (info.SortField == null)

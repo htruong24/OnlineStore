@@ -1,82 +1,18 @@
 ﻿@model IEnumerable<OnlineStore.Data.Entities.Address>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Module = "Địa chỉ";
+    ViewBag.Title = "Danh sách";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div class="action-buttons" style="padding-bottom: 10px;">
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @Html.ActionLink("Tạo mới", "Create")
+    </button>
+    @Html.Partial("_Search")
+    <input type="hidden" id="hdControllerName" value="Addresses" />
+</div>
+<div id="search-container">
+    @Html.Action("_List", "Addresses")
+</div>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CityId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedById)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedById)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostalCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedById)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedById)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>

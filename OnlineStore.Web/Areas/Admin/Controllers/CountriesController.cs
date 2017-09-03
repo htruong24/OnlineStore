@@ -8,17 +8,47 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineStore.Data.Entities;
 using OnlineStore.Data.Infrastructure;
+using OnlineStore.Services.BLL.Services;
+using OnlineStore.Data.Interfaces;
+using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
     public class CountriesController : Controller
     {
-        private OnlineStoreDbContext db = new OnlineStoreDbContext();
+        private readonly CountryService _countryService;
+
+        public CountriesController()
+        {
+            this._countryService = new CountryService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+        }
 
         // GET: Admin/Countries
         public ActionResult Index()
         {
-            return View(db.Countries.ToList());
+            return View();
+        }
+
+        // GET: List of countries
+        public ActionResult _List(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            _countryService.Pagination = info;
+            _countryService.Filter = filter;
+            var units = _countryService.GetCountries();
+            TempData["SortingPagingInfo"] = _countryService.Pagination;
+
+            return PartialView(units);
         }
 
         // GET: Admin/Countries/Details/5
@@ -28,7 +58,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = db.Countries.Find(id);
+            var country = _countryService.GetCountry(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -47,15 +77,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Country country)
+        public ActionResult Create(Country country)
         {
             if (ModelState.IsValid)
             {
-                db.Countries.Add(country);
-                db.SaveChanges();
+                UpdateDefaultProperties(country);
+                _countryService.CreateCountry(country);
                 return RedirectToAction("Index");
             }
-
             return View(country);
         }
 
@@ -66,7 +95,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = db.Countries.Find(id);
+            var country = _countryService.GetCountry(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -79,12 +108,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CreatedOn,CreatedById,ModifiedOn,ModifiedById")] Country country)
+        public ActionResult Edit(Country country)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(country).State = EntityState.Modified;
-                db.SaveChanges();
+                UpdateDefaultProperties(country);
+                _countryService.UpdateCountry(country);
                 return RedirectToAction("Index");
             }
             return View(country);
@@ -97,7 +126,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = db.Countries.Find(id);
+            var country = _countryService.GetCountry(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -110,19 +139,31 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Country country = db.Countries.Find(id);
-            db.Countries.Remove(country);
-            db.SaveChanges();
+            _countryService.DeleteCountry(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultProperties(Country country)
         {
-            if (disposing)
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
             {
-                db.Dispose();
+                if (country.Id == 0)
+                {
+                    country.CreatedById = user.Id;
+                    country.CreatedOn = DateTime.Now;
+                    country.ModifiedById = user.Id;
+                    country.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    country.ModifiedById = user.Id;
+                    country.ModifiedOn = DateTime.Now;
+                }
             }
-            base.Dispose(disposing);
         }
     }
 }

@@ -45,10 +45,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             _countryService.Pagination = info;
             _countryService.Filter = filter;
-            var units = _countryService.GetCountries();
+            var countries = _countryService.GetCountries();
             TempData["SortingPagingInfo"] = _countryService.Pagination;
 
-            return PartialView(units);
+            return PartialView(countries);
         }
 
         // GET: Admin/Countries/Details/5

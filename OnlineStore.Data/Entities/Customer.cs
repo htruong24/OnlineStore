@@ -66,6 +66,12 @@
         [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [ForeignKey("ShippingAddress")]
+        [DisplayName("Địa chỉ giao hàng")]
+        public int ShippingAddressId { get; set; }
+
+        public virtual ShippingAddress ShippingAddress { get; set; }
+
         [DisplayName("Ngày tạo")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? CreatedOn { get; set; }

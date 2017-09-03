@@ -14,17 +14,17 @@ using OnlineStore.Common;
 
 namespace OnlineStore.Web.Areas.Admin.Controllers
 {
-    public class AddressesController : Controller
+    public class ShippingAddressesController : Controller
     {
         private readonly CityService _cityService;
         private readonly CustomerService _customerService;
-        private readonly AddressService _addressService;
+        private readonly ShippingAddressService _shippingAddressService;
 
-        public AddressesController()
+        public ShippingAddressesController()
         {
             this._cityService = new CityService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
-            this._addressService = new AddressService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._shippingAddressService = new ShippingAddressService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
 
@@ -48,12 +48,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 };
             }
 
-            _customerService.Pagination = info;
-            _customerService.Filter = filter;
-            var customers = _customerService.GetCustomers();
-            TempData["SortingPagingInfo"] = _customerService.Pagination;
+            _shippingAddressService.Pagination = info;
+            _shippingAddressService.Filter = filter;
+            var addresses = _shippingAddressService.GetShippingAddresses();
+            TempData["SortingPagingInfo"] = _shippingAddressService.Pagination;
 
-            return PartialView(customers);
+            return PartialView(addresses);
         }
 
         // GET: Admin/Addresses/Details/5
@@ -63,12 +63,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var customer = _customerService.GetCustomer(id);
-            if (customer == null)
+            var shippingAddress = _shippingAddressService.GetShippingAddress(id);
+            if (shippingAddress == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(shippingAddress);
         }
 
         // GET: Admin/Addresses/Create
@@ -84,15 +84,16 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Address address)
+        public ActionResult Create(ShippingAddress shippingAddress)
         {
             if (ModelState.IsValid)
             {
-                UpdateDefaultProperties(address);
-                _addressService.CreateAddress(address);
+                UpdateDefaultProperties(shippingAddress);
+                shippingAddress.Customer = _customerService.GetCustomer(shippingAddress.CustomerId);
+                _shippingAddressService.CreateShippingAddress(shippingAddress);
                 return RedirectToAction("Index");
             }
-            return View(address);
+            return View(shippingAddress);
         }
 
         // GET: Admin/Addresses/Edit/5
@@ -102,14 +103,14 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var address = _addressService.GetAddress(id);
+            var shippingAddress = _shippingAddressService.GetShippingAddress(id);
             ViewBag.Cities = GetCities();
             ViewBag.Customers = GetCustomers();
-            if (address == null)
+            if (shippingAddress == null)
             {
                 return HttpNotFound();
             }
-            return View(address);
+            return View(shippingAddress);
         }
 
         // POST: Admin/Addresses/Edit/5
@@ -117,15 +118,15 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Address address)
+        public ActionResult Edit(ShippingAddress shippingAddress)
         {
             if (ModelState.IsValid)
             {
-                UpdateDefaultProperties(address);
-                _addressService.UpdateAddress(address);
+                UpdateDefaultProperties(shippingAddress);
+                _shippingAddressService.UpdateShippingAddress(shippingAddress);
                 return RedirectToAction("Index");
             }
-            return View(address);
+            return View(shippingAddress);
         }
 
         // GET: Admin/Addresses/Delete/5
@@ -135,12 +136,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var address = _addressService.GetAddress(id);
-            if (address == null)
+            var shippingAddress = _shippingAddressService.GetShippingAddress(id);
+            if (shippingAddress == null)
             {
                 return HttpNotFound();
             }
-            return View(address);
+            return View(shippingAddress);
         }
 
         // POST: Admin/Addresses/Delete/5
@@ -148,7 +149,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _addressService.DeleteAddress(id);
+            _shippingAddressService.DeleteShippingAddress(id);
             return RedirectToAction("Index");
         }
 
@@ -177,24 +178,24 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
         }
 
         // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
-        public void UpdateDefaultProperties(Address address)
+        public void UpdateDefaultProperties(ShippingAddress shippingAddress)
         {
             var user = Session[CommonConstants.USER_SESSION] as User;
             // Create
             if (user != null)
             {
-                if (address.Id == 0)
+                if (shippingAddress.Id == 0)
                 {
-                    address.CreatedById = user.Id;
-                    address.CreatedOn = DateTime.Now;
-                    address.ModifiedById = user.Id;
-                    address.ModifiedOn = DateTime.Now;
+                    shippingAddress.CreatedById = user.Id;
+                    shippingAddress.CreatedOn = DateTime.Now;
+                    shippingAddress.ModifiedById = user.Id;
+                    shippingAddress.ModifiedOn = DateTime.Now;
                 }
                 // Update
                 else
                 {
-                    address.ModifiedById = user.Id;
-                    address.ModifiedOn = DateTime.Now;
+                    shippingAddress.ModifiedById = user.Id;
+                    shippingAddress.ModifiedOn = DateTime.Now;
                 }
             }
         }

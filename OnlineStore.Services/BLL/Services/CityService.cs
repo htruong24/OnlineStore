@@ -27,7 +27,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var city = _unitOfWork.GetRepository<Data.Entities.City>()
-                     .Get(x => x.Id == cityId, null, "CreatedBy,ModifiedBy")
+                     .Get(x => x.Id == cityId, null, "Country,CreatedBy,ModifiedBy")
                      .FirstOrDefault();
                 return city;
             }
@@ -64,7 +64,7 @@ namespace OnlineStore.Services.BLL.Services
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<City>().Get(null, null, "CreatedBy,ModifiedBy");
+                var query = _unitOfWork.GetRepository<City>().Get(null, null, "Country,CreatedBy,ModifiedBy");
 
                 // Sorting
                 switch (Pagination.SortField)

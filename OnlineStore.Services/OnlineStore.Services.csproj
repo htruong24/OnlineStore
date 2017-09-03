@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BL\UserBL.cs" />
-    <Compile Include="BLL\Contracts\IAddressService.cs" />
+    <Compile Include="BLL\Contracts\IShippingAddressService.cs" />
     <Compile Include="BLL\Contracts\ICountryService.cs" />
     <Compile Include="BLL\Contracts\ICityService.cs" />
     <Compile Include="BLL\Contracts\IRecommendProductService.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="BLL\Services\SupplierService.cs" />
     <Compile Include="BLL\Services\SubCategoryService.cs" />
     <Compile Include="BLL\Services\CountryService.cs" />
-    <Compile Include="BLL\Services\AddressService.cs" />
+    <Compile Include="BLL\Services\ShippingAddressService.cs" />
     <Compile Include="BLL\Services\CityService.cs" />
     <Compile Include="BLL\Services\UnitService.cs" />
     <Compile Include="BLL\Services\CategoryService.cs" />

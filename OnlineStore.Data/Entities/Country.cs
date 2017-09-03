@@ -10,7 +10,7 @@
     {
         public int Id { get; set; }
 
-        [DisplayName("Tên thành phố")]
+        [DisplayName("Tên quốc gia")]
         public string Name { get; set; }
 
         [DisplayName("Ngày tạo")]

@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\ShippingAddress.cs" />
     <Compile Include="Entities\AutomaticValue.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Category.cs" />

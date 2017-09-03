@@ -1,6 +1,6 @@
-﻿@model IEnumerable<OnlineStore.Data.Entities.Address>
+﻿@model IEnumerable<OnlineStore.Data.Entities.ShippingAddress>
 @{
-    ViewBag.Module = "Địa chỉ";
+    ViewBag.Module = "Địa chỉ giao hàng";
     ViewBag.Title = "Danh sách";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -13,6 +13,6 @@
     <input type="hidden" id="hdControllerName" value="Addresses" />
 </div>
 <div id="search-container">
-    @Html.Action("_List", "Addresses")
+    @Html.Action("_List", "ShippingAddresses")
 </div>
 

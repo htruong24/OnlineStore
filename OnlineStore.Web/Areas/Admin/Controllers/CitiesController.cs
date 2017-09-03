@@ -47,10 +47,10 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
 
             _cityService.Pagination = info;
             _cityService.Filter = filter;
-            var units = _cityService.GetCities();
+            var cities = _cityService.GetCities();
             TempData["SortingPagingInfo"] = _cityService.Pagination;
 
-            return PartialView(units);
+            return PartialView(cities);
         }
 
         // GET: Admin/Cities/Details/5

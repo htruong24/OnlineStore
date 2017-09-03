@@ -1,13 +1,9 @@
-﻿@model OnlineStore.Data.Entities.Address
+﻿@model OnlineStore.Data.Entities.ShippingAddress
 @{
-    ViewBag.Module = "Địa chỉ";
-    ViewBag.Title = "Xóa địa chỉ";
+    ViewBag.Module = "Địa chỉ giao hàng";
+    ViewBag.Title = "Chi tiết";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div class="alert alert-danger">
-    Bạn có chắc muốn xóa địa chỉ này?
-</div>
-
 <div>
     @*Details information*@
     <div class="widget-box">
@@ -17,6 +13,12 @@
         <div class="widget-body">
             <div class="widget-main">
                 <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CustomerId)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Customer.Name)
+                    </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Value)
                     </dt>
@@ -34,12 +36,6 @@
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.City.Name)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CustomerId)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Customer.Name)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Note)
@@ -88,16 +84,12 @@
         </div>
     </div>
 </div>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <button type="submit" class="btn btn-white btn-danger btn-bold">
-        <i class="ace-icon fa fa-floppy-o bigger-120 red"></i>
-        Xác nhận
+<p>
+    <button class="btn btn-white btn-info btn-bold">
+        <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id })
     </button>
-}
-
-<div style="padding-top: 20px;">
-    <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
-</div>
+    <div style="padding-top: 20px;">
+        <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
+    </div>
+</p>

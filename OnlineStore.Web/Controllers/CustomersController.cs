@@ -172,6 +172,26 @@ namespace OnlineStore.Web.Controllers
             return View();
         }
 
+        public ActionResult CreateAddress()
+        {
+            return View();
+        }
+
+        public ActionResult CreateAddress(ShippingAddress address)
+        {
+            return View();
+        }
+
+        public ActionResult UpdateAddress()
+        {
+            return View();
+        }
+
+        public ActionResult UpdateAddress(ShippingAddress address)
+        {
+            return View();
+        }
+
         public ActionResult PromotionInformation()
         {
             return View();

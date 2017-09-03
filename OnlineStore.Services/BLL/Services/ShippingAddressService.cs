@@ -9,7 +9,7 @@ using OnlineStore.Services.BLL.Contracts;
 
 namespace OnlineStore.Services.BLL.Services
 {
-    public class AddressService: IAddressService
+    public class ShippingAddressService: IShippingAddressService
     {
         public SortingPagingInfo Pagination;
 
@@ -17,55 +17,55 @@ namespace OnlineStore.Services.BLL.Services
 
         private readonly UnitOfWork _unitOfWork;
 
-        public AddressService(UnitOfWork unitOfWork)
+        public ShippingAddressService(UnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
 
-        public Address GetAddress(int? addressId)
+        public ShippingAddress GetShippingAddress(int? shippingAddressId)
         {
             using (_unitOfWork)
             {
-                var address = _unitOfWork.GetRepository<Data.Entities.Address>()
-                     .Get(x => x.Id == addressId, null, "CreatedBy,ModifiedBy")
+                var shippingAddress = _unitOfWork.GetRepository<Data.Entities.ShippingAddress>()
+                     .Get(x => x.Id == shippingAddressId, null, "City,Customer,CreatedBy,ModifiedBy")
                      .FirstOrDefault();
 
-                return address;
+                return shippingAddress;
             }
         }
 
-        public void UpdateAddress(Address address)
+        public void UpdateShippingAddress(ShippingAddress shippingAddress)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Data.Entities.Address>().Update(address);
+                _unitOfWork.GetRepository<Data.Entities.ShippingAddress>().Update(shippingAddress);
                 _unitOfWork.Save();
             }
         }
 
-        public void CreateAddress(Address address)
+        public void CreateShippingAddress(ShippingAddress shippingAddress)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Address>().Create(address);
+                _unitOfWork.GetRepository<ShippingAddress>().Create(shippingAddress);
                 _unitOfWork.Save();
             }
         }
 
-        public void DeleteAddress(int? addressId)
+        public void DeleteShippingAddress(int? shippingAddressId)
         {
             using (_unitOfWork)
             {
-                _unitOfWork.GetRepository<Address>().Delete(addressId);
+                _unitOfWork.GetRepository<ShippingAddress>().Delete(shippingAddressId);
                 _unitOfWork.Save();
             }
         }
 
-        public List<Address> GetAddresses()
+        public List<ShippingAddress> GetShippingAddresses()
         {
             using (_unitOfWork)
             {
-                var query = _unitOfWork.GetRepository<Address>().Get(null, null, "CreatedBy,ModifiedBy");
+                var query = _unitOfWork.GetRepository<ShippingAddress>().Get(null, null, "City,Customer,CreatedBy,ModifiedBy");
 
                 // Sorting
                 switch (Pagination.SortField)
@@ -120,6 +120,18 @@ namespace OnlineStore.Services.BLL.Services
 
                 return query.ToList();
 
+            }
+        }
+
+        public ShippingAddress GetShippingAddressByCustomerId(int? customerId)
+        {
+            using (_unitOfWork)
+            {
+                var shippingAddress = _unitOfWork.GetRepository<Data.Entities.ShippingAddress>()
+                     .Get(x => x.CustomerId == customerId, null, "City,Customer,CreatedBy,ModifiedBy")
+                     .FirstOrDefault();
+
+                return shippingAddress;
             }
         }
     }

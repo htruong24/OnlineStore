@@ -33,7 +33,7 @@
                 {
                     <tr>
                         <td>
-                            <a href="~/Admin/Addresses/Details/@item.Id">
+                            <a href="~/Admin/ShippingAddresses/Details/@item.Id">
                                 @Html.DisplayFor(modelItem => item.Customer.Name)
                             </a>
                         </td>
@@ -51,13 +51,13 @@
                         </td>
                         <td>
                             <div class="hidden-sm hidden-xs action-buttons">
-                                <a class="blue" href="~/Admin/Addresses/Details/@item.Id">
+                                <a class="blue" href="~/Admin/ShippingAddresses/Details/@item.Id">
                                     <i class="ace-icon fa fa-search-plus bigger-130"></i>
                                 </a>
-                                <a class="green" href="~/Admin/Addresses/Edit/@item.Id">
+                                <a class="green" href="~/Admin/ShippingAddresses/Edit/@item.Id">
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </a>
-                                <a class="red" href="~/Admin/Addresses/Delete/@item.Id">
+                                <a class="red" href="~/Admin/ShippingAddresses/Delete/@item.Id">
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </a>
                             </div>
@@ -68,21 +68,21 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                         <li>
-                                            <a href="~/Admin/Addresses/Details/@item.Id" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <a href="~/Admin/ShippingAddresses/Details/@item.Id" class="tooltip-info" data-rel="tooltip" title="View">
                                                 <span class="blue">
                                                     <i class="ace-icon fa fa-search-plus bigger-120"></i>
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="~/Admin/Addresses/Edit/@item.Id" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <a href="~/Admin/ShippingAddresses/Edit/@item.Id" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                 <span class="green">
                                                     <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="~/Admin/Addresses/Delete/@item.Id" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="~/Admin/ShippingAddresses/Delete/@item.Id" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                 <span class="red">
                                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                 </span>
@@ -99,4 +99,4 @@
     </div>
 </div>
 
-@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/ShippingAddresses/Index" })
+@Html.Action("_Paging", "Common", new { totalRows = info.TotalRows, currentPage = info.CurrentPage, pageSize = info.PageSize, controlName = "/ShippingShippingAddresses/Index" })

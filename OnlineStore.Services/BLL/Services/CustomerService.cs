@@ -27,7 +27,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var customer = _unitOfWork.GetRepository<Data.Entities.Customer>()
-                        .Get(x => x.Id == customerId, null, "ShippingAddress,CreatedBy,ModifiedBy")
+                        .Get(x => x.Id == customerId, null, "ShippingAddresses,CreatedBy,ModifiedBy")
                         .FirstOrDefault();
 
                 return customer;

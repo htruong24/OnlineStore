@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Controllers
     public class CustomersController : Controller
     {
         private readonly CustomerService _customerService;
+        private readonly OrderService _orderService;
 
         public CustomersController()
         {
             this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._orderService = new OrderService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -165,6 +167,35 @@ namespace OnlineStore.Web.Controllers
         public ActionResult Orders()
         {
             return View();
+        }
+
+        // GET: List of orders
+        public ActionResult _OrdersList(SortingPagingInfo info, DefaultFilter filter)
+        {
+            if (info.SortField == null)
+            {
+                info = new SortingPagingInfo
+                {
+                    SortField = "Name",
+                    SortDirection = "ascending",
+                    PageSize = CommonConstants.PAGE_SIZE,
+                    CurrentPage = 1
+                };
+            }
+
+            var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            _orderService.Pagination = info;
+            _orderService.Filter = filter;
+            filter.CustomerId = customer.Id;
+            var orders = _orderService.GetOrders();
+            TempData["SortingPagingInfo"] = _orderService.Pagination;
+
+            return PartialView(orders);
+        }
+
+        public ActionResult _OrderDetails()
+        {
+            return PartialView();
         }
 
         public ActionResult Address()

@@ -2,7 +2,7 @@
 @using OnlineStore.Data.Entities
 @model OnlineStore.Data.Entities.Customer
 @{
-    ViewBag.Title = "Quản lí tài khoản";
+    ViewBag.Title = "Thông tin cá nhân";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
 }
@@ -14,9 +14,65 @@
                 @Html.Partial("_Menu")
             </div>
             <div class="col-sm-9 col-right">
-                <h2>Xin chào, @Model.Name</h2>
+                <h2>@ViewBag.Title</h2>
+                <hr />
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </dt>
+
+                        <dd>
+                            @(Model.Gender == 1 ? "Nam" : (Model.Gender == 0 ? "Nữ" : ""))
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateOfBirth)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DateOfBirth)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Address)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Telephone)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Telephone)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                    </dl>
+                </div>
+                <p>
+                    <i class="ace-icon fa fa-wrench bigger-110 icon-only"></i> @Html.ActionLink("Cập nhật thông tin", "Edit", new { id = Model.Id })
+                </p>
             </div>
         </div>
     </div>
 </div>
+
 

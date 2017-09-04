@@ -89,7 +89,6 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 UpdateDefaultProperties(shippingAddress);
-                shippingAddress.Customer = _customerService.GetCustomer(shippingAddress.CustomerId);
                 _shippingAddressService.CreateShippingAddress(shippingAddress);
                 return RedirectToAction("Index");
             }
@@ -165,7 +164,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return _cityService.GetCities();
         }
 
-        // Get countries
+        // Get customers
         public List<Customer> GetCustomers()
         {
             _customerService.Pagination = new SortingPagingInfo

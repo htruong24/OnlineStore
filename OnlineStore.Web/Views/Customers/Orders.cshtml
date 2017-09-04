@@ -14,7 +14,14 @@
                 @Html.Partial("_Menu")
             </div>
             <div class="col-sm-9 col-right">
-                <h2>Xin chào, @customer.Name</h2>
+                <h2>@ViewBag.Title</h2>
+                <hr />
+                <div id="orders-container">
+                    @Html.Action("_OrdersList", "Customers")
+                </div>
+                <div id="details-container">
+                    <hr />
+                </div>
             </div>
         </div>
     </div>

@@ -2,13 +2,14 @@
 <link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="~/assets/admin/js/app/order/edit.js"></script>
 
+@using OnlineStore.Data.Entities
 @model OnlineStore.Data.Entities.Order
 @{
     ViewBag.Module = "Đơn hàng";
     ViewBag.Title = "Tạo mới";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
-    var PaymentObjects = (List<SelectListItem>) ViewBag.PaymentObjects;
+    var PaymentObjects = (List<SelectListItem>)ViewBag.PaymentObjects;
     var PaymentMethods = (List<SelectListItem>)ViewBag.PaymentMethods;
     var DeliveryMethods = (List<SelectListItem>)ViewBag.DeliveryMethods;
     var Cities = (List<SelectListItem>)ViewBag.Cities;
@@ -31,6 +32,26 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.PaymentObject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="radio-inline">
+                    <label>
+                        <input name="PaymentObject" value="Khách vãng lai" checked type="radio" class="ace" />
+                        <span class="lbl">Khách vãng lai</span>
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input name="PaymentObject" value="Khách đã tồn tại" type="radio" class="ace" />
+                        <span class="lbl">Khách đã tồn tại</span>
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.PaymentObject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Khách vãng lai -->
+        <div class="form-group customer-anonymous">
             @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
@@ -38,11 +59,21 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PaymentObject, htmlAttributes: new { @class = "control-label col-md-2" })
+        <!-- PaymentObject -->
+        <div class="form-group customer-existed">
+            @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PaymentObject, PaymentObjects, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PaymentObject, "", new { @class = "text-danger" })
+                <select name="CustomerId" class="slCustomer form-control">
+                    @{
+                        var customers = (List<Customer>)ViewBag.Customers;
+
+                        foreach (var customer in customers)
+                        {
+                            <option value="@customer.Id">@customer.Name</option>
+                        }
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -117,14 +148,23 @@
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Tạo mới" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+                        }
 <div>
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".slCustomer").select2({
+            placeholder: "Chọn khách hàng",
+            allowClear: true
+        });
+    });
+</script>

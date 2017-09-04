@@ -20,6 +20,7 @@
         [DisplayName("Mã số")]
         public string Code { get; set; }
 
+        [DisplayName("Tên khách hàng")]
         [StringLength(30)]
         public string CustomerId { get; set; }
 

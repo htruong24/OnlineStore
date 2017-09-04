@@ -17,10 +17,12 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
     public class OrdersController : BaseController
     {
         private readonly OrderService _orderService;
+        private readonly CustomerService _customerService;
 
         public OrdersController()
         {
             this._orderService = new OrderService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         // GET: Admin/Orders
@@ -73,7 +75,8 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             var paymentMethods = new string[] { "Tiền mặt khi nhận hàng", "Chuyển khoản" };
             var deliveryMethods = new string[] { "Tận nơi", "Qua bưu điện" };
             var cities = new string[] { "Hồ Chí Minh", "Đà Nẵng", "Vũng Tàu", "Đồng Nai", "Buôn Ma Thuột" };
-            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng" };
+            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng", "Hủy" };
+            ViewBag.Customers = GetCustomers();
 
             ViewBag.PaymentObjects = paymentObjects.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
             ViewBag.PaymentMethods = paymentMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
@@ -112,7 +115,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             var paymentMethods = new string[] { "Tiền mặt khi nhận hàng", "Chuyển khoản" };
             var deliveryMethods = new string[] { "Tận nơi", "Qua bưu điện" };
             var cities = new string[] { "Hồ Chí Minh", "Đà Nẵng", "Vũng Tàu", "Đồng Nai", "Buôn Ma Thuột" };
-            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng" };
+            var statuses = new string[] { "Mới đặt hàng", "Đang giao hàng", "Đã giao hàng", "Hủy" };
 
             ViewBag.PaymentObjects = paymentObjects.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
             ViewBag.PaymentMethods = paymentMethods.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
@@ -189,6 +192,18 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                     order.ModifiedOn = DateTime.Now;
                 }
             }
+        }
+
+        // Get customers
+        public List<Customer> GetCustomers()
+        {
+            _customerService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _customerService.GetCustomers();
         }
     }
 }

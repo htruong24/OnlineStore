@@ -20,11 +20,8 @@
         [DisplayName("Thành phố")]
         public int? CityId { get; set; }
 
-        [ForeignKey("Customer")]
         [DisplayName("Khách hàng")]
         public int CustomerId { get; set; }
-
-        public virtual Customer Customer { get; set; }
 
         [DisplayName("Ghi chú")]
         public string Note { get; set; }
@@ -55,5 +52,8 @@
 
         [ForeignKey("CityId")]
         public virtual City City { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
     }
 }

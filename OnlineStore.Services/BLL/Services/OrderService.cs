@@ -170,6 +170,10 @@ namespace OnlineStore.Services.BLL.Services
                                              || x.Note.Contains(Filter.Keyword)
                                              || x.Status.Contains(Filter.Keyword));
                 }
+                if(Filter.CustomerId != 0)
+                {
+                    query = query.Where(x => x.CustomerId == Filter.CustomerId.ToString());
+                }
 
                 // Paging
                 Pagination.TotalRows = query.Count();

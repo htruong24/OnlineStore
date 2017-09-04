@@ -12,9 +12,9 @@
     var PaymentObjects = (List<SelectListItem>)ViewBag.PaymentObjects;
     var PaymentMethods = (List<SelectListItem>)ViewBag.PaymentMethods;
     var DeliveryMethods = (List<SelectListItem>)ViewBag.DeliveryMethods;
-    var Cities = (List<SelectListItem>)ViewBag.Cities;
     var Statuses = (List<SelectListItem>)ViewBag.Statuses;
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -112,7 +112,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.City, Cities, new { htmlAttributes = new { @class = "form-control" } })
+                <select name="CityId" class="slCity form-control">
+                    @{
+                        var cities = (List<City>)ViewBag.Cities;
+
+                        foreach (var city in cities)
+                        {
+                            <option value="@city.Id">@city.Name</option>
+                        }
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -155,7 +164,7 @@
             </div>
         </div>
     </div>
-                        }
+    }
 <div>
     <i class="ace-icon fa fa-reply icon-only"></i> @Html.ActionLink("Trở về trang chủ", "Index")
 </div>
@@ -166,5 +175,64 @@
             placeholder: "Chọn khách hàng",
             allowClear: true
         });
+
+        $(".slCity").select2({
+            placeholder: "Chọn thành phố",
+            allowClear: true
+        });
+
+        $(".slCustomer").on("select2:select", function () {
+            UpdateCustomerInfo($(this).val());
+        });
+
+        //Toggle customer
+        CheckIfCustomerIsExisted();
+        $('input[name="PaymentObject"]').change(function () {
+            CheckIfCustomerIsExisted();
+        })
     });
+
+    function CheckIfCustomerIsExisted()
+    {
+        var customerId = $(".slCustomer").val();
+        var customerType = $('input[name="PaymentObject"]:checked').val();
+        console.log(customerType);
+        if (customerType == "Khách đã tồn tại") {
+            $(".customer-anonymous").hide();
+            $(".customer-existed").show();
+            UpdateCustomerInfo(customerId);
+        }
+        else
+        {
+            $(".customer-anonymous").show();
+            $(".customer-existed").hide();
+        }
+    }
+
+    function UpdateCustomerInfo(customerId)
+    {
+        $('#loading-container').empty().append(loadingContent);
+        $.ajax({
+            type: "GET",
+            url: "/Admin/Customers/GetCustomer",
+            data: { customerId: customerId},
+            success: function (customer) {
+                SetCustomerInfo(customer)
+                $("#loadingContent").remove();
+            },
+            error: function (xhr, textStatus, error) {
+                toastr.error(error);
+                $("#loadingContent").remove();
+            }
+        });
+    }
+
+    function SetCustomerInfo(customer) {
+        $("#Telephone").val(customer.Telephone);
+        $("#Email").val(customer.Email);
+        $("#Address").val(customer.Address);
+        $("#PostalCode").val(customer.PostalCode);
+        $("#Note").val(customer.Note);
+        $(".slCity").val(customer.CityId).trigger('change');
+    }
 </script>

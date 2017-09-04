@@ -166,5 +166,23 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
                 }
             }
         }
+
+        // Get customer
+        [HttpGet]
+        public JsonResult GetCustomer(int customerId)
+        {
+            var customer = _customerService.GetCustomer(customerId);
+            var address = customer.ShippingAddresses.ToList();
+            return Json(new
+            {
+                Name = customer.Name,
+                Telephone = customer.Telephone,
+                Email = customer.Email,
+                Address = address.Count() > 0 ? address[0].Value : "",
+                PostalCode = address.Count() > 0 ? address[0].PostalCode : "",
+                CityId = address.Count() > 0 ? address[0].CityId : null,
+                Note = address.Count() > 0 ? address[0].Note : "",
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -152,7 +152,7 @@ namespace OnlineStore.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        // Get countries
+        // Get cities
         public List<City> GetCities()
         {
             _cityService.Pagination = new SortingPagingInfo

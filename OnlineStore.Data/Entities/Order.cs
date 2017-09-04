@@ -45,7 +45,7 @@
         [DisplayName("Thành phố")]
         public string City { get; set; }
 
-        [DisplayName("Địa chỉ")]
+        [DisplayName("Địa chỉ giao hàng")]
         public string Address { get; set; }
 
         [DisplayName("Mã bưu điện")]

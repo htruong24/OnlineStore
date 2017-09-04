@@ -293,7 +293,7 @@ namespace OnlineStore.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }       
 
         // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
         public void UpdateDefaultProperties(Customer customer)
@@ -314,3 +314,4 @@ namespace OnlineStore.Web.Controllers
         }
     }
 }
+

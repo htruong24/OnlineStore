@@ -153,5 +153,19 @@ namespace OnlineStore.Web.Controllers
 
             return PartialView();
         }
+
+        // Delivery Information
+        public ActionResult DeliveryInformation()
+        {
+            var cities = new string[] { "", "Hồ Chí Minh", "Đà Nẵng", "Vũng Tàu", "Đồng Nai", "Buôn Ma Thuột" };
+            ViewBag.Cities = cities.Select(x => new SelectListItem { Text = x, Value = x }).ToList();
+            var cartItems = Session[CommonConstants.SHOPPING_CART_SESSION] == null ? new List<OrderDetail>() : (List<OrderDetail>)Session[CommonConstants.SHOPPING_CART_SESSION];
+            return View(cartItems);
+        }
+
+        public ActionResult PaymentInformation()
+        {
+            return View();
+        }
     }
 }

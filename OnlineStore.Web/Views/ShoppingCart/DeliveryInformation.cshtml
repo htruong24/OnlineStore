@@ -1,0 +1,143 @@
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.OrderDetail>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <div class="container">
+        <div class="checkout">
+            <div class="row">
+                <div class="col-sm-7">
+                    <form id="frmCheckout" action="~/Orders/Create" method="post">
+                        <div class="checkout-step">
+                            <div class="checkout-step-item">
+                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
+                                    @*<span class="number">3</span>*@
+                                    <h2>Chọn địa chỉ giao hàng</h2>
+                                </div>
+                                <div id="checkout-three" class="collapse in">
+                                    <div class="step-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h4>THÔNG TIN KHÁCH HÀNG</h4>
+                                                <div class="form-group">
+                                                    <label class="control-label">Tên khách hàng <em>*</em></label>
+                                                    <input type="text" name="CustomerName" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Số điện thoại <em>*</em></label>
+                                                    <input type="text" name="Telephone" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Email <em>*</em></label>
+                                                    <input type="email" name="Email" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <h4>ĐỊA CHỈ</h4>
+                                                <div class="form-group">
+                                                    <label class="control-label">Thành phố <em>*</em></label>
+                                                    <select name="City" class="form-control">
+                                                        <option value="">-- Chọn thành phố  --</option>
+                                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                        <option value="Buôn Ma Thuột">Buôn Ma Thuột</option>
+                                                        <option value="Vũng Tàu">Vũng Tàu</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Mã bưu điện</label>
+                                                    <input name="PostalCode" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Địa chỉ <em>*</em></label>
+                                                    <textarea name="Address" type="text" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <h4>CHÚ THÍCH</h4>
+                                                <div class="form-group">
+                                                    <textarea name="Note" rows="10" type="text" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align:center; margin-bottom:5px;">
+                            <div class="col-sm-12">
+                                <input type="submit" class="btn btn-default btn-md" value="XÁC NHẬN" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="first last">
+                                        <th>Ảnh</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá</th>
+                                        <th>Tổng cộng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var orderDetail in Model)
+                                    {
+                                        var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                        var featuredImageUrl = Placeholder.PRODUCT;
+                                        if (featuredImage != null)
+                                        {
+                                            featuredImageUrl = featuredImage.Photo.Url;
+                                        }
+
+                                        <tr class="order-details" id="product-@orderDetail.ProductId">
+                                            <td>
+                                                <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
+                                                    <img style="width:50px;" alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
+                                            </td>
+                                            <td class="qty" style="text-align:center; font-size:20px;">
+                                                <label><b>@orderDetail.Quantity</b></label>
+                                            </td>
+                                            <td class="subtotal">@orderDetail.Price.ToCurrency()</td>
+                                            @{
+                                                var amount = orderDetail.Quantity * orderDetail.Price;
+                                            }
+                                            <td class="grandtotal">@amount.ToCurrency()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    Tổng cộng
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    @{
+                                        var totalAmount = Model.Sum(x => x.Price * x.Quantity);
+                                    }
+                                    @totalAmount.ToCurrency() VNĐ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

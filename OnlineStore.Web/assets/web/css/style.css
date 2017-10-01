@@ -3313,3 +3313,20 @@ label {
 .btn-login:before {
     content: "\f007";
 }
+
+/*CUSTOM CSS*/
+.subtotal,
+.grandtotal {
+    font-size: 13px;
+}
+
+
+.table-cart-total tbody > tr > td {
+    border: 0;
+    font-size: 14px;
+}
+
+.table > thead > tr > th
+{
+    text-align:center;
+}

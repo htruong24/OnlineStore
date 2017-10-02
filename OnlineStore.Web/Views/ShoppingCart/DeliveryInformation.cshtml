@@ -9,36 +9,37 @@
         <div class="checkout">
             <div class="row">
                 <div class="col-sm-7">
-                    <form id="frmCheckout" action="~/Orders/Create" method="post">
-                        <div class="checkout-step">
-                            <div class="checkout-step-item">
-                                <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
-                                    @*<span class="number">3</span>*@
-                                    <h2>Chọn địa chỉ giao hàng</h2>
-                                </div>
-                                <div id="checkout-three" class="collapse in">
-                                    <div class="step-content">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4>THÔNG TIN KHÁCH HÀNG</h4>
-                                                <div class="form-group">
-                                                    <label class="control-label">Tên khách hàng <em>*</em></label>
+                    <div class="checkout-step">
+                        <div class="checkout-step-item">
+                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
+                                @*<span class="number">3</span>*@
+                                <h2>Chọn địa chỉ giao hàng</h2>
+                            </div>
+                            <div id="checkout-three" class="collapse in">
+                                <div class="step-content">
+                                    <div class="col-sm-offset-1 col-sm-10 ">
+                                        <form class="form-horizontal" id="frmCheckout" action="~/Orders/Create" method="post">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Tên khách hàng<em>*</em></label>
+                                                <div class="col-sm-8">
                                                     <input type="text" name="CustomerName" class="form-control">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Số điện thoại <em>*</em></label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Điện thoại di động<em>*</em></label>
+                                                <div class="col-sm-8">
                                                     <input type="text" name="Telephone" class="form-control">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Email <em>*</em></label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Email<em>*</em></label>
+                                                <div class="col-sm-8">
                                                     <input type="email" name="Email" class="form-control">
                                                 </div>
                                             </div>
-
-                                            <div class="col-sm-12">
-                                                <h4>ĐỊA CHỈ</h4>
-                                                <div class="form-group">
-                                                    <label class="control-label">Thành phố <em>*</em></label>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Thành phố<em>*</em></label>
+                                                <div class="col-sm-8">
                                                     <select name="City" class="form-control">
                                                         <option value="">-- Chọn thành phố  --</option>
                                                         <option value="Hồ Chí Minh">Hồ Chí Minh</option>
@@ -46,32 +47,37 @@
                                                         <option value="Vũng Tàu">Vũng Tàu</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Mã bưu điện</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Mã bưu điện</label>
+                                                <div class="col-sm-8">
                                                     <input name="PostalCode" type="text" class="form-control">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Địa chỉ <em>*</em></label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Địa chỉ <em>*</em></label>
+                                                <div class="col-sm-8">
                                                     <textarea name="Address" type="text" class="form-control"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12">
-                                                <h4>CHÚ THÍCH</h4>
-                                                <div class="form-group">
-                                                    <textarea name="Note" rows="10" type="text" class="form-control"></textarea>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4">Chú thích</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="Note" rows="5" type="text" class="form-control"></textarea>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-4 col-sm-8">
+                                                    <a href="/ShoppingCart/PaymentInformation" class="btn btn-default btn-md fwb">TIẾP TỤC</a>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="text-align:center; margin-bottom:5px;">
-                            <div class="col-sm-12">
-                                <input type="submit" class="btn btn-default btn-md" value="XÁC NHẬN" />
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                  
                 </div>
                 <div class="col-sm-5">
                     <div class="row">
@@ -97,22 +103,22 @@
                                         }
 
                                         <tr class="order-details" id="product-@orderDetail.ProductId">
-                                            <td>
+                                            <td style="vertical-align:middle;">
                                                 <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
                                                     <img style="width:50px;" alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align:middle;">
                                                 <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
                                             </td>
-                                            <td class="qty" style="text-align:center; font-size:20px;">
+                                            <td class="qty" style="text-align:center; font-size:14px; vertical-align:middle;">
                                                 <label><b>@orderDetail.Quantity</b></label>
                                             </td>
-                                            <td class="subtotal">@orderDetail.Price.ToCurrency()</td>
+                                            <td class="subtotal" style="vertical-align:middle;">@orderDetail.Price.ToCurrency()</td>
                                             @{
                                                 var amount = orderDetail.Quantity * orderDetail.Price;
                                             }
-                                            <td class="grandtotal">@amount.ToCurrency()</td>
+                                            <td style="vertical-align:middle;" class="grandtotal">@amount.ToCurrency()</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -123,11 +129,25 @@
                         <div class="col-sm-12">
                             <div class="col-sm-6">
                                 <div class="row">
-                                    Tổng cộng
+                                    Phí vận chuyển:
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <div class="row" style="text-align:right;">
+                                    Chưa tính
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="row">
+                                    Tổng cộng:
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row" style="text-align:right;">
                                     @{
                                         var totalAmount = Model.Sum(x => x.Price * x.Quantity);
                                     }

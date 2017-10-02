@@ -1,1 +1,129 @@
-﻿
+﻿@using OnlineStore.Common
+@model List<OnlineStore.Data.Entities.OrderDetail>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <div class="container">
+        <div class="checkout">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="frb-group">
+                                <div class="frb frb-primary col-sm-6">
+                                    <input type="radio" id="radio-button-1" name="radio-button" value="1">
+                                    <label for="radio-button-1">
+                                        <span class="frb-title">Thanh toán khi nhận hàng</span>
+                                        <span class="frb-description">Quý khách sẽ thanh toán bằng tiền mặt khi nhận hàng tại nhà</span>
+                                    </label>
+                                </div>
+                                <div class="frb frb-success col-sm-6">
+                                    <input type="radio" id="radio-button-2" name="radio-button" value="2">
+                                    <label for="radio-button-2">
+                                        <span class="frb-title">Chuyển khoản ngân hàng</span>
+                                        <span class="frb-description">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            Lưu ý:
+                            - Bạn nhớ kiểm tra kỹ thông tin của đơn hàng bên phải vì thông tin này sẽ không thể thay đổi sau khi đơn hàng được xác nhận thành công.
+                            - Lazada.vn sẽ không gửi tin nhắn xác nhận đơn hàng nên bạn vui lòng xem lại thông tin trong xác nhận đơn hàng được gửi qua email.
+                            - Nhằm đảm bảo quyền lợi mua sắm cho các khách hàng cá nhân, Lazada sẽ giới hạn số lượng sản phẩm trong mỗi đơn hàng và chúng tôi xin phép từ chối đơn hàng có dấu hiệu mua đi bán lại.
+                            - Hiện tại Lazada chưa thể hỗ trợ giao hàng lên lầu / tầng đối với các địa chỉ thuộc chung cư hoặc tòa nhà cao tầng.
+                            Trong mọi trường hợp, trừ khi có yêu cầu khác đi, Quý Khách hàng sẽ nhận được hoá đơn theo thông tin cá nhân đã đăng ký khi mua hàng tại Lazada. Để chuyển đổi từ hóa đơn cho cá nhân sang hóa đơn cho doanh nghiệp, Quý Khách hàng vui lòng liên hệ Lazada trong vòng 7 ngày kể từ ngày đặt hàng. Sau thời gian trên, Lazada có toàn quyền từ chối hỗ trợ chuyển đổi.
+                        </div>
+                    </div>
+                    <div class="row" style="padding:20px 0;">
+                        <div class="col-sm-12">
+                            <a href="/ShoppingCart/PaymentInformation" class="btn btn-default btn-md fwb">ĐẶT HÀNG</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="first last">
+                                        <th>Ảnh</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá</th>
+                                        <th>Tổng cộng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var orderDetail in Model)
+                                    {
+                                        var featuredImage = orderDetail.Product.ProductPhotos.FirstOrDefault(x => x.Featured == true);
+                                        var featuredImageUrl = Placeholder.PRODUCT;
+                                        if (featuredImage != null)
+                                        {
+                                            featuredImageUrl = featuredImage.Photo.Url;
+                                        }
+
+                                        <tr class="order-details" id="product-@orderDetail.ProductId">
+                                            <td style="vertical-align:middle;">
+                                                <a class="product-image" title=">@orderDetail.Product.Name" href="/Products/Details/@orderDetail.ProductId">
+                                                    <img style="width:50px;" alt="@orderDetail.Product.Name" src="~/@featuredImageUrl">
+                                                </a>
+                                            </td>
+                                            <td style="vertical-align:middle;">
+                                                <a href="/Products/Details/@orderDetail.ProductId">@orderDetail.Product.Name</a>
+                                            </td>
+                                            <td class="qty" style="text-align:center; font-size:14px; vertical-align:middle;">
+                                                <label><b>@orderDetail.Quantity</b></label>
+                                            </td>
+                                            <td class="subtotal" style="vertical-align:middle;">@orderDetail.Price.ToCurrency()</td>
+                                            @{
+                                                var amount = orderDetail.Quantity * orderDetail.Price;
+                                            }
+                                            <td style="vertical-align:middle;" class="grandtotal">@amount.ToCurrency()</td>
+                                        </tr>
+                                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    Phí vận chuyển:
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row" style="text-align:right;">
+                                    Chưa tính
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    Tổng cộng:
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row" style="text-align:right;">
+                                    @{
+                                        var totalAmount = Model.Sum(x => x.Price * x.Quantity);
+                                    }
+                                    @totalAmount.ToCurrency() VNĐ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

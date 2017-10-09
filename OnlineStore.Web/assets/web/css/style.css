@@ -3938,7 +3938,7 @@ label {
     font-family: FontAwesome;
     content: '\f096';
     position: absolute;
-    top: 50%;
+    top: 40%;
     margin-top: -11px;
     left: 15px;
     font-size: 22px;
@@ -4023,7 +4023,7 @@ label {
     font-weight: normal;
     font-style: italic;
     color: #999;
-    margin: 5px 5px 5px 50px;
+    margin: 5px 5px 5px 45px;
 }
 
 .frb input[type="radio"]:empty:checked ~ label span.frb-description,

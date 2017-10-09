@@ -13,17 +13,15 @@
                         <div class="col-sm-12">
                             <div class="frb-group">
                                 <div class="frb frb-primary col-sm-6">
-                                    <input type="radio" id="radio-button-1" name="radio-button" value="1">
+                                    <input type="radio" checked class="chkPaymentMethod" id="radio-button-1" name="radio-button" value="cash">
                                     <label for="radio-button-1">
                                         <span class="frb-title">Thanh toán khi nhận hàng</span>
-                                        <span class="frb-description">Quý khách sẽ thanh toán bằng tiền mặt khi nhận hàng tại nhà</span>
                                     </label>
                                 </div>
                                 <div class="frb frb-success col-sm-6">
-                                    <input type="radio" id="radio-button-2" name="radio-button" value="2">
+                                    <input type="radio" class="chkPaymentMethod" id="radio-button-2" name="radio-button" value="bank">
                                     <label for="radio-button-2">
                                         <span class="frb-title">Chuyển khoản ngân hàng</span>
-                                        <span class="frb-description">Để thực hiện việc thanh toán, bắt buộc thẻ ATM của bạn đã có đăng ký sử dụng dịch vụ Internet Banking.</span>
                                     </label>
                                 </div>
                             </div>
@@ -31,12 +29,19 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            Lưu ý:
-                            - Bạn nhớ kiểm tra kỹ thông tin của đơn hàng bên phải vì thông tin này sẽ không thể thay đổi sau khi đơn hàng được xác nhận thành công.
-                            - Lazada.vn sẽ không gửi tin nhắn xác nhận đơn hàng nên bạn vui lòng xem lại thông tin trong xác nhận đơn hàng được gửi qua email.
-                            - Nhằm đảm bảo quyền lợi mua sắm cho các khách hàng cá nhân, Lazada sẽ giới hạn số lượng sản phẩm trong mỗi đơn hàng và chúng tôi xin phép từ chối đơn hàng có dấu hiệu mua đi bán lại.
-                            - Hiện tại Lazada chưa thể hỗ trợ giao hàng lên lầu / tầng đối với các địa chỉ thuộc chung cư hoặc tòa nhà cao tầng.
-                            Trong mọi trường hợp, trừ khi có yêu cầu khác đi, Quý Khách hàng sẽ nhận được hoá đơn theo thông tin cá nhân đã đăng ký khi mua hàng tại Lazada. Để chuyển đổi từ hóa đơn cho cá nhân sang hóa đơn cho doanh nghiệp, Quý Khách hàng vui lòng liên hệ Lazada trong vòng 7 ngày kể từ ngày đặt hàng. Sau thời gian trên, Lazada có toàn quyền từ chối hỗ trợ chuyển đổi.
+                            <div class="method-cash" style="padding:40px 0;">Quý khách sẽ thanh toán bằng tiền mặt khi nhận hàng tại nhà</div>
+                            <div class="method-bank" style="padding:40px 0;">
+                                Quý khách xin vui lòng chuyển khoản vào tài khoảng như dưới đây:<br /><br />
+                                Chủ tài khoản: <b>Trương Quân Hiệu</b><br />
+                                Số tài khoản: <b>123122211</b><br />
+                                Chi nhánh: <b>Ngân hàng Đông Á Tùng Thiện Vương</b><br /><br />
+                            </div>
+                            <div>
+                                <b>Lưu ý:</b><br />
+                                - Bạn nhớ kiểm tra kỹ thông tin của đơn hàng bên phải vì thông tin này sẽ không thể thay đổi sau khi đơn hàng được xác nhận thành công.<br />
+                                - Lazada.vn sẽ không gửi tin nhắn xác nhận đơn hàng nên bạn vui lòng xem lại thông tin trong xác nhận đơn hàng được gửi qua email.<br />
+                                - Nhằm đảm bảo quyền lợi mua sắm cho các khách hàng cá nhân, Lazada sẽ giới hạn số lượng sản phẩm trong mỗi đơn hàng và chúng tôi xin phép từ chối đơn hàng có dấu hiệu mua đi bán lại.<br />
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="padding:20px 0;">
@@ -127,3 +132,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".chkPaymentMethod").on("change", function (e) {
+            var paymentMethod = $(this).val();
+            if (paymentMethod === "cash")
+            {
+                $(".method-cash").show();
+                $(".method-bank").hide();
+            }
+            else
+            {
+                $(".method-cash").hide();
+                $(".method-bank").show();
+            }
+        });
+    });
+
+    function GetPayment()
+    {
+        var paymentMethod = $(".chkPaymentMethod").val();
+        if (paymentMethod === "cash") {
+            $(".method-cash").show();
+            $(".method-bank").hide();
+        }
+        else {
+            $(".method-cash").hide();
+            $(".method-bank").show();
+        }
+    }
+</script>
+

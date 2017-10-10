@@ -1,6 +1,8 @@
-﻿@using OnlineStore.Common
+﻿<script src="~/assets/admin/js/jquery-ui.min.js"></script>
+<link href="~/assets/admin/css/jquery-ui.min.css" rel="stylesheet" />
+@using OnlineStore.Common
 @using OnlineStore.Data.Entities
-@model OnlineStore.Data.Entities.Customer
+@model OnlineStore.Data.Entities.ShippingAddress
 @{
     ViewBag.Title = "Địa chỉ giao hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,12 +13,100 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3 col-left">
-                @Html.Partial("_Menu")
+                @Html.Action("_Menu", "Customers")
             </div>
             <div class="col-sm-9 col-right">
-                <h2>Xin chào, @customer.Name</h2>
+                <h2>@ViewBag.Title</h2>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(x => x.CreatedOn)
+                    @Html.HiddenFor(x => x.CreatedById)
+                    @Html.HiddenFor(x => x.ModifiedOn)
+                    @Html.HiddenFor(x => x.ModifiedById)
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.CustomerId)
+
+                    <div class="form-horizontal">
+                        <hr />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select name="CityId" class="slCity form-control">
+                                    @{
+                                        var cities = (List<City>)ViewBag.Cities;
+
+                                        foreach (var city in cities)
+                                        {
+                                            if (city.Id == Model.CityId)
+                                            {
+                                                <option value="@city.Id" selected="selected">@city.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@city.Id">@city.Name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-white btn-info btn-bold">
+                                    <i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+                                    Cập nhật
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(".slCity").select2({
+            placeholder: "Chọn thành phố",
+            allowClear: true
+        });
+    });
+</script>

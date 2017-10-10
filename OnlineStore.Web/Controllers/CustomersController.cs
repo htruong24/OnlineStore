@@ -18,11 +18,15 @@ namespace OnlineStore.Web.Controllers
     {
         private readonly CustomerService _customerService;
         private readonly OrderService _orderService;
+        private readonly CityService _cityService;
+        private readonly ShippingAddressService _shippingAddressService;
 
         public CustomersController()
         {
+            this._cityService = new CityService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._customerService = new CustomerService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
             this._orderService = new OrderService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
+            this._shippingAddressService = new ShippingAddressService(new UnitOfWork(new DbContextFactory<OnlineStoreDbContext>()));
         }
 
         private OnlineStoreDbContext db = new OnlineStoreDbContext();
@@ -118,6 +122,12 @@ namespace OnlineStore.Web.Controllers
             return RedirectToAction("Login", "Customers");
         }
 
+        public ActionResult _Menu()
+        {
+            var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+            return PartialView(customer);
+        }
+
         public ActionResult ChangeEmail()
         {
             var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
@@ -200,7 +210,46 @@ namespace OnlineStore.Web.Controllers
 
         public ActionResult Address()
         {
-            return View();
+            ViewBag.Cities = GetCities();
+            var customer = (Customer)Session[CommonConstants.CUSTOMER_SESSION];
+            var shippingAddress = _shippingAddressService.GetShippingAddressByCustomerId(customer.Id);
+
+            return View(shippingAddress);
+        }
+
+        [HttpPost]
+        public ActionResult Address(ShippingAddress shippingAddress)
+        {
+            var customer = (Customer)Session[CommonConstants.CUSTOMER_SESSION];
+            ModelState.Remove("CustomerId");
+            ModelState.Remove("Id");
+            if (ModelState.IsValid)
+            {
+                shippingAddress.CustomerId = customer.Id;
+                UpdateDefaultShippingAddressProperties(shippingAddress);
+                if (shippingAddress.Id == 0)
+                {
+                    _shippingAddressService.CreateShippingAddress(shippingAddress);
+                }
+                else
+                {
+                    _shippingAddressService.UpdateShippingAddress(shippingAddress);
+                }
+                return RedirectToAction("Address");
+            }
+            return View(shippingAddress);
+        }
+
+        // Get cities
+        public List<City> GetCities()
+        {
+            _cityService.Pagination = new SortingPagingInfo
+            {
+                SortField = "Name",
+                SortDirection = "ascending",
+                PageSize = 0
+            };
+            return _cityService.GetCities();
         }
 
         public ActionResult CreateAddress()
@@ -293,7 +342,7 @@ namespace OnlineStore.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }       
+        }
 
         // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
         public void UpdateDefaultProperties(Customer customer)
@@ -310,6 +359,29 @@ namespace OnlineStore.Web.Controllers
             {
                 customer.ModifiedById = "1";
                 customer.ModifiedOn = DateTime.Now;
+            }
+        }
+
+        // Update: CreatedOn, CreatedBy, ModifiedOn, ModifiedBy
+        public void UpdateDefaultShippingAddressProperties(ShippingAddress shippingAddress)
+        {
+            var user = Session[CommonConstants.USER_SESSION] as User;
+            // Create
+            if (user != null)
+            {
+                if (shippingAddress.Id == 0)
+                {
+                    shippingAddress.CreatedById = user.Id;
+                    shippingAddress.CreatedOn = DateTime.Now;
+                    shippingAddress.ModifiedById = user.Id;
+                    shippingAddress.ModifiedOn = DateTime.Now;
+                }
+                // Update
+                else
+                {
+                    shippingAddress.ModifiedById = user.Id;
+                    shippingAddress.ModifiedOn = DateTime.Now;
+                }
             }
         }
     }

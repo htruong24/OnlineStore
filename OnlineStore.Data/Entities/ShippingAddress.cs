@@ -17,6 +17,10 @@
         [DisplayName("Mã bưu điện")]
         public string PostalCode { get; set; }
 
+        [DisplayName("Số điện thoại")]
+        [StringLength(20)]
+        public string Telephone { get; set; }
+
         [DisplayName("Thành phố")]
         public int? CityId { get; set; }
 

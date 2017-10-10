@@ -10,19 +10,22 @@
         <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable">
             <thead>
                 <tr>
-                    <th class="sorting sortable" data-sortfield="Name">
+                    <th class="sorting sortable" data-sortfield="CustomerId">
                         @Html.DisplayNameFor(model => model.CustomerId)
                     </th>
-                    <th class="sorting sortable" data-sortfield="Name">
+                    <th class="sorting sortable" data-sortfield="CustomerId">
                         @Html.DisplayNameFor(model => model.Value)
                     </th>
-                    <th class="sorting sortable" data-sortfield="Name">
+                    <th class="sorting sortable" data-sortfield="PostalCode">
                         @Html.DisplayNameFor(model => model.PostalCode)
                     </th>
-                    <th class="sorting sortable" data-sortfield="Category">
+                    <th class="sorting sortable" data-sortfield="CityId">
                         @Html.DisplayNameFor(model => model.CityId)
                     </th>
-                    <th class="sorting sortable" data-sortfield="Category">
+                    <th class="sorting sortable" data-sortfield="Telephone">
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </th>
+                    <th class="sorting sortable" data-sortfield="Note">
                         @Html.DisplayNameFor(model => model.Note)
                     </th>
                     <th class="sorting_disabled"></th>
@@ -45,6 +48,9 @@
                         </td>
                         <td>
                             @Html.ValueFor(modelItem => item.City.Name)
+                        </td>
+                        <td>
+                            @Html.ValueFor(modelItem => item.Telephone)
                         </td>
                         <td>
                             @Html.ValueFor(modelItem => item.Note)

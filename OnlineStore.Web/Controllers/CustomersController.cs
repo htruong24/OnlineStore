@@ -235,6 +235,7 @@ namespace OnlineStore.Web.Controllers
                 {
                     _shippingAddressService.UpdateShippingAddress(shippingAddress);
                 }
+                Session[CommonConstants.CUSTOMER_SESSION] = _customerService.GetCustomer(customer.Id);
                 return RedirectToAction("Address");
             }
             return View(shippingAddress);

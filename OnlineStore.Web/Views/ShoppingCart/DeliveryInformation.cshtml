@@ -1,24 +1,54 @@
 ﻿@using OnlineStore.Common
+@using OnlineStore.Data.Entities
 @model List<OnlineStore.Data.Entities.OrderDetail>
 @{
     ViewBag.Title = "Thanh toán";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session[CommonConstants.CUSTOMER_SESSION] as Customer;
+    var isNew = "checked";
 }
 <div class="main">
     <div class="container">
-        <div class="checkout">
+        <div class="checkout" style="padding-bottom:20px;">
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="checkout-step">
-                        <div class="checkout-step-item">
-                            <div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
-                                @*<span class="number">3</span>*@
-                                <h2>Chọn địa chỉ giao hàng</h2>
+                    @*If existing shipping address*@
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="frb-group">
+                                @if (customer != null && customer.ShippingAddresses.Count > 0)
+                                {
+                                    <div class="frb frb-primary col-sm-12" style="padding:0;">
+                                        <input type="radio" checked class="chkPaymentAddress" id="radio-button-1" name="radio-button" value="current">
+                                        <label for="radio-button-1">
+                                            <span class="frb-title">Sử dụng địa chỉ giao hàng hiện tại của bạn</span>
+                                            <span class="frb-description">
+                                                Sử dụng địa chỉ giao hàng hiện tại của bạn
+                                            </span>
+                                        </label>
+                                    </div>
+                                    isNew = "";
+                                }
+                                <div class="frb frb-success col-sm-12" style="padding:0;">
+                                    <input type="radio" @isNew class="chkPaymentAddress" id="radio-button-2" name="radio-button" value="new">
+                                    <label for="radio-button-2">
+                                        <span class="frb-title">Nhập địa chỉ giao hàng mới</span>
+                                    </label>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    @*Add new shipping address*@
+                    <div class="checkout-step" id="newShippingAddress">
+                        <div class="checkout-step-item">
+                            @*<div class="step-title clearfix collapsed" data-toggle="collapse" data-target="#checkout-three">
+                                <h2>Chọn địa chỉ giao hàng</h2>
+                            </div>*@
                             <div id="checkout-three" class="collapse in">
                                 <div class="step-content">
                                     <div class="col-sm-offset-1 col-sm-10 ">
-                                        <form class="form-horizontal" id="frmCheckout" action="~/Orders/Create" method="post">
+                                        <form class="form-horizontal" id="frmDeliveryInfo" action="~/ShoppingCart/CreateDeliveryInfo" method="post">
                                             <div class="form-group">
                                                 <label class="control-label col-sm-4">Tên khách hàng<em>*</em></label>
                                                 <div class="col-sm-8">
@@ -66,18 +96,20 @@
                                                     <textarea name="Note" rows="5" type="text" class="form-control"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-4 col-sm-8">
-                                                    <a href="/ShoppingCart/PaymentInformation" class="btn btn-default btn-md fwb">TIẾP TỤC</a>
-                                                </div>
-                                            </div>
+                                         
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                  
+                    <div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <a href="#" onclick="SaveDeliveryInformation();" class="btn btn-default btn-md fwb">TIẾP TỤC</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-5">
                     <div class="row">
@@ -161,4 +193,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        CheckPaymentAddress();
+        $(".chkPaymentAddress").on("change", function (e) {
+            CheckPaymentAddress();
+        });
+    });
+
+    function CheckPaymentAddress()
+    {
+        var paymentAddress = $(".chkPaymentAddress:checked").val();
+        if (paymentAddress === "new")
+            $("#newShippingAddress").show();
+        else
+            $("#newShippingAddress").hide();
+    }
+
+    function SaveDeliveryInformation()
+    {
+        var paymentAddress = $(".chkPaymentAddress:checked").val();
+        if (paymentAddress === "new")
+        {
+            $("#frmDeliveryInfo").submit();
+        }
+    } 
+</script>
+
 

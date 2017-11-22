@@ -48,9 +48,16 @@
 
                                         foreach (var city in cities)
                                         {
-                                            if (city.Id == Model.CityId)
+                                            if (Model != null)
                                             {
-                                                <option value="@city.Id" selected="selected">@city.Name</option>
+                                                if (city.Id == Model.CityId)
+                                                {
+                                                    <option value="@city.Id" selected="selected">@city.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@city.Id">@city.Name</option>
+                                                }
                                             }
                                             else
                                             {

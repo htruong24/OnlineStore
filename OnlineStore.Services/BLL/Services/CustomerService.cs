@@ -9,7 +9,7 @@ using OnlineStore.Services.BLL.Contracts;
 
 namespace OnlineStore.Services.BLL.Services
 {
-    public class CustomerService: ICustomerService
+    public class CustomerService : ICustomerService
     {
         public SortingPagingInfo Pagination;
 
@@ -27,7 +27,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var customer = _unitOfWork.GetRepository<Data.Entities.Customer>()
-                        .Get(x => x.Id == customerId, null, "ShippingAddresses,CreatedBy,ModifiedBy")
+                        .Get(x => x.Id == customerId, null, "ShippingAddresses, ShippingAddresses.City, ShippingAddresses.City.Country, CreatedBy, ModifiedBy")
                         .FirstOrDefault();
 
                 return customer;
@@ -66,7 +66,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var query = _unitOfWork.GetRepository<Customer>().Get(null, null, "CreatedBy,ModifiedBy");
-                
+
                 // Sorting
                 switch (Pagination.SortField)
                 {
@@ -163,7 +163,7 @@ namespace OnlineStore.Services.BLL.Services
             using (_unitOfWork)
             {
                 var customer = _unitOfWork.GetRepository<Data.Entities.Customer>()
-                        .Get(x => x.Email == email && x.Password == password, null, "CreatedBy,ModifiedBy")
+                        .Get(x => x.Email == email && x.Password == password, null, "ShippingAddresses, ShippingAddresses.City, ShippingAddresses.City.Country, CreatedBy, ModifiedBy")
                         .FirstOrDefault();
 
                 return customer;
